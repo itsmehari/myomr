@@ -281,6 +281,39 @@ private-*.md
 # ============================================
 # Add any MyOMR-specific patterns here
 
+# Test and debug files
+/omr-local-job-listings/test-jobs.php
+/omr-local-job-listings/test-connection.php
+/omr-local-job-listings/test-categories.php
+/omr-local-job-listings/debug-categories-direct.php
+/debug-status.php
+
+# Internal to-review folder
+/@tocheck/
+
+# Personal/team notes
+/LEARNINGS.md
+/LEARNINGS-ORIGINAL-BACKUP.md
+/LEARNINGS-REORGANIZED.md
+/LEARNINGS.md.backup
+
+# Upgrade/build artifacts
+.htaccess.phpupgrader.*
+.htaccess.no_htaccess*
+.processed_property_names.txt
+
+# Data/import files
+/First-Set-OMR-Hostel-PG.csv
+
+# Dev/setup scripts (one-time use)
+/weblog/create-tables-remote.php
+/omr-coworking-spaces/dev-install-tables.php
+/omr-hostels-pgs/dev-install-tables.php
+
+# Generated sitemaps (regenerated on server)
+/sitemap.xml
+/sitemap-pages.xml
+
 # Old backup files
 myomr_backup_*.sql
 metap8ok_myomr_*.sql
