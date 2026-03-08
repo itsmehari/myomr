@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Job Portal - Employer Dashboard (Unified Applications View)
  * Modern employer dashboard with advanced filtering and bulk actions

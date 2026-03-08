@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Job Portal - Post Job Form
  * Employers can post job vacancies through this form
@@ -148,7 +148,7 @@ if (empty($_SESSION['csrf_token'])) {
             border: 2px solid #008552;
         }
         .progress-step::after {
-            content: 'â†’';
+            content: '→';
             position: absolute;
             right: -1rem;
             top: 50%;
@@ -341,7 +341,7 @@ if (empty($_SESSION['csrf_token'])) {
                                 <select class="form-select-modern" id="category" name="category" required>
                                     <option value="">Select Category</option>
                                     <?php if (empty($categories)): ?>
-                                        <option value="" disabled>âš ï¸ No categories available - Please check database</option>
+                                        <option value="" disabled>⚠️ No categories available - Please check database</option>
                                         <?php if (defined('DEVELOPMENT_MODE') && DEVELOPMENT_MODE): ?>
                                             <option value="" disabled>Debug: Categories array is empty. Check job_categories table.</option>
                                         <?php endif; ?>
@@ -385,7 +385,7 @@ if (empty($_SESSION['csrf_token'])) {
                         <div class="col-md-6">
                             <div class="form-group-modern">
                                 <label for="salary_range" class="form-label-modern">Salary Range <span class="text-muted">(Optional)</span></label>
-                                <input type="text" class="form-control-modern" id="salary_range" name="salary_range" placeholder="e.g., â‚¹30,000 - â‚¹50,000">
+                                <input type="text" class="form-control-modern" id="salary_range" name="salary_range" placeholder="e.g., ₹30,000 - ₹50,000">
                                 <div class="help-text-modern"><i class="fas fa-info-circle"></i> You can leave this as "Not Disclosed"</div>
                             </div>
                         </div>
@@ -496,7 +496,7 @@ if (empty($_SESSION['csrf_token'])) {
     try { if (typeof gtag === 'function') { gtag('event', name, params || {}); } } catch(e) {}
   }
 
-  // form_start â€” fires once when user first interacts with any field
+  // form_start — fires once when user first interacts with any field
   (function() {
     var started = false;
     var form = document.getElementById('post-job-form');

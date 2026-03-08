@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Job Portal - View Applications
  * Employers can view applications for their job postings
@@ -239,12 +239,12 @@ $canonical_url = "https://myomr.in/omr-local-job-listings/view-applications-omr.
                     <h3 class="h5 mb-2"><?php echo htmlspecialchars($job['title']); ?></h3>
                     <p class="text-muted mb-2">
                         <i class="fas fa-building me-2"></i><?php echo htmlspecialchars($job['company_name']); ?>
-                        <span class="mx-2">â€¢</span>
+                        <span class="mx-2">•</span>
                         <i class="fas fa-map-marker-alt me-2"></i><?php echo htmlspecialchars($job['location']); ?>
                     </p>
                     <p class="text-muted mb-0">
                         <i class="fas fa-tag me-2"></i><?php echo htmlspecialchars($job['category_name'] ?? $job['category']); ?>
-                        <span class="mx-2">â€¢</span>
+                        <span class="mx-2">•</span>
                         <i class="fas fa-briefcase me-2"></i><?php echo htmlspecialchars($job['job_type']); ?>
                     </p>
                 </div>

@@ -1,6 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+// Debug mode: ?debug=1 shows errors (see core/error-handler.php)
+ini_set('display_errors', (isset($_GET['debug']) && $_GET['debug'] === '1') ? '1' : '0');
+ini_set('display_startup_errors', (isset($_GET['debug']) && $_GET['debug'] === '1') ? '1' : '0');
 error_reporting(E_ALL);
 ?>
 <?php

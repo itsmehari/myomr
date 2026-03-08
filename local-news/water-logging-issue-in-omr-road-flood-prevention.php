@@ -217,7 +217,7 @@ color:grey;
   </div>
 </div>
 
-      <div><a href="http://myomr.in/"></a><img src="../My-OMR-Idhu-Namma-OMR-Logo.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;" alt="MyOMR - Idhu Namma OMR community portal"></a></div>
+      <div><a href="https://myomr.in/"></a><img src="../My-OMR-Idhu-Namma-OMR-Logo.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;" alt="MyOMR - Idhu Namma OMR community portal"></a></div>
 <nav>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">

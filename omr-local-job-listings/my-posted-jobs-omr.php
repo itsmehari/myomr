@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Employer Dashboard - My Posted Jobs
  */

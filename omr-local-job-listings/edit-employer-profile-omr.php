@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Edit Employer Profile
  * Allows employers to update their profile information

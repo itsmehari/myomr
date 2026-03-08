@@ -18,6 +18,11 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 # Security: disable indexes
 Options -Indexes
 
+# Explicit directory index (helps avoid 403 when index.php not served)
+<IfModule mod_dir.c>
+  DirectoryIndex index.php index.html
+</IfModule>
+
 # Security headers
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
@@ -70,6 +75,9 @@ SetEnv MYOMR_ENV production
 <IfModule mod_php8.c>
   php_value auto_prepend_file core/error-handler.php
 </IfModule>
+
+# Favicon: redirect to logo (avoids 403 when favicon.ico missing)
+RewriteRule ^favicon\.ico$ /My-OMR-Logo.jpg [L,R=302]
 
 # Root sitemap index
 RewriteRule ^sitemap\.xml$ generate-sitemap-index.php [L]

@@ -210,7 +210,7 @@ color:grey;
       <h5>Local Community News Portal</h5>
       <!--<div><img src="../My-OMR-Idhu-Namma-OMR-Logo.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;" alt="MyOMR - Idhu Namma OMR community portal"></div>-->
       
-<div><a href="http://myomr.in/"></a>
+<div><a href="https://myomr.in/"></a>
 <img src="../My-OMR-Idhu-Namma-OMR-Logo.jpg" style="width:inherit; position:relative;max-width: 100px; padding-bottom:10px;" alt="MyOMR - Idhu Namma OMR community portal">
 </a></div>
 <nav>

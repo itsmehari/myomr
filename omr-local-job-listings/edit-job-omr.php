@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Job Portal - Edit Job Form
  * Employers can edit their existing job postings

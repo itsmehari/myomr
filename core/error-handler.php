@@ -1,8 +1,15 @@
 <?php
 require_once __DIR__ . '/env.php';
 
+// Debug mode: ?debug=1 enables error display to diagnose 403/500 issues (remove after fixing)
+$debug_mode = isset($_GET['debug']) && $_GET['debug'] === '1';
+
 // Configure error display/logging based on environment
-if (omr_is_production()) {
+if ($debug_mode) {
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    ini_set('log_errors', '1');
+} elseif (omr_is_production()) {
     ini_set('display_errors', '0');
     ini_set('display_startup_errors', '0');
 } else {
@@ -45,7 +52,7 @@ set_exception_handler(function($ex){
         'trace' => $ex->getTraceAsString()
     ]);
     if (!headers_sent()) { http_response_code(500); }
-    if (!omr_is_production()) {
+    if (!omr_is_production() || !empty($_GET['debug'])) {
         echo '<pre style="padding:16px;white-space:pre-wrap;">' . htmlspecialchars($ex->__toString(), ENT_QUOTES, 'UTF-8') . '</pre>';
     } else {
         echo '<!DOCTYPE html><html><body><h1>Something went wrong</h1><p>Please try again later.</p></body></html>';
@@ -56,6 +63,9 @@ register_shutdown_function(function(){
     $err = error_get_last();
     if ($err && in_array($err['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
         omr_log('fatal', $err['message'], ['file'=>$err['file'], 'line'=>$err['line']]);
+        if (!empty($_GET['debug'])) {
+            echo '<pre style="padding:16px;background:#fdd;border:1px solid red;">Fatal: ' . htmlspecialchars($err['message'], ENT_QUOTES) . "\nFile: {$err['file']}\nLine: {$err['line']}</pre>";
+        }
     }
 });
 
