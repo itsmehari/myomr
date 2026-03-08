@@ -1,0 +1,47 @@
+# MyOMR Job Portal — URL Rewriting
+# Place this file in /omr-local-job-listings/
+# Requires: AllowOverride All on the server
+
+Options -Indexes
+Options +FollowSymLinks
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /omr-local-job-listings/
+
+    # --- Security: block direct access to includes/
+    RewriteRule ^includes/(?!save-job\.php|save-job-alert\.php).*$ - [F,L]
+
+    # --- Clean Job Detail URLs ---
+    # /omr-local-job-listings/job/123/software-engineer-at-tcs  →  job-detail-omr.php?id=123
+    RewriteRule ^job/([0-9]+)/([a-z0-9\-]+)/?$  job-detail-omr.php?id=$1  [QSA,L]
+
+    # Legacy redirect: /job-detail-omr.php?id=123  →  redirect to canonical slug (handled in PHP for now)
+    # This rule keeps old links working; PHP should 301-redirect to slug URL once slugs are stored in DB.
+
+    # --- Category landing pages ---
+    # /jobs/it-jobs-omr  →  index.php?category=it
+    RewriteRule ^jobs/([a-z0-9\-]+)-jobs-omr/?$  index.php?category=$1  [QSA,L]
+
+    # --- Location landing pages ---
+    # /jobs-in-perungudi  →  index.php?location=Perungudi
+    RewriteRule ^jobs-in-([a-z0-9\-]+)/?$  index.php?location=$1  [QSA,L]
+
+    # --- Experience landing pages ---
+    # /fresher-jobs  →  index.php?experience_level=Fresher
+    RewriteRule ^fresher-jobs/?$   index.php?experience_level=Fresher  [QSA,L]
+    RewriteRule ^wfh-jobs/?$       index.php?is_remote=1               [QSA,L]
+    RewriteRule ^part-time-jobs/?$ index.php?job_type=part-time        [QSA,L]
+    RewriteRule ^walk-in-jobs/?$   index.php?job_type=walk-in          [QSA,L]
+</IfModule>
+
+# --- Security Headers ---
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# --- PHP error log ---
+php_flag  display_errors Off
+php_value error_log      /home/myomr/weblog/job-portal-errors.log

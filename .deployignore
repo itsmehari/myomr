@@ -1,0 +1,16 @@
+# Global deploy ignores (for FTPS/SFTP deploy.js)
+.git/
+node_modules/
+dev-tools/deploy/node_modules/
+dev-tools/deploy/deploy.config.json
+dev-tools/deploy/*.log
+*.log
+.DS_Store
+Thumbs.db
+*.zip
+*.tar
+*.gz
+tmp/
+.cache/
+vendor/bin/.phpunit.cache/
+

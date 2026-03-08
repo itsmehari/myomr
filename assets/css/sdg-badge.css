@@ -1,0 +1,252 @@
+/* UN SDG Floating Badge Styles */
+
+/* Official UN SDG Colors */
+:root {
+    --sdg-1: #E5243B;
+    --sdg-2: #DDA63A;
+    --sdg-3: #4C9F38;
+    --sdg-4: #C5192D;
+    --sdg-5: #FF3A21;
+    --sdg-6: #26BDE2;
+    --sdg-7: #FCC30B;
+    --sdg-8: #A21942;
+    --sdg-9: #FD6925;
+    --sdg-10: #DD1367;
+    --sdg-11: #FD9D24;
+    --sdg-12: #BF8B2E;
+    --sdg-13: #3F7E44;
+    --sdg-14: #0A97D9;
+    --sdg-15: #56C02B;
+    --sdg-16: #00689D;
+    --sdg-17: #19486A;
+}
+
+/* SDG Badge Container */
+.sdg-badge-container {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none; /* Container itself is not clickable */
+}
+
+/* Single Badge */
+.sdg-badge {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    pointer-events: auto;
+    text-decoration: none;
+    position: relative;
+    animation: sdgFadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+/* Fade-in animation on load */
+@keyframes sdgFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effect */
+.sdg-badge:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Active/Focus state for accessibility */
+.sdg-badge:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+    transform: scale(1.05);
+}
+
+/* Stacked badges (dual) */
+.sdg-badge-container.stacked {
+    flex-direction: column;
+}
+
+.sdg-badge-container.stacked .sdg-badge {
+    width: 60px;
+    height: 60px;
+}
+
+/* Side-by-side badges */
+.sdg-badge-container.side-by-side {
+    flex-direction: row;
+}
+
+.sdg-badge-container.side-by-side .sdg-badge {
+    width: 60px;
+    height: 60px;
+}
+
+/* Color classes for each SDG */
+.sdg-badge.sdg-1 { background-color: var(--sdg-1); }
+.sdg-badge.sdg-2 { background-color: var(--sdg-2); }
+.sdg-badge.sdg-3 { background-color: var(--sdg-3); }
+.sdg-badge.sdg-4 { background-color: var(--sdg-4); }
+.sdg-badge.sdg-5 { background-color: var(--sdg-5); }
+.sdg-badge.sdg-6 { background-color: var(--sdg-6); }
+.sdg-badge.sdg-7 { background-color: var(--sdg-7); }
+.sdg-badge.sdg-8 { background-color: var(--sdg-8); }
+.sdg-badge.sdg-9 { background-color: var(--sdg-9); }
+.sdg-badge.sdg-10 { background-color: var(--sdg-10); }
+.sdg-badge.sdg-11 { background-color: var(--sdg-11); }
+.sdg-badge.sdg-12 { background-color: var(--sdg-12); }
+.sdg-badge.sdg-13 { background-color: var(--sdg-13); }
+.sdg-badge.sdg-14 { background-color: var(--sdg-14); }
+.sdg-badge.sdg-15 { background-color: var(--sdg-15); }
+.sdg-badge.sdg-16 { background-color: var(--sdg-16); }
+.sdg-badge.sdg-17 { background-color: var(--sdg-17); }
+
+/* Tooltip */
+.sdg-tooltip {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: normal;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+    max-width: 250px;
+    white-space: normal;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.sdg-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+}
+
+.sdg-badge:hover .sdg-tooltip,
+.sdg-badge:focus .sdg-tooltip {
+    opacity: 1;
+}
+
+/* Tooltip title */
+.sdg-tooltip-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* Tooltip description */
+.sdg-tooltip-desc {
+    font-size: 12px;
+    opacity: 0.9;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Tooltip link */
+.sdg-tooltip-link {
+    color: #fff;
+    text-decoration: underline;
+    font-size: 12px;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.sdg-tooltip-link:hover {
+    color: #4CAF50;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sdg-badge-container {
+        bottom: 30px;
+        left: 30px;
+    }
+    
+    .sdg-badge {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .sdg-badge-container.stacked .sdg-badge {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .sdg-badge-container.side-by-side .sdg-badge {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .sdg-tooltip {
+        bottom: 60px;
+        font-size: 12px;
+        padding: 10px 12px;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sdg-badge-container {
+        bottom: 20px;
+        left: 20px;
+    }
+    
+    .sdg-badge {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+    
+    .sdg-badge-container.stacked .sdg-badge {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .sdg-badge-container.side-by-side .sdg-badge {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .sdg-tooltip {
+        display: none; /* Hide tooltip on very small screens to avoid clutter */
+    }
+}
+
+/* Hide badges on print */
+@media print {
+    .sdg-badge-container {
+        display: none;
+    }
+}

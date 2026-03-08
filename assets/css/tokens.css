@@ -1,0 +1,55 @@
+/**
+ * MyOMR Design Tokens
+ * Single source of truth for brand colours, typography, spacing, and elevation.
+ *
+ * Usage: var(--color-primary) etc.
+ */
+:root {
+  /* Brand colours — aligned with main-nav and all marketing pages */
+  --color-primary:       #14532d;   /* Deep brand green — headings, buttons, links */
+  --color-primary-hover: #0f3d1f;   /* Darker on hover */
+  --color-primary-mid:   #166534;   /* Gradient end */
+  --color-accent:        #22c55e;   /* Light green — highlights, badges, icons */
+  --color-secondary:     #166534;   /* Secondary green (was blue — corrected) */
+
+  /* Neutrals */
+  --color-text:   #1f2937;   /* Near-black body text */
+  --color-muted:  #6b7280;   /* Grey for captions / secondary text */
+  --color-border: #e5e7eb;   /* Card and input borders */
+  --color-bg:     #f9fafb;   /* Page background */
+  --color-white:  #ffffff;
+
+  /* Surface */
+  --color-surface-light: #f0fdf4;   /* Brand-tinted light bg */
+
+  /* Typography */
+  --font-family-base: 'Poppins', sans-serif;
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* Border radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Elevation / shadows */
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --shadow-lg:   0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-brand: 0 8px 24px rgba(20, 83, 45, 0.15);
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+}

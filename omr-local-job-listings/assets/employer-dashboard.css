@@ -1,0 +1,498 @@
+/**
+ * Employer Dashboard Styles
+ * Modern, responsive styles for employer application management dashboard
+ * 
+ * @package MyOMR Job Portal
+ * @version 2.0.0
+ * @reference QuikrJobs-style design
+ */
+
+/* ============================================
+   Dashboard Sidebar
+   ============================================ */
+
+.dashboard-sidebar {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.sidebar-section:last-child {
+    border-bottom: none;
+}
+
+/* Status Navigation */
+.status-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.status-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: #374151;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.status-nav-item:hover {
+    background-color: #f9fafb;
+    color: #008552;
+    text-decoration: none;
+    border-left-color: #008552;
+}
+
+.status-nav-item.active {
+    background-color: #f0fdf4;
+    color: #008552;
+    border-left-color: #008552;
+    font-weight: 600;
+}
+
+.status-nav-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Filter Groups */
+.filter-group {
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.filter-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-weight: 500;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.filter-header:hover {
+    background-color: #f9fafb;
+}
+
+.filter-header i {
+    font-size: 12px;
+    color: #6b7280;
+    transition: transform 0.2s ease;
+}
+
+.filter-header[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+.filter-content {
+    padding: 12px 16px 16px;
+    background-color: #f9fafb;
+}
+
+.filter-checkboxes {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.filter-checkboxes .form-check {
+    margin-bottom: 8px;
+    padding-left: 24px;
+}
+
+.filter-checkboxes .form-check-label {
+    font-size: 13px;
+    color: #4b5563;
+    cursor: pointer;
+}
+
+.filter-checkboxes .form-check-input {
+    margin-top: 0.25rem;
+    cursor: pointer;
+}
+
+/* Custom scrollbar for filter checkboxes */
+.filter-checkboxes::-webkit-scrollbar {
+    width: 6px;
+}
+
+.filter-checkboxes::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.filter-checkboxes::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.filter-checkboxes::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ============================================
+   Applicant Cards
+   ============================================ */
+
+.applicant-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+}
+
+.applicant-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+.applicant-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.applicant-checkbox {
+    padding-top: 4px;
+}
+
+.applicant-checkbox .form-check-input {
+    cursor: pointer;
+    margin-top: 0;
+    width: 18px;
+    height: 18px;
+}
+
+.applicant-avatar {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #008552 0%, #006d42 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.applicant-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.applicant-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.applicant-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    word-break: break-word;
+}
+
+.applicant-meta {
+    font-size: 13px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.applicant-meta .separator {
+    color: #9ca3af;
+}
+
+.applicant-actions-top {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.applicant-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.applied-date {
+    font-size: 13px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+}
+
+.contact-availability {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.contact-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.contact-badge.available {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.contact-badge.unavailable {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.applicant-info-details {
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: #4b5563;
+}
+
+.info-item {
+    margin-bottom: 6px;
+}
+
+.info-item strong {
+    color: #1f2937;
+    margin-right: 4px;
+}
+
+.applicant-timeline {
+    padding: 8px 12px;
+    background-color: #f9fafb;
+    border-left: 3px solid #008552;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.applicant-actions-bottom {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   Bulk Actions Bar
+   ============================================ */
+
+#bulk-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    background-color: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 6px;
+}
+
+#bulk-actions-bar.d-none {
+    display: none !important;
+}
+
+#selected-count {
+    font-weight: 500;
+    color: #008552;
+    margin-right: 8px;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 991.98px) {
+    .dashboard-sidebar {
+        position: static;
+        max-height: none;
+        margin-bottom: 20px;
+    }
+    
+    .applicant-card-header {
+        flex-wrap: wrap;
+    }
+    
+    .applicant-actions-top {
+        width: 100%;
+        margin-top: 12px;
+    }
+    
+    .applicant-actions-top .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .applicant-card {
+        padding: 16px;
+    }
+    
+    .applicant-card-header {
+        gap: 12px;
+    }
+    
+    .applicant-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .applicant-name {
+        font-size: 14px;
+    }
+    
+    .applicant-meta {
+        font-size: 12px;
+    }
+    
+    .applicant-actions-top .btn,
+    .applicant-actions-bottom .btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .status-nav-item {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .filter-header {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .filter-content {
+        padding: 10px 12px 12px;
+    }
+}
+
+/* ============================================
+   Loading States
+   ============================================ */
+
+.applications-loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7280;
+}
+
+.applications-loading i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   Empty States
+   ============================================ */
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: #d1d5db;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    color: #374151;
+    margin-bottom: 12px;
+}
+
+.empty-state p {
+    color: #6b7280;
+    margin-bottom: 24px;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.font-weight-medium {
+    font-weight: 500;
+}
+
+.font-weight-semibold {
+    font-weight: 600;
+}
+
+.font-weight-bold {
+    font-weight: 700;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+    .dashboard-sidebar,
+    .applicant-actions-top,
+    .applicant-actions-bottom,
+    #bulk-actions-bar {
+        display: none !important;
+    }
+    
+    .applicant-card {
+        page-break-inside: avoid;
+        margin-bottom: 20px;
+    }
+}
+

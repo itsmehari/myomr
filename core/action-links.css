@@ -1,0 +1,47 @@
+.action-links-section {
+    background: #f9f9f9;
+    padding: 40px 20px;
+    text-align: center;
+}
+.section-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+.action-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+.action-button {
+    background: #008552;
+    color: white;
+    padding: 12px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    font-weight: bold;
+    flex: 1 1 calc(25% - 20px);
+    text-align: center;
+}
+.action-button:hover {
+    background: #FDBB2D;
+    color: black;
+}
+.action-button i {
+    font-size: 18px;
+}
+@media (max-width: 768px) {
+    .action-links {
+        flex-direction: column;
+    }
+    .action-button {
+        width: 100%;
+        justify-content: center;
+    }
+}

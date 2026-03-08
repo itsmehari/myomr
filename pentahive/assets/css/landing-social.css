@@ -1,0 +1,235 @@
+/**
+ * Social Media Landing Page Variant - Additional Styles
+ */
+
+/* Hero Section - Social Media Variant */
+.hero-social {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 100px 0;
+}
+
+.hero-social .hero-title {
+    color: white;
+    font-size: 2.75rem;
+    font-weight: 700;
+}
+
+.hero-social .hero-subtitle {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.25rem;
+}
+
+.hero-stats-inline {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-inline {
+    text-align: center;
+}
+
+.stat-inline .stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.stat-inline .stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 0.25rem;
+}
+
+/* Comparison Visual */
+.comparison-visual {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.cost-bad {
+    background: #fee2e2;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid #ef4444;
+}
+
+.cost-good {
+    background: #dcfce7;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid #22c55e;
+}
+
+.cost-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.cost-amount {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.cost-bad .cost-amount {
+    color: #dc2626;
+}
+
+.cost-good .cost-amount {
+    color: #16a34a;
+}
+
+.cost-year {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.arrow-down {
+    text-align: center;
+    font-size: 2rem;
+    color: #666;
+    margin: 1rem 0;
+    font-weight: 700;
+}
+
+/* Problem Cards Visual */
+.problem-card-visual {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    height: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.problem-card-visual:hover {
+    transform: translateY(-8px);
+}
+
+.problem-icon-large {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.problem-icon-large i {
+    font-size: 2rem;
+    color: white;
+}
+
+.problem-card-visual h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.problem-card-visual p {
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    height: 100%;
+}
+
+.testimonial-stars {
+    color: #ffc107;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.testimonial-author {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.testimonial-author strong {
+    color: var(--text-dark);
+}
+
+.testimonial-author small {
+    color: var(--text-light);
+}
+
+/* Solution List */
+.solution-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.solution-list li {
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.feature-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.feature-item span {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-social .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-stats-inline {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

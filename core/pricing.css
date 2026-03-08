@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.pricing-section {
+    text-align: center;
+    padding: 50px 20px;
+    background: #fff;
+}
+
+.pricing-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin: 0 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #008037;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.toggle-text {
+    font-size: 14px;
+}
+
+.highlight {
+    color: #d62828;
+    font-weight: bold;
+}
+
+.pricing-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.pricing-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: left;
+}
+
+.pricing-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.cta-btn {
+    background: #008037;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cta-btn:hover {
+    background: #006b2e;
+}
+
+.or-text {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.or-text a {
+    color: #008037;
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    background-color: transparent !important;
+    width: 100%
+}
+
+ul li {
+    font-size: 14px;
+    margin: 5px 0;
+    background-color:none !important;
+    width: 100%

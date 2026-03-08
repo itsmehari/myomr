@@ -1,0 +1,25 @@
+# 🔒 Security: Block all remote access to dev-tools folder
+# Only accessible from localhost
+
+# Allow access only from localhost
+<RequireAll>
+    Require ip 127.0.0.1
+    Require ip ::1
+</RequireAll>
+
+# Deny all other access
+<RequireNone>
+    Require all granted
+</RequireNone>
+
+# Additional security headers
+<IfModule mod_headers.c>
+    Header set X-Robots-Tag "noindex, nofollow"
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Error page
+ErrorDocument 403 "Access Denied: Development tools are only accessible from localhost"

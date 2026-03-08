@@ -1,0 +1,294 @@
+# MyOMR.in - Git Ignore File
+# Version 2.0.0
+
+# ============================================
+# CRITICAL: Development Tools (NEVER COMMIT)
+# ============================================
+/dev-tools/backups/
+/dev-tools/exports/
+/dev-tools/logs/
+/dev-tools/temp/
+/dev-tools/.env
+
+# ============================================
+# Database & Configuration (SENSITIVE)
+# ============================================
+# Database backups
+*.sql
+*.sql.gz
+*.sql.zip
+backup_*.sql
+db_backup_*.sql
+
+# Database dumps
+/database-dumps/
+/backups/
+
+# Configuration files with credentials
+.env
+.env.local
+.env.production
+config.local.php
+*-local.php
+
+# ============================================
+# IDE & Editor Files
+# ============================================
+# Cursor IDE
+.cursor/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PhpStorm / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Notepad++
+*.bak
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+\#*\#
+.\#*
+
+# ============================================
+# Operating System Files
+# ============================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ============================================
+# PHP & Composer
+# ============================================
+/vendor/
+composer.lock
+composer.phar
+
+# ============================================
+# Logs & Error Reports
+# ============================================
+*.log
+*.log.*
+error_log
+debug.log
+php_errors.log
+/logs/
+/log/
+/weblog/*.txt
+
+# ============================================
+# Temporary & Cache Files
+# ============================================
+*.tmp
+*.temp
+*.cache
+/tmp/
+/temp/
+/cache/
+/var/cache/
+
+# ============================================
+# Upload & Media Directories
+# ============================================
+# Uploaded files (keep structure, ignore content)
+/uploads/*
+!/uploads/.gitkeep
+
+# User-generated content
+/user-content/
+/user-uploads/
+
+# ============================================
+# Build & Compiled Files
+# ============================================
+*.min.js
+*.min.css
+/dist/
+/build/
+
+# ============================================
+# Package Managers
+# ============================================
+# NPM
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# ============================================
+# Version Control
+# ============================================
+.git/
+.svn/
+.hg/
+
+# ============================================
+# Documentation Exports
+# ============================================
+/docs/exports/
+/docs/*.pdf
+/docs/*.docx
+
+# ============================================
+# Test & Development Files
+# ============================================
+/tests/tmp/
+/tests/cache/
+phpunit.xml
+.phpunit.result.cache
+
+# Test files that might be created
+test-*.php
+debug-*.php
+scratch-*.php
+
+# ============================================
+# Stray Development Files
+# ============================================
+# Old dev files that might reappear
+/crud-helper.php
+/test-remote-db-connection.php
+/export-database-schema.php
+/start-ssh-tunnel.ps1
+/core/omr-connect-remote.php
+
+# Any file with "test" or "temp" in name
+*-test.php
+*-temp.php
+*-backup.php
+
+# ============================================
+# Security & Sensitive Data
+# ============================================
+# SSH keys
+*.pem
+*.key
+*.pub
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+
+# SSL certificates
+*.crt
+*.csr
+*.p12
+*.pfx
+
+# Password files
+passwords.txt
+.htpasswd
+
+# ============================================
+# cPanel & Hosting
+# ============================================
+.cpanel/
+.ftpconfig
+.ftpauth
+.sftp-config.json
+
+# Error documents
+/error_docs/
+
+# ============================================
+# Archive Files
+# ============================================
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+*.tgz
+
+# Except important archives
+!project-structure.zip
+
+# ============================================
+# Miscellaneous
+# ============================================
+# TODO files (personal)
+TODO.local.md
+NOTES.local.md
+
+# Private notes
+PRIVATE.md
+private-*.md
+
+# Session files
+/sessions/
+*.sess
+
+# ============================================
+# DO COMMIT THESE (Exceptions)
+# ============================================
+# Keep dev tools scripts (just not their output)
+!/dev-tools/*.php
+!/dev-tools/*.ps1
+!/dev-tools/*.sh
+!/dev-tools/*.md
+!/dev-tools/.htaccess
+
+# Keep important documentation
+!/docs/*.md
+!/README.md
+!/PROJECT_MASTER.md
+!/CHANGELOG.md
+
+# Keep asset files
+!/assets/**/*.css
+!/assets/**/*.js
+!/assets/**/*.jpg
+!/assets/**/*.png
+!/assets/**/*.gif
+!/assets/**/*.svg
+!/assets/**/*.webp
+
+# Keep .gitkeep files to preserve directory structure
+!.gitkeep
+!**/.gitkeep
+
+# ============================================
+# Project-Specific Ignores
+# ============================================
+# Add any MyOMR-specific patterns here
+
+# Old backup files
+myomr_backup_*.sql
+metap8ok_myomr_*.sql
+
+# Old connection test files
+conn-test*.php
+db-conn*.php
+
+# ============================================
+# END OF .gitignore
+# ============================================
+

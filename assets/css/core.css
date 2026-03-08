@@ -1,0 +1,31 @@
+/* MyOMR core CSS: sitewide base styles */
+
+:root {
+  --myomr-font-primary: 'Poppins', sans-serif;
+  --myomr-color-primary: #14532d; /* deep green */
+  --myomr-color-accent: #22c55e; /* light green */
+  --myomr-color-muted: #6b7280;
+  --myomr-radius: 10px;
+  --myomr-maxw: 1280px;
+}
+
+html, body { font-family: var(--myomr-font-primary); }
+
+/* Layout */
+.container[style*="max-width:1280px"] { max-width: var(--myomr-maxw) !important; }
+
+/* Utilities */
+.maxw-1280 { max-width: var(--myomr-maxw); margin-left: auto; margin-right: auto; }
+.rounded-lg { border-radius: var(--myomr-radius); }
+.text-muted-omr { color: var(--myomr-color-muted) !important; }
+.bg-primary-omr { background: var(--myomr-color-primary) !important; color: #fff; }
+.btn-omr { background: var(--myomr-color-accent); color: #14532d; border-radius: var(--myomr-radius); padding: .5rem 1rem; border: 0; }
+.btn-omr:hover { filter: brightness(.95); }
+
+/* Buttons & badges defaults consistent */
+.badge.bg-success { background-color: #28a745 !important; }
+
+/* Footer normalization hook (keep existing footer.css where used) */
+.myomr-footer { font-size: 14px; }
+
+

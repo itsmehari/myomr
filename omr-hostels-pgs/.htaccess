@@ -1,0 +1,46 @@
+# MyOMR Hostels & PGs - Clean URLs
+
+# Enable Rewrite Engine
+RewriteEngine On
+RewriteBase /omr-hostels-pgs/
+
+# Redirect index to clean URL
+RewriteCond %{THE_REQUEST} \s/omr-hostels-pgs/index\.php[\s?] [NC]
+RewriteRule ^index\.php$ /omr-hostels-pgs/ [R=301,L]
+
+# Clean URLs for property details
+RewriteCond %{THE_REQUEST} \s/omr-hostels-pgs/property-detail\.php\?id=(\d+) [NC]
+RewriteRule ^property-detail\.php$ property/%1? [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^property/(\d+)/?$ property-detail.php?id=$1 [L,QSA]
+
+# Security: Block access to sensitive files
+<FilesMatch "^(\.htaccess|includes/|admin/|\.sql)$">
+    Require all denied
+</FilesMatch>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache Control
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+

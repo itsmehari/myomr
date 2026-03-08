@@ -1,0 +1,435 @@
+Folder PATH listing
+Volume serial number is A09A-FA36
+C:.
+|   .htaccess
+|   .htaccess.no_htaccess.phpupgrader
+|   .htaccess.phpupgrader.6cd5fb42
+|   .htaccess.phpupgrader.initial
+|   CHANGELOG.md
+|   contact-my-omr-team.php
+|   context.md
+|   error_log
+|   folder-structure.txt
+|   footer.css
+|   general-data-policy-of-my-omr.php
+|   Grill-Pan-Cast-Iron-Buy-Online.css
+|   Grill-Pan-Cast-Iron-Buy-Online.html
+|   home-page-news-cards.php
+|   index.php
+|   jquery.js
+|   My-OMR-Logo - Copy.jpg
+|   My-OMR-Logo.jpg
+|   news_images
+|   nicepage.css
+|   nicepage.js
+|   omr-road-social-media.php
+|   README.md
+|   sitemap.xml
+|   social-style.css
+|   terms-and-conditions-my-omr.php
+|   webmaster-contact-my-omr.php
+|   website-privacy-policy-of-my-omr.php
+|   
++---.cursor
+|   \---rules
++---.well-known
+|   +---acme-challenge
+|   \---pki-validation
++---admin
+|   |   admin-breadcrumbs.php
+|   |   admin-flash.php
+|   |   admin-header.php
+|   |   admin-sidebar.php
+|   |   change-password.php
+|   |   commonlogin.php
+|   |   dashboard.php
+|   |   error_log
+|   |   events-add.php
+|   |   events-delete.php
+|   |   events-edit.php
+|   |   events-list.php
+|   |   index.php
+|   |   login.php
+|   |   logout.php
+|   |   news-add.php
+|   |   news-edit.php
+|   |   news-list.php
+|   |   news-update-page-admin.php
+|   |   process-listing.php
+|   |   restaurants-add.php
+|   |   restaurants-edit.php
+|   |   restaurants-list.php
+|   |   updatenewsform.php
+|   |   
+|   +---events
+|   |       delete.php
+|   |       events-add.php
+|   |       events-delete.php
+|   |       events-edit.php
+|   |       events-list.php
+|   |       
+|   \---uploads
+|       \---restaurants
+|               1747670971_sangeeta-veg-omr-thoraipakkam.jpg
+|               
++---assets
+|   +---css
+|   |       footer.css
+|   |       main.css
+|   |       myomr-news-bulletin.css
+|   |       
+|   \---js
+|           myomr-news-bulletin.js
+|           
++---backups
+|   |   error_log
+|   |   _backup_My-OMR-Logo.jpg
+|   |   
+|   \---backupfolder
+|           index.php.bak
+|           
++---cgi-bin
+|       navbar.php
+|       
++---components
+|   |   action-buttons.php
+|   |   admin-breadcrumbs.php
+|   |   admin-flash.php
+|   |   admin-header.php
+|   |   admin-sidebar.php
+|   |   analytics.php
+|   |   discover-nav.php
+|   |   footer.css
+|   |   footer.php
+|   |   head-resources.php
+|   |   main-nav.php
+|   |   meta.php
+|   |   myomr-news-bulletin.css
+|   |   myomr-news-bulletin.js
+|   |   myomr-news-bulletin.php
+|   |   nav-footer-styles.css
+|   |   navbar.php
+|   |   omr-listings-nav.php
+|   |   scroll-story.php
+|   |   sidebar.php
+|   |   social-icons.php
+|   |   subscribe.css
+|   |   subscribe.php
+|   |   subscribers.txt
+|   |   thank-you.html
+|   |   
+|   \---assets
+|           Myomr-just-1-Rs-Logo-Website.png
+|           
++---core
+|       action-links.css
+|       action-links.js
+|       action-links.php
+|       modal.css
+|       modal.js
+|       news-old-mahabalipuram-road
+|       omr-connect.php
+|       omr-road-database-list.php
+|       pricing.css
+|       pricing.html
+|       pricing.js
+|       script.js
+|       search-services.html
+|       subscribe.css
+|       subscribe.php
+|       
++---discover-myomr
+|       areas-covered.php
+|       community.php
+|       features.php
+|       getting-started.php
+|       overview.php
+|       pricing.php
+|       support.php
+|       
++---docs
+|       ARCHITECTURE.md
+|       CHANGELOG.md
+|       NEWS_SECTION.md
+|       ONBOARDING.md
+|       TODO.md
+|       
++---events
+|   |   db.php
+|   |   error_log
+|   |   event-details.php
+|   |   gallery.php
+|   |   index.php
+|   |   Omr-Road-Events-and-Happenings.css
+|   |   Omr-Road-Events-and-Happenings.html
+|   |   submit-event.php
+|   |   
+|   \---admin
++---free-ads-chennai
+|   |   about.html
+|   |   browse ads.html
+|   |   clients.html
+|   |   contact.html
+|   |   index.html
+|   |   
+|   +---css
+|   |       animate.min.css
+|   |       bootstrap-grid.css
+|   |       bootstrap-grid.css.map
+|   |       bootstrap-grid.min.css
+|   |       bootstrap-grid.min.css.map
+|   |       bootstrap-reboot.css
+|   |       bootstrap-reboot.css.map
+|   |       bootstrap-reboot.min.css
+|   |       bootstrap-reboot.min.css.map
+|   |       bootstrap.css
+|   |       bootstrap.css.map
+|   |       bootstrap.min.css
+|   |       bootstrap.min.css.map
+|   |       default-skin.css
+|   |       font-awesome.min.css
+|   |       icomoon.css
+|   |       jquery-ui.css
+|   |       jquery.fancybox.min.css
+|   |       jquery.mCustomScrollbar.min.css
+|   |       meanmenu.css
+|   |       nice-select.css
+|   |       normalize.css
+|   |       owl.carousel.min.css
+|   |       responsive.css
+|   |       slick.css
+|   |       style.css
+|   |       
+|   +---images
+|   |       about-banner.png
+|   |       banner.png
+|   |       chevron-arrow.png
+|   |       client-img.png
+|   |       doctor-icon.png
+|   |       email-icon.png
+|   |       eye-icon.png
+|   |       footer-logo.png
+|   |       img-1.png
+|   |       img-2.png
+|   |       img-3.png
+|   |       img-4.png
+|   |       img-5.png
+|   |       like-icon.png
+|   |       logo.png
+|   |       map-banner.png
+|   |       map-flag.png
+|   |       phone-icon.png
+|   |       
+|   \---js
+|           bootstrap.bundle.js
+|           bootstrap.bundle.js.map
+|           bootstrap.bundle.min.js
+|           bootstrap.bundle.min.js.map
+|           bootstrap.js
+|           bootstrap.js.map
+|           bootstrap.min.js
+|           bootstrap.min.js.map
+|           custom.js
+|           jquery-3.0.0.min.js
+|           jquery.mCustomScrollbar.concat.min.js
+|           jquery.min.js
+|           jquery.validate.js
+|           modernizer.js
+|           plugin.js
+|           popper.min.js
+|           slider-setting.js
+|           
++---happy-streets-omr-photo-gallery
+|       Happy-Streets-OMR-Road-Photo-Gallery-01.jpg
+|       Happy-Streets-OMR-Road-Photo-Gallery-02.jpg
+|       Happy-Streets-OMR-Road-Photo-Gallery-03.jpg
+|       Happy-Streets-OMR-Road-Photo-Gallery-04.jpg
+|       Happy-Streets-OMR-Road-Photo-Gallery-05.jpg
+|       Happy-Streets-OMR-Road-Photo-Gallery-06.jpg
+|       Happy-Streets-OMR-Road-Photo-Gallery-07.jpg
+|       
++---images
+|   |   2374449.png
+|   |   3059502-dea42af4.png
+|   |   3059502.png
+|   |   5th-12th-Tutions-All-Subjects-In-OMR.jpg
+|   |   727606.png
+|   |   Carrom-Tournament-Chennai-Perungudi-2022.png
+|   |   Curi-Hospital-Rotary-Club-Utsav-Womens-Day-2023.jpg
+|   |   Decathlon-Yoga-Competition-Mar-12-2023.jpeg
+|   |   DTP-TYPING-Advertisement-MyOMR.jpg
+|   |   Govt-Circular-Kancheepuram-Collector-Apr-2022-Farmers-Welfare-Meet.jpg
+|   |   JS-Runs.jpg
+|   |   My-OMR-Idhu-Namma-OMR-Logo.jpg
+|   |   MyOmr-Login-Page.png
+|   |   MyOMR-Logo.png
+|   |   Place-Ads-myomr-Website-OMRnews.jpg
+|   |   
+|   \---jobs
+|           Baalya-School-Vacancy-For-Teachers-Sept-2024.jpg
+|           
++---info
+|   |   ads.txt
+|   |   citizens-charter-old-mahabali-puram-road.php
+|   |   googlefb33f345e291fb3a.html
+|   |   report-civic-issue-omr.php
+|   |   sitemap.xml
+|   |   subscribers.txt
+|   |   thank-you.html
+|   |   website-privacy-policy-of-my-omr.php
+|   |   
+|   \---onboarding
+|           overview.php
+|           support.php
+|           
++---intlTelInput
+|       intlTelInput.css
+|       intlTelInput.min.js
+|       utils.js
+|       
++---listings
+|       add-business-directory-omr.php
+|       digital-marketing-junior-job-vacancy-cleanbios-guindy.php
+|       post-business-ad-omr.php
+|       post-job-omr.php
+|       Python-C-C-Plus-Java-Computer-Programming-Courses-in-OMR.jpg
+|       rent-house-omr.php
+|       rent-land-omr.php
+|       search-and-post-jobs-job-vacancy-employment-platform-for-omr-chennai.php
+|       sell-property-omr.php
+|       sell-rent-property-house-plot-omr-chennai.php
+|       tutions-classes-courses-training-centers-in-omr-chennai.php
+|       
++---local-news
+|   |   About-My-OMR-Local-News-Network-of-Old-Mahabalipuram-Road.php
+|   |   ads.txt
+|   |   Amazon-Office-World-Trace-Center-OMR-Road-2022.php
+|   |   Another-Chapter-Of-HappyStreets-OMr-Sep-18th-2022.php
+|   |   Chennai-Corporation-Allots-Funds-to-Relay-Roads-Will-OMR-Get-Facelift.php
+|   |   Demand-for-Mushroom-in-Local-Shops-On-Occassion-Of-Purataasi.php
+|   |   Dr.Kalaipunithan-Sets-World-Record-Longest-Letter-root.php
+|   |   Dr.Kalaipunithan-Sets-World-Record-Longest-Letter.php
+|   |   Elections-2024-Chennai-South-Lok-Sabha-Constitency-Fiery-Battle.php
+|   |   EPIC-Eco-Park-and-Information-Center-Seminar-Organic-Farming-Soft-Skills-Padur-Village-EPIC-Day-2024.php
+|   |   error_log
+|   |   EVs-Take-a-hit-Catches-Fire.php
+|   |   facebook-glitch-march-5th-2024.php
+|   |   Fire-Breaks-Out-At-Corporation-Dump-Yard-Perungudi-2022.php
+|   |   GCC-announces-100-tonne-windrow-composting-units-at-Perungudi.php
+|   |   HappyStreets-OMR-Road.php
+|   |   image-video-gallery-old-mahabalipuram-road-news.php
+|   |   Kancheepuram-Collector-Calls-for-Farmers-Welfare-Meeting.php
+|   |   Mylapore-Kabaleeswarar-Arubathu-Moovar-Festival-2025-Timetable-63-Naayanmar.php
+|   |   New-Road-Side-Park-Namakku-Naame-Scheme-Corporation-Road-Perungudi.php
+|   |   news-highlights-from-omr-road.php
+|   |   omr-news-list-of-areas-covered.php
+|   |   Omr-Radial-Road-Storm-Water-Drain-Work.php
+|   |   Road-Closure-SH109-PanchayathRoad-OMR--march-5th-2024.php
+|   |   Sathuragiri-Open-for-Trekking-2022.php
+|   |   search-OMR-old-mahabali-puram-road.php
+|   |   Silver-Jubliee-Celebraations-Ambedkar-Law-University-CM-Stalin-Sept-20th-2022.php
+|   |   Two-Woman-Software-Engineers-Killed-Road-Accident-in-OMR.php
+|   |   water-logging-issue-in-omr-road-flood-prevention.php
+|   |   Wells-Fargo-to-Close-Chennai-Office-2025.php
+|   |   
+|   +---assets
+|   |   \---ads
+|   |           square-300x250.png
+|   |           strip-300x100.png
+|   |           
+|   +---omr-news-images
+|   |       5th-12th-Tutions-All-Subjects-In-OMR.webp
+|   |       Access-To-Panchayath-Road-from-SH109-is-Closed-Due-to-Storm-Water-Drain-Project-March-2024.jpg
+|   |       Ambedkar-Law-University-Silver-Jubliee-Celebrations-21-sept-2022.jpg
+|   |       Ambedkar-Law-University-Silver-Jubliee-Celebrations-21-sept-2022.webp
+|   |       Ambedkar-Law-University-Silver-Jubliee-Celebrations-Guest-of-Honor-21-sept-2022.jpg
+|   |       Ambedkar-Law-University-Silver-Jubliee-Celebrations-Guest-of-Honor-21-sept-2022.webp
+|   |       Another-Chapter-Of-HappyStreets-OMr-Sep-18th-2022.jpg
+|   |       Another-Chapter-Of-HappyStreets-OMr-Sep-18th-2022.webp
+|   |       Carrom-Tournament-Chennai-Perungudi-2022.webp
+|   |       CM-Stalin-Addresses-The -Gathering-At-Ambedkar-Law-Univeristy-Tharamani-OMR.jpg
+|   |       CM-Stalin-Addresses-The -Gathering-At-Ambedkar-Law-Univeristy-Tharamani-OMR.webp
+|   |       DMK-Carders-Waiting-for-CM-Arrival-Ambedkar-Law-University-Silver-Jubliee-Celebrations-21-sept-2022.jpg
+|   |       DMK-Carders-Waiting-for-CM-Arrival-Ambedkar-Law-University-Silver-Jubliee-Celebrations-21-sept-2022.webp
+|   |       Dr-Kalaipunithan-World-Record-Holder-for-Longest-Letter.jpeg
+|   |       DTP-TYPING-Advertisement-MyOMR.webp
+|   |       Elections-2024-Chennai-South-Lok-Sabha-Constitency-Fiery-Battle.jpg
+|   |       EPIC-Padur-Epic-Day-2024-Farmers-SelfHelpGroups-Seminar.png
+|   |       EPIC-Padur-Epic-Day-2024-Fecilitation.png
+|   |       EPIC-Padur-Epic-Day-2024-Govt-School-Padur-Villupaatu-Group.png
+|   |       EPIC-Padur-Epic-Day-2024-Karthic-on-SHGs-Marketing.png
+|   |       EPIC-Padur-Epic-Day-2024-Shantha-Sheela-Nair-Retd-IAS-Addressing-Gathering.JPG
+|   |       Ev-Accident-Incident.jpg
+|   |       Ev-Accident-Incident.webp
+|   |       fb-insta-glich-march-5th-2024-today-fb-not-workin.jpg
+|   |       GCC-announces-100-tonne-windrow-composting-units-at-Perungudi.webp
+|   |       Govt-Circular-Kancheepuram-Collector-Apr-2022-Farmers-Welfare-Meet.webp
+|   |       HappyStreets-OMR-Chance-EY-Illai.jpg
+|   |       HappyStreets-OMR-Chance-EY-Illai.webp
+|   |       Map-Pointing-the-location-of-road-closure-in-OMR-SH109.png
+|   |       Mushrooms-in-High-Demand-Due-to-Purataasi-Month-in-Chennai.webp
+|   |       My-OMR-Idhu-Namma-OMR-Logo.jpg
+|   |       My-OMR-Idhu-Namma-OMR-Logo.webp
+|   |       My-OMR-Logo.webp
+|   |       MyOmr-Login-Page.webp
+|   |       Omr-Road-Link-Road-Storm-Water-Drain-Project-Works.jpg
+|   |       OMR-Road-Two-Techie-Woman-Killed-in-Road-Accident.jpg
+|   |       OMR-Road-Two-Techie-Woman-Killed-in-Road-Accident.webp
+|   |       OMR-Water-Logging-Issue-Dilapidated-Roads-Of-Perungudi-Chennai-Myomr.jpg
+|   |       OMR-Water-Logging-Issue-Dilapidated-Roads-Of-Perungudi-Chennai-Myomr.webp
+|   |       Perungudi-Corporation-Road-Road-Side-Park-Namakku-Naame-Scheme-May-2022.jpg
+|   |       Perungudi-Corporation-Road-Road-Side-Park-Namakku-Naame-Scheme-May-2022.webp
+|   |       Perungudi-Dump-Yard-Fire-Incident-28-04-2022.jpg
+|   |       Perungudi-Dump-Yard-Fire-Incident-28-04-2022.webp
+|   |       Place-Ads-myomr-Website-OMRnews.webp
+|   |       Python-C-C-Plus-Java-Computer-Programming-Courses-in-OMR.webp
+|   |       Sathuragiri-Hills-Open-for-four-day-28Apr-2022.jpg
+|   |       Sathuragiri-Hills-Open-for-four-day-28Apr-2022.webp
+|   |       Water-Logging-Issues-in-OMR-Sept-2022.jpg
+|   |       Water-Logging-Issues-in-OMR-Sept-2022.webp
+|   |       Wells-Fargo-Exists-Chennai-2025-my-omr.jpg
+|   |       World-Record-For-Longest-Letter-Writing-by-Dr-Kalaipunithan.jpg
+|   |       WTC-Amazon-Business-Center-World-Trade-Center-OMR-Road-Perungudi.jpg
+|   |       WTC-Amazon-Business-Center-World-Trade-Center-OMR-Road-Perungudi.webp
+|   |       
+|   \---weblog
+|           error_log
+|           log.php
+|           logfile.txt
+|           openlog.php
+|           
++---omr-listings
+|       atms.php
+|       banks.php
+|       best-schools.php
+|       error_log
+|       government-offices.php
+|       hospitals.php
+|       index.php
+|       industries.php
+|       it-companies.php
+|       omr-road-schools.php
+|       parks.php
+|       restaurants.php
+|       schools.php
+|       
++---small-businesses
+|       index.html
+|       
++---social-media-icons
+|       my-omr-facebook.webp
+|       my-omr-instagram.webp
+|       my-omr-whatsapp.webp
+|       my-omr-youtube.webp
+|       
++---test
+|   \---assets
+|       \---js
+|               myomr-news-bulletin.js
+|               
+\---weblog
+        error_log
+        log.php
+        logfile.txt
+        openlog.php
+        

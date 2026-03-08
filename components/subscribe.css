@@ -1,0 +1,86 @@
+/* Subscribe Section Styling */
+.subscribe-section {
+    background: #4B1E83; /* Purple Background */
+    padding: 30px;
+    text-align: center;
+    border-radius: 15px;
+    color: white;
+    max-width: 900px;
+    margin: 30px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Heading */
+.subscribe-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: white;
+}
+
+/* Form Styling */
+.subscribe-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Email Input */
+.subscribe-input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Submit Button */
+.subscribe-button {
+    background: #FF5722; /* Orange Button */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.subscribe-button:hover {
+    background: #E64A19;
+}
+
+/* Privacy Text */
+.subscribe-text {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #D1C6E0; /* Light greyish text */
+}
+
+/* Decorative Background Elements */
+.subscribe-section::before,
+.subscribe-section::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: #5EE4B9; /* Greenish Decoration */
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+.subscribe-section::before {
+    left: -40px;
+    bottom: -30px;
+}
+
+.subscribe-section::after {
+    right: -40px;
+    top: -30px;
+    background: #9C6EFF; /* Purple Decoration */
+}

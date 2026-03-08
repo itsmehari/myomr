@@ -1,0 +1,521 @@
+<?php include 'weblog/log.php' ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JYSF141J1H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JYSF141J1H');
+</script>
+
+<title>OMR Road News & Community website - Old Mahabalipuram Road - (MY OMR) - Happy Streets of OMR News | Search | Business | Commercial Portal of OMR - Old Mahabalipuram Road</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="News, Events, Happenings in and around Old Mahabalipuram Road, You can find news articles, event coverages, search for businesses, post advertisments related to companies, businesses, events and happenings in our website.">
+<meta name="keywords" content="Old Mahabalipuram Road, OMR Road, OMR News, My OMR, Perungudi, SRP Tools, Kandhanchavadi, Thuraipakkam, Karapakkam, Mettukuppam, Dollar Stop, Sholinganallur, Navalur, Kelambakkam.">
+<meta name="author" content="Krishnan">
+
+<meta property="og:type" content="article" />
+<meta name=”robots” content=”index, follow”>
+<meta property="og:title" content="Old Mahabalipuram Road news, Search, Events, Happenings, Photographs" />
+<meta property="og:description" content="home page of old mahabalipuram road, OMR website,which hosts several features for its user base, especially from chennai, Tamilnadu. We offer special coverage on the News, Happenings, Events, Businesses and people of old mahabalipuram road and its
+neighbouring Community" />
+<meta property="og:image" content="https://myomr.in/My-OMR-Logo.jpg" />
+<meta property="og:url" content="https://myomr.in/" />
+<meta property="og:site_name" content="My OMR Old Mahabalipuram Road." />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="ta_IN" />
+
+<meta name="twitter:title" content="My OMR - Old Mahabalipuram Road News, Events, Images, Happenings, Search, Business Website">
+<meta name="twitter:description" content="in this page you can find news, events, images, happenings, updates, local business information of OMR Road, Old Mahabalipuram Road and its Surroundings">
+<meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.jpg">
+<meta name="twitter:site" content="@MyomrNews">
+<meta name="twitter:creator" content="@MyomrNews">
+<link rel="stylesheet" href="footer.css">
+
+<script async defer data-pin-hover="true" data-pin-tall="true" data-pin-round="true" src="//assets.pinterest.com/js/pinit.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="social-style.css">
+    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  .jumbotron
+  {
+    background-color:#CCFF33;
+    font-family: 'Libre Baskerville', serif;
+  }
+  .button {
+  background-color: #D62828; /* Reddish Shade */
+  border: none;
+  color: #EAE287;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.button1 {background-color: #F77F00;color: #EAE287;} /* Dark Yellowish Scheme */
+.button1 a {color: #EAE287;} /* Dark Yellowish Scheme */
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */
+.button5 {background-color: #555555;} /* Black */
+  </style>
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  
+  <!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.css"
+  rel="stylesheet"
+/>
+
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.js"
+></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<style>
+h2{
+font-family: 'Playfair Display', serif;
+color: #4c516D;
+}
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+</head>
+<style>
+    .float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+  font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+  z-index:100;
+  animation: myAnim 2s ease 0s 1 normal forwards;
+}
+
+.my-float{
+	margin-top:16px;
+	
+}
+
+@keyframes myAnim {
+	0% {
+		animation-timing-function: ease-in;
+		opacity: 1;
+		transform: translateY(-45px);
+	}
+
+	24% {
+		opacity: 1;
+	}
+
+	40% {
+		animation-timing-function: ease-in;
+		transform: translateY(-24px);
+	}
+
+	65% {
+		animation-timing-function: ease-in;
+		transform: translateY(-12px);
+	}
+
+	82% {
+		animation-timing-function: ease-in;
+		transform: translateY(-6px);
+	}
+
+	93% {
+		animation-timing-function: ease-in;
+		transform: translateY(-4px);
+	}
+
+	25%,
+	55%,
+	75%,
+	87% {
+		animation-timing-function: ease-out;
+		transform: translateY(0px);
+	}
+
+	100% {
+		animation-timing-function: ease-out;
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+
+.h2-news
+{
+font-size: 120%;
+color:grey;
+}
+</style>
+<body>
+    <?php include 'myomr-nav-bar.html' ?>
+<a href="https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi" class="float" target="_blank">
+ <i class="fa fa-whatsapp my-float"></i>
+</a>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v14.0" nonce="brAi0ji4"></script>
+
+    <a href="commonlogin.php">Login to your admin panel</a>
+    
+   <!-- <a class="weatherwidget-io" href="https://forecast7.com/en/13d0880d27/chennai/" data-label_1="CHENNAI" data-label_2="WEATHER" data-theme="original" >CHENNAI WEATHER</a>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
+-->
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-6">
+    
+       <div class="fb-page" data-href="https://www.facebook.com/myomrCommunity" data-tabs="timeline" data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/myomrCommunity" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/myomrCommunity">My OMR News Portal for Old Mahabalipuram Road</a></blockquote></div>
+       
+       
+        </div>
+        <div class="col-sm-6">
+
+  <h1 style="font-family: 'Playfair Display', serif;">Old Mahabalipuram Road</h1>
+    <h4 style="font-family: 'Playfair Display', serif;">OMR - The IT Corridor of Chennai</h4>
+  <p style="font-family: 'Josefin Sans', sans-serif;">Welcome fellow Residents of OMR road. Through www.myomr.in we wish to create an active community of people involving and representing the locality in making each others better by sharing and recommending news and happenings and expriences in our OMR Locality. 
+   We discuss News, Events, Happenings and any info which will be useful for the entire community. We will talk about Social and Civic issues and will frequently raise debatable pointers to topics which are socially connected with our locality, there by try achieving solution related to the same. It is all a collective effect which needs to transpire. 
+
+Volunteers and fellow Residents who are interested in contributing to the platform can express interest and help build this online community !!
+reach us via the following Mail id: myomrnews@gmail.com
+Thanks !! 
+Cheers..
+</p>
+  <p style="font-family: 'Josefin Sans', sans-serif;">Major road in suburban Chennai, India, beginning at the Madhya Kailash temple in Adyar and continuing south till Mahabalipuram, ultimately merging with the East Coast Road. 
+     This is popularly called as the 'IT Corridor' because this stretch has become home to many IT/ITES companies.
+     This page is dedicated to happenings in the 45 km stretched highway. </p>
+
+<a href="https://www.facebook.com/myomrCommunity" class="fa" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_facebook-128.png" width="30px;" ></a>
+<a href="https://www.instagram.com/myomrcommunity/" class="fa" target="_blank"><img src="https://cdn2.iconfinder.com/data/icons/social-media-applications/64/social_media_applications_3-instagram-128.png" width="30px"></a>
+<a href="https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi" class="fa" target="_blank"><img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Whatsapp2_colored_svg-512.png" width="30px"></a>
+<a href="https://www.youtube.com/channel/UCyFrgbaQht7C-17m_prn0Rg" class="fa" target="_blank"><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/youtube-128.png" width="30px;"></a>
+
+        </div>
+    </div>
+</div>
+<!--    
+<div class ="container">
+<div class ="row">
+<!-- TradingView Widget BEGIN -->
+<!--
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://in.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text">Markets</span></a> by TradingView</div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+  "symbols": [
+    {
+      "proName": "FOREXCOM:SPXUSD",
+      "title": "S&P 500"
+    },
+    {
+      "proName": "FOREXCOM:NSXUSD",
+      "title": "US 100"
+    },
+    {
+      "proName": "FX_IDC:EURUSD",
+      "title": "EUR/USD"
+    },
+    {
+      "proName": "BITSTAMP:BTCUSD",
+      "title": "Bitcoin"
+    },
+    {
+      "proName": "BITSTAMP:ETHUSD",
+      "title": "Ethereum"
+    }
+  ],
+  "showSymbolLogo": true,
+  "colorTheme": "light",
+  "isTransparent": false,
+  "displayMode": "adaptive",
+  "locale": "in"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+<!--
+</div>
+</div>
+-->
+
+<div class="container-fluid">
+    <div class="row row-no-gutters" style="background-color: #F77F00;">
+    <div class="col-sm-4" style="padding:0 px; margin: 0px;  border-right: 2px solid white;  text-align:center;background-color: #F77F33;"><button class="button button1"><a href="sell-rent-property-house-plot-omr-chennai.php" style="text-decoration:none;">Looking to Rent or Sell your Property <br> do it here..</a></button></div>
+    <div class="col-sm-4" style="padding:0 px; margin: 0px; border-right: 2px solid white;  text-align:center;background-color: #F77F33;"><button class="button button1"><a href="search-and-post-jobs-job-vacancy-employment-platform-for-omr-chennai.php" style="text-decoration:none;">Looking for job or looking to hire candidates  <br> do it here..</a></button></div>
+    <div class="col-sm-4" style="padding:0 px; margin: 0px;  border-right: 2px solid white;  text-align:center;background-color: #F77F33;"><button class="button button1"><a href="search-and-post-jobs-job-vacancy-employment-platform-for-omr-chennai.php" style="text-decoration:none;">Home Tutions <br>Learn Programming & Designing..</a></button></div>
+  </div>
+</div>
+<div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+      <h2>My OMR</h2>
+      <h5>Local Community News Portal</h5>
+      <div><img src="My-OMR-Idhu-Namma-OMR-Logo.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;"></div>
+      
+      <!--<p>
+      
+      
+      igate to News Section</p>-->
+      <!--<h3>recent news</h3>-->
+      <!--<p>top news of the week</p>-->
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php">Home</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link active" href="About-My-OMR-Old-Mahabalipuram-Road-Local-News.php">About My OMR</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="news-highlights-from-omr-road.php">Highlights</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="old-mahabalipuram-road-news-image-video-gallery.php">Gallery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="contact-my-omr-team.php">Contact</a>
+        </li>
+          </ul>
+
+            <img src="5th-12th-Tutions-All-Subjects-In-OMR.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;" width="250px" />
+            <img src="DTP-TYPING-Advertisement-MyOMR.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;" width="250px" />
+            <img src="Place-Ads-myomr-Website-OMRnews.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;" width="250px" />
+
+      <hr class="d-sm-none">
+    </div>
+    <div class="col-sm-8">
+<!-- ------news article------ -->
+
+<section class="news-headlines" style="width:100%;">
+    <div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="HappyStreets-OMR-Chance-EY-Illai.jpg" width="220">
+        </div>
+        <div class="col-sm-8">
+<h2 class="h2-news"> Third week of Happy Streets OMR is all set to happen on, 11 Sept in the Thuraipakkam Signal Junction, Near BSR MALL. </h2>
+      <h5>OMR News, Sept 09, 2022</h5>
+<a href="news-old-mahabalipuram-road-omr/Happy-Streets-OMr-Road-Sunday-Event.php" target="_blank" style="color:red;font-weight:600;">Read More</a>
+        <br>
+        </div>
+        <hr>           
+    </div>
+    </div>
+</section>
+
+<!-- ------news article------ -->
+
+<section class="news-headlines" style="width:100%;">
+    <div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="Water-Logging-Issues-in-OMR-Sept-2022.jpg" width="220">
+        </div>
+        <div class="col-sm-8">
+      <h2 class="h2-news">மழை நீர் தேக்கம். OMR மற்றும் முழு சென்னையிலும் ஒரு முக்கிய பிரச்சினை.</h2>
+      <h5>OMR News, Sept 08, 2022</h5>
+<a href="news-highlights-from-omr-road.php" target="_blank" style="color:red;font-weight:600;">Read More</a>
+        <br><br>
+        </div>
+        <hr>           
+    </div>
+    </div>
+</section>
+
+<!-- ------news article------ -->
+
+<section class="news-headlines" style="width:100%;">
+    <div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="Perungudi-Corporation-Road-Road-Side-Park-Namakku-Naame-Scheme-May-2022.jpg" width="220">
+        </div>
+        <div class="col-sm-8">
+      <h2 class="h2-news">New Side Park under Namakku Name Scheme in Corporation Road, Seevaram, Perungudi</h2>
+      <h5>OMR News, May 01, 2022</h5>
+<a href="news-highlights-from-omr-road.php" target="_blank" style="color:red;font-weight:600;">Read More</a>
+        <br><br>
+        </div>
+        <hr>           
+    </div>
+    </div>
+</section>
+
+<!-- ------news article------ -->
+
+<section class="news-headlines" style="width:100%;">
+    <div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="Perungudi-Dump-Yard-Fire-Incident-28-04-2022.jpg" width="220">
+        </div>
+        <div class="col-sm-8">
+      <h2 class="h2-news">Fire Incident at Perungudi Dumpyard</h2>
+      <h5>OMR News, Apr 28, 2022</h5>
+<a href="news-highlights-from-omr-road.php" target="_blank" style="color:red;font-weight:600;">Read More</a>
+        <br>
+        </div>
+        <br>
+        <hr>           
+    </div>
+    </div>
+</section>
+
+<!-- ------news article------ -->
+
+<section class="news-headlines" style="width:100%;">
+    <div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="Govt-Circular-Kancheepuram-Collector-Apr-2022-Farmers-Welfare-Meet.jpg" width="220">
+        </div>
+        <div class="col-sm-8">
+      <h2 class="h2-news">Farmers Welfare Meet - Call out to farmers from Kancheepuram Collector,</h2>
+    <h4>OMR News, Apr 26, 2022</h2>
+
+<a href="news-highlights-from-omr-road.php" target="_blank" style="color:red;font-weight:600;">Read More</a>
+        <br>
+        </div>
+        <br>
+        <hr>           
+    </div>
+    </div>
+</section>
+
+<!-- ------news article------ -->
+ <section class="news-headlines" style="width:100%;">
+    <div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="Ev-Accident-Incident.jpg" width="220">
+        </div>
+        <div class="col-sm-8">
+      <h2 class="h2-news">EVs Take a hit</h2>
+      <h5>OMR News, Apr 24, 2022</h5>
+<a href="news-highlights-from-omr-road.php" target="_blank" style="color:red;font-weight:600;">Read More</a>
+        <br>
+        </div>
+        <br>
+        <hr>           
+    </div>
+    </div>
+</section>
+
+<!-- ------news article------ -->    
+
+ <section class="news-headlines" style="width:100%;">
+    <div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="OMR-Water-Logging-Issue-Dilapidated-Roads-Of-Perungudi-Chennai-Myomr.jpg" width="220">
+        </div>
+        <div class="col-sm-8">
+      <h2 class="h2-news">Chennai Corporation plans to relay damaged roads - Will perungudi be covered?</h2>
+      <h5>OMR News, Apr 28, 2022</h5>
+<a href="news-highlights-from-omr-road.php" target="_blank" style="color:red;font-weight:600;">Read More</a>
+        <br>
+        </div>
+        <br>
+        <hr>           
+    </div>
+    </div>
+</section>
+
+<!-- ------news article------ -->    
+  
+ <section class="news-headlines" style="width:100%;">
+    <div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="Sathuragiri-Hills-Open-for-four-day-28Apr-2022.jpg" width="220">
+        </div>
+        <div class="col-sm-8">
+      <h2 class="h2-news">Sauthuragiri open for 4 days - Starting 28-Apr-2022 - Plan your Pilgrimage.</h2>
+      <h5>OMR News, Apr 28, 2022</h5>
+<a href="news-highlights-from-omr-road.php" target="_blank" style="color:red;font-weight:600;">Read More</a>
+        <br>
+        </div>
+        <br>
+        <hr>           
+    </div>
+    </div>
+</section>
+
+<!-- ------news article------ -->    
+
+     <section class="news-headlines" style="width:100%;">
+    <div class="container" style="margin-top:30px;">
+  <div class="row">
+    <div class="col-sm-4">
+        <img src="WTC-Amazon-Business-Center-World-Trade-Center-OMR-Road-Perungudi.jpg" width="220">
+        </div>
+        <div class="col-sm-8">
+      <h2 class="h2-news">Amazon strengthens presence in Tamil Nadu with a new office building</h2>
+      <h5>OMR News, Mar 30, 2022</h5>
+<a href="news-highlights-from-omr-road.php" target="_blank" style="color:red;font-weight:600;">Read More</a>
+        <br>
+        </div>
+        <br>
+        <hr>           
+    </div>
+    </div>
+</section>
+
+<!-- ------news article------ -->   
+ 
+    </div>
+  </div>
+</div>
+
+<!--footer section begins -->
+<?php include 'components/footer.php'; ?>
+<!--footer section ends -->
+</body>
+</html>
+

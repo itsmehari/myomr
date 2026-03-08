@@ -1,0 +1,157 @@
+# MyOMR root .htaccess – central routing and sitemap management
+
+# Custom error pages
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+RewriteEngine On
+RewriteBase /
+
+# Force HTTPS - Redirect HTTP to HTTPS (must be first)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect www to non-www (canonical domain)
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Security: disable indexes
+Options -Indexes
+
+# Security headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  # Content-Security-Policy can be tightened later after CDN audit
+  # Header set Content-Security-Policy "default-src 'self' https: 'unsafe-inline' 'unsafe-eval'"
+</IfModule>
+
+# Static asset caching (merged into single block)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 30 days"
+  ExpiresByType application/javascript "access plus 30 days"
+  ExpiresByType application/x-javascript "access plus 30 days"
+  ExpiresByType image/webp "access plus 90 days"
+  ExpiresByType image/jpeg "access plus 90 days"
+  ExpiresByType image/png "access plus 90 days"
+  ExpiresByType image/gif "access plus 90 days"
+  ExpiresByType image/svg+xml "access plus 90 days"
+  ExpiresByType font/woff2 "access plus 365 days"
+  ExpiresByType font/woff "access plus 365 days"
+  ExpiresByType font/ttf "access plus 365 days"
+  ExpiresDefault "access plus 5 minutes"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=604800, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(png|jpg|jpeg|gif|svg|webp|woff2|woff|ttf)$">
+    Header set Cache-Control "public, max-age=2592000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html|php)$">
+    Header set Cache-Control "public, max-age=300"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Environment and bootstrap
+SetEnv MYOMR_ENV production
+<IfModule mod_php7.c>
+  php_value auto_prepend_file core/error-handler.php
+</IfModule>
+<IfModule mod_php8.c>
+  php_value auto_prepend_file core/error-handler.php
+</IfModule>
+
+# Root sitemap index
+RewriteRule ^sitemap\.xml$ generate-sitemap-index.php [L]
+
+# Module: Events – clean routes
+RewriteRule ^omr-local-events/sitemap\.xml$ omr-local-events/generate-events-sitemap.php [L]
+RewriteRule ^omr-local-events/event/([^/]+)/?$ omr-local-events/event-detail-omr.php?slug=$1 [L,QSA]
+RewriteRule ^omr-local-events/category/([^/]+)/?$ omr-local-events/category.php?slug=$1 [L,QSA]
+RewriteRule ^omr-local-events/locality/([^/]+)/?$ omr-local-events/locality.php?slug=$1 [L,QSA]
+RewriteRule ^omr-local-events/venue/([^/]+)/?$ omr-local-events/venue.php?slug=$1 [L,QSA]
+RewriteRule ^omr-local-events/today/?$ omr-local-events/today.php [L,QSA]
+RewriteRule ^omr-local-events/weekend/?$ omr-local-events/weekend.php [L,QSA]
+RewriteRule ^omr-local-events/month/?$ omr-local-events/month.php [L,QSA]
+RewriteRule ^omr-local-events/post/?$ omr-local-events/post-event-omr.php [L,QSA]
+
+# Module sitemaps
+RewriteRule ^omr-listings/sitemap\.xml$ omr-listings/generate-listings-sitemap.php [L]
+RewriteRule ^omr-local-job-listings/sitemap\.xml$ omr-local-job-listings/generate-sitemap.php [L]
+RewriteRule ^omr-hostels-pgs/sitemap\.xml$ omr-hostels-pgs/generate-sitemap.php [L]
+RewriteRule ^omr-coworking-spaces/sitemap\.xml$ omr-coworking-spaces/generate-sitemap.php [L]
+RewriteRule ^pentahive/sitemap\.xml$ pentahive/generate-sitemap.php [L]
+RewriteRule ^local-news/sitemap\.xml$ local-news/generate-sitemap.php [L]
+RewriteRule ^election-blo-details/sitemap\.xml$ election-blo-details/generate-blo-sitemap.php [L]
+
+# Root-level pages (files in sub-folders)
+RewriteRule ^contact-my-omr-team\.php$ weblog/contact-my-omr-team.php [L]
+RewriteRule ^citizens-charter-old-mahabali-puram-road\.php$ info/citizens-charter-old-mahabali-puram-road.php [L]
+
+# Legacy redirect
+RewriteRule ^listings/search-and-post-jobs-job-vacancy-employment-platform-for-omr-chennai\.php$ omr-local-job-listings/index.php [R=301,L]
+
+# --- Listing module: clean URLs ---
+
+# Banks
+RewriteRule ^banks/?$ omr-listings/banks.php [L]
+RewriteRule ^banks/([A-Za-z0-9\-]+)/?$ omr-listings/bank.php?slug=$1 [L,QSA]
+
+# Hospitals
+RewriteRule ^hospitals/?$ omr-listings/hospitals.php [L]
+RewriteRule ^hospitals/([A-Za-z0-9\-]+)/?$ omr-listings/hospital.php?slug=$1 [L,QSA]
+
+# Schools
+RewriteRule ^schools/?$ omr-listings/schools.php [L]
+RewriteRule ^schools/([A-Za-z0-9\-]+)/?$ omr-listings/school.php?slug=$1 [L,QSA]
+
+# Parks
+RewriteRule ^parks/?$ omr-listings/parks.php [L]
+RewriteRule ^parks/([A-Za-z0-9\-]+)/?$ omr-listings/park.php?slug=$1 [L,QSA]
+
+# Industries
+RewriteRule ^industries/?$ omr-listings/industries.php [L]
+RewriteRule ^industries/([A-Za-z0-9\-]+)/?$ omr-listings/industry.php?slug=$1 [L,QSA]
+
+# Government Offices
+RewriteRule ^government-offices/?$ omr-listings/government-offices.php [L]
+RewriteRule ^government-offices/([A-Za-z0-9\-]+)/?$ omr-listings/government-office.php?slug=$1 [L,QSA]
+
+# ATMs
+RewriteRule ^atms/?$ omr-listings/atms.php [L]
+RewriteRule ^atms/([A-Za-z0-9\-]+)/?$ omr-listings/atm.php?slug=$1 [L,QSA]
+
+# IT Companies
+RewriteRule ^it-companies/?$ omr-listings/it-companies.php [L]
+RewriteRule ^it-companies/([A-Za-z0-9\-]+)/?$ omr-listings/it-company.php?slug=$1 [L,QSA]
+
+# IT Parks (sitemap rule must come before the slug catch-all)
+RewriteRule ^it-parks/sitemap\.xml$ omr-listings/generate-it-parks-sitemap.php [L]
+RewriteRule ^it-parks/?$ omr-listings/it-parks-in-omr.php [L]
+RewriteRule ^it-parks/([A-Za-z0-9\-]+)/?$ omr-listings/it-park.php?slug=$1 [L,QSA]
+
+# Restaurants
+RewriteRule ^restaurants/?$ omr-listings/restaurants.php [L]
+RewriteRule ^restaurants/([A-Za-z0-9\-]+)/?$ omr-listings/restaurant.php?slug=$1 [L,QSA]
+
+# Local News: clean article URLs (/local-news/slug -> article.php?slug=slug)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^local-news/([^/]+)/?$ local-news/article.php?slug=$1 [L,QSA]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the "ea-php82" package as the default "PHP" programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php82___lsphp .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

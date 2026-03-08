@@ -1,0 +1,630 @@
+/* =============================================================
+   MyOMR News Bulletin — Wire-Inspired Editorial Layout
+   Responsive: Mobile → Tablet → Desktop
+   Font: Poppins (loaded via main stylesheet)
+   Brand green: #008037
+   ============================================================= */
+
+/* ── Section Wrapper ── */
+.omr-newsroom {
+    width: 100%;
+    max-width: 1280px;
+    margin: 52px auto;
+    padding: 0 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ── Section Header ── */
+.newsroom-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 3px solid #008037;
+    padding-bottom: 14px;
+    margin-bottom: 26px;
+}
+
+.newsroom-header__eyebrow {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #008037;
+    margin-bottom: 3px;
+}
+
+.newsroom-header__title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+}
+
+.newsroom-viewall {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #008037;
+    text-decoration: none;
+    padding: 7px 16px;
+    border: 1.5px solid #008037;
+    border-radius: 24px;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.newsroom-viewall:hover {
+    background: #008037;
+    color: #fff;
+    text-decoration: none;
+}
+
+.newsroom-viewall:focus-visible {
+    background: #008037;
+    color: #fff;
+    text-decoration: none;
+    outline: 2px solid #005c26;
+    outline-offset: 3px;
+}
+
+/* ── Main Two-Column Layout: [Main | Sidebar] ── */
+.newsroom-layout {
+    display: grid;
+    grid-template-columns: 1fr 330px;
+    gap: 24px;
+    align-items: start;
+}
+
+/* ── Shared: News Badge Chips ── */
+.news-badge {
+    display: inline-block;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.badge--local     { background: #dcf5e7; color: #00612a; }
+.badge--events    { background: #fff0e4; color: #b84d00; }
+.badge--infra     { background: #e5effd; color: #1a56db; }
+.badge--community { background: #e0f7f4; color: #0c7a6a; }
+.badge--business  { background: #fef9e5; color: #8a5f00; }
+.badge--alert     { background: #fee2e2; color: #b91c1c; }
+
+/* ── Shared: News Meta (source · date) ── */
+.news-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #999;
+    flex-wrap: wrap;
+}
+
+.news-meta__source {
+    font-weight: 600;
+    color: #666;
+}
+
+.news-meta__sep {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.news-meta__date {
+    color: #aaa;
+}
+
+/* ============================================================
+   HERO CARD
+   ============================================================ */
+
+.news-hero {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.07);
+    margin-bottom: 20px;
+    transition: box-shadow 0.25s ease;
+}
+
+.news-hero:hover {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+.news-hero__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.news-hero__image-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.news-hero__img {
+    width: 100%;
+    height: 310px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+}
+
+.news-hero:hover .news-hero__img {
+    transform: scale(1.04);
+}
+
+.news-hero__image-wrap .news-badge {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.news-hero__body {
+    padding: 20px 22px 22px;
+}
+
+.news-hero__title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.38;
+    margin: 0 0 11px;
+    letter-spacing: -0.02em;
+    transition: color 0.2s;
+}
+
+.news-hero__link:hover .news-hero__title {
+    color: #008037;
+}
+
+.news-hero__excerpt {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    margin: 0 0 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ============================================================
+   MEDIUM CARDS ROW (2-up grid below hero)
+   ============================================================ */
+
+.newsroom-medium-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.news-medium {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.news-medium:hover {
+    box-shadow: 0 7px 22px rgba(0, 0, 0, 0.11);
+    transform: translateY(-3px);
+}
+
+.news-medium__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.news-medium__image-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.news-medium__img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.news-medium:hover .news-medium__img {
+    transform: scale(1.05);
+}
+
+.news-medium__image-wrap .news-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.news-medium__body {
+    padding: 14px 15px 16px;
+}
+
+.news-medium__title {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.42;
+    margin: 0 0 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s;
+}
+
+.news-medium__link:hover .news-medium__title {
+    color: #008037;
+}
+
+/* ============================================================
+   SIDEBAR — Compact Story List
+   ============================================================ */
+
+.newsroom-sidebar {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.sidebar-more-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #008037;
+    padding: 14px 16px 11px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fafcfa;
+}
+
+/* ── Compact Card ── */
+.news-compact {
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.news-compact:last-child {
+    border-bottom: none;
+}
+
+.news-compact__link {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 13px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease;
+}
+
+.news-compact__link:hover {
+    background: #f5fbf7;
+    text-decoration: none;
+}
+
+.news-compact__thumb {
+    flex-shrink: 0;
+    width: 76px;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #e9e9e9;
+}
+
+.news-compact__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.news-compact__link:hover .news-compact__thumb img {
+    transform: scale(1.07);
+}
+
+.news-compact__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.news-compact__body .news-badge {
+    margin-bottom: 5px;
+}
+
+.news-compact__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.42;
+    margin: 0 0 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s;
+}
+
+.news-compact__link:hover .news-compact__title {
+    color: #008037;
+}
+
+.news-compact__body .news-meta__date {
+    font-size: 11px;
+    color: #bbb;
+    display: block;
+}
+
+/* ============================================================
+   SECTION FOOTER
+   ============================================================ */
+
+.newsroom-footer {
+    margin-top: 22px;
+    text-align: center;
+    padding: 16px 0 4px;
+    border-top: 1px solid #ebebeb;
+}
+
+.newsroom-footer__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #008037;
+    text-decoration: none;
+    padding: 9px 22px;
+    background: #f0faf4;
+    border-radius: 24px;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.newsroom-footer__link:hover {
+    background: #008037;
+    color: #fff;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.newsroom-footer__link:focus-visible {
+    background: #008037;
+    color: #fff;
+    transform: translateY(-1px);
+    text-decoration: none;
+    outline: 2px solid #005c26;
+    outline-offset: 3px;
+}
+
+/* =============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================= */
+
+/* ── Large Desktop (≥ 1100px): wider sidebar ── */
+@media (min-width: 1100px) {
+    .newsroom-layout {
+        grid-template-columns: 1fr 360px;
+        gap: 28px;
+    }
+
+    .news-hero__img {
+        height: 340px;
+    }
+
+    .news-hero__title {
+        font-size: 23px;
+    }
+}
+
+/* ── Small Desktop / Large Tablet Landscape (992px – 1099px) ── */
+@media (max-width: 1099px) and (min-width: 992px) {
+    .newsroom-layout {
+        grid-template-columns: 1fr 295px;
+        gap: 20px;
+    }
+
+    .news-hero__img {
+        height: 280px;
+    }
+
+    .news-hero__title {
+        font-size: 19px;
+    }
+
+    .news-medium__img {
+        height: 155px;
+    }
+}
+
+/* ── Tablet (600px – 991px): Stack main + sidebar, sidebar goes 2-col ── */
+@media (max-width: 991px) {
+
+    .newsroom-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .news-hero__img {
+        height: 280px;
+    }
+
+    /* Sidebar becomes a 2-column grid on tablet.
+       Use gap + background trick: sidebar bg becomes the "border" colour,
+       each card bg is white — perfectly consistent grid dividers with zero nth-child math. */
+    .newsroom-sidebar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: #f0f0f0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .sidebar-more-label {
+        grid-column: 1 / -1;
+        background: #fafcfa;
+    }
+
+    .news-compact {
+        border-bottom: none;
+        border-right: none;
+        background: #fff;
+    }
+
+    .news-compact__link:hover {
+        background: #f5fbf7;
+    }
+}
+
+/* ── Mobile Landscape (480px – 599px): medium cards still 2-col ── */
+@media (max-width: 599px) and (min-width: 480px) {
+    .omr-newsroom {
+        padding: 0 14px;
+        margin: 36px auto;
+    }
+
+    .newsroom-header {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .newsroom-header__title {
+        font-size: 19px;
+    }
+
+    .news-hero__img {
+        height: 240px;
+    }
+
+    .news-hero__title {
+        font-size: 17px;
+    }
+
+    .news-hero__excerpt {
+        -webkit-line-clamp: 2;
+    }
+
+    /* Sidebar: revert to single column on mobile */
+    .newsroom-sidebar {
+        display: block;
+    }
+
+    .news-compact {
+        border-bottom: 1px solid #f2f2f2;
+        border-right: none;
+    }
+
+    .news-compact:last-child {
+        border-bottom: none;
+    }
+}
+
+/* ── Mobile Portrait (< 480px): single column everything ── */
+@media (max-width: 479px) {
+    .omr-newsroom {
+        padding: 0 12px;
+        margin: 28px auto;
+    }
+
+    .newsroom-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding-bottom: 12px;
+        margin-bottom: 18px;
+    }
+
+    .newsroom-header__title {
+        font-size: 18px;
+    }
+
+    .newsroom-viewall {
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+
+    .news-hero__img {
+        height: 210px;
+    }
+
+    .news-hero__title {
+        font-size: 16.5px;
+        letter-spacing: -0.01em;
+    }
+
+    .news-hero__excerpt {
+        font-size: 13.5px;
+        -webkit-line-clamp: 2;
+    }
+
+    .news-hero__body {
+        padding: 15px 15px 17px;
+    }
+
+    /* Medium cards: stack to single column on smallest screens */
+    .newsroom-medium-row {
+        grid-template-columns: 1fr;
+    }
+
+    .news-medium__img {
+        height: 190px;
+    }
+
+    .news-medium__title {
+        font-size: 14px;
+    }
+
+    /* Sidebar: full single column list */
+    .newsroom-sidebar {
+        display: block;
+    }
+
+    .news-compact {
+        border-bottom: 1px solid #f2f2f2;
+        border-right: none;
+    }
+
+    .news-compact:last-child {
+        border-bottom: none;
+    }
+
+    .news-compact__link {
+        padding: 12px 14px;
+        gap: 10px;
+    }
+
+    .news-compact__thumb {
+        width: 68px;
+        height: 54px;
+    }
+
+    .news-compact__title {
+        font-size: 12.5px;
+    }
+
+    .newsroom-footer__link {
+        font-size: 12.5px;
+        padding: 8px 18px;
+    }
+}

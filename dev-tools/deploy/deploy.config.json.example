@@ -1,0 +1,56 @@
+{
+  "prod": {
+    "protocol": "ftps", 
+    "host": "sh008.hostgator.in",
+    "port": 21,
+    "user": "cpanel_username",
+    "password": "cpanel_password",
+    "remotePath": "/public_html/",
+    "secure": true
+  },
+  "prod_sftp": {
+    "protocol": "sftp",
+    "host": "sh008.hostgator.in",
+    "port": 22,
+    "user": "cpanel_username",
+    "password": "cpanel_password",
+    "remotePath": "/public_html/"
+  }
+}
+{
+  "defaultEnv": "prod",
+  "env": {
+    "prod": {
+      "protocol": "ftps", 
+      "host": "your.cpanel.host",
+      "port": 21,
+      "username": "cpanel_user",
+      "password": "cpanel_password",
+      "remotePath": "/home/cpanel_user/public_html",
+      "secureOptions": {
+        "rejectUnauthorized": true
+      }
+    },
+    "stage": {
+      "protocol": "sftp",
+      "host": "your.cpanel.host",
+      "port": 22,
+      "username": "cpanel_user",
+      "password": "cpanel_password",
+      "privateKeyPath": "C:/Users/Admin/.ssh/id_rsa",
+      "remotePath": "/home/cpanel_user/stage"
+    }
+  },
+  "exclude": [
+    ".git/**",
+    "node_modules/**",
+    "dev-tools/**",
+    "docs/**",
+    "**/*.md",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "weblog/**"
+  ]
+}
+
+

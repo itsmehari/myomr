@@ -1,0 +1,142 @@
+# Cursor AI Rules for MyOMR.in Project
+
+## ⚠️ IMPORTANT: Working with the `docs/` Folder
+
+**When you encounter any task related to the `docs/` folder, you MUST:**
+
+1. **Read `docs/README.md` FIRST** - This file is specifically designed to explain:
+   - The complete structure and organization of the `docs/` folder
+   - What each category folder contains and when to use it
+   - Documentation naming conventions and organization principles
+   - How documentation relates to the project codebase
+   - What should be done in the `docs/` folder for different types of work
+
+2. **Gain Context** - By reading `docs/README.md`, you will understand:
+   - Where to place new documentation files
+   - How to navigate existing documentation
+   - The relationship between documentation categories and project work
+   - Documentation maintenance procedures
+   - How to find relevant documentation for any task
+
+3. **Follow the Structure** - Use the information in `docs/README.md` to:
+   - Place files in the correct category folders
+   - Follow naming conventions
+   - Maintain documentation organization
+   - Update documentation appropriately
+
+**`docs/README.md` is your primary source of truth for understanding the documentation structure and what should be done in the `docs/` folder.**
+
+---
+
+## Documentation Structure
+
+**CRITICAL: Understanding the `docs/` Folder Structure**
+
+**`docs/README.md` is specifically designed to explain the structure and organization of the `docs/` folder.**
+
+**When you need to understand:**
+- How the `docs/` folder is organized
+- Where documentation files are located
+- What each category folder contains
+- How to navigate the documentation
+- What documentation conventions are used
+- How documentation relates to the project codebase
+
+**ALWAYS read `docs/README.md` first.** This file provides essential context about:
+- The 9 category folders (analytics-seo, data-backend, content-projects, operations-deployment, product-prd, strategy-marketing, worklogs, workflows-pipelines, archive)
+- Documentation naming conventions and organization principles
+- File relationships and cross-references
+- Navigation strategies for finding relevant documentation
+- How documentation maps to the actual codebase
+- Documentation maintenance lifecycle
+
+**By reading `docs/README.md`, you will gain complete context about:**
+- What should be done in the `docs/` folder
+- Where to place new documentation
+- How documentation is organized and maintained
+- How to find relevant documentation for any task
+- The relationship between documentation and project work
+
+**This file is AI-enhanced with structured metadata, clear navigation guides, and explicit instructions for both human developers and AI systems.**
+
+**Key Documentation Files:**
+- `docs/README.md` - Documentation index and navigation hub
+- `docs/ARCHITECTURE.md` - System architecture and file organization
+- `LEARNINGS.md` - Project learnings and best practices (root level)
+- `docs/data-backend/DATABASE_INDEX.md` - Database documentation hub
+- `docs/operations-deployment/ONBOARDING.md` - Development setup guide
+
+**Documentation Organization:**
+- Documentation is organized by function/purpose, not by date
+- Files use semantic naming: UPPER-KEBAB-CASE for major docs, `worklog-dd-mm-yyyy.md` for worklogs
+- Category folders use kebab-case (e.g., `analytics-seo`, `data-backend`)
+- New docs go to `docs/inbox/` for triage, then moved to appropriate category
+- Process guides and release playbooks live in `docs/workflows-pipelines/`
+
+**When to Reference Documentation:**
+- Before starting new features → Check `docs/product-prd/` for PRDs
+- When working with database → Check `docs/data-backend/DATABASE_INDEX.md`
+- When deploying → Check `docs/operations-deployment/` for checklists
+- When reviewing recent work → Check `docs/worklogs/` for daily logs
+- When understanding architecture → Check `docs/ARCHITECTURE.md`
+- When documenting or following a process → Check `docs/workflows-pipelines/`
+
+## Project Context
+
+**Technology Stack:**
+- Backend: PHP (Procedural), MySQL
+- Frontend: HTML5, CSS3, Bootstrap 5, Vanilla JavaScript
+- Deployment: cPanel shared hosting, phpMyAdmin for database
+- Font: Poppins (primary)
+
+**Key Conventions:**
+- File naming: kebab-case (e.g., `post-job-omr.php`)
+- Max container width: 1280px
+- Database config: `core/omr-connect.php`
+- Components: Reusable PHP includes in `components/`
+- Security: All admin pages check `$_SESSION['admin_logged_in']`
+
+## Code Organization
+
+**Core Folders:**
+- `/admin/` - Admin-only CRUD tools
+- `/components/` - Reusable layout parts (nav, footer, meta tags)
+- `/core/` - DB connection and shared logic
+- `/docs/` - All project documentation
+- `/local-news/` - News article pages
+- `/omr-listings/` - Business listings
+- `/omr-local-job-listings/` - Job portal
+- `/omr-local-events/` - Events system
+
+**Important Files:**
+- `components/meta.php` - Standard meta tags and canonical URLs
+- `core/url-helpers.php` - URL generation functions
+- `.htaccess` - URL rewriting and redirects (HTTPS, www removal)
+
+## Development Workflow
+
+**Before working with the `docs/` folder:**
+1. **ALWAYS read `docs/README.md` first** - This file explains the complete structure of the `docs/` folder, how it's organized, and what should be done in each category
+2. Understand the documentation organization principles and naming conventions
+3. Know where to place new documentation and how to maintain existing docs
+
+**During development:**
+1. Check `docs/README.md` for relevant documentation navigation
+2. Review `docs/worklogs/` for recent changes
+3. Check `LEARNINGS.md` for project patterns and best practices
+4. Follow conventions in `docs/ARCHITECTURE.md`
+5. Update worklogs after completing work
+
+**When adding/updating documentation:**
+- Follow the structure explained in `docs/README.md`
+- Place new docs in `docs/inbox/` for triage
+- Move organized docs to appropriate category folders
+- Update `docs/README.md` if organization structure changes
+
+## Documentation Maintenance
+
+- New documentation → Place in `docs/inbox/` for triage
+- Organized documentation → Move to appropriate category folder
+- Obsolete documentation → Move to `docs/archive/`
+- Always update `docs/README.md` when organization changes
+

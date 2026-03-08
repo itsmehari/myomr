@@ -1,0 +1,655 @@
+/* main.css - Centralized custom styles for MyOMR.in */
+
+/* ========================================
+   GLOBAL STYLES
+======================================== */
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* ========================================
+   FOOTER STYLES
+======================================== */
+
+.footer-section {
+  background: #151414;
+  position: relative;
+}
+.footer-cta {
+  border-bottom: 1px solid #373636;
+}
+.single-cta i {
+  color: #ff5e14;
+  font-size: 30px;
+  float: left;
+  margin-top: 8px;
+}
+.cta-text {
+  padding-left: 15px;
+  display: inline-block;
+}
+.cta-text h4 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.cta-text span {
+  color: #757575;
+  font-size: 15px;
+}
+.footer-content {
+  position: relative;
+  z-index: 2;
+}
+.footer-pattern img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 330px;
+  background-size: cover;
+  background-position: 100% 100%;
+}
+.footer-logo {
+  margin-bottom: 30px;
+}
+.footer-logo img {
+  max-width: 200px;
+}
+.footer-text p {
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #7e7e7e;
+  line-height: 28px;
+}
+.footer-social-icon span {
+  color: #fff;
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 20px;
+}
+.footer-social-icon a {
+  color: #fff;
+  font-size: 16px;
+  margin-right: 15px;
+}
+.footer-social-icon i {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 50%;
+}
+.facebook-bg {
+  background: #3b5998;
+}
+.twitter-bg {
+  background: #55acee;
+}
+.google-bg {
+  background: #dd4b39;
+}
+.footer-widget-heading h3 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  position: relative;
+}
+.footer-widget-heading h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  height: 2px;
+  width: 50px;
+  background: #ff5e14;
+}
+.footer-widget ul li {
+  display: inline-block;
+  float: left;
+  width: 50%;
+  margin-bottom: 12px;
+}
+.footer-widget ul li a:hover {
+  color: #ff5e14;
+}
+.footer-widget ul li a {
+  color: #878787;
+  text-transform: capitalize;
+}
+.subscribe-form {
+  position: relative;
+  overflow: hidden;
+}
+.subscribe-form input {
+  width: 100%;
+  padding: 14px 28px;
+  background: #2e2e2e;
+  border: 1px solid #2e2e2e;
+  color: #fff;
+}
+.subscribe-form button {
+  position: absolute;
+  right: 0;
+  background: #ff5e14;
+  padding: 13px 20px;
+  border: 1px solid #ff5e14;
+  top: 0;
+}
+.subscribe-form button i {
+  color: #fff;
+  font-size: 22px;
+  transform: rotate(-6deg);
+}
+.copyright-area {
+  background: #202020;
+  padding: 25px 0;
+}
+.copyright-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #878787;
+}
+.copyright-text p a {
+  color: #ff5e14;
+}
+.footer-menu li {
+  display: inline-block;
+  margin-left: 20px;
+}
+.footer-menu li:hover a {
+  color: #ff5e14;
+}
+.footer-menu li a {
+  font-size: 14px;
+  color: #878787;
+}
+
+/* ========================================
+   MODAL STYLES
+======================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Factor+A:wght@400;700&family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=League+Gothic&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 9999;
+}
+.modal {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background: #ffd700;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 500px;
+  height: 480px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.modal h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  padding-top: 20px;
+  color: #000;
+  font-family: "Roboto", sans-serif !important;
+  font-size: 32px;
+}
+.modal ul {
+  align: center;
+  list-style: none;
+  padding: 20px;
+  text-align: left;
+  margin: 10px 0;
+  background: none !important;
+  width: 100%;
+  display: block !important;
+}
+.modal ul li {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 16px;
+  width: 100%;
+  display: flex !important;
+  display: block !important;
+}
+.modal button {
+  background: #5a2d82;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 16px;
+}
+.modal button:hover {
+  background: #48236b;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ========================================
+   ACTION LINKS STYLES
+======================================== */
+
+.action-links-section {
+  background: #f9f9f9;
+  padding: 40px 20px;
+  text-align: center;
+}
+.section-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+.action-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+.action-button {
+  background: #008552;
+  color: white;
+  padding: 12px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+  font-weight: bold;
+  flex: 1 1 calc(25% - 20px);
+  text-align: center;
+}
+.action-button:hover {
+  background: #fdbb2d;
+  color: black;
+}
+.action-button i {
+  font-size: 18px;
+}
+@media (max-width: 768px) {
+  .action-links {
+    flex-direction: column;
+  }
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   NEWS BULLETIN STYLES
+======================================== */
+
+.myomr-news-bulletin {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.bulletin-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+.news-card {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+.news-card img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.news-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+.news-card p {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+.news-card a {
+  color: #008037;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  margin-top: 8px;
+}
+.view-more {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #008037;
+  text-decoration: none;
+}
+.news-tags {
+  font-size: 14px;
+  color: #008037;
+  font-weight: bold;
+  margin-top: 8px;
+}
+.news-tags strong {
+  color: #005522;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   SUBSCRIBE SECTION STYLES
+======================================== */
+
+.subscribe-section {
+  background: linear-gradient(135deg, #14532d 0%, #22c55e 100%);
+  color: white;
+  padding: 3rem 0;
+  text-align: center;
+}
+.subscribe-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+.subscribe-form {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.subscribe-form input {
+  flex: 1;
+  min-width: 250px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+}
+.subscribe-form button {
+  background: #f77f00;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.subscribe-form button:hover {
+  background: #e66a00;
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   SOCIAL STYLES
+======================================== */
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.social-icons a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.social-icons a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.facebook-icon {
+  background: #3b5998;
+}
+.twitter-icon {
+  background: #55acee;
+}
+.instagram-icon {
+  background: #e4405f;
+}
+.youtube-icon {
+  background: #ff0000;
+}
+.whatsapp-icon {
+  background: #25d366;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 768px) {
+  .subscribe-form {
+    flex-direction: column;
+    width: 100%;
+  }
+  .subscribe-form input {
+    width: 100%;
+    min-width: auto;
+  }
+  .action-links {
+    flex-direction: column;
+  }
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal {
+    width: 90%;
+    height: auto;
+    max-height: 80vh;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+======================================== */
+
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+.mb-5 {
+  margin-bottom: 3rem;
+}
+.mt-0 {
+  margin-top: 0;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 1rem;
+}
+.mt-4 {
+  margin-top: 1.5rem;
+}
+.mt-5 {
+  margin-top: 3rem;
+}
+
+/* ========================================
+   HOME PAGE SPECIFIC STYLES
+======================================== */
+
+/* WhatsApp Floating Button */
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+  animation: myAnim 2s ease 0s 1 normal forwards;
+}
+
+.my-float {
+  margin-top: 16px;
+}
+
+@keyframes myAnim {
+  0% {
+    animation-timing-function: ease-in;
+    opacity: 1;
+    transform: translateY(-45px);
+  }
+  24% {
+    opacity: 1;
+  }
+  40% {
+    animation-timing-function: ease-in;
+    transform: translateY(-24px);
+  }
+  65% {
+    animation-timing-function: ease-in;
+    transform: translateY(-12px);
+  }
+  82% {
+    animation-timing-function: ease-in;
+    transform: translateY(-6px);
+  }
+  93% {
+    animation-timing-function: ease-in;
+    transform: translateY(-4px);
+  }
+  25%,
+  55%,
+  75%,
+  87% {
+    animation-timing-function: ease-out;
+    transform: translateY(0px);
+  }
+  100% {
+    animation-timing-function: ease-out;
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+/* News Headlines */
+.h2-news {
+  font-size: 120%;
+  color: black;
+}
+
+/* Area Tags */
+.areas {
+  display: inline-block;
+  width: 120px;
+  padding: 5px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, #9ebd13 0%, #008552 100%);
+  color: white;
+  border-right: 2px solid white;
+  border-top: 2px solid white;
+  margin: 3px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.areas:hover {
+  background: linear-gradient(90deg, #fdbb2d 0%, #3a1c71 100%);
+  cursor: pointer;
+}
+
+/* Hide on Mobile */
+@media screen and (max-width: 600px) {
+  div.hide-on-mobile {
+    display: none;
+  }
+}

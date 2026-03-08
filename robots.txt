@@ -1,0 +1,32 @@
+User-agent: *
+
+# Admin and processing pages — not for indexing
+Disallow: /admin/
+Disallow: /dev-tools/
+Disallow: /backups/
+Disallow: /cgi-bin/
+
+# Module admin areas
+Disallow: /omr-local-events/admin/
+Disallow: /omr-local-job-listings/admin/
+Disallow: /omr-local-job-listings/cron/
+Disallow: /omr-local-job-listings/includes/
+
+# Process/handler scripts (not pages)
+Disallow: /omr-local-events/process-newsletter-signup.php
+Disallow: /omr-local-job-listings/process-job-omr.php
+Disallow: /omr-local-job-listings/process-application-omr.php
+Disallow: /omr-local-job-listings/update-application-status-omr.php
+Disallow: /omr-coworking-spaces/process-inquiry.php
+Disallow: /omr-hostels-pgs/process-inquiry.php
+
+# Prevent indexing of paginated/filtered job board variants
+Disallow: /omr-local-job-listings/index.php?*salary*
+Disallow: /omr-local-job-listings/index.php?*is_remote*
+
+Allow: /
+
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://myomr.in/sitemap.xml

@@ -1,0 +1,202 @@
+/**
+ * MyOMR Internal Landing Page Variant - Additional Styles
+ */
+
+/* Hero Section - MyOMR Variant */
+.hero-myomr {
+    background: linear-gradient(135deg, #00AA44 0%, #008035 100%);
+    color: white;
+    padding: 100px 0;
+}
+
+.hero-myomr .hero-title {
+    color: white;
+    font-size: 2.75rem;
+    font-weight: 700;
+}
+
+.hero-myomr .hero-subtitle {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.25rem;
+}
+
+.brand-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    color: white;
+}
+
+.hero-myomr .trust-badges .badge-item {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Local Focus Section */
+.local-focus-section {
+    padding: 80px 0;
+}
+
+.local-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+}
+
+.local-benefits li {
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+}
+
+/* OMR Areas Grid */
+.area-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.area-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Community Special Card */
+.special-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border: 3px solid var(--success-color);
+    position: relative;
+}
+
+.special-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--success-color);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.special-price {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--success-color);
+    margin-bottom: 1rem;
+}
+
+.price-period {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-light);
+}
+
+.special-features {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+}
+
+.special-features li {
+    padding: 0.5rem 0;
+    font-size: 1.05rem;
+}
+
+.savings-highlight {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    border: 2px solid var(--success-color);
+}
+
+.savings-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.savings-amount {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--success-color);
+    margin-bottom: 0.5rem;
+}
+
+.savings-period {
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+/* Testimonials */
+.testimonials-section {
+    padding: 80px 0;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    height: 100%;
+}
+
+.testimonial-stars {
+    color: #ffc107;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.testimonial-author {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.testimonial-author strong {
+    color: var(--text-dark);
+}
+
+.testimonial-author small {
+    color: var(--text-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-myomr .hero-title {
+        font-size: 2rem;
+    }
+    
+    .area-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .special-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .special-price {
+        font-size: 2.5rem;
+    }
+    
+    .savings-amount {
+        font-size: 2.5rem;
+    }
+}
+
