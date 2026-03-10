@@ -8,7 +8,12 @@ if (empty($slug)) {
     exit;
 }
 
-require_once '../core/omr-connect.php';
+// Bootstrap: central path + component helpers (omr_nav, omr_footer)
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/component-includes.php';
+
+require_once ROOT_PATH . '/core/omr-connect.php';
 
 // Prepare and execute the query to prevent SQL injection
 $stmt = $conn->prepare("SELECT * FROM articles WHERE slug = ? AND status = 'published'");
@@ -38,11 +43,11 @@ if (!$article) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php require_once '../components/head-resources.php'; ?>
+    <?php require_once ROOT_PATH . '/components/head-resources.php'; ?>
     <?php $ga_custom_params = [
       'article_category' => $article['category'] ?? 'Local News',
       'article_author'   => $article['author']   ?? 'MyOMR Editorial Team',
-    ]; include '../components/analytics.php'; ?>
+    ]; include ROOT_PATH . '/components/analytics.php'; ?>
     <?php 
     // Set variables for SEO meta file
     $article_title = htmlspecialchars($article['title']);
@@ -50,7 +55,7 @@ if (!$article) {
     $article_content = strip_tags(htmlspecialchars($article['content']));
     $article_url = 'https://myomr.in/local-news/' . $article['slug'];
     // Only prepend domain for relative paths; full URLs used as-is
-    $img = $article['image_path'] ?? '/My-OMR-Logo.jpg';
+    $img = $article['image_path'] ?? '/My-OMR-Logo.png';
     $article_image = (strpos($img, 'http://') === 0 || strpos($img, 'https://') === 0)
         ? $img
         : 'https://myomr.in' . (strpos($img, '/') === 0 ? $img : '/' . $img);
@@ -59,7 +64,7 @@ if (!$article) {
     $article_category = htmlspecialchars($article['category'] ?? 'Local News');
     
     // Include SEO meta file
-    require_once '../core/article-seo-meta.php'; 
+    require_once ROOT_PATH . '/core/article-seo-meta.php'; 
     
     // Check if this is a BLO article to add additional structured data
     $is_blo_article = (strpos($article['slug'], 'blo') !== false || strpos(strtolower($article['title']), 'blo') !== false);
@@ -77,13 +82,59 @@ if (!$article) {
         strpos(strtolower($article['tags'] ?? ''), 'sport') !== false ||
         strpos(strtolower($article['tags'] ?? ''), 'kabaddi') !== false
     );
+    // LPG / crisis-type articles: add FAQPage schema for rich results (English slug only)
+    $is_lpg_article = (strpos($article['slug'], 'lpg-shortage') !== false && substr($article['slug'], -6) !== '-tamil');
     ?>
     
     <?php 
     // Include additional SEO for sports articles
     if ($is_sports_article):
-        require_once '../local-news/article-sports-seo-enhancement.php';
+        require_once ROOT_PATH . '/local-news/article-sports-seo-enhancement.php';
     endif;
+    
+    // FAQPage schema for LPG shortage article (English) - supports FAQ rich results in search
+    if ($is_lpg_article): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is there an LPG shortage in Chennai and India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The shortage is a direct ripple effect of the ongoing Iran-Israel-USA conflict in the Middle East, which has disrupted global energy supply chains and LPG shipments. India imports a large portion of its LPG from Gulf countries; tensions in the region have slowed shipments and increased fuel prices. The government prioritises domestic and essential services, reducing availability for commercial users like restaurants."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the LPG shortage affect OMR restaurants and street vendors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Restaurants and roadside food vendors (thallu vandi) on OMR rely on 19-kg commercial LPG cylinders. Medium-sized restaurants use 5-10 cylinders per day; many keep only 2-3 days stock. Street vendors typically have one or two cylinders with no buffer. A prolonged shortage can force temporary closures, reduced menus, and shorter hours, especially along the IT corridor where cafeterias and food stalls serve thousands daily."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Tiruppur doing to save LPG?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Tiruppur Hotel Owners Association has announced that dosa and omelette will not be prepared temporarily, as these items consume more LPG. Hotels are instead serving only variety rice items such as lemon rice, tamarind rice, coconut rice, tomato rice, and curd rice to reduce gas consumption until supply stabilises."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is affected by the commercial LPG shortage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hotel associations representing thousands of eateries in Chennai, Bengaluru, Mumbai and other cities are affected. The Chennai Hotels Association represents 10,000+ hotels and eateries. Street food vendors, IT park cafeterias, and corporate catering kitchens on OMR are also at risk. Up to 50% of restaurants may temporarily shut kitchens if the supply disruption continues."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
     
     if ($is_blo_article): ?>
     <!-- Additional Structured Data for BLO Article - FAQPage -->
@@ -299,11 +350,76 @@ if (!$article) {
             margin: 1.5rem 0;
             border-radius: 5px;
         }
+        
+        /* Share bar */
+        .article-share-bar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .article-share-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--myomr-green);
+            margin-right: 0.5rem;
+        }
+        .article-share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .article-share-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); color: #fff; }
+        .article-share-wa { background: #25d366; }
+        .article-share-fb { background: #1877f2; }
+        .article-share-tw { background: #000; }
+        .article-share-copy { background: #6b7280; border: 0; cursor: pointer; font-size: 1rem; }
+        .article-share-copy.copied { background: var(--myomr-light-green); }
+        
+        /* Table of contents */
+        .article-toc {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .article-toc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--myomr-green);
+            margin: 0 0 0.75rem 0;
+            padding: 0;
+            border: none;
+        }
+        .article-toc-list {
+            margin: 0;
+            padding-left: 1.25rem;
+            list-style: decimal;
+        }
+        .article-toc-list a {
+            color: var(--myomr-green);
+            text-decoration: none;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .article-toc-list a:hover { text-decoration: underline; }
+        .article-content h2[id] { scroll-margin-top: 1.5rem; }
     </style>
 </head>
 <body>
 
-<?php require_once '../components/main-nav.php'; ?>
+<?php omr_nav('main'); ?>
 
 <div class="container article-container">
     <article>
@@ -351,7 +467,7 @@ if (!$article) {
                 <p style="margin: 0 0 1rem 0; font-weight: 600; color: #14532d;">
                     <i class="fas fa-language"></i> This article is also available in Tamil
                 </p>
-                <a href="/local-news/article.php?slug=<?php echo htmlspecialchars($tamil_slug); ?>" 
+                <a href="/local-news/<?php echo htmlspecialchars($tamil_slug); ?>" 
                    style="display: inline-block; background: #14532d; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; font-weight: 600;">
                     <i class="fas fa-book"></i> தமிழில் படிக்க
                 </a>
@@ -380,7 +496,7 @@ if (!$article) {
                 <p style="margin: 0 0 1rem 0; font-weight: 600; color: #1e40af;">
                     <i class="fas fa-language"></i> This article is also available in English
                 </p>
-                <a href="/local-news/article.php?slug=<?php echo htmlspecialchars($english_slug); ?>" 
+                <a href="/local-news/<?php echo htmlspecialchars($english_slug); ?>" 
                    style="display: inline-block; background: #1e40af; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; font-weight: 600;">
                     <i class="fas fa-book"></i> Read in English
                 </a>
@@ -389,6 +505,26 @@ if (!$article) {
             endif;
         endif; 
         ?>
+        
+        <!-- Share this article -->
+        <?php 
+        $article_share_url = 'https://myomr.in/local-news/' . $slug;
+        $article_share_title = rawurlencode($article['title']);
+        $article_share_text = rawurlencode($article['summary'] ?? $article['title']);
+        ?>
+        <div class="article-share-bar" aria-label="Share this article">
+            <span class="article-share-label"><i class="fas fa-share-alt"></i> Share</span>
+            <a href="https://wa.me/?text=<?php echo rawurlencode($article['title'] . ' ' . $article_share_url); ?>" target="_blank" rel="noopener noreferrer" class="article-share-btn article-share-wa" title="Share on WhatsApp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode($article_share_url); ?>" target="_blank" rel="noopener noreferrer" class="article-share-btn article-share-fb" title="Share on Facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/intent/tweet?url=<?php echo rawurlencode($article_share_url); ?>&text=<?php echo $article_share_title; ?>" target="_blank" rel="noopener noreferrer" class="article-share-btn article-share-tw" title="Share on X (Twitter)" aria-label="Share on X"><i class="fab fa-x-twitter"></i></a>
+            <button type="button" class="article-share-btn article-share-copy" title="Copy link" aria-label="Copy link" data-url="<?php echo htmlspecialchars($article_share_url); ?>"><i class="fas fa-link"></i></button>
+        </div>
+        
+        <!-- In this article (table of contents) - populated by JS from h2s -->
+        <nav id="article-toc" class="article-toc" aria-label="In this article" style="display: none;">
+            <h2 class="article-toc-title">In this article</h2>
+            <ol class="article-toc-list"></ol>
+        </nav>
         
         <section class="article-content">
             <?php echo $article['content']; ?>
@@ -428,7 +564,7 @@ if (!$article) {
                 <?php
                 if ($article_count > 0) {
                     foreach ($related_articles as $related) {
-                        $related_image = !empty($related['image_path']) ? htmlspecialchars($related['image_path']) : '/My-OMR-Logo.jpg';
+                        $related_image = !empty($related['image_path']) ? htmlspecialchars($related['image_path']) : '/My-OMR-Logo.png';
                         $related_summary = !empty($related['summary']) ? htmlspecialchars(substr($related['summary'], 0, 120)) . '...' : '';
                         $related_date = !empty($related['published_date']) ? date('M j, Y', strtotime($related['published_date'])) : '';
                         ?>
@@ -586,8 +722,53 @@ if (!$article) {
     </article>
 </div>
 
-<?php require_once '../components/footer.php'; ?>
-<link rel="stylesheet" href="../components/footer.css">
+<?php omr_footer(); ?>
+<link rel="stylesheet" href="/assets/css/footer.css">
+<script>
+(function() {
+    var content = document.querySelector('.article-content');
+    if (!content) return;
+    var h2s = content.querySelectorAll('h2');
+    if (h2s.length < 3) return;
+    var toc = document.getElementById('article-toc');
+    var list = toc ? toc.querySelector('.article-toc-list') : null;
+    if (!toc || !list) return;
+    h2s.forEach(function(h2, i) {
+        var id = 'section-' + (i + 1);
+        if (!h2.id) h2.id = id;
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '#' + h2.id;
+        a.textContent = h2.textContent;
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+    toc.style.display = 'block';
+})();
+document.querySelectorAll('.article-share-copy').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        var url = this.getAttribute('data-url');
+        if (!url) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(function() {
+                btn.classList.add('copied');
+                btn.setAttribute('title', 'Copied!');
+                setTimeout(function() { btn.classList.remove('copied'); btn.setAttribute('title', 'Copy link'); }, 2000);
+            });
+        } else {
+            var ta = document.createElement('textarea');
+            ta.value = url;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            btn.classList.add('copied');
+            btn.setAttribute('title', 'Copied!');
+            setTimeout(function() { btn.classList.remove('copied'); btn.setAttribute('title', 'Copy link'); }, 2000);
+        }
+    });
+});
+</script>
 </body>
 </html>
 

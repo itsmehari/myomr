@@ -1,4 +1,4 @@
-# ⚡ Quick Fix: Perungudi Article Not Showing
+﻿# ⚡ Quick Fix: Perungudi Article Not Showing
 
 ## 🎯 The Issue
 
@@ -83,7 +83,7 @@ Your article will appear on:
    ```
    local-news/omr-news-images/perungudi-dumpyard-transformation.webp
    ```
-   OR use placeholder: `/My-OMR-Logo.jpg`
+   OR use placeholder: `/My-OMR-Logo.png`
 
 ### Clear Cache:
 

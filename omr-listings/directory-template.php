@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Modular Directory Page Template
  * This template can be used for all directory pages (schools, hospitals, restaurants, etc.)
@@ -66,14 +66,14 @@ $result = $conn->query($sql);
     <meta property="og:type" content="website">
     <meta property="og:title" content="<?php echo htmlspecialchars($config['title']); ?> | MyOMR">
     <meta property="og:description" content="<?php echo htmlspecialchars($config['description']); ?>">
-    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     <meta property="og:url" content="https://myomr.in/omr-listings/<?php echo $directory_type; ?>.php">
     <meta property="og:site_name" content="My OMR Old Mahabalipuram Road">
     
     <!-- Twitter Cards -->
     <meta name="twitter:title" content="<?php echo htmlspecialchars($config['title']); ?> | MyOMR">
     <meta name="twitter:description" content="<?php echo htmlspecialchars($config['description']); ?>">
-    <meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.png">
     <meta name="twitter:site" content="@MyomrNews">
     
     <!-- Canonical URL -->

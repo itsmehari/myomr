@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * MyOMR Coworking Spaces Portal - Space Detail Page
  * Individual space listing view with inquiry form
@@ -99,7 +99,7 @@ $page_description = strlen($clean_description) > 155
     ? substr($clean_description, 0, 155) . '...'
     : $clean_description;
 $canonical_url = "https://myomr.in/omr-coworking-spaces/space-detail.php?id=" . $space_id;
-$og_image = "https://myomr.in/omr-coworking-spaces/" . htmlspecialchars($space['featured_image'] ?? 'My-OMR-Logo.jpg');
+$og_image = "https://myomr.in/omr-coworking-spaces/" . htmlspecialchars($space['featured_image'] ?? 'My-OMR-Logo.png');
 
 // Parse JSON fields
 $space_types = json_decode($space['space_types'] ?? '[]', true);
@@ -142,7 +142,7 @@ $amenities = json_decode($space['amenities'] ?? '[]', true);
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/coworking-spaces.css">
     <!-- Universal Footer Styles -->
-    <link rel="stylesheet" href="../components/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     
     <!-- Structured Data -->
     <?php echo generateSpaceSchema($space); ?>

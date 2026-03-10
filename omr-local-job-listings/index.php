@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * MyOMR Job Portal — Main Listings Page (v3.0 2026 Overhaul)
  *
@@ -8,7 +8,13 @@
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/includes/job-functions-omr.php';
 require_once __DIR__ . '/includes/seo-helper.php';
-require_once __DIR__ . '/../core/omr-connect.php';
+
+// Bootstrap: central path + component helpers
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/component-includes.php';
+
+require_once ROOT_PATH . '/core/omr-connect.php';
 global $conn;
 
 /* ── Sanitize & collect filters ─────────────────────────────── */
@@ -74,11 +80,11 @@ $base_url   = "/omr-local-job-listings/" . ($filter_qs ? "?$filter_qs" : '');
 <meta property="og:description" content="<?= $page_desc ?>">
 <meta property="og:url"         content="<?= $canonical ?>">
 <meta property="og:type"        content="website">
-<meta property="og:image"       content="https://myomr.in/My-OMR-Logo.jpg">
+<meta property="og:image"       content="https://myomr.in/My-OMR-Logo.png">
 <meta name="twitter:card"       content="summary_large_image">
 <meta name="twitter:title"      content="<?= $page_title ?>">
 <meta name="twitter:description" content="<?= $page_desc ?>">
-<meta name="twitter:image"      content="https://myomr.in/My-OMR-Logo.jpg">
+<meta name="twitter:image"      content="https://myomr.in/My-OMR-Logo.png">
 
 <?php
 $ga_custom_params = [];
@@ -86,7 +92,7 @@ if (!empty($filters['category']))        $ga_custom_params['job_category']     =
 if (!empty($filters['job_type']))        $ga_custom_params['job_type']         = $filters['job_type'];
 if (!empty($filters['location']))        $ga_custom_params['locality']         = $filters['location'];
 if (!empty($filters['experience_level'])) $ga_custom_params['experience_level'] = $filters['experience_level'];
-include '../components/analytics.php'; ?>
+include ROOT_PATH . '/components/analytics.php'; ?>
 <?php if (!empty($filters['search'])): ?>
 <script>
 (function() {
@@ -106,7 +112,7 @@ include '../components/analytics.php'; ?>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/core.css">
 <link rel="stylesheet" href="assets/job-portal-2026.css">
-<link rel="stylesheet" href="../components/footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 
 <!-- Structured Data -->
 <script type="application/ld+json">
@@ -129,7 +135,7 @@ include '../components/analytics.php'; ?>
 </head>
 <body class="job-portal-page">
 
-<?php require_once '../components/main-nav.php'; ?>
+<?php omr_nav('main'); ?>
 
 <!-- ── HERO ───────────────────────────────────────────────────── -->
 <section class="jp-hero">
@@ -579,12 +585,12 @@ include '../components/analytics.php'; ?>
   </div><!-- /.container -->
 </main>
 
-<?php require_once '../components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/job-portal-2026.js"></script>
-<?php include '../components/sdg-badge.php'; ?>
+<?php include ROOT_PATH . '/components/sdg-badge.php'; ?>
 
 <script>
 /* Mobile sidebar */

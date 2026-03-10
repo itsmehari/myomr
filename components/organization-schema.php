@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 // Organization JSON-LD schema for MyOMR (single output)
 $org = [
   '@context' => 'https://schema.org',
   '@type' => 'Organization',
   'name' => 'MyOMR',
   'url' => 'https://myomr.in',
-  'logo' => 'https://myomr.in/My-OMR-Logo.jpg',
+  'logo' => 'https://myomr.in/My-OMR-Logo.png',
   'sameAs' => [
     'https://www.facebook.com/myomrCommunity',
     'https://www.instagram.com/myomrcommunity/',

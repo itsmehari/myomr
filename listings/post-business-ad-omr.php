@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Advertise Your Business in OMR — Inquiry Page
  * Rebuilt from placeholder to full advertising inquiry page
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $page_title    = 'Advertise Your Business in OMR Chennai | MyOMR';
 $page_desc     = 'Reach 10,000+ monthly visitors in OMR Chennai. Advertise your business with banner ads, sponsored listings, or featured directory placement on MyOMR.in.';
 $canonical_url = 'https://myomr.in/listings/post-business-ad-omr.php';
-$og_image      = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image      = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Central data for IT Parks (temporary until DB is added)
 // Assign stable numeric IDs for clean URLs
 $omr_it_parks_all = [
@@ -14,7 +14,7 @@ $omr_it_parks_all = [
     'built_up_area' => '1.8 million sq ft',
     'total_area' => '41.32 acres',
     'companies' => 'Kissflow, Amazon',
-    'image' => '/My-OMR-Logo.jpg'
+    'image' => '/My-OMR-Logo.png'
   ],
   [
     'id' => 2,
@@ -28,7 +28,7 @@ $omr_it_parks_all = [
     'built_up_area' => '1.8 million sq ft',
     'total_area' => '8 acres',
     'companies' => 'Cisco, Sify, Tenneco, Trimble, Guardian, TCS, EY, CDAC',
-    'image' => '/My-OMR-Logo.jpg'
+    'image' => '/My-OMR-Logo.png'
   ],
   [
     'id' => 3,
@@ -42,7 +42,7 @@ $omr_it_parks_all = [
     'built_up_area' => '',
     'total_area' => '782.51 acres',
     'companies' => 'TCS, Cognizant, Hexaware, Sopra Steria, Atos, Changepond',
-    'image' => '/My-OMR-Logo.jpg'
+    'image' => '/My-OMR-Logo.png'
   ],
   [
     'id' => 4,
@@ -56,7 +56,7 @@ $omr_it_parks_all = [
     'built_up_area' => '3.6 million sq ft',
     'total_area' => '20+ acres',
     'companies' => 'Comcast, TCS, Siemens (Atos), Sutherland, HCL, Polaris, Ford, Prodapt, Wells Fargo',
-    'image' => '/My-OMR-Logo.jpg'
+    'image' => '/My-OMR-Logo.png'
   ],
   [
     'id' => 5,
@@ -70,7 +70,7 @@ $omr_it_parks_all = [
     'built_up_area' => '2.2 million sq ft',
     'total_area' => '22 acres',
     'companies' => 'Shell, Walmart, JRay, Caterpillar, World Bank, KLA, Ford India, GlobalLogic',
-    'image' => '/My-OMR-Logo.jpg'
+    'image' => '/My-OMR-Logo.png'
   ],
   [
     'id' => 6,
@@ -84,7 +84,7 @@ $omr_it_parks_all = [
     'built_up_area' => '',
     'total_area' => '',
     'companies' => '',
-    'image' => '/My-OMR-Logo.jpg'
+    'image' => '/My-OMR-Logo.png'
   ],
   [
     'id' => 7,
@@ -98,7 +98,7 @@ $omr_it_parks_all = [
     'built_up_area' => '4 million sq ft',
     'total_area' => '17.5 grounds',
     'companies' => '',
-    'image' => '/My-OMR-Logo.jpg'
+    'image' => '/My-OMR-Logo.png'
   ],
 ];
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -44,7 +44,7 @@ $og_url              = 'https://myomr.in/local-news/news-highlights-from-omr-roa
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/main.css">
     <!-- Favicon -->
-    <link rel="icon" href="/My-OMR-Logo.jpg" type="image/jpeg">
+    <link rel="icon" href="/My-OMR-Logo.png" type="image/jpeg">
     
     <!-- Other scripts and styles -->
     <link rel="stylesheet" href="/assets/css/myomr-news-bulletin.css">
@@ -60,7 +60,7 @@ $og_url              = 'https://myomr.in/local-news/news-highlights-from-omr-roa
 <!-- Latest News & Highlights -->
 <section class="container py-5">
   <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif; color: #008552;">MyOMR News Bulletin</h2>
-  <?php include __DIR__ . '/../weblog/home-page-news-cards.php'; ?>
+  <?php include __DIR__ . '/../components/myomr-news-bulletin.php'; ?>
   <?php include __DIR__ . '/../components/featured-news-links.php'; ?>
 </section>
 

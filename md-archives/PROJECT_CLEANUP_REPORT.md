@@ -1,4 +1,4 @@
-# 🧹 Project Cleanup Report
+﻿# 🧹 Project Cleanup Report
 
 **Date:** December 26, 2024  
 **Version:** 2.0.0  
@@ -35,7 +35,7 @@ Performed a complete scan of the MyOMR.in project to identify stray, unwanted, o
 #### 2. **Duplicate Logo File**
 
 - **Location:** `/My-OMR-Logo - Copy.jpg`
-- **Issue:** Duplicate of `My-OMR-Logo.jpg`
+- **Issue:** Duplicate of `My-OMR-Logo.png`
 - **Action:** **DELETE** - Keep only the original
 - **Command:**
   ```powershell
@@ -94,7 +94,7 @@ Performed a complete scan of the MyOMR.in project to identify stray, unwanted, o
 
 - **Location:** `/backups/`
 - **Contents:**
-  - `_backup_My-OMR-Logo.jpg`
+  - `_backup_My-OMR-Logo.png`
   - `backupfolder/index.php.bak`
   - `error_log`
 - **Issue:** Old backup files

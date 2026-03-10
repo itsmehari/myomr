@@ -19,7 +19,7 @@ if (isset($_GET['delete'])) {
     $stmt->bind_param('i', $id);
     if ($stmt->execute()) {
         // Delete uploaded image file if it lives in our upload dir
-        if ($row && !empty($row['image_path']) && strpos($row['image_path'], '/local-news/omr-news-images/') === 0 && $row['image_path'] !== '/My-OMR-Logo.jpg') {
+        if ($row && !empty($row['image_path']) && strpos($row['image_path'], '/local-news/omr-news-images/') === 0 && $row['image_path'] !== '/My-OMR-Logo.png') {
             $diskPath = dirname(__DIR__, 2) . $row['image_path'];
             if (is_file($diskPath)) {
                 @unlink($diskPath);
@@ -135,8 +135,8 @@ $totalPages = (int) ceil($total / $perPage);
           <?php foreach ($articles as $a): ?>
             <tr>
               <td>
-                <?php $img = $a['image_path'] ?: '/My-OMR-Logo.jpg'; ?>
-                <img src="<?php echo htmlspecialchars($img); ?>" alt="" style="width:56px;height:42px;object-fit:cover;border-radius:4px" onerror="this.src='/My-OMR-Logo.jpg'">
+                <?php $img = $a['image_path'] ?: '/My-OMR-Logo.png'; ?>
+                <img src="<?php echo htmlspecialchars($img); ?>" alt="" style="width:56px;height:42px;object-fit:cover;border-radius:4px" onerror="this.src='/My-OMR-Logo.png'">
               </td>
               <td><?php echo htmlspecialchars($a['title']); ?></td>
               <td><code class="small"><?php echo htmlspecialchars($a['slug']); ?></code></td>

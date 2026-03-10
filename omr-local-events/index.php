@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Events Listing - MyOMR
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
@@ -29,11 +29,11 @@ $page_description = 'Discover upcoming events across OMR: community, education, 
 $canonical_url = 'https://myomr.in/omr-local-events/';
 $og_title            = $page_title;
 $og_description      = $page_description;
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = $canonical_url;
 $twitter_title       = $page_title;
 $twitter_description = $page_description;
-$twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
+$twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">

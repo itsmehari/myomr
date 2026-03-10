@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 $page_title       = 'MyOMR Features | News, Jobs, Events, Listings & More - OMR Chennai';
 $page_description = 'Explore all features of MyOMR: local news, job listings, events, business directories, real estate, hostels, and coworking spaces in the OMR corridor.';
 $canonical_url    = 'https://myomr.in/discover-myomr/features.php';
-$og_image         = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image         = 'https://myomr.in/My-OMR-Logo.png';
 $og_title         = $page_title;
 $og_description   = $page_description;
 $og_url           = $canonical_url;

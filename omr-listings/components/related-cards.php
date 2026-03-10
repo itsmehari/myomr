@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Expects $relatedItems (array of ['name','address','url','imageCandidates']), and $fallbackImage
 if (empty($relatedItems) || !is_array($relatedItems)) { return; }
 ?>
@@ -31,10 +31,10 @@ if (empty($relatedItems) || !is_array($relatedItems)) { return; }
 <?php
 // Generic related cards include.
 // Expects $relatedItems = [ [ 'name' => string, 'address' => string, 'url' => string, 'imageCandidates' => [ '/path.webp', '/path.jpg', ... ] ], ... ]
-// Optional: $fallbackImage (default '/My-OMR-Logo.jpg')
+// Optional: $fallbackImage (default '/My-OMR-Logo.png')
 
 if (!isset($relatedItems) || !is_array($relatedItems)) { $relatedItems = []; }
-if (!isset($fallbackImage) || !is_string($fallbackImage) || $fallbackImage === '') { $fallbackImage = '/My-OMR-Logo.jpg'; }
+if (!isset($fallbackImage) || !is_string($fallbackImage) || $fallbackImage === '') { $fallbackImage = '/My-OMR-Logo.png'; }
 
 if (!empty($relatedItems)):
 ?>

@@ -42,7 +42,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Idhu-Namma-OMR-Logo.jpg';
 <?php $ga_custom_params = ['listing_type' => 'industry']; include '../components/analytics.php'; ?>
 <?php include '../components/head-resources.php'; ?>
 <meta name="robots" content="index, follow">
-<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 <style>
 .hover-me:hover
 {

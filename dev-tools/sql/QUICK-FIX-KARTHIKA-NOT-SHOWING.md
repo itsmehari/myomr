@@ -1,4 +1,4 @@
-# ⚡ Quick Fix: R Karthika Article Not Showing
+﻿# ⚡ Quick Fix: R Karthika Article Not Showing
 
 ## 🔍 Problem
 Article was added to database but not showing on:
@@ -125,7 +125,7 @@ WHERE slug = 'from-kannagi-nagar-to-the-podium-r-karthika-u18-girls-kabaddi-hist
 
 -- OR use placeholder:
 -- UPDATE articles
--- SET image_path = '/My-OMR-Logo.jpg'
+-- SET image_path = '/My-OMR-Logo.png'
 -- WHERE slug = 'from-kannagi-nagar-to-the-podium-r-karthika-u18-girls-kabaddi-history';
 ```
 

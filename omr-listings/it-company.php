@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -47,7 +47,7 @@ $mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' . $mapsQuery;
 
 // Canonical pretty URL
 $canonical = 'https://myomr.in/it-companies/' . $slug;
-$canonical_url = $canonical; $page_title = htmlspecialchars($companyName, ENT_QUOTES, 'UTF-8') . ' | IT Company on OMR | MyOMR'; $page_description = htmlspecialchars($companyName . ' - IT Company on Chennai OMR. Address: ' . $address, ENT_QUOTES, 'UTF-8'); $og_title = $page_title; $og_description = $page_description; $og_url = $canonical; $og_image = 'https://myomr.in/My-OMR-Logo.jpg';
+$canonical_url = $canonical; $page_title = htmlspecialchars($companyName, ENT_QUOTES, 'UTF-8') . ' | IT Company on OMR | MyOMR'; $page_description = htmlspecialchars($companyName . ' - IT Company on Chennai OMR. Address: ' . $address, ENT_QUOTES, 'UTF-8'); $og_title = $page_title; $og_description = $page_description; $og_url = $canonical; $og_image = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -191,7 +191,7 @@ $canonical_url = $canonical; $page_title = htmlspecialchars($companyName, ENT_QU
             ]
           ];
         }
-        $fallbackImage = '/My-OMR-Logo.jpg';
+        $fallbackImage = '/My-OMR-Logo.png';
         include __DIR__ . '/components/related-cards.php';
       }
     }

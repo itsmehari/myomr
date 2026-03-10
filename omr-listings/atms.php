@@ -36,7 +36,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Idhu-Namma-OMR-Logo.jpg';
 <?php include '../components/meta.php'; ?>
 <?php include '../components/analytics.php'; ?>
 <?php include '../components/head-resources.php'; ?>
-<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 <style>
 .hover-me:hover
 {

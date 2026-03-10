@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 $page_title       = 'OMR Community | Connect with Neighbors on Old Mahabalipuram Road';
 $page_description = 'Join the MyOMR community. Connect with neighbors, participate in local groups, events, and forums across the OMR corridor, Chennai.';
 $canonical_url    = 'https://myomr.in/discover-myomr/community.php';
-$og_image         = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image         = 'https://myomr.in/My-OMR-Logo.png';
 $og_title         = $page_title;
 $og_description   = $page_description;
 $og_url           = $canonical_url;

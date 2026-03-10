@@ -1,4 +1,4 @@
-<?php include 'weblog/log.php' ?>
+﻿<?php include 'weblog/log.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +19,7 @@ $twitter_image       = 'https://myomr.in/local-news/omr-news-images/EPIC-Padur-E
 <?php include '../components/head-resources.php'; ?>
 
 <meta name="robots" content="index, follow" />
-<link rel="stylesheet" href="../footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 
 
 
@@ -104,7 +104,7 @@ color: #4c516D;
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "<?php echo htmlspecialchars($page_title ?? '', ENT_QUOTES); ?>",
-  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.jpg', ENT_QUOTES); ?>"],
+  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.png', ENT_QUOTES); ?>"],
   "datePublished": "<?php echo htmlspecialchars($date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "dateModified": "<?php echo htmlspecialchars($date_modified ?? $date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "author": [{"@type": "Organization", "name": "MyOMR News"}],

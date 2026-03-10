@@ -1,4 +1,4 @@
-<?php include 'weblog/log.php' ?>
+﻿<?php include 'weblog/log.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +8,17 @@ $page_description    = 'Most electric vehicles catching fire due to scorching su
 $canonical_url       = 'https://myomr.in/local-news/EVs-Take-a-hit-Catches-Fire.php';
 $og_title            = 'Electric Vehicles Catch Fire Due to Scorching Heat - OMR Road News 2022 | MyOMR';
 $og_description      = 'Most electric vehicles catching fire due to scorching summer heat in 2022 - OMR road community news and safety updates.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/local-news/EVs-Take-a-hit-Catches-Fire.php';
 $twitter_title       = 'Electric Vehicles Catch Fire Due to Scorching Heat - OMR Road News 2022 | MyOMR';
 $twitter_description = 'Most electric vehicles catching fire due to scorching summer heat in 2022 - OMR road community news and safety updates.';
-$twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
+$twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <?php include '../components/meta.php'; ?>
 <?php include '../components/analytics.php'; ?>
 <?php include '../components/head-resources.php'; ?>
 
-<link rel="stylesheet" href="../footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 
 <script async defer data-pin-hover="true" data-pin-tall="true" data-pin-round="true" src="//assets.pinterest.com/js/pinit.js"></script>
 
@@ -101,7 +101,7 @@ color: #4c516D;
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "<?php echo htmlspecialchars($page_title ?? '', ENT_QUOTES); ?>",
-  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.jpg', ENT_QUOTES); ?>"],
+  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.png', ENT_QUOTES); ?>"],
   "datePublished": "<?php echo htmlspecialchars($date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "dateModified": "<?php echo htmlspecialchars($date_modified ?? $date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "author": [{"@type": "Organization", "name": "MyOMR News"}],

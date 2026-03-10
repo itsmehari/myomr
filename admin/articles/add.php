@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../_bootstrap.php';
 requireAdmin();
 require_once __DIR__ . '/../../core/omr-connect.php';
@@ -10,7 +10,7 @@ $error = '';
 $vals = [
     'title' => '', 'slug' => '', 'summary' => '', 'content' => '', 'category' => 'Local News',
     'author' => 'MyOMR Editorial Team', 'status' => 'published', 'published_date' => date('Y-m-d'),
-    'image_path' => '/My-OMR-Logo.jpg', 'tags' => '', 'image_mode' => 'url'
+    'image_path' => '/My-OMR-Logo.png', 'tags' => '', 'image_mode' => 'url'
 ];
 
 $uploadDir = dirname(__DIR__, 2) . '/local-news/omr-news-images/';

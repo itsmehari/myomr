@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -30,7 +30,7 @@ $address = $bank['address'];
 $contact = $bank['contact'];
 $website = $bank['website'];
 $canonical = 'https://myomr.in/banks/' . $slug;
-$canonical_url = $canonical; $page_title = htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ' | Bank on OMR | MyOMR'; $page_description = htmlspecialchars($name . ' - Bank on Chennai OMR. Address: ' . $address, ENT_QUOTES, 'UTF-8'); $og_title = $page_title; $og_description = $page_description; $og_url = $canonical; $og_image = 'https://myomr.in/My-OMR-Logo.jpg';
+$canonical_url = $canonical; $page_title = htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ' | Bank on OMR | MyOMR'; $page_description = htmlspecialchars($name . ' - Bank on Chennai OMR. Address: ' . $address, ENT_QUOTES, 'UTF-8'); $og_title = $page_title; $og_description = $page_description; $og_url = $canonical; $og_image = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,7 +127,7 @@ $canonical_url = $canonical; $page_title = htmlspecialchars($name, ENT_QUOTES, '
             ]
           ];
         }
-        $fallbackImage = '/My-OMR-Logo.jpg';
+        $fallbackImage = '/My-OMR-Logo.png';
         include __DIR__ . '/components/related-cards.php';
       }
     }

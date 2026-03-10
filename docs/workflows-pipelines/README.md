@@ -51,6 +51,7 @@ docs/workflows-pipelines/
 ├── free-ads-workflow.md           # Classifieds submission → moderation
 ├── election-blo-workflow.md       # BLO data refresh and QA
 ├── landing-pages-workflow.md      # Discover MyOMR, Pentahive & info page updates
+├── ASSET-INCLUDES.md                    # CSS, JS & component include patterns
 ├── documentation-housekeeping-workflow.md # Keeping docs organised & archival rules
 ├── dev-platform-workflow.md       # Local → staging → production flow (planned)
 ├── content-update-pipeline.md     # Cross-module content ingestion plays (planned)
@@ -79,6 +80,7 @@ Naming follows our kebab-case convention. Each document covers one major workflo
 | Election BLO lookup   | `election-blo-workflow.md`   | `omr-election-blo/`, data spreadsheets, BLO articles                                                         |
 | Landing/static pages  | `landing-pages-workflow.md`  | `discover-myomr/`, `info/`, `pentahive/`, campaign briefs                                                    |
 | Documentation upkeep  | `documentation-housekeeping-workflow.md` | `@tocheck/`, `docs/archive/`, `docs/README.md`                                                               |
+| Asset & component includes | `ASSET-INCLUDES.md` | `core/include-path.php`, `components/css-includes.php`, `components/js-includes.php`, `components/component-includes.php` |
 | Development lifecycle | `dev-platform-workflow.md`   | `operations-deployment/ONBOARDING.md`, `operations-deployment/DEPLOYMENT-CHECKLIST.md`, `LEARNINGS.md`        |
 | Content ingestion     | `content-update-pipeline.md` | `dev-tools/sql/…`, `product-prd/PRD-Hostels-PGs.md`, `content-projects/HOSTELS-PGS-IMPLEMENTATION-SUMMARY.md` |
 | Admin operations      | `admin-ops-workflow.md`      | `omr-hostels-pgs/admin/manage-properties.php`, `admin/` module docs                                           |

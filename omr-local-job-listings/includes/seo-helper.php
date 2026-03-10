@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * SEO Helper Functions
  * Centralized SEO functions for job portal
@@ -8,7 +8,7 @@
  * Generate comprehensive meta tags for job pages
  */
 function generateJobSEOMeta($title, $description, $url, $image = '', $type = 'website') {
-    $image = $image ?: 'https://myomr.in/My-OMR-Logo.jpg';
+    $image = $image ?: 'https://myomr.in/My-OMR-Logo.png';
     
     $meta = '';
     

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * MyOMR Job Portal - Primary Landing Page
  * Jobs in OMR Chennai - Main Landing Page
@@ -13,6 +13,11 @@ require_once __DIR__ . '/omr-local-job-listings/includes/error-reporting.php';
 
 // Include helper functions
 require_once __DIR__ . '/omr-local-job-listings/includes/job-functions-omr.php';
+
+// Bootstrap: central path + component helpers (omr_nav, omr_footer)
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__;
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/component-includes.php';
 
 // Load database connection
 require_once __DIR__ . '/core/omr-connect.php';
@@ -84,13 +89,13 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
     <meta property="og:description" content="<?php echo $page_description; ?>">
     <meta property="og:url" content="<?php echo $canonical_url; ?>">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?php echo $page_title; ?>">
     <meta name="twitter:description" content="<?php echo $page_description; ?>">
-    <meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.png">
     
     <!-- Google Analytics -->
     <?php include 'components/analytics.php'; ?>
@@ -106,7 +111,7 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
     <link rel="stylesheet" href="omr-local-job-listings/assets/job-listings-omr.css">
     <link rel="stylesheet" href="omr-local-job-listings/assets/omr-jobs-unified-design.css">
     <!-- Footer Styles -->
-    <link rel="stylesheet" href="components/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     
     <!-- Landing page styles are in job-listings-omr.css (extracted from inline) -->
     
@@ -141,7 +146,7 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
         "@type": "Organization",
         "name": "My OMR",
         "url": "https://myomr.in/",
-        "logo": "https://myomr.in/My-OMR-Logo.jpg",
+        "logo": "https://myomr.in/My-OMR-Logo.png",
         "sameAs": [
             "https://www.facebook.com/MyOMR.in",
             "https://www.instagram.com/myomr.in",
@@ -153,7 +158,7 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
 <body class="modern-page">
 
 <!-- Navigation -->
-<?php require_once 'components/main-nav.php'; ?>
+<?php omr_nav('main'); ?>
 
 <!-- Skip Link -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -620,7 +625,7 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
 </style>
 
 <!-- Footer -->
-<?php require_once 'components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

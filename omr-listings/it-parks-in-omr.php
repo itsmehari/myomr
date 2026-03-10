@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -32,11 +32,11 @@ $page_description    = 'Explore major IT Parks along Old Mahabalipuram Road (OMR
 $canonical_url       = 'https://myomr.in/it-parks';
 $og_title            = 'IT Parks in OMR, Chennai | MyOMR';
 $og_description      = 'Explore major IT Parks along Old Mahabalipuram Road (OMR), Chennai - locations, addresses, websites, inauguration year, owners, and key companies.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/it-parks';
 $twitter_title       = 'IT Parks in OMR, Chennai | MyOMR';
 $twitter_description = 'Explore major IT Parks along Old Mahabalipuram Road (OMR), Chennai - locations, addresses, websites, inauguration year, owners, and key companies.';
-$twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
+$twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <?php $breadcrumbs = [
   ['https://myomr.in/','Home'],

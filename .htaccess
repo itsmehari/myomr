@@ -23,15 +23,14 @@ Options -Indexes
   DirectoryIndex index.php index.html
 </IfModule>
 
-# Security headers
+# Security headers (if site hangs, comment out this entire block)
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-  # Content-Security-Policy can be tightened later after CDN audit
-  # Header set Content-Security-Policy "default-src 'self' https: 'unsafe-inline' 'unsafe-eval'"
+  # HSTS - uncomment only if headers work; can cause issues on some hosts
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 </IfModule>
 
 # Static asset caching (merged into single block)
@@ -67,17 +66,20 @@ Options -Indexes
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
 </IfModule>
 
-# Environment and bootstrap
+# Environment
 SetEnv MYOMR_ENV production
-<IfModule mod_php7.c>
-  php_value auto_prepend_file core/error-handler.php
-</IfModule>
-<IfModule mod_php8.c>
-  php_value auto_prepend_file core/error-handler.php
-</IfModule>
+
+# auto_prepend_file - DISABLED: often causes homepage hang on shared hosting
+# If you need error-handler.php, include it manually in index.php or via php.ini
+# <IfModule mod_php7.c>
+#   php_value auto_prepend_file core/error-handler.php
+# </IfModule>
+# <IfModule mod_php8.c>
+#   php_value auto_prepend_file core/error-handler.php
+# </IfModule>
 
 # Favicon: redirect to logo (avoids 403 when favicon.ico missing)
-RewriteRule ^favicon\.ico$ /My-OMR-Logo.jpg [L,R=302]
+RewriteRule ^favicon\.ico$ /My-OMR-Logo.png [L,R=302]
 
 # Root sitemap index
 RewriteRule ^sitemap\.xml$ generate-sitemap-index.php [L]
@@ -88,10 +90,10 @@ RewriteRule ^omr-local-events/event/([^/]+)/?$ omr-local-events/event-detail-omr
 RewriteRule ^omr-local-events/category/([^/]+)/?$ omr-local-events/category.php?slug=$1 [L,QSA]
 RewriteRule ^omr-local-events/locality/([^/]+)/?$ omr-local-events/locality.php?slug=$1 [L,QSA]
 RewriteRule ^omr-local-events/venue/([^/]+)/?$ omr-local-events/venue.php?slug=$1 [L,QSA]
-RewriteRule ^omr-local-events/today/?$ omr-local-events/today.php [L,QSA]
-RewriteRule ^omr-local-events/weekend/?$ omr-local-events/weekend.php [L,QSA]
-RewriteRule ^omr-local-events/month/?$ omr-local-events/month.php [L,QSA]
-RewriteRule ^omr-local-events/post/?$ omr-local-events/post-event-omr.php [L,QSA]
+RewriteRule ^omr-local-events/today/?$ omr-local-events/today.php [L]
+RewriteRule ^omr-local-events/weekend/?$ omr-local-events/weekend.php [L]
+RewriteRule ^omr-local-events/month/?$ omr-local-events/month.php [L]
+RewriteRule ^omr-local-events/post/?$ omr-local-events/post-event-omr.php [L]
 
 # Module sitemaps
 RewriteRule ^omr-listings/sitemap\.xml$ omr-listings/generate-listings-sitemap.php [L]

@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 $page_title       = 'Pricing Plans - MyOMR Community Portal | OMR Chennai';
 $page_description = 'Browse OMR Chennai\'s #1 local portal free. Upgrade your business with Verified or Featured listings for maximum local visibility.';
 $canonical_url    = 'https://myomr.in/discover-myomr/pricing.php';
-$og_image         = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image         = 'https://myomr.in/My-OMR-Logo.png';
 $og_title         = $page_title;
 $og_description   = $page_description;
 $og_url           = $canonical_url;

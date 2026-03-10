@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 $page_title       = 'Areas Covered by MyOMR | Old Mahabalipuram Road Communities';
 $page_description = 'Discover all the neighborhoods and localities covered by MyOMR along the OMR corridor, from Perungudi to Kelambakkam, Chennai.';
 $canonical_url    = 'https://myomr.in/discover-myomr/areas-covered.php';
-$og_image         = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image         = 'https://myomr.in/My-OMR-Logo.png';
 $og_title         = $page_title;
 $og_description   = $page_description;
 $og_url           = $canonical_url;

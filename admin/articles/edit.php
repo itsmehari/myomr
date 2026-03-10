@@ -31,7 +31,7 @@ $vals = [
     'title' => $article['title'], 'slug' => $article['slug'], 'summary' => $article['summary'],
     'content' => $article['content'], 'category' => $article['category'] ?? 'Local News',
     'author' => $article['author'] ?? 'MyOMR Editorial Team', 'status' => $article['status'],
-    'published_date' => $article['published_date'], 'image_path' => $article['image_path'] ?? '/My-OMR-Logo.jpg',
+    'published_date' => $article['published_date'], 'image_path' => $article['image_path'] ?? '/My-OMR-Logo.png',
     'tags' => $article['tags'] ?? '', 'image_mode' => 'url'
 ];
 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $imagePath = $u;
             }
         } else {
-            $imagePath = $article['image_path'] ?? '/My-OMR-Logo.jpg';
+            $imagePath = $article['image_path'] ?? '/My-OMR-Logo.png';
         }
     } else {
         if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (move_uploaded_file($f['tmp_name'], $uploadDir . $fname)) {
                     // Delete old uploaded file if it lives in our upload dir (avoid orphans)
                     $oldPath = $article['image_path'] ?? '';
-                    if ($oldPath && strpos($oldPath, '/local-news/omr-news-images/') === 0 && $oldPath !== '/My-OMR-Logo.jpg') {
+                    if ($oldPath && strpos($oldPath, '/local-news/omr-news-images/') === 0 && $oldPath !== '/My-OMR-Logo.png') {
                         $diskPath = dirname(__DIR__, 2) . $oldPath;
                         if (is_file($diskPath)) {
                             @unlink($diskPath);
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$vals['image_path'] = $article['image_path'] ?? '/My-OMR-Logo.jpg';
+$vals['image_path'] = $article['image_path'] ?? '/My-OMR-Logo.png';
 $conn->close();
 ?>
 <!DOCTYPE html>
@@ -181,7 +181,7 @@ $conn->close();
         <div class="form-group">
           <label>Image</label>
           <div class="mb-2">
-            <img src="<?php echo htmlspecialchars($vals['image_path']); ?>" alt="current" class="img-preview rounded border" onerror="this.src='/My-OMR-Logo.jpg'">
+            <img src="<?php echo htmlspecialchars($vals['image_path']); ?>" alt="current" class="img-preview rounded border" onerror="this.src='/My-OMR-Logo.png'">
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="image_mode" id="imUrl" value="url" <?php echo $vals['image_mode'] === 'url' ? 'checked' : ''; ?>>

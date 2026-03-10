@@ -25,10 +25,10 @@ if (!isset($article)) {
 $article_title = htmlspecialchars($article['title']);
 $article_desc = htmlspecialchars($article['summary']);
 $article_content = strip_tags(htmlspecialchars($article['content']));
-// Use clean URL format for SEO (matches .htaccess rewrite rule)
+// Use clean URL format (avoids query-string blocking by ModSecurity; requires .htaccess rewrite)
 $article_url = 'https://myomr.in/local-news/' . $article['slug'];
 // Only prepend domain for relative paths; full URLs used as-is
-$img = $article['image_path'] ?? '/My-OMR-Logo.jpg';
+$img = $article['image_path'] ?? '/My-OMR-Logo.png';
 $article_image = (strpos($img, 'http://') === 0 || strpos($img, 'https://') === 0)
     ? $img
     : 'https://myomr.in' . (strpos($img, '/') === 0 ? $img : '/' . $img);
@@ -117,7 +117,7 @@ $article_tags = !empty($article['tags']) ? explode(',', $article['tags']) : [];
     "name": "MyOMR",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://myomr.in/My-OMR-Logo.jpg",
+      "url": "https://myomr.in/My-OMR-Logo.png",
       "width": 600,
       "height": 60
     }

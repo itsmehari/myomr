@@ -77,7 +77,7 @@ if ($tables && $tables->num_rows > 0) {
 }
 
 echo "<hr>";
-echo "<p><strong>✅ Done! You can now upload the index.php and home-page-news-cards.php files.</strong></p>";
+echo "<p><strong>✅ Done! You can now upload the index.php file.</strong></p>";
 echo "<p><a href='index.php'>← Back to Dev Tools</a></p>";
 
 $dev_conn->close();

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 0);
 error_reporting(0);
 
@@ -109,7 +109,7 @@ $page_description    = 'Get your IT company listed on MyOMR directory. Submit yo
 $canonical_url       = 'https://myomr.in/omr-listings/get-listed.php';
 $og_title            = 'Get Listed | IT Companies on OMR, Chennai | MyOMR';
 $og_description      = 'Submit your IT company details to appear in the OMR IT directory.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/omr-listings/get-listed.php';
 ?>
 <?php $breadcrumbs = [

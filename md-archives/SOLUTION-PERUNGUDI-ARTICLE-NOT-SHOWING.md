@@ -1,4 +1,4 @@
-# 🔧 Solution: Perungudi Article Not Showing
+﻿# 🔧 Solution: Perungudi Article Not Showing
 
 ## 🎯 The Problem
 
@@ -128,7 +128,7 @@ The database points to this image:
 
 ```sql
 UPDATE articles
-SET image_path = '/My-OMR-Logo.jpg'
+SET image_path = '/My-OMR-Logo.png'
 WHERE slug = 'perungudi-dumpyard-transformation-waste-to-circular-economy-omr';
 ```
 

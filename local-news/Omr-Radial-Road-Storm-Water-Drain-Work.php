@@ -1,4 +1,4 @@
-<?php include '../weblog/log.php'; ?>
+﻿<?php include '../weblog/log.php'; ?>
 <?php include '../components/main-nav.php'; ?>
 <?php
 $page_title          = 'Unfinished Pallavaram Thoraipakkam Radial Road Project - Delays on OMR Secondary IT Corridor | MyOMR';
@@ -6,7 +6,7 @@ $page_description    = 'The 12km Pallavaram Thoraipakkam Radial Road remains unf
 $canonical_url       = 'https://myomr.in/local-news/Omr-Radial-Road-Storm-Water-Drain-Work.php';
 $og_title            = 'Incomplete Supervision Stalls Progress on Radial Road | MyOMR';
 $og_description      = 'The 12km Pallavaram Thoraipakkam Radial Road remains unfinished after four years. Residents question funds deployment and paused development.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/local-news/Omr-Radial-Road-Storm-Water-Drain-Work.php';
 ?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ $og_url              = 'https://myomr.in/local-news/Omr-Radial-Road-Storm-Water-
 <?php include '../components/analytics.php'; ?>
 <?php include '../components/head-resources.php'; ?>
 <meta name="robots" content="index, follow">
-<link rel="stylesheet" href="../footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 
 <script async defer data-pin-hover="true" data-pin-tall="true" data-pin-round="true" src="//assets.pinterest.com/js/pinit.js"></script>
 
@@ -99,7 +99,7 @@ color: #4c516D;
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "<?php echo htmlspecialchars($page_title ?? '', ENT_QUOTES); ?>",
-  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.jpg', ENT_QUOTES); ?>"],
+  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.png', ENT_QUOTES); ?>"],
   "datePublished": "<?php echo htmlspecialchars($date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "dateModified": "<?php echo htmlspecialchars($date_modified ?? $date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "author": [{"@type": "Organization", "name": "MyOMR News"}],

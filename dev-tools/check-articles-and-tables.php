@@ -110,7 +110,7 @@ if (!empty($missing_found)) {
 }
 
 if (isset($not_published) && $not_published > 0) {
-    echo "<li>To show ALL articles on homepage: Edit <code>home-page-news-cards.php</code> and remove <code>WHERE status = 'published'</code></li>";
+    echo "<li>To show ALL articles on homepage: Edit <code>components/myomr-news-bulletin.php</code> and remove <code>WHERE status = 'published'</code></li>";
     echo "<li>Or publish all articles by running: <code>UPDATE articles SET status = 'published' WHERE status IS NULL</code></li>";
 }
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -37,7 +37,7 @@ $page_description    = $park ? htmlspecialchars('Explore ' . $park['name'] . ' I
 $og_title            = $page_title;
 $og_description      = $page_description;
 $og_url              = $_canonical;
-$og_image            = !empty($park['image']) ? (strpos($park['image'], 'http') === 0 ? $park['image'] : 'https://myomr.in' . $park['image']) : 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = !empty($park['image']) ? (strpos($park['image'], 'http') === 0 ? $park['image'] : 'https://myomr.in' . $park['image']) : 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <?php include 'weblog/log.php' ?>
 <!DOCTYPE html>

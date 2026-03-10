@@ -1,4 +1,4 @@
-<?php include '../weblog/log.php'; ?>
+﻿<?php include '../weblog/log.php'; ?>
 <?php
 $page_title          = 'Mushroom Scarcity in OMR Perungudi During Puratasi Due to High Demand | MyOMR';
 $page_description    = 'Surge in demand for mushrooms during Puratasi month (No Meat Month) in Chennai OMR. Local shops face scarcity near Perungudi and Karapakkam.';
@@ -18,7 +18,7 @@ $twitter_image       = 'https://myomr.in/local-news/omr-news-images/Mushrooms-in
 <?php include '../components/analytics.php'; ?>
 <?php include '../components/head-resources.php'; ?>
 <meta name="robots" content="index, follow">
-<link rel="stylesheet" href="../footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 
 <script async defer data-pin-hover="true" data-pin-tall="true" data-pin-round="true" src="//assets.pinterest.com/js/pinit.js"></script>
 
@@ -101,7 +101,7 @@ color: #4c516D;
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "<?php echo htmlspecialchars($page_title ?? '', ENT_QUOTES); ?>",
-  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.jpg', ENT_QUOTES); ?>"],
+  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.png', ENT_QUOTES); ?>"],
   "datePublished": "<?php echo htmlspecialchars($date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "dateModified": "<?php echo htmlspecialchars($date_modified ?? $date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "author": [{"@type": "Organization", "name": "MyOMR News"}],

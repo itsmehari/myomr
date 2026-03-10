@@ -1,4 +1,4 @@
-# 🚀 R Karthika Article - Complete SEO & Ranking Optimization Guide
+﻿# 🚀 R Karthika Article - Complete SEO & Ranking Optimization Guide
 
 ## 📋 Overview
 
@@ -106,7 +106,7 @@ This document outlines all SEO mechanisms implemented for the R Karthika kabaddi
     "name": "MyOMR",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://myomr.in/My-OMR-Logo.jpg",
+      "url": "https://myomr.in/My-OMR-Logo.png",
       "width": 600,
       "height": 60
     }

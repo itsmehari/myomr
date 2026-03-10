@@ -1,14 +1,14 @@
-<?php
+﻿<?php
 $page_title          = 'Two Women Techies Killed in Road Accident on OMR - Sept 2022 | MyOMR';
 $page_description    = 'Two women software engineers were killed in a road accident on Old Mahabalipuram Road by a drunk driver in September 2022.';
 $canonical_url       = 'https://myomr.in/local-news/Two-Woman-Software-Engineers-Killed-Road-Accident-in-OMR.php';
 $og_title            = 'Two Women Techies Killed in Road Accident on OMR - Sept 2022 | MyOMR';
 $og_description      = 'Two women software engineers were killed in a road accident on Old Mahabalipuram Road, OMR by a drunk driver in September 2022.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/local-news/Two-Woman-Software-Engineers-Killed-Road-Accident-in-OMR.php';
 $twitter_title       = 'Two Women Techies Killed in Road Accident on OMR - Sept 2022 | MyOMR';
 $twitter_description = 'Two women software engineers killed in road accident on OMR, Chennai by a drunk driver - Sept 2022.';
-$twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
+$twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
 <?php include '../components/analytics.php'; ?>
 <?php include '../components/head-resources.php'; ?>
 <meta name="robots" content="index, follow">
-<link rel="stylesheet" href="../footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 
 <script async defer data-pin-hover="true" data-pin-tall="true" data-pin-round="true" src="//assets.pinterest.com/js/pinit.js"></script>
 
@@ -100,7 +100,7 @@ color: #4c516D;
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "<?php echo htmlspecialchars($page_title ?? '', ENT_QUOTES); ?>",
-  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.jpg', ENT_QUOTES); ?>"],
+  "image": ["<?php echo htmlspecialchars($og_image ?? 'https://myomr.in/My-OMR-Logo.png', ENT_QUOTES); ?>"],
   "datePublished": "<?php echo htmlspecialchars($date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "dateModified": "<?php echo htmlspecialchars($date_modified ?? $date_published ?? '2022-01-01', ENT_QUOTES); ?>",
   "author": [{"@type": "Organization", "name": "MyOMR News"}],

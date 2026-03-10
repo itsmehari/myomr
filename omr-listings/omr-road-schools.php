@@ -1,4 +1,4 @@
-```php
+﻿```php
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -65,11 +65,11 @@ $page_description    = 'Find all schools on Old Mahabalipuram Road (OMR), Chenna
 $canonical_url       = 'https://myomr.in/schools';
 $og_title            = 'Schools on OMR Road, Chennai | Complete List | MyOMR';
 $og_description      = 'Find all schools on Old Mahabalipuram Road (OMR), Chennai. Get school names, addresses, contacts, and landmarks.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/schools';
 $twitter_title       = 'Schools on OMR Road, Chennai | Complete List | MyOMR';
 $twitter_description = 'Find all schools on Old Mahabalipuram Road (OMR), Chennai. Get school names, addresses, contacts, and landmarks.';
-$twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
+$twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <?php include '../components/meta.php'; ?>
 <?php include '../components/analytics.php'; ?>

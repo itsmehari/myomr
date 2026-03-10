@@ -193,7 +193,7 @@ $canonical_url = "https://myomr.in/omr-local-job-listings/employer-dashboard-omr
     <link rel="stylesheet" href="/assets/css/core.css">
     <link rel="stylesheet" href="assets/job-listings-omr.css">
     <link rel="stylesheet" href="assets/omr-jobs-unified-design.css">
-    <link rel="stylesheet" href="../components/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     <!-- Dashboard Styles -->
     <link rel="stylesheet" href="assets/employer-dashboard.css">
     

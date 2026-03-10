@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 $page_title       = 'Support & Help | MyOMR OMR Chennai Community Portal';
 $page_description = 'Need help with MyOMR? Find answers to common questions or contact our support team for assistance with listings, events, and more.';
 $canonical_url    = 'https://myomr.in/discover-myomr/support.php';
-$og_image         = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image         = 'https://myomr.in/My-OMR-Logo.png';
 $og_title         = $page_title;
 $og_description   = $page_description;
 $og_url           = $canonical_url;

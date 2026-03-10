@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Landing Page Template
  * Reusable template for SEO-optimized landing pages
@@ -53,13 +53,13 @@ if (isset($location)) {
     <meta property="og:description" content="<?php echo htmlspecialchars($page_description); ?>">
     <meta property="og:url" content="<?php echo $canonical_url; ?>">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?php echo htmlspecialchars($page_title); ?>">
     <meta name="twitter:description" content="<?php echo htmlspecialchars($page_description); ?>">
-    <meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.png">
     
     <?php include __DIR__ . '/../../../components/analytics.php'; ?>
     
@@ -70,7 +70,7 @@ if (isset($location)) {
     <link rel="stylesheet" href="/assets/css/core.css">
     <link rel="stylesheet" href="../assets/job-listings-omr.css">
     <link rel="stylesheet" href="../assets/omr-jobs-unified-design.css">
-    <link rel="stylesheet" href="../../../components/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     
     <style>
         .hero-landing {

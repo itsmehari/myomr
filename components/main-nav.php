@@ -1,4 +1,4 @@
-<?php /* Unified Main Navigation Bar - Green Theme with Top Secondary Menu */ ?>
+﻿<?php /* Unified Main Navigation Bar - Green Theme with Top Secondary Menu */ ?>
 <style>
 /* Top Secondary Menu Bar - 60px height */
 .top-secondary-menu {
@@ -560,7 +560,7 @@ function is_active($link, $current_uri) {
 <!-- Main Navigation Bar -->
 <nav class="main-navbar" role="navigation" aria-label="Primary">
   <div class="logo">
-    <img src="/My-OMR-Logo.jpg" alt="MyOMR Logo">
+    <img src="/My-OMR-Logo.png" alt="MyOMR Logo">
     <span>MyOMR.in</span>
   </div>
   

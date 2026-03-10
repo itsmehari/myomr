@@ -1,14 +1,14 @@
-<?php
+﻿<?php
 $page_title          = 'Digital Marketing Junior Vacancy at CleanBios Guindy | OMR Jobs | MyOMR';
 $page_description    = 'Junior digital marketing job vacancy at CleanBios Consulting, Guindy. Job listings for OMR Road, Chennai area.';
 $canonical_url       = 'https://myomr.in/listings/digital-marketing-junior-job-vacancy-cleanbios-guindy.php';
 $og_title            = 'Digital Marketing Junior Vacancy at CleanBios Guindy | OMR Jobs';
 $og_description      = 'Junior digital marketing job vacancy at CleanBios Consulting, Guindy - OMR job listings.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/listings/digital-marketing-junior-job-vacancy-cleanbios-guindy.php';
 $twitter_title       = 'Digital Marketing Junior Vacancy at CleanBios Guindy | MyOMR';
 $twitter_description = 'Junior digital marketing job vacancy at CleanBios Consulting, Guindy. OMR job listings.';
-$twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
+$twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">

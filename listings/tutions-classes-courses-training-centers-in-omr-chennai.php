@@ -1,4 +1,4 @@
-<?php include 'weblog/log.php' ?>
+﻿<?php include 'weblog/log.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +8,11 @@ $page_description    = 'Find and post ads for tuitions, coaching classes, course
 $canonical_url       = 'https://myomr.in/listings/tutions-classes-courses-training-centers-in-omr-chennai.php';
 $og_title            = 'Tuitions, Coaching Classes and Training Centers in OMR Chennai | MyOMR';
 $og_description      = 'Find and post ads for tuitions, coaching classes, courses, and training centers in OMR Road, Chennai.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/listings/tutions-classes-courses-training-centers-in-omr-chennai.php';
 $twitter_title       = 'Tuitions, Coaching Classes and Training Centers in OMR Chennai | MyOMR';
 $twitter_description = 'Find and post ads for tuitions, coaching classes, courses, and training centers in OMR Road, Chennai.';
-$twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
+$twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <?php include '../components/meta.php'; ?>
 <?php include '../components/analytics.php'; ?>

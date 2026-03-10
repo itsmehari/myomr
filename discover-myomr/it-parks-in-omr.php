@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -13,7 +13,7 @@ $page_description    = 'A practical guide to major IT Parks on OMR, Chennai - si
 $canonical_url       = 'https://myomr.in/discover-myomr/it-parks-in-omr.php';
 $og_title            = 'IT Parks in OMR (Old Mahabalipuram Road), Chennai | MyOMR';
 $og_description      = 'A practical guide to major IT Parks on OMR - significance, economic impact, and detailed park profiles.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/discover-myomr/it-parks-in-omr.php';
 ?>
 <?php include '../components/meta.php'; ?>
@@ -37,7 +37,7 @@ body { font-family: 'Poppins', sans-serif; }
   '@type' => 'NewsArticle',
   'headline' => 'IT Parks in OMR (Old Mahabalipuram Road), Chennai — Guide',
   'description' => 'A practical guide to major IT Parks on OMR, Chennai — significance, impact, and detailed park profiles.',
-  'image' => ['https://myomr.in/My-OMR-Logo.jpg'],
+  'image' => ['https://myomr.in/My-OMR-Logo.png'],
   'datePublished' => date('c'),
   'dateModified' => date('c'),
   'author' => [
@@ -49,7 +49,7 @@ body { font-family: 'Poppins', sans-serif; }
     'name' => 'MyOMR.in',
     'logo' => [
       '@type' => 'ImageObject',
-      'url' => 'https://myomr.in/My-OMR-Logo.jpg'
+      'url' => 'https://myomr.in/My-OMR-Logo.png'
     ]
   ],
   'mainEntityOfPage' => [

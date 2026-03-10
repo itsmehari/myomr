@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Election BLO Search Page for AC Shozhinganallur
  * Allows OMR residents to search for their Block Level Officer details
@@ -112,7 +112,7 @@ if ($conn) {
     <meta property="og:url" content="https://myomr.in/info/find-blo-officer.php">
     <meta property="og:title" content="<?php echo htmlspecialchars($page_title); ?>">
     <meta property="og:description" content="<?php echo htmlspecialchars($page_description); ?>">
-    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="MyOMR.in">
@@ -123,7 +123,7 @@ if ($conn) {
     <meta property="twitter:url" content="https://myomr.in/info/find-blo-officer.php">
     <meta property="twitter:title" content="<?php echo htmlspecialchars($page_title); ?>">
     <meta property="twitter:description" content="<?php echo htmlspecialchars($page_description); ?>">
-    <meta property="twitter:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta property="twitter:image" content="https://myomr.in/My-OMR-Logo.png">
     <meta property="twitter:site" content="@MyomrNews">
     <meta property="twitter:creator" content="@MyomrNews">
     
@@ -258,7 +258,7 @@ if ($conn) {
       "@type": "Organization",
       "name": "MyOMR.in",
       "url": "https://myomr.in",
-      "logo": "https://myomr.in/My-OMR-Logo.jpg",
+      "logo": "https://myomr.in/My-OMR-Logo.png",
       "description": "Local news portal and community website for Old Mahabalipuram Road (OMR), Chennai",
       "sameAs": [
         "https://www.facebook.com/MyOMR.in",

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * MyOMR.in Digital Marketing Landing Page
  * 
@@ -20,7 +20,7 @@ $canonical_url = 'https://myomr.in/digital-marketing-landing.php';
 // OG tags
 $og_title = 'MyOMR.in - Your Complete Digital Community Hub for OMR, Chennai';
 $og_description = 'Join MyOMR.in - Chennai\'s premier digital community platform. Get local news, find jobs, discover events, browse businesses, and connect with the OMR community.';
-$og_image = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image = 'https://myomr.in/My-OMR-Logo.png';
 $og_url = $canonical_url;
 
 // Twitter tags
@@ -1222,7 +1222,7 @@ html {
   "@type": "Organization",
   "name": "MyOMR",
   "url": "https://myomr.in",
-  "logo": "https://myomr.in/My-OMR-Logo.jpg",
+  "logo": "https://myomr.in/My-OMR-Logo.png",
   "description": "MyOMR.in - Your complete digital community hub for Old Mahabalipuram Road (OMR), Chennai. Local news, jobs, events, business listings, and more.",
   "address": {
     "@type": "PostalAddress",
@@ -1554,7 +1554,7 @@ html {
     <div class="container">
         <div class="logo-section">
             <a href="/" class="logo-text" aria-label="MyOMR Home">
-                <img src="/My-OMR-Logo.jpg" alt="MyOMR Logo" height="50" width="50">
+                <img src="/My-OMR-Logo.png" alt="MyOMR Logo" height="50" width="50">
                 MyOMR.in
             </a>
         </div>

@@ -1,7 +1,14 @@
 <?php
+// Enable error display FIRST when ?debug=1 (before any require), so 500 errors are visible
+if (!empty($_GET['debug']) && $_GET['debug'] === '1') {
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    ini_set('log_errors', '1');
+    error_reporting(E_ALL);
+}
+
 require_once __DIR__ . '/env.php';
 
-// Debug mode: ?debug=1 enables error display to diagnose 403/500 issues (remove after fixing)
 $debug_mode = isset($_GET['debug']) && $_GET['debug'] === '1';
 
 // Configure error display/logging based on environment

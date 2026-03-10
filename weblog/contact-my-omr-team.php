@@ -1,4 +1,4 @@
-<?php include 'weblog/log.php' ?>
+﻿<?php include 'weblog/log.php' ?>
 <?php
 // Set canonical URL for this page (without query string)
 $canonical_url = 'https://myomr.in/contact-my-omr-team.php';
@@ -7,7 +7,7 @@ $page_title          = 'Contact the MyOMR Team | Old Mahabalipuram Road Communit
 $page_description    = 'Get in touch with the MyOMR team. News, events, happenings in and around Old Mahabalipuram Road, Chennai.';
 $og_title            = 'Contact the MyOMR Team | MyOMR.in';
 $og_description      = 'Get in touch with the MyOMR team for news, events and community updates along OMR, Chennai.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/contact-my-omr-team.php';
 ?>
 ?>
@@ -239,7 +239,7 @@ color: #4c516D;
     <div class="col-sm-4">
       <h2>My OMR</h2>
       <h5>Local Community Portal</h5>
-      <div><img src="My-OMR-Logo.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;"></div>
+      <div><img src="My-OMR-Logo.png" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;"></div>
       
       <!--<p>Navigate to News Section</p>-->
       <!--<h3>recent news</h3>-->

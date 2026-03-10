@@ -39,7 +39,7 @@ if ($stmt) {
     $stmt->execute();
     $res = $stmt->get_result();
     while ($row = $res->fetch_assoc()) {
-        $loc     = $base . 'article.php?slug=' . rawurlencode($row['slug']);
+        $loc     = $base . $row['slug'];
         $lastmod = !empty($row['updated_at']) ? date('Y-m-d', strtotime($row['updated_at']))
                                               : date('Y-m-d', strtotime($row['published_date']));
         $pubDate = date('Y-m-d', strtotime($row['published_date']));

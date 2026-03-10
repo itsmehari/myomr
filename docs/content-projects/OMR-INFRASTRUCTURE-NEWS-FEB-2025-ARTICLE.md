@@ -1,4 +1,4 @@
-# OMR Infrastructure News – Article Draft (Feb 2025)
+﻿# OMR Infrastructure News – Article Draft (Feb 2025)
 
 **Purpose:** Collated and elaborated infrastructure news about OMR and its areas, ready for the MyOMR news feature. Use the **Article content** and **Metadata** sections below to add this via `weblog/ADD-NEW-ARTICLE.php` or by inserting into the `articles` table.
 
@@ -79,7 +79,7 @@ Use these values when adding the article via the Add New Article form or SQL.
 | **author** | MyOMR Editorial Team |
 | **status** | published |
 | **published_date** | 2025-02-24 |
-| **image_path** | /My-OMR-Logo.jpg |
+| **image_path** | /My-OMR-Logo.png |
 | **tags** | OMR, Old Mahabalipuram Road, Chennai, infrastructure, flyover, Tidel Park, Chennai Metro, road repair, Sholinganallur, Navalur, SRP Tools, TNRDC |
 
 **Meta description (≤155 chars):**  
@@ -107,7 +107,7 @@ VALUES (
   'MyOMR Editorial Team',
   'published',
   '2025-02-24',
-  '/My-OMR-Logo.jpg',
+  '/My-OMR-Logo.png',
   'OMR, Old Mahabalipuram Road, Chennai, infrastructure, flyover, Tidel Park, Chennai Metro, road repair, Sholinganallur, Navalur, SRP Tools, TNRDC',
   0,
   NOW(),

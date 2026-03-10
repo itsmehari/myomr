@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Start output buffering to catch any errors
 ob_start();
 ?>
@@ -26,7 +26,7 @@ ob_start();
     $page_keywords = "UN SDG education, SDG in schools, SDG awareness India, OMR schools SDG";
     $og_title = "SDG Education in OMR Schools | Parents & Students | MyOMR";
     $og_description = "Spread UN SDG awareness in OMR schools! Empower students, teachers, and parents to become SDG ambassadors.";
-    $og_image = "https://myomr.in/My-OMR-Logo.jpg";
+    $og_image = "https://myomr.in/My-OMR-Logo.png";
     $og_url = "https://myomr.in/discover-myomr/sdg-education-schools.php";
     if (file_exists('../components/meta.php')) {
         include '../components/meta.php';

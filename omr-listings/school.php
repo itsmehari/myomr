@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -44,7 +44,7 @@ $servicesTextDb = $school['services'] ?? '';
 $careersUrlDb = $school['careers_url'] ?? '';
 $mapsQuery = urlencode($name . ' ' . $address);
 $canonical = 'https://myomr.in/schools/' . $slug;
-$canonical_url = $canonical; $page_title = htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ' | School on OMR | MyOMR'; $page_description = htmlspecialchars($name . ' - School on Chennai OMR. Address: ' . $address, ENT_QUOTES, 'UTF-8'); $og_title = $page_title; $og_description = $page_description; $og_url = $canonical; $og_image = 'https://myomr.in/My-OMR-Logo.jpg';
+$canonical_url = $canonical; $page_title = htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ' | School on OMR | MyOMR'; $page_description = htmlspecialchars($name . ' - School on Chennai OMR. Address: ' . $address, ENT_QUOTES, 'UTF-8'); $og_title = $page_title; $og_description = $page_description; $og_url = $canonical; $og_image = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,7 +142,7 @@ $canonical_url = $canonical; $page_title = htmlspecialchars($name, ENT_QUOTES, '
             ]
           ];
         }
-        $fallbackImage = '/My-OMR-Logo.jpg';
+        $fallbackImage = '/My-OMR-Logo.png';
         include __DIR__ . '/components/related-cards.php';
       }
     }
@@ -190,7 +190,7 @@ $name = $item['schoolname'];
 $address = $item['address'];
 $contact = $item['contact'];
 $canonical = 'https://myomr.in/schools/' . $slug;
-$canonical_url = $canonical; $page_title = htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ' | School on OMR | MyOMR'; $page_description = htmlspecialchars($name . ' - School on Chennai OMR. Address: ' . $address, ENT_QUOTES, 'UTF-8'); $og_title = $page_title; $og_description = $page_description; $og_url = $canonical; $og_image = 'https://myomr.in/My-OMR-Logo.jpg';
+$canonical_url = $canonical; $page_title = htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ' | School on OMR | MyOMR'; $page_description = htmlspecialchars($name . ' - School on Chennai OMR. Address: ' . $address, ENT_QUOTES, 'UTF-8'); $og_title = $page_title; $og_description = $page_description; $og_url = $canonical; $og_image = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -282,7 +282,7 @@ $canonical_url = $canonical; $page_title = htmlspecialchars($name, ENT_QUOTES, '
             ]
           ];
         }
-        $fallbackImage = '/My-OMR-Logo.jpg';
+        $fallbackImage = '/My-OMR-Logo.png';
         include __DIR__ . '/components/related-cards.php';
       }
     }

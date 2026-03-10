@@ -1,4 +1,4 @@
-# 📤 R Karthika Article - Server Upload Checklist
+﻿# 📤 R Karthika Article - Server Upload Checklist
 
 ## 📋 Files to Upload to Server
 
@@ -103,7 +103,7 @@ These files are for your reference only - **DO NOT upload** to server:
    - Verify: File exists and is accessible
 
 2. **If image doesn't exist:**
-   - Article will use placeholder: `/My-OMR-Logo.jpg`
+   - Article will use placeholder: `/My-OMR-Logo.png`
    - You can upload image later and update database:
      ```sql
      UPDATE articles 

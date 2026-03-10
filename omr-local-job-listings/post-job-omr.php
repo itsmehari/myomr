@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * MyOMR Job Portal - Post Job Form
  * Employers can post job vacancies through this form
@@ -73,7 +73,7 @@ if (empty($_SESSION['csrf_token'])) {
     <meta property="og:description" content="<?php echo $page_description; ?>">
     <meta property="og:url" content="<?php echo $canonical_url; ?>">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     
     <!-- Google Analytics -->
     <?php $ga_user_id = (int)($_SESSION['employer_id'] ?? 0); $ga_user_properties = ['user_type' => 'employer']; include '../components/analytics.php'; ?>
@@ -95,7 +95,7 @@ if (empty($_SESSION['csrf_token'])) {
     <!-- Modern Form CSS -->
     <link rel="stylesheet" href="assets/post-job-form-modern.css">
     <!-- Universal Footer Styles -->
-    <link rel="stylesheet" href="../components/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     
     <style>
         .form-section {

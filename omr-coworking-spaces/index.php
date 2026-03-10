@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * MyOMR Coworking Spaces Portal - Main Space Listings Page
  * 
@@ -139,13 +139,13 @@ if (!empty($filter_params)) {
     <meta property="og:description" content="<?php echo $page_description; ?>">
     <meta property="og:url" content="<?php echo $canonical_url; ?>">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?php echo $page_title; ?>">
     <meta name="twitter:description" content="<?php echo $page_description; ?>">
-    <meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.png">
     
     <!-- Google Analytics -->
     <?php include '../components/analytics.php'; ?>
@@ -162,7 +162,7 @@ if (!empty($filter_params)) {
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/coworking-spaces.css">
     <!-- Universal Footer Styles -->
-    <link rel="stylesheet" href="../components/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -195,7 +195,7 @@ if (!empty($filter_params)) {
       "@type": "Organization",
       "name": "My OMR",
       "url": "https://myomr.in/",
-      "logo": "https://myomr.in/My-OMR-Logo.jpg",
+      "logo": "https://myomr.in/My-OMR-Logo.png",
       "sameAs": [
         "https://www.facebook.com/MyOMR.in",
         "https://www.instagram.com/myomr.in",

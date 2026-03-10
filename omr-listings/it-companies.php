@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -110,11 +110,11 @@ $page_description    = 'Find top IT companies along Old Mahabalipuram Road (OMR)
 $canonical_url       = 'https://myomr.in/it-companies';
 $og_title            = 'IT Companies in OMR, Chennai | MyOMR';
 $og_description      = 'Find top IT companies along Old Mahabalipuram Road (OMR), Chennai. Explore company names, addresses, industry types, and contact details for your business needs.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/it-companies';
 $twitter_title       = 'IT Companies in OMR, Chennai | MyOMR';
 $twitter_description = 'Find top IT companies along Old Mahabalipuram Road (OMR), Chennai. Explore company names, addresses, industry types, and contact details for your business needs.';
-$twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
+$twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <?php $breadcrumbs = [
   ['https://myomr.in/','Home'],

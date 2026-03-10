@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * MyOMR Job Portal — Job Detail Page (v3.0 2026 Overhaul)
  *
@@ -115,11 +115,11 @@ $apps_count = (int)($job['applications_count'] ?? 0);
 <meta property="og:description" content="<?= $page_desc ?>">
 <meta property="og:url"         content="<?= $canonical ?>">
 <meta property="og:type"        content="website">
-<meta property="og:image"       content="https://myomr.in/My-OMR-Logo.jpg">
+<meta property="og:image"       content="https://myomr.in/My-OMR-Logo.png">
 <meta name="twitter:card"       content="summary_large_image">
 <meta name="twitter:title"      content="<?= htmlspecialchars($job['title']) ?> | MyOMR Jobs">
 <meta name="twitter:description" content="<?= $page_desc ?>">
-<meta name="twitter:image"      content="https://myomr.in/My-OMR-Logo.jpg">
+<meta name="twitter:image"      content="https://myomr.in/My-OMR-Logo.png">
 
 <?php $ga_custom_params = [
   'job_category'     => $job['category_name'] ?? $job['category'] ?? '',
@@ -133,7 +133,7 @@ $apps_count = (int)($job['applications_count'] ?? 0);
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/core.css">
 <link rel="stylesheet" href="assets/job-portal-2026.css">
-<link rel="stylesheet" href="../components/footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 
 <!-- Structured Data -->
 <?php echo generateJobPostingSchema($job); ?>

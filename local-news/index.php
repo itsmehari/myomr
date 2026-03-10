@@ -85,7 +85,7 @@ if ($filter_cat !== '') {
 }
 $page_desc     = 'Stay updated with the latest local news from OMR Chennai — roads, schools, businesses, events, civic updates, and community stories from Perungudi to Kelambakkam.';
 $canonical_url = 'https://myomr.in/local-news/';
-$og_image      = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image      = 'https://myomr.in/My-OMR-Logo.png';
 
 // ── Pagination URL helper ─────────────────────────────────────────────────────
 function news_pager_url(int $p, string $cat, string $q): string {
@@ -142,7 +142,7 @@ $sub_error    = isset($_GET['subscribe_error']);
     "publisher": {
       "@type": "Organization",
       "name": "MyOMR",
-      "logo": { "@type": "ImageObject", "url": "https://myomr.in/My-OMR-Logo.jpg" }
+      "logo": { "@type": "ImageObject", "url": "https://myomr.in/My-OMR-Logo.png" }
     }
   }
   </script>

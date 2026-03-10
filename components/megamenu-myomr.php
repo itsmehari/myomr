@@ -1,16 +1,30 @@
-<?php
+﻿<?php
 /**
  * MyOMR Megamenu – responsive navigation with menu, submenu, list items
- * Requires: core/megamenu-config.php
+ * Requires: core/megamenu-config.php (fallback if missing)
  */
 if (!isset($megamenu)) {
-  include __DIR__ . '/../core/megamenu-config.php';
+  $config_file = __DIR__ . '/../core/megamenu-config.php';
+  if (file_exists($config_file)) {
+    include $config_file;
+  }
+}
+if (empty($megamenu) || !is_array($megamenu)) {
+  $megamenu = [
+    ['label' => 'Home', 'url' => '/', 'icon' => 'fas fa-home', 'active' => true],
+    ['label' => 'Jobs', 'url' => '/omr-local-job-listings/', 'icon' => 'fas fa-briefcase'],
+    ['label' => 'Events', 'url' => '/omr-local-events/', 'icon' => 'fas fa-calendar-alt'],
+    ['label' => 'News', 'url' => '/local-news/news-highlights-from-omr-road.php', 'icon' => 'fas fa-newspaper'],
+    ['label' => 'Places', 'url' => '/omr-listings/', 'icon' => 'fas fa-map-marker-alt'],
+    ['label' => 'About', 'url' => '/about-myomr-omr-community-portal.php', 'icon' => 'fas fa-info-circle'],
+    ['label' => 'Contact', 'url' => '/contact-my-omr-team.php', 'icon' => 'fas fa-envelope'],
+  ];
 }
 ?>
 <header class="megamenu-wrap" role="banner">
   <div class="megamenu-bar">
     <a href="/" class="megamenu-logo" aria-label="MyOMR.in Home">
-      <img src="/My-OMR-Logo.jpg" alt="MyOMR - Old Mahabalipuram Road Community Portal" width="40" height="40">
+      <img src="/My-OMR-Logo.png" alt="MyOMR - Old Mahabalipuram Road Community Portal" width="40" height="40">
       <div class="megamenu-logo-text">
         <span class="megamenu-site-name">MyOMR.in</span>
         <span class="megamenu-tagline">Explore OMR • Old Mahabalipuram Road</span>

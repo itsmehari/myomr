@@ -184,7 +184,7 @@ scratch-*.php
 *-test.php
 *-temp.php
 *-backup.php
-!index-main-backup.php
+!index-minimal-backup.php
 
 # ============================================
 # Security & Sensitive Data

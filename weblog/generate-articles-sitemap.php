@@ -23,7 +23,7 @@ if ($conn) {
             $slug = htmlspecialchars($row['slug']);
             $lastmod = date('Y-m-d', strtotime($row['updated_at'] ? $row['updated_at'] : $row['published_date']));
             echo "\n  <url>\n";
-            echo "    <loc>" . $base_url . '/local-news/' . $slug . "</loc>\n";
+            echo "    <loc>" . $base_url . '/local-news/' . htmlspecialchars($row['slug'], ENT_XML1) . "</loc>\n";
             echo "    <lastmod>" . $lastmod . "</lastmod>\n";
             echo "    <changefreq>weekly</changefreq>\n";
             echo "    <priority>0.9</priority>\n";

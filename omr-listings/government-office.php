@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -126,7 +126,7 @@ $og_description   = $page_description;
             ]
           ];
         }
-        $fallbackImage = '/My-OMR-Logo.jpg';
+        $fallbackImage = '/My-OMR-Logo.png';
         include __DIR__ . '/components/related-cards.php';
       }
     }

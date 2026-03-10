@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 $page_title       = 'Get Started with MyOMR | OMR Chennai Community Portal';
 $page_description = 'New to MyOMR? Learn how to explore local news, post listings, find jobs, and connect with the OMR community in just a few easy steps.';
 $canonical_url    = 'https://myomr.in/discover-myomr/getting-started.php';
-$og_image         = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image         = 'https://myomr.in/My-OMR-Logo.png';
 $og_title         = $page_title;
 $og_description   = $page_description;
 $og_url           = $canonical_url;

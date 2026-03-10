@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Pentahive Website Maintenance - Social Media Landing Page Variant
  * Optimized for Facebook/Instagram ads (awareness stage traffic)
@@ -69,13 +69,13 @@ $canonical_url = "https://myomr.in/pentahive/facebook";
     <meta property="og:description" content="<?php echo htmlspecialchars($page_description); ?>">
     <meta property="og:url"         content="<?php echo $canonical_url; ?>">
     <meta property="og:type"        content="website">
-    <meta property="og:image"       content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta property="og:image"       content="https://myomr.in/My-OMR-Logo.png">
     <meta property="og:site_name"   content="MyOMR — Pentahive">
     <!-- Twitter Card -->
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:title"       content="<?php echo htmlspecialchars($page_title); ?>">
     <meta name="twitter:description" content="<?php echo htmlspecialchars($page_description); ?>">
-    <meta name="twitter:image"       content="https://myomr.in/My-OMR-Logo.jpg">
+    <meta name="twitter:image"       content="https://myomr.in/My-OMR-Logo.png">
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

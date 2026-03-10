@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message .= '<div style="margin-top:20px; padding:15px; background:#e7f5e7; border-radius:5px;"><strong>Next Steps:</strong><br>';
             $message .= '1. Run sitemap generator: <a href="sitemap-generator.php" target="_blank">Generate Sitemap</a><br>';
             $message .= '2. Submit to Google Search Console<br>';
-            $message .= '3. View article: <a href="/local-news/' . $slug . '">View Article</a></div>';
+            $message .= '3. View article: <a href="/local-news/' . htmlspecialchars($slug) . '">View Article</a></div>';
         } else {
             $message = '<div style="color:red;">❌ Error: ' . $conn->error . '</div>';
         }

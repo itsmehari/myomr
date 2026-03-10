@@ -1,4 +1,4 @@
-# ✅ Complete SEO & Rich Snippets - R Karthika Article
+﻿# ✅ Complete SEO & Rich Snippets - R Karthika Article
 
 ## 🎯 Overview
 
@@ -105,7 +105,7 @@ This document confirms that the R Karthika article has **comprehensive SEO and r
     "name": "MyOMR",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://myomr.in/My-OMR-Logo.jpg",
+      "url": "https://myomr.in/My-OMR-Logo.png",
       "width": 600,
       "height": 60
     }

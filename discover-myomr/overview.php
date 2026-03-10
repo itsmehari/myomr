@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 $page_title       = 'Everything OMR. One Trusted Portal. | MyOMR Chennai';
 $page_description = 'MyOMR is OMR Chennai\'s local community portal. Trusted for local news, jobs, events, business listings, hostels, coworking spaces and more across the entire OMR corridor.';
 $canonical_url    = 'https://myomr.in/discover-myomr/overview.php';
-$og_image         = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image         = 'https://myomr.in/My-OMR-Logo.png';
 $og_title         = $page_title;
 $og_description   = $page_description;
 $og_url           = $canonical_url;

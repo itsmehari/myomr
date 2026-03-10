@@ -1,4 +1,4 @@
-<?php include 'weblog/log.php' ?>
+﻿<?php include 'weblog/log.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,18 +8,18 @@ $page_description    = 'Post ads for rooms, houses and offices for rent or sale 
 $canonical_url       = 'https://myomr.in/listings/sell-rent-property-house-plot-omr-chennai.php';
 $og_title            = 'Sell or Rent Property, House, Plot on OMR Chennai | MyOMR';
 $og_description      = 'Post ads for rooms, houses and offices for rent or sale in OMR Road, Perungudi, Sholinganallur, Chennai.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/listings/sell-rent-property-house-plot-omr-chennai.php';
 $twitter_title       = 'Sell or Rent Property, House, Plot on OMR Chennai | MyOMR';
 $twitter_description = 'Post ads for rooms, houses and offices for rent or sale in OMR Road, Perungudi, Sholinganallur, Chennai.';
-$twitter_image       = 'https://myomr.in/My-OMR-Logo.jpg';
+$twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 ?>
 <?php include '../components/meta.php'; ?>
 <?php include '../components/analytics.php'; ?>
 <?php include '../components/head-resources.php'; ?>
 
 <meta name=”robots” content=”index, follow”>
-<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
 
 <script async defer data-pin-hover="true" data-pin-tall="true" data-pin-round="true" src="//assets.pinterest.com/js/pinit.js"></script>
 

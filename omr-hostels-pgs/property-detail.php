@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * MyOMR Hostels & PGs Portal - Property Detail Page
  * Individual property listing view with inquiry form
@@ -100,7 +100,7 @@ $page_description = strlen($clean_description) > 155
     ? substr($clean_description, 0, 155) . '...'
     : $clean_description;
 $canonical_url = "https://myomr.in/omr-hostels-pgs/property-detail.php?id=" . $property_id;
-$og_image = "https://myomr.in/omr-hostels-pgs/" . htmlspecialchars($property['featured_image'] ?? 'My-OMR-Logo.jpg');
+$og_image = "https://myomr.in/omr-hostels-pgs/" . htmlspecialchars($property['featured_image'] ?? 'My-OMR-Logo.png');
 
 // Parse JSON fields
 $room_types = json_decode($property['room_types'] ?? '[]', true);
@@ -143,7 +143,7 @@ $facilities = json_decode($property['facilities'] ?? '[]', true);
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/hostels-pgs.css">
     <!-- Universal Footer Styles -->
-    <link rel="stylesheet" href="../components/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     
     <!-- Structured Data -->
     <?php echo generatePropertySchema($property); ?>

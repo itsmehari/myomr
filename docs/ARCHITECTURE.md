@@ -26,6 +26,10 @@
 
 - This file provides a snapshot; see `context.md` for the most current architecture and decisions.
 
+## Recent Architectural Updates (as of March 2026)
+
+- **Asset & Component Includes:** Centralized include system for CSS, JS, and components. See `docs/workflows-pipelines/ASSET-INCLUDES.md`. Uses `core/include-path.php`, `components/css-includes.php`, `components/js-includes.php`, `components/component-includes.php` with `ROOT_PATH` so pages work from any subdirectory depth.
+
 ## Recent Architectural Updates (as of December 2024)
 
 - **Homepage Redesign:** `index.php` was refactored for a modular, mobile-friendly layout, integrating all dynamic PHP logic.

@@ -1,4 +1,4 @@
-<?php include 'weblog/log.php' ?>
+﻿<?php include 'weblog/log.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +17,7 @@
 <meta property="og:title" content="Old Mahabalipuram Road news, Search, Events, Happenings, Photographs" />
 <meta property="og:description" content="home page of old mahabalipuram road, OMR website,which hosts several features for its user base, especially from chennai, Tamilnadu. We offer special coverage on the News, Happenings, Events, Businesses and people of old mahabalipuram road and its
 neighbouring Community" />
-<meta property="og:image" content="https://myomr.in/My-OMR-Logo.jpg" />
+<meta property="og:image" content="https://myomr.in/My-OMR-Logo.png" />
 <meta property="og:url" content="https://myomr.in/" />
 <meta property="og:site_name" content="My OMR Old Mahabalipuram Road." />
 <meta property="og:locale" content="en_US" />
@@ -25,7 +25,7 @@ neighbouring Community" />
 
 <meta name="twitter:title" content="My OMR - Old Mahabalipuram Road News, Events, Images, Happenings, Search, Business Website">
 <meta name="twitter:description" content="in this page you can find news, events, images, happenings, updates, local business information of OMR Road, Old Mahabalipuram Road and its Surroundings">
-<meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.jpg">
+<meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.png">
 <meta name="twitter:site" content="@MyomrNews">
 <meta name="twitter:creator" content="@MyomrNews">
 <link rel="stylesheet" href="assets/css/main.css">
@@ -272,7 +272,7 @@ color: #4c516D;
     <div class="col-sm-4">
       <h2>My OMR</h2>
       <h5>Local Community Portal</h5>
-      <div><img src="My-OMR-Logo.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;"></div>
+      <div><img src="My-OMR-Logo.png" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;"></div>
       
       <!--<p>Navigate to News Section</p>-->
       <!--<h3>recent news</h3>-->

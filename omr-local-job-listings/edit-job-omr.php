@@ -137,7 +137,7 @@ if (empty($_SESSION['csrf_token'])) {
     <link rel="stylesheet" href="assets/job-listings-omr.css">
     <link rel="stylesheet" href="assets/post-job-form-modern.css">
     <link rel="stylesheet" href="assets/omr-jobs-unified-design.css">
-    <link rel="stylesheet" href="../components/footer.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     
     <style>
         .form-section {

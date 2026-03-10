@@ -1,4 +1,4 @@
-# 📂 Backups Folder Analysis
+﻿# 📂 Backups Folder Analysis
 
 **Date:** December 26, 2024  
 **Location:** `/backups/`  
@@ -10,7 +10,7 @@
 
 | Item                         | Type       | Size    | Last Modified  | Age            |
 | ---------------------------- | ---------- | ------- | -------------- | -------------- |
-| `_backup_My-OMR-Logo.jpg`    | Image      | 101 KB  | April 24, 2022 | ~2.5 years old |
+| `_backup_My-OMR-Logo.png`    | Image      | 101 KB  | April 24, 2022 | ~2.5 years old |
 | `backupfolder/index.php.bak` | PHP Backup | 23.5 KB | April 11, 2025 | Recent         |
 
 **Total Size:** ~125 KB
@@ -19,7 +19,7 @@
 
 ## 🔍 Detailed Analysis
 
-### **1. \_backup_My-OMR-Logo.jpg**
+### **1. \_backup_My-OMR-Logo.png**
 
 **Details:**
 
@@ -31,7 +31,7 @@
 **Assessment:**
 
 - ✅ This is just a backup of the logo
-- ✅ Original exists: `/My-OMR-Logo.jpg`
+- ✅ Original exists: `/My-OMR-Logo.png`
 - ✅ Very old backup (2022)
 - ❌ No longer needed
 
@@ -195,17 +195,17 @@ Move-Item "backups" "C:\Users\Admin\Desktop\MyOMR_Local_Backups\"
 ```
 Root/
 ├── backups/                     ← 125 KB
-│   ├── _backup_My-OMR-Logo.jpg ← Redundant
+│   ├── _backup_My-OMR-Logo.png ← Redundant
 │   └── backupfolder/
 │       └── index.php.bak       ← Old code
-└── My-OMR-Logo.jpg             ← Original exists
+└── My-OMR-Logo.png             ← Original exists
 ```
 
 ### **After:**
 
 ```
 Root/
-├── My-OMR-Logo.jpg             ← Original (kept)
+├── My-OMR-Logo.png             ← Original (kept)
 └── [no backups folder]         ← Clean!
 
 Local Storage (your computer):

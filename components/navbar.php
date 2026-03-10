@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 // Unified Bootstrap Navbar for MyOMR
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded mb-3" style="font-family: 'Josefin Sans', Arial, sans-serif;">
   <a class="navbar-brand d-flex align-items-center" href="/">
-    <img src="/My-OMR-Logo.jpg" alt="MyOMR Logo" width="40" height="40" class="d-inline-block align-top mr-2 rounded-circle border border-primary">
+    <img src="/My-OMR-Logo.png" alt="MyOMR Logo" width="40" height="40" class="d-inline-block align-top mr-2 rounded-circle border border-primary">
     <span class="font-weight-bold text-primary" style="font-size: 1.5rem;">MyOMR.in</span>
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

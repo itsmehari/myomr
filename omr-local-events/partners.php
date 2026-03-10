@@ -1,10 +1,10 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 
 $page_title = 'Partner with MyOMR Events — Badges, Embeds &amp; Free Listings for OMR Organisations';
 $page_desc  = 'RWAs, colleges, NGOs and local organisations on OMR can embed the MyOMR Events badge, list events for free, and help their community stay connected.';
-$og_image   = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image   = 'https://myomr.in/My-OMR-Logo.png';
 
 // Pull live event count for social proof
 $total_events  = 0;

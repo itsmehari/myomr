@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
@@ -20,7 +20,7 @@ $page_description    = 'Submit your local event to reach OMR residents. Communit
 $canonical_url       = 'https://myomr.in/omr-local-events/post-event-omr.php';
 $og_title            = 'List Your Event on OMR | MyOMR';
 $og_description      = 'Submit your local event to reach OMR residents. Community, workshops, sports, arts, business and more.';
-$og_image            = 'https://myomr.in/My-OMR-Logo.jpg';
+$og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/omr-local-events/post-event-omr.php';
 ?>
 <head>

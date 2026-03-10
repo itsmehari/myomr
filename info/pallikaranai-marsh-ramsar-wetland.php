@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -32,7 +32,7 @@ $og_image = 'https://myomr.in/images/pallikaranai-marsh-hero.jpg';
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../assets/css/main.css">
     <!-- Favicon -->
-    <link rel="icon" href="../My-OMR-Logo.jpg" type="image/jpeg">
+    <link rel="icon" href="../My-OMR-Logo.png" type="image/jpeg">
 
     <!-- Page Specific Styles -->
     <style>

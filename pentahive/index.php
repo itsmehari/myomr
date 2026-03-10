@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Pentahive Website Maintenance Service - Primary Landing Page
  * 
@@ -97,7 +97,7 @@ $page_keywords = "website maintenance, website maintenance Chennai, website main
             "@type": "Organization",
             "name": "Pentahive Technology Solutions",
             "url": "https://myomr.in/pentahive/",
-            "logo": "https://myomr.in/My-OMR-Logo.jpg"
+            "logo": "https://myomr.in/My-OMR-Logo.png"
         },
         "areaServed": {
             "@type": "City",

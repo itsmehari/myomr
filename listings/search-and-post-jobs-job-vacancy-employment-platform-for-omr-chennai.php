@@ -1,4 +1,4 @@
-<?php include 'weblog/log.php' ?>
+﻿<?php include 'weblog/log.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +13,7 @@
     <meta name="author" content="Krishnan">
     <meta property="og:title" content="Jobs in OMR - Local Job Listings on OMR Road, Chennai" />
     <meta property="og:description" content="Find jobs on OMR Road, including teaching, IT, and digital marketing roles. Apply directly with detailed contact info." />
-    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.jpg" />
+    <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png" />
     <meta property="og:url" content="https://myomr.in/" />
     <meta property="og:site_name" content="My OMR Jobs Portal" />
 

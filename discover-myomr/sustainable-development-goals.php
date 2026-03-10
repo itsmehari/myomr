@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Start output buffering to catch any errors
 ob_start();
 ?>
@@ -26,7 +26,7 @@ ob_start();
     $page_keywords = "UN SDG, Sustainable Development Goals, OMR community, sustainability, Chennai, MyOMR, community development";
     $og_title = "UN Sustainable Development Goals | MyOMR Community Commitment";
     $og_description = "MyOMR's commitment announcement to UN Sustainable Development Goals";
-    $og_image = "https://myomr.in/My-OMR-Logo.jpg";
+    $og_image = "https://myomr.in/My-OMR-Logo.png";
     $og_url = "https://myomr.in/discover-myomr/sustainable-development-goals.php";
     if (file_exists('../components/meta.php')) {
         include '../components/meta.php';
@@ -43,7 +43,7 @@ ob_start();
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../assets/css/main.css">
     <!-- Favicon -->
-    <link rel="icon" href="../My-OMR-Logo.jpg" type="image/jpeg">
+    <link rel="icon" href="../My-OMR-Logo.png" type="image/jpeg">
 
     <!-- SDG Page Specific Styles -->
     <style>
@@ -261,7 +261,7 @@ ob_start();
           },
           "primaryImageOfPage": {
             "@type": "ImageObject",
-            "url": "https://myomr.in/My-OMR-Logo.jpg",
+            "url": "https://myomr.in/My-OMR-Logo.png",
             "width": 1200,
             "height": 630
           },
@@ -279,7 +279,7 @@ ob_start();
           "@id": "https://myomr.in/discover-myomr/sustainable-development-goals.php#article",
           "headline": "UN Sustainable Development Goals | MyOMR Community Commitment",
           "description": "MyOMR's commitment to UN Sustainable Development Goals and community sustainability initiatives",
-          "image": "https://myomr.in/My-OMR-Logo.jpg",
+          "image": "https://myomr.in/My-OMR-Logo.png",
           "author": {
             "@type": "Organization",
             "name": "MyOMR Editorial Team",
@@ -292,7 +292,7 @@ ob_start();
             "url": "https://myomr.in",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://myomr.in/My-OMR-Logo.jpg",
+              "url": "https://myomr.in/My-OMR-Logo.png",
               "width": 600,
               "height": 600
             }
@@ -310,7 +310,7 @@ ob_start();
           "url": "https://myomr.in",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://myomr.in/My-OMR-Logo.jpg",
+            "url": "https://myomr.in/My-OMR-Logo.png",
             "width": 600,
             "height": 600
           },
