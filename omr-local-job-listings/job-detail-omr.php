@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Job Portal — Job Detail Page (v3.0 2026 Overhaul)
  *
@@ -9,9 +9,13 @@ require_once __DIR__ . '/includes/error-reporting.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/component-includes.php';
+
 require_once __DIR__ . '/includes/job-functions-omr.php';
 require_once __DIR__ . '/includes/seo-helper.php';
-require_once __DIR__ . '/../core/omr-connect.php';
+require_once ROOT_PATH . '/core/omr-connect.php';
 global $conn;
 
 if (!isset($conn) || !$conn instanceof mysqli || $conn->connect_error) {
@@ -52,14 +56,15 @@ if (!$job) {
 
     if (!$job) {
         http_response_code(404);
-        require_once __DIR__ . '/../components/main-nav.php';
-        echo '<div class="container py-5 text-center">
+        require_once ROOT_PATH . '/components/skip-link.php';
+        omr_nav('main');
+        echo '<main id="main-content"><div class="container py-5 text-center">
           <i class="fas fa-search fa-3x text-muted mb-3"></i>
           <h1 class="h2">Job Not Found</h1>
           <p class="text-muted">This listing may have been removed or filled.</p>
           <a href="/omr-local-job-listings/" class="btn btn-success mt-2">Browse All Jobs</a>
-        </div>';
-        require_once __DIR__ . '/../components/footer.php';
+        </div></main>';
+        omr_footer();
         exit;
     }
 }
@@ -126,7 +131,7 @@ $apps_count = (int)($job['applications_count'] ?? 0);
   'job_type'         => $job['job_type'] ?? '',
   'locality'         => $job['location'] ?? '',
   'experience_level' => $job['experience_level'] ?? '',
-]; include '../components/analytics.php'; ?>
+]; include ROOT_PATH . '/components/analytics.php'; ?>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -150,7 +155,8 @@ $apps_count = (int)($job['applications_count'] ?? 0);
 </head>
 <body class="job-portal-page">
 
-<?php require_once '../components/main-nav.php'; ?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav('main'); ?>
 
 <!-- Preview banner -->
 <?php if ($preview_mode): ?>
@@ -167,7 +173,7 @@ $apps_count = (int)($job['applications_count'] ?? 0);
 <nav class="jp-breadcrumb" aria-label="Breadcrumb">
   <div class="container">
     <ol class="breadcrumb mb-0">
-      <li class="breadcrumb-item"><a href="../index.php"><i class="fas fa-home"></i> Home</a></li>
+      <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i> Home</a></li>
       <li class="breadcrumb-item"><a href="index.php">Jobs in OMR</a></li>
       <li class="breadcrumb-item">
         <a href="index.php?category=<?= urlencode($job['category'] ?? '') ?>">
@@ -645,7 +651,7 @@ $apps_count = (int)($job['applications_count'] ?? 0);
   </div>
 </div>
 
-<?php require_once '../components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/job-analytics-events.js"></script>

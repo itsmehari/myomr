@@ -56,11 +56,14 @@ if ($employerId > 0) {
     }
 }
 
-// Get filter parameters
+// Get filter parameters (whitelist for security)
 $selectedJobId = isset($_GET['job_id']) ? (int)$_GET['job_id'] : 0;
-$statusFilter = isset($_GET['status']) ? $conn->real_escape_string($_GET['status']) : '';
-$statusCategory = isset($_GET['category']) ? $conn->real_escape_string($_GET['category']) : 'all';
-$sortBy = isset($_GET['sort']) ? $conn->real_escape_string($_GET['sort']) : 'recent';
+$allowed_statuses = ['pending', 'shortlisted', 'rejected', 'hired', 'withdrawn', 'screening', 'interview'];
+$statusFilter = isset($_GET['status']) && in_array($_GET['status'], $allowed_statuses, true) ? $_GET['status'] : '';
+$allowed_categories = ['all', 'shortlisted', 'matching'];
+$statusCategory = isset($_GET['category']) && in_array($_GET['category'], $allowed_categories, true) ? $_GET['category'] : 'all';
+$allowed_sorts = ['recent', 'vip', 'experience', 'salary'];
+$sortBy = isset($_GET['sort']) && in_array($_GET['sort'], $allowed_sorts, true) ? $_GET['sort'] : 'recent';
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $perPage = isset($_GET['per_page']) ? (int)$_GET['per_page'] : 20;
 
@@ -101,10 +104,14 @@ if ($employerId > 0) {
         $totalApplications = (int)$countRow['total'];
     }
     
-    // Build ORDER BY clause
+    // Build ORDER BY clause (sortBy whitelisted above)
     $orderBy = "a.applied_at DESC";
     if ($sortBy === 'vip') {
         $orderBy = "a.is_vip DESC, a.applied_at DESC";
+    } elseif ($sortBy === 'experience') {
+        $orderBy = "a.experience_years DESC, a.applied_at DESC";
+    } elseif ($sortBy === 'salary') {
+        $orderBy = "a.applicant_current_salary DESC, a.applied_at DESC";
     }
     
     // Calculate offset for pagination

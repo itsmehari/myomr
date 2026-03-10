@@ -1,8 +1,13 @@
-﻿<?php
+<?php
 /**
  * Landing Page Template
  * Reusable template for SEO-optimized landing pages
+ * Uses ROOT_PATH when defined; otherwise resolves from __DIR__.
  */
+
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/../..') ?: dirname(__DIR__, 2));
+}
 
 // If template is included directly, set defaults
 if (!isset($page_title)) {
@@ -61,15 +66,15 @@ if (isset($location)) {
     <meta name="twitter:description" content="<?php echo htmlspecialchars($page_description); ?>">
     <meta name="twitter:image" content="https://myomr.in/My-OMR-Logo.png">
     
-    <?php include __DIR__ . '/../../../components/analytics.php'; ?>
+    <?php include ROOT_PATH . '/components/analytics.php'; ?>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/core.css">
-    <link rel="stylesheet" href="../assets/job-listings-omr.css">
-    <link rel="stylesheet" href="../assets/omr-jobs-unified-design.css">
+    <link rel="stylesheet" href="/omr-local-job-listings/assets/job-listings-omr.css">
+    <link rel="stylesheet" href="/omr-local-job-listings/assets/omr-jobs-unified-design.css">
     <link rel="stylesheet" href="/assets/css/footer.css">
     
     <style>
@@ -171,7 +176,13 @@ if (isset($location)) {
 </head>
 <body class="modern-page">
 
-<?php require_once __DIR__ . '/../../../components/main-nav.php'; ?>
+<?php
+if (!function_exists('omr_nav')) {
+    require_once ROOT_PATH . '/components/component-includes.php';
+}
+require_once ROOT_PATH . '/components/skip-link.php';
+omr_nav('main');
+?>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <main id="main-content">
@@ -351,8 +362,8 @@ if (isset($location)) {
     }
     
     // Include related pages component
-    if (file_exists(__DIR__ . '/../../../components/job-related-landing-pages.php')) {
-        include __DIR__ . '/../../../components/job-related-landing-pages.php';
+    if (file_exists(ROOT_PATH . '/components/job-related-landing-pages.php')) {
+        include ROOT_PATH . '/components/job-related-landing-pages.php';
     }
     ?>
 
@@ -378,13 +389,13 @@ if (isset($location)) {
 
 </main>
 
-<?php require_once __DIR__ . '/../../../components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Landing Page Analytics -->
 <script src="/omr-local-job-listings/assets/landing-page-analytics.js"></script>
 
-<?php include __DIR__ . '/../../../components/sdg-badge.php'; ?>
+<?php include ROOT_PATH . '/components/sdg-badge.php'; ?>
 
 </body>
 </html>

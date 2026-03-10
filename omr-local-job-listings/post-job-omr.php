@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Job Portal - Post Job Form
  * Employers can post job vacancies through this form
@@ -14,6 +14,11 @@ require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/includes/employer-auth.php';
 requireEmployerAuth();
 
+// Bootstrap
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/component-includes.php';
+
 // Include helper functions
 require_once __DIR__ . '/includes/job-functions-omr.php';
 
@@ -23,7 +28,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Load DB connection and fetch employer profile + categories
-require_once __DIR__ . '/../core/omr-connect.php';
+require_once ROOT_PATH . '/core/omr-connect.php';
 global $conn;
 
 // Pre-fill form with employer's saved profile data
@@ -76,7 +81,7 @@ if (empty($_SESSION['csrf_token'])) {
     <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     
     <!-- Google Analytics -->
-    <?php $ga_user_id = (int)($_SESSION['employer_id'] ?? 0); $ga_user_properties = ['user_type' => 'employer']; include '../components/analytics.php'; ?>
+    <?php $ga_user_id = (int)($_SESSION['employer_id'] ?? 0); $ga_user_properties = ['user_type' => 'employer']; include ROOT_PATH . '/components/analytics.php'; ?>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -164,7 +169,8 @@ if (empty($_SESSION['csrf_token'])) {
 <body class="post-job-page">
 
 <!-- Navigation -->
-<?php require_once '../components/main-nav.php'; ?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav('main'); ?>
 
 <!-- Skip Link -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -453,7 +459,7 @@ if (empty($_SESSION['csrf_token'])) {
                         <div class="form-check-modern d-flex align-items-start">
                             <input class="form-check-input-modern" type="checkbox" id="terms" name="terms" required>
                             <label class="form-check-label-modern" for="terms">
-                                I agree to the <a href="../terms-and-conditions-my-omr.php" target="_blank" class="text-primary">Terms and Conditions</a> and confirm that this job posting is accurate
+                                I agree to the <a href="/terms-and-conditions-my-omr.php" target="_blank" class="text-primary">Terms and Conditions</a> and confirm that this job posting is accurate
                             </label>
                             <div class="invalid-feedback-modern"><i class="fas fa-exclamation-circle"></i> You must agree to the terms to submit.</div>
                         </div>
@@ -486,7 +492,7 @@ if (empty($_SESSION['csrf_token'])) {
 </main>
 
 <!-- Footer -->
-<?php require_once '../components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

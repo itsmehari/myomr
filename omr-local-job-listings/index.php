@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Job Portal — Main Listings Page (v3.0 2026 Overhaul)
  *
@@ -31,24 +31,34 @@ if (!empty($_GET['walk_in'])) {
     $filters['job_type'] = 'walk-in';
 }
 
-/* ── Pagination ─────────────────────────────────────────────── */
+/* ── Pagination & data (with graceful fallback on failure) ───── */
 $per_page     = 12;
 $current_page = max(1, (int)($_GET['page'] ?? 1));
 $offset       = ($current_page - 1) * $per_page;
 
-$total_jobs  = getJobCount($filters);
-$jobs        = getJobListings($filters, $per_page, $offset);
-$total_pages = (int)ceil($total_jobs / $per_page);
+$total_jobs   = 0;
+$jobs         = [];
+$total_pages  = 1;
+$featured_jobs = [];
+$categories   = [];
+$count_wfh    = 0;
+$count_fresher = 0;
+$count_pt     = 0;
 
-// Featured jobs (separate spotlight query — top 3 featured)
-$featured_jobs = getJobListings(['is_featured' => 1] + $filters, 3, 0);
-
-$categories = getJobCategories();
-
-/* ── Quick counts for pills ─────────────────────────────────── */
-$count_wfh     = getJobCount(['is_remote' => 1]);
-$count_fresher = getJobCount(['experience_level' => 'Fresher']);
-$count_pt      = getJobCount(['job_type' => 'part-time']);
+try {
+    $total_jobs   = getJobCount($filters);
+    $jobs         = getJobListings($filters, $per_page, $offset);
+    $total_pages  = max(1, (int)ceil($total_jobs / $per_page));
+    $featured_jobs = getJobListings(['is_featured' => 1] + $filters, 3, 0);
+    $categories   = getJobCategories();
+    $count_wfh    = getJobCount(['is_remote' => 1]);
+    $count_fresher = getJobCount(['experience_level' => 'Fresher']);
+    $count_pt     = getJobCount(['job_type' => 'part-time']);
+} catch (Throwable $e) {
+    if (defined('DEVELOPMENT_MODE') && DEVELOPMENT_MODE) {
+        error_log('omr-local-job-listings/index.php data fetch: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+    }
+}
 
 /* ── SEO ─────────────────────────────────────────────────────── */
 $page_title = "Jobs in OMR Chennai – Find Local Opportunities | MyOMR";
@@ -135,6 +145,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
 </head>
 <body class="job-portal-page">
 
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
 <?php omr_nav('main'); ?>
 
 <!-- ── HERO ───────────────────────────────────────────────────── -->

@@ -141,8 +141,14 @@ function getJobListings(array $filters = [], int $limit = 20, int $offset = 0): 
     }
 
     $stmt->bind_param($types, ...$params);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    if (!$stmt->execute()) {
+        if (defined('DEVELOPMENT_MODE') && DEVELOPMENT_MODE) {
+            error_log('getJobListings(): execute() failed: ' . $stmt->error);
+        }
+        return [];
+    }
+    $result = $stmt->get_result();
+    return ($result && method_exists($result, 'fetch_all')) ? $result->fetch_all(MYSQLI_ASSOC) : [];
 }
 
 /**
@@ -176,8 +182,11 @@ function getJobCount(array $filters = []): int
     if (!empty($params)) {
         $stmt->bind_param($types, ...$params);
     }
-    $stmt->execute();
-    $row = $stmt->get_result()->fetch_assoc();
+    if (!$stmt->execute()) {
+        return 0;
+    }
+    $result = $stmt->get_result();
+    $row    = $result ? $result->fetch_assoc() : null;
     return (int) ($row['total'] ?? 0);
 }
 
