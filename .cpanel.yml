@@ -3,4 +3,8 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home3/metap8ok/myomr.in/
     - /bin/mkdir -p $DEPLOYPATH
-    - /bin/rsync -av --delete --exclude ".git" --exclude "uploads" --exclude "sessions" --exclude ".env" --exclude "logs" --exclude "log" --exclude "error_log" ./ $DEPLOYPATH
+    - /bin/cp -R admin assets cgi-bin components core discover-myomr info listings local-news omr-coworking-spaces omr-hostels-pgs omr-listings omr-local-events omr-local-job-listings pentahive weblog images social-media-icons intlTelInput events election-blo-details free-ads-chennai happy-streets-omr-photo-gallery marketplace md-archives omr-election-blo small-businesses $DEPLOYPATH
+    - /bin/cp index.php .htaccess robots.txt 404.php 500.php $DEPLOYPATH
+    - /bin/cp digital-marketing-landing.php fresher-jobs-omr-chennai.php healthcare-jobs-omr-chennai.php it-jobs-omr-chennai.php jobs-in-omr-chennai.php generate-sitemap-index.php security-audit-thirdparty.php index-minimal-backup.php $DEPLOYPATH
+    - /bin/cp jobs-in-kelambakkam-omr.php jobs-in-navalur-omr.php jobs-in-perungudi-omr.php jobs-in-sholinganallur-omr.php jobs-in-thoraipakkam-omr.php teaching-jobs-omr-chennai.php $DEPLOYPATH
+    - /bin/cp My-OMR-Logo.png myomr-banner-image.png $DEPLOYPATH
