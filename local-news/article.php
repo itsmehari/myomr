@@ -32,11 +32,9 @@ $article = $result->fetch_assoc();
 $stmt->close();
 // Don't close connection here - we'll need it for related articles
 
-// If no article is found, show a 404 error
+// If no article is found, serve branded 404
 if (!$article) {
-    http_response_code(404);
-    echo "<h1>404 Not Found</h1>";
-    echo "<p>The article you were looking for could not be found.</p>";
+    require_once ROOT_PATH . '/core/serve-404.php';
     exit;
 }
 ?>
@@ -84,6 +82,8 @@ if (!$article) {
     );
     // LPG / crisis-type articles: add FAQPage schema for rich results (English slug only)
     $is_lpg_article = (strpos($article['slug'], 'lpg-shortage') !== false && substr($article['slug'], -6) !== '-tamil');
+    // Fuel panic / petrol crisis articles: FAQPage schema (English slug only)
+    $is_fuel_panic_article = (strpos($article['slug'], 'fuel-panic') !== false && substr($article['slug'], -6) !== '-tamil');
     ?>
     
     <?php 
@@ -129,6 +129,50 @@ if (!$article) {
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Hotel associations representing thousands of eateries in Chennai, Bengaluru, Mumbai and other cities are affected. The Chennai Hotels Association represents 10,000+ hotels and eateries. Street food vendors, IT park cafeterias, and corporate catering kitchens on OMR are also at risk. Up to 50% of restaurants may temporarily shut kitchens if the supply disruption continues."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
+    
+    // FAQPage schema for fuel panic / petrol bunk article (English) - supports FAQ rich results
+    if ($is_fuel_panic_article): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is there a real petrol shortage in Chennai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Fuel dealers have clarified that there is no actual shortage of petrol or diesel in Tamil Nadu. Supply chains are functioning normally. The rush at petrol bunks was triggered by rumours on social media about possible disruptions due to geopolitical tensions in West Asia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where were long queues reported in Chennai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Long queues were reported in Velachery, Perungudi, OMR Road (IT corridor), and the SRP Tools junction area. Residents along the IT corridor reported unusually long waits during early morning hours as commuters stopped to refuel before heading to offices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did panic buying happen at petrol bunks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Speculation on social media about fuel supply disruptions due to West Asia tensions triggered the rush. When people see others stocking up, they tend to follow the same behaviour, leading to sudden spikes in demand. Experts say such situations are driven more by psychological behaviour than real supply shortages."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to store petrol in containers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Officials have warned that filling fuel in plastic cans or containers is dangerous. Unnecessary hoarding can cause logistical pressure even when overall fuel availability is stable. Fuel stations maintain multiple days of inventory and receive regular supplies from depots."
           }
         }
       ]
@@ -596,6 +640,17 @@ if (!$article) {
         <!-- MyOMR Community Awareness Section (All Articles) -->
         <div class="community-awareness-section" style="background: linear-gradient(135deg, #14532d 0%, #22c55e 100%); padding: 3rem 2rem; border-radius: 12px; margin: 3rem 0; color: white; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
             <div class="container">
+                <!-- WhatsApp Group CTA -->
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <a href="https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi" target="_blank" rel="noopener noreferrer" 
+                       style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: #25d366; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(37,211,102,0.4); transition: transform 0.2s, box-shadow 0.2s;"
+                       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(37,211,102,0.5)';"
+                       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(37,211,102,0.4)';"
+                       aria-label="Join our WhatsApp group for OMR local news">
+                        <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                        Join our WhatsApp Group for more local news related to OMR and vicinity
+                    </a>
+                </div>
                 <div class="row align-items-center">
                     <div class="col-lg-7 mb-4 mb-lg-0">
                         <h2 style="color: white; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700;">

@@ -29,6 +29,7 @@
   <h3><i class="fas fa-briefcase me-1"></i> Job Type</h3>
   <?php
   $types = [
+    ''           => 'All types',
     'full-time'  => 'Full-Time',
     'part-time'  => 'Part-Time',
     'contract'   => 'Contract',
@@ -38,11 +39,11 @@
   foreach ($types as $val => $label): ?>
   <div class="form-check">
     <input class="form-check-input" type="radio" name="job_type"
-           id="jt_<?= $val ?>"
-           value="<?= $val ?>"
+           id="jt_<?= $val ?: 'all' ?>"
+           value="<?= htmlspecialchars($val) ?>"
            form="main-search-form"
            <?= ($filters['job_type'] ?? '') === $val ? 'checked' : '' ?>>
-    <label class="form-check-label" for="jt_<?= $val ?>"><?= $label ?></label>
+    <label class="form-check-label" for="jt_<?= $val ?: 'all' ?>"><?= htmlspecialchars($label) ?></label>
   </div>
   <?php endforeach; ?>
 </div>

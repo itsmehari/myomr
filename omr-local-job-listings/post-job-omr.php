@@ -15,8 +15,10 @@ require_once __DIR__ . '/includes/employer-auth.php';
 requireEmployerAuth();
 
 // Bootstrap
-$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
-require_once $root . '/core/include-path.php';
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
 require_once ROOT_PATH . '/components/component-includes.php';
 
 // Include helper functions
@@ -370,10 +372,11 @@ if (empty($_SESSION['csrf_token'])) {
                                 <label for="job_type" class="form-label-modern required-field">Job Type</label>
                                 <select class="form-select-modern" id="job_type" name="job_type" required>
                                     <option value="">Select Type</option>
-                                    <option value="Full-time">Full-time</option>
-                                    <option value="Part-time">Part-time</option>
-                                    <option value="Contract">Contract</option>
-                                    <option value="Internship">Internship</option>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="internship">Internship</option>
+                                    <option value="walk-in">Walk-in</option>
                                 </select>
                                 <div class="invalid-feedback-modern"><i class="fas fa-exclamation-circle"></i> Please select a job type.</div>
                             </div>

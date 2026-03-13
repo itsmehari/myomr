@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Coworking Spaces Portal - Space Detail Page
  * Individual space listing view with inquiry form
@@ -33,9 +33,8 @@ if (!isset($conn) || !$conn instanceof mysqli || $conn->connect_error) {
 $space_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($space_id <= 0) {
-    header("HTTP/1.0 404 Not Found");
-    echo "<h1>404 - Space Not Found</h1>";
-    echo "<p>Invalid space ID.</p>";
+    if (!defined('ROOT_PATH')) define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+    require_once ROOT_PATH . '/core/serve-404.php';
     exit;
 }
 
@@ -77,9 +76,8 @@ if ($directResult && $directResult->num_rows > 0) {
 }
 
 if (!$space) {
-    header("HTTP/1.0 404 Not Found");
-    echo "<h1>404 - Space Not Found</h1>";
-    echo "<p>The workspace you're looking for doesn't exist or has been removed.</p>";
+    if (!defined('ROOT_PATH')) define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+    require_once ROOT_PATH . '/core/serve-404.php';
     exit;
 }
 

@@ -3,6 +3,7 @@
  * Generate Sitemap for Job Portal
  */
 require_once __DIR__ . '/../core/omr-connect.php';
+require_once __DIR__ . '/includes/job-functions-omr.php';
 
 // Get all approved jobs
 $result = $conn->query("SELECT id, title, updated_at FROM job_postings WHERE status = 'approved' ORDER BY updated_at DESC");
@@ -53,7 +54,7 @@ foreach ($pages as $page) {
 // Add job detail pages
 foreach ($jobs as $job) {
     $xml .= '  <url>' . "\n";
-    $xml .= '    <loc>' . htmlspecialchars($base_url . '/omr-local-job-listings/job-detail-omr.php?id=' . $job['id']) . '</loc>' . "\n";
+    $xml .= '    <loc>' . htmlspecialchars(getJobDetailUrl((int)$job['id'], $job['title'] ?? null)) . '</loc>' . "\n";
     $xml .= '    <lastmod>' . date('Y-m-d', strtotime($job['updated_at'])) . '</lastmod>' . "\n";
     $xml .= '    <changefreq>weekly</changefreq>' . "\n";
     $xml .= '    <priority>0.7</priority>' . "\n";
@@ -62,9 +63,16 @@ foreach ($jobs as $job) {
 
 $xml .= '</urlset>';
 
-// Write to file
-file_put_contents(__DIR__ . '/sitemap.xml', $xml);
+// CLI (cron): write to file and echo success message
+if (php_sapi_name() === 'cli') {
+    file_put_contents(__DIR__ . '/sitemap.xml', $xml);
+    echo "Sitemap generated successfully! (" . count($jobs) . " jobs)\n";
+    echo "Location: " . $base_url . "/omr-local-job-listings/sitemap.xml\n";
+    exit;
+}
 
-echo "Sitemap generated successfully! (" . count($jobs) . " jobs)\n";
-echo "Location: " . $base_url . "sitemap.xml\n";
+// Web: output XML for search engines
+header('Content-Type: application/xml; charset=UTF-8');
+header('X-Robots-Tag: noindex');
+echo $xml;
 

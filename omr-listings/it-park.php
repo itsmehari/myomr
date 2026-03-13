@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -26,7 +26,8 @@ if ($id > 0) {
 if (!$park) { $park = $id ? omr_it_parks_get_by_id($id) : null; }
 
 if (!$park) {
-  http_response_code(404);
+  require_once __DIR__ . '/../core/serve-404.php';
+  exit;
 }
 ?>
 <?php

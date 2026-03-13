@@ -1,6 +1,7 @@
 # 🔍 Error Debug Guide - MyOMR Job Portal
 
-**Date:** October 29, 2025
+**Date:** October 29, 2025  
+**Archived:** March 2026
 
 ---
 
@@ -49,31 +50,13 @@ All job portal files now have **error reporting enabled** for development. Error
 
 ## 🔧 Diagnostic Steps
 
-### **Step 1: Run Test File**
+### **Step 1: Check Error Log**
 
-Visit: `https://myomr.in/omr-local-job-listings/test-connection.php`
-
-This will:
-
-- ✅ Check if database connection file exists
-- ✅ Test database connection
-- ✅ Verify all tables exist
-- ✅ Test job_categories query
-- ✅ Test getJobCategories() function
-
-**What to look for:**
-
-- Any ❌ (red X) marks indicate issues
-- Read the error messages carefully
-- Check which test fails first
+Error log: `/weblog/job-portal-errors.log` (or server error log)
 
 ### **Step 2: Check Error Display**
 
-With error reporting enabled, errors should appear:
-
-- At the top of the page (red error boxes)
-- In browser console (JavaScript errors)
-- In error log: `/weblog/job-portal-errors.log`
+With error reporting enabled, errors may appear in the browser during development.
 
 ### **Step 3: Common Fixes**
 
@@ -95,48 +78,6 @@ SHOW TABLES LIKE 'job_%';
 SHOW TABLES LIKE 'employer%';
 ```
 
-**If Function Error:**
-
-- Check if `includes/job-functions-omr.php` exists
-- Verify path: `__DIR__ . '/includes/job-functions-omr.php'`
-- Check file permissions (644 for files, 755 for folders)
-
 ---
 
-## 📋 Error Report Format
-
-When errors appear, they will show:
-
-```
-PHP Error:
-Type: [Error Type]
-Message: [Error Message]
-File: [File Path]
-Line: [Line Number]
-```
-
-**Save this information** to help fix the issue.
-
----
-
-## 🔍 Check These Files First
-
-1. ✅ `core/omr-connect.php` - Database connection
-2. ✅ `includes/job-functions-omr.php` - Helper functions
-3. ✅ `includes/error-reporting.php` - Error display
-4. ✅ Database tables exist
-5. ✅ File paths are correct
-
----
-
-## 📞 Need Help?
-
-1. Run `test-connection.php`
-2. Copy error message (if any)
-3. Check error log file
-4. Verify file paths
-5. Check database connection
-
----
-
-**Last Updated:** October 29, 2025
+**Note:** test-connection.php was removed in March 2026 cleanse. Use server error logs and docs/inbox/JOB-PORTAL-OVERHAUL-PLAN.md for diagnostics.

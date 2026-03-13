@@ -7,18 +7,17 @@
  * @version 1.0.0
  */
 
-// Enable error reporting for development
 require_once __DIR__ . '/includes/error-reporting.php';
-
-// Require employer authentication
 require_once __DIR__ . '/includes/employer-auth.php';
 requireEmployerAuth();
-
-// Include helper functions
 require_once __DIR__ . '/includes/job-functions-omr.php';
 
-// Load database connection directly (like test-jobs.php)
-require_once __DIR__ . '/../core/omr-connect.php';
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+require_once ROOT_PATH . '/core/omr-connect.php';
 global $conn;
 
 // Verify connection
@@ -162,7 +161,7 @@ if (empty($_SESSION['csrf_token'])) {
 <body class="post-job-page">
 
 <!-- Navigation -->
-<?php require_once '../components/main-nav.php'; ?>
+<?php omr_nav('main'); ?>
 
 <!-- Main Content -->
 <main id="main-content">
@@ -286,10 +285,13 @@ if (empty($_SESSION['csrf_token'])) {
                                 <label for="job_type" class="form-label-modern required-field">Job Type</label>
                                 <select class="form-select-modern" id="job_type" name="job_type" required>
                                     <option value="">Select Type</option>
-                                    <option value="Full-time" <?php echo ($job['job_type'] === 'Full-time') ? 'selected' : ''; ?>>Full-time</option>
-                                    <option value="Part-time" <?php echo ($job['job_type'] === 'Part-time') ? 'selected' : ''; ?>>Part-time</option>
-                                    <option value="Contract" <?php echo ($job['job_type'] === 'Contract') ? 'selected' : ''; ?>>Contract</option>
-                                    <option value="Internship" <?php echo ($job['job_type'] === 'Internship') ? 'selected' : ''; ?>>Internship</option>
+                                    <?php
+                                    $jt = isset($job['job_type']) ? normalizeJobType($job['job_type']) : '';
+                                    $job_type_options = ['full-time' => 'Full-time', 'part-time' => 'Part-time', 'contract' => 'Contract', 'internship' => 'Internship', 'walk-in' => 'Walk-in'];
+                                    foreach ($job_type_options as $val => $label):
+                                    ?><option value="<?php echo htmlspecialchars($val); ?>" <?php echo ($jt === $val) ? 'selected' : ''; ?>><?php echo htmlspecialchars($label); ?></option><?php
+                                    endforeach;
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -352,7 +354,7 @@ if (empty($_SESSION['csrf_token'])) {
                             <i class="fas fa-times"></i>
                             <span>Cancel</span>
                         </a>
-                        <a href="job-detail-omr.php?id=<?php echo $job_id; ?>" class="btn-modern btn-modern-secondary" target="_blank">
+                        <a href="<?php echo getJobDetailPath($job_id, $job['title'] ?? null); ?>" class="btn-modern btn-modern-secondary" target="_blank">
                             <i class="fas fa-eye"></i>
                             <span>Preview</span>
                         </a>
@@ -367,7 +369,7 @@ if (empty($_SESSION['csrf_token'])) {
 </main>
 
 <!-- Footer -->
-<?php require_once '../components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.js"></script>

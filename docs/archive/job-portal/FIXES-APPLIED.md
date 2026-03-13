@@ -54,12 +54,6 @@ Changed all `require_once` to use `__DIR__`:
 - ✅ Fallback to empty array if function fails
 - ✅ Page still loads even if categories fail
 
-**In `core/omr-connect.php`:**
-
-- ✅ Better error messages
-- ✅ Shows helpful debugging info in development mode
-- ✅ Sets UTF-8 charset
-
 ### **5. Fixed Session Handling**
 
 - ✅ Check `session_status()` before starting sessions
@@ -87,7 +81,7 @@ Run this file to diagnose issues:
 - Tests functions
 - Shows detailed diagnostic info
 
-**Access:** `https://myomr.in/omr-local-job-listings/test-connection.php`
+**Note:** Archived 2026-03 – test files removed from production.
 
 ---
 
@@ -106,89 +100,8 @@ Run this file to diagnose issues:
 11. ✅ `my-posted-jobs-omr.php` (Error reporting)
 12. ✅ `job-posted-success-omr.php` (Error reporting)
 13. ✅ `application-submitted-omr.php` (Error reporting)
-14. ✅ `test-connection.php` (NEW - Diagnostic tool)
+14. ✅ `test-connection.php` (NEW - Diagnostic tool) — removed in cleanse
 15. ✅ `ERROR-DEBUG-GUIDE.md` (NEW - Documentation)
-
----
-
-## 🎯 Next Steps
-
-1. **Upload Updated Files**
-
-   - Upload all modified files to server
-   - Maintain folder structure
-
-2. **Test Error Display**
-
-   - Visit: `https://myomr.in/omr-local-job-listings/post-job-omr.php`
-   - Errors should now display in browser
-   - Read error message carefully
-
-3. **Run Diagnostic**
-
-   - Visit: `https://myomr.in/omr-local-job-listings/test-connection.php`
-   - Review all test results
-   - Fix any issues identified
-
-4. **Check Common Issues**
-   - Database connection working?
-   - Tables exist?
-   - File paths correct?
-   - PHP version compatible?
-
----
-
-## 🐛 If Error Persists
-
-**Error messages will now show:**
-
-- Exact file and line number
-- Error type and message
-- Stack trace (for exceptions)
-
-**Check:**
-
-1. Error message in browser (now visible)
-2. Error log: `/weblog/job-portal-errors.log`
-3. Test connection results
-4. Database credentials
-5. File permissions
-
----
-
-**All error reporting is now enabled. Visit the page again and check the error message!**
-
----
-
----
-
-## 🔧 Latest Fixes (October 29, 2025 - Follow-up)
-
-### **7. Enhanced Error Handling in `getJobCategories()`**
-
-- ✅ Added try-catch blocks for Exception and Error
-- ✅ Better connection validation checks
-- ✅ Improved error logging
-- ✅ Graceful fallback to empty array
-
-### **8. Enhanced Error Catching in `post-job-omr.php`**
-
-- ✅ Added catch block for `Error` type (in addition to `Exception`)
-- ✅ Error messages display directly in browser during development
-- ✅ Better user feedback for debugging
-
-### **9. Output Buffering in Error Reporting**
-
-- ✅ Added `ob_start()` to `error-reporting.php`
-- ✅ Ensures error messages can be displayed even if headers are sent
-- ✅ Better error visibility
-
-### **10. Fixed Syntax Error in `seo-helper.php`**
-
-- ✅ Fixed corrupted `generateJobSEOMeta()` function
-- ✅ Removed mixed HTML/PHP code
-- ✅ Fixed typo in `generateBreadcrumbSchema()` ("-CI" removed)
-- ✅ All syntax errors resolved
 
 ---
 

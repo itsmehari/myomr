@@ -7,6 +7,7 @@ requireAdmin();
 
 require_once __DIR__ . '/../../core/omr-connect.php';
 require_once __DIR__ . '/../../core/email.php';
+require_once __DIR__ . '/../includes/job-functions-omr.php';
 
 // CSRF token
 if (empty($_SESSION['admin_csrf'])) {
@@ -186,7 +187,7 @@ $jobs = $result->fetch_all(MYSQLI_ASSOC);
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
                                     </form>
                                 <?php endif; ?>
-                                <a href="../job-detail-omr.php?id=<?php echo (int)$job['id']; ?>" target="_blank" class="btn btn-outline-secondary"><i class="fas fa-eye"></i></a>
+                                <a href="../<?php echo getJobDetailPath((int)$job['id'], $job['title'] ?? null); ?>" target="_blank" class="btn btn-outline-secondary"><i class="fas fa-eye"></i></a>
                                 <a href="view-applications-omr.php?id=<?php echo (int)$job['id']; ?>" class="btn btn-outline-primary"><i class="fas fa-inbox"></i></a>
                             </div>
                         </td>

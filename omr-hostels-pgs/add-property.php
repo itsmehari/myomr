@@ -1,39 +1,37 @@
 <?php
 /**
- * Add New Property Form
- * Allows property owners to add new listings
+ * Add New Property Form – uses module bootstrap and root layout.
  */
-
-require_once __DIR__ . '/includes/error-reporting.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/includes/owner-auth.php';
 requireOwnerAuth();
 
-// If redirected here, auto-login
 if (!isOwnerLoggedIn() && !empty($_GET['email'])) {
     ownerLogin(sanitizeInput($_GET['email']));
 }
 
-// SEO Meta
-$page_title = "Add Your Property - MyOMR Hostels & PGs";
-$page_description = "List your hostel or PG on MyOMR. Reach thousands of students and professionals in OMR Chennai.";
-$canonical_url = "https://myomr.in/omr-hostels-pgs/add-property.php";
+$page_nav = 'main';
+$page_title = 'Add Your Property - MyOMR Hostels & PGs';
+$page_description = 'List your hostel or PG on MyOMR. Reach thousands of students and professionals in OMR Chennai.';
+$canonical_url = 'https://myomr.in/omr-hostels-pgs/add-property.php';
+$og_type = 'website';
+$breadcrumbs = [
+    ['https://myomr.in/', 'Home'],
+    ['https://myomr.in/omr-hostels-pgs/', 'Hostels & PGs in OMR'],
+    [$canonical_url, 'Add Property'],
+];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $page_title; ?></title>
-    <meta name="description" content="<?php echo $page_description; ?>">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/hostels-pgs.css">
-    <?php include '../components/analytics.php'; ?>
+    <?php require_once ROOT_PATH . '/components/meta.php'; ?>
+    <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
+    <link rel="stylesheet" href="/omr-hostels-pgs/assets/hostels-pgs.css">
 </head>
 <body class="modern-page">
 
-<?php require_once __DIR__ . '/../components/main-nav.php'; ?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav(); ?>
 
 <div class="hero-modern">
     <div class="container">
@@ -341,7 +339,9 @@ $canonical_url = "https://myomr.in/omr-hostels-pgs/add-property.php";
   });
 })();
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php require_once ROOT_PATH . '/components/js-includes.php'; ?>
+<?php include ROOT_PATH . '/components/sdg-badge.php'; ?>
 </body>
 </html>
 

@@ -7,10 +7,15 @@
  * @version 1.0.0
  */
 
-// Enable error reporting for development
 require_once __DIR__ . '/includes/error-reporting.php';
 
-require_once __DIR__ . '/../core/omr-connect.php';
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+require_once ROOT_PATH . '/core/omr-connect.php';
+require_once __DIR__ . '/includes/job-functions-omr.php';
 
 $job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 0;
 $applicant_name = isset($_GET['applicant']) ? htmlspecialchars($_GET['applicant']) : '';
@@ -33,13 +38,14 @@ if ($job_id > 0) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/job-listings-omr.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     
     <!-- Google Analytics -->
     <?php include '../components/analytics.php'; ?>
 </head>
 <body class="modern-page">
 
-<?php require_once '../components/main-nav.php'; ?>
+<?php omr_nav('main'); ?>
 
 <!-- Hero Section -->
 <div class="hero-modern">
@@ -121,12 +127,14 @@ if ($job_id > 0) {
                         </div>
                         <div>
                             <h5 class="mb-3">Pro Tips</h5>
-                    <ul class="mb-0">
-                        <li>Keep your phone and email accessible for employer contact</li>
-                        <li>Prepare for potential interviews</li>
-                        <li>Continue applying to other jobs to increase your opportunities</li>
-                        <li>Stay professional in all communications</li>
-                    </ul>
+                            <ul class="mb-0">
+                                <li>Keep your phone and email accessible for employer contact</li>
+                                <li>Prepare for potential interviews</li>
+                                <li>Continue applying to other jobs to increase your opportunities</li>
+                                <li>Stay professional in all communications</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Action Buttons -->
@@ -136,7 +144,7 @@ if ($job_id > 0) {
                         <span>Browse More Jobs</span>
                     </a>
                     <?php if ($job_id > 0): ?>
-                    <a href="job-detail-omr.php?id=<?php echo $job_id; ?>" class="btn-modern btn-modern-secondary">
+                    <a href="<?php echo getJobDetailPath($job_id, $job['title'] ?? null); ?>" class="btn-modern btn-modern-secondary">
                         <i class="fas fa-arrow-left"></i>
                         <span>Back to Job</span>
                     </a>
@@ -148,7 +156,7 @@ if ($job_id > 0) {
     </div>
 </main>
 
-<?php require_once '../components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

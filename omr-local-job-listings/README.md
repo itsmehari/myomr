@@ -16,7 +16,7 @@ Use it to understand how the public job board, employer tools, and admin operati
 | Manage Jobs | Employers | `employer-login-omr.php`, `my-posted-jobs-omr.php`, `edit-job-omr.php`, `update-application-status-omr.php` | Logged-in employers manage listings, edit postings, and review candidate applications. Sessions handled via `includes/employer-auth.php`. |
 | Admin Ops | Internal team | `admin/manage-jobs-omr.php`, `admin/verify-employers-omr.php`, `admin/view-all-applications-omr.php` | Admins approve jobs, verify employers, and escalate reports. Views gated by `$_SESSION['admin_logged_in']`. |
 | SEO & Outreach | Marketing / SEO | `generate-sitemap.php`, `assets/landing-page-analytics.js`, `includes/seo-helper.php` | Generates `sitemap.xml`, injects JSON-LD schemas, tracks conversions. |
-| Maintenance & QA | Dev / QA | `DEPLOYMENT-CHECKLIST.md`, `HUMAN-TESTING-CHECKLIST.md`, `ERROR-DEBUG-GUIDE.md`, `READY-FOR-DEPLOYMENT.md` | Checklists and guides for regression testing, launch prep, and debugging. |
+| Maintenance & QA | Dev / QA | `DEPLOYMENT-CHECKLIST.md` | Deployment checklist. See `docs/inbox/JOB-PORTAL-OVERHAUL-PLAN.md` and `docs/archive/job-portal/` for historical docs. |
 
 ---
 
@@ -44,12 +44,6 @@ omr-local-job-listings/
 │   ├── landing-page-template.php
 │   └── seo-helper.php         # Meta tags, canonical URLs, schema builders
 ├── DEPLOYMENT-CHECKLIST.md    # Step-by-step deployment SOP
-├── DESIGN-UPDATE-SUMMARY.md   # UI/UX changes with dates
-├── ERROR-DEBUG-GUIDE.md       # Known issues + fixes
-├── FIXES-APPLIED.md           # Patch history (hotfix log)
-├── HUMAN-TESTING-CHECKLIST.md # Manual QA flow
-├── QUICK-START-GUIDE.md       # Onboarding notes for new devs
-├── READY-FOR-DEPLOYMENT.md    # Final Go/No-Go criteria
 ├── generate-sitemap.php       # Builds job sitemap with clean URLs
 ├── robots.txt                 # Disallow rules for crawler hygiene
 ├── index.php                  # Jobs landing page (searchable list)
@@ -69,9 +63,7 @@ omr-local-job-listings/
 └── job-posted-success-omr.php # Thank-you / follow-up CTAs
 ```
 
-**Test & Diagnostics Utilities**
-- `test-connection.php`, `test-jobs.php`, `test-categories.php`, `debug-categories-direct.php` – used during integration to inspect DB state.
-- `FIX-CATEGORIES.sql` – corrective script for taxonomy mismatches.
+**Archived:** Test/debug utilities and old docs moved to `docs/archive/job-portal/` (March 2026 cleanse).
 
 ---
 
@@ -82,7 +74,7 @@ omr-local-job-listings/
 | `job_postings` | Stores all job listings | `id`, `employer_id`, `status`, `featured`, `published_at` | `process-job-omr.php`, `job-detail-omr.php`, `includes/job-functions-omr.php` |
 | `employers` | Employer profiles & login credentials | `id`, `company_name`, `email`, `password_hash`, `status` | `employer-register-omr.php`, `includes/employer-auth.php`, `admin/verify-employers-omr.php` |
 | `job_applications` | Candidate applications | `id`, `job_id`, `candidate_email`, `status`, `source` | `process-application-omr.php`, `view-applications-omr.php`, `update-application-status-omr.php` |
-| `job_categories` | List of categories & slugs | `id`, `name`, `slug`, `is_active` | `includes/job-functions-omr.php`, `FIX-CATEGORIES.sql` |
+| `job_categories` | List of categories & slugs | `id`, `name`, `slug`, `is_active` | `includes/job-functions-omr.php`, `docs/archive/job-portal/FIX-CATEGORIES.sql` |
 
 > **Status Flags:** `job_postings.status` cycles `pending → approved → archived`. Admin actions reside in `admin/manage-jobs-omr.php`.
 
@@ -112,10 +104,9 @@ omr-local-job-listings/
 
 ## 5. Deployment & QA Guardrails
 
-- **Before Deploy:** run through `DEPLOYMENT-CHECKLIST.md` and `READY-FOR-DEPLOYMENT.md`.
-- **Manual QA:** follow `HUMAN-TESTING-CHECKLIST.md` (covers auth, CRUD, filters, mobile).
-- **Known Fixes:** review `FIXES-APPLIED.md` + `DESIGN-UPDATE-SUMMARY.md` before making structural changes.
-- **Debugging:** `ERROR-DEBUG-GUIDE.md` explains logging (`includes/error-reporting.php`) and fallback behaviours.
+- **Before Deploy:** run through `DEPLOYMENT-CHECKLIST.md`.
+- **Overhaul & troubleshooting:** see `docs/inbox/JOB-PORTAL-OVERHAUL-PLAN.md`.
+- **Historical docs:** `docs/archive/job-portal/` (testing checklists, design notes, FIX-CATEGORIES.sql).
 
 ---
 
@@ -132,11 +123,10 @@ omr-local-job-listings/
 ## 7. Collaboration Notes
 
 - Use this README as the authoritative map; update it whenever files move or workflow changes.
-- Cross-reference `docs/worklogs/` for daily context and `HUMAN-TESTING-CHECKLIST.md` after major edits.
-- When touching shared helpers (`includes/job-functions-omr.php`), document changes in `FIXES-APPLIED.md`.
+- Cross-reference `docs/worklogs/` for daily context; `docs/archive/job-portal/` for historical checklists.
 
 ---
 
-**Maintainers:** Hari Krishnan & GPT-5 Codex  
-Questions? Start with `QUICK-START-GUIDE.md`, then ping on worklog.  
+**Maintainers:** Hari Krishnan  
+Questions? See `DEPLOYMENT-CHECKLIST.md` or `docs/inbox/JOB-PORTAL-OVERHAUL-PLAN.md`.  
 _“Built with ❤️ for the OMR community.”_

@@ -7,8 +7,8 @@ include __DIR__ . '/includes/dev-diagnostics.php';
 $slug = isset($_GET['slug']) ? sanitizeInput($_GET['slug']) : '';
 $category = $slug ? getCategoryBySlug($slug) : null;
 if (!$category) {
-  http_response_code(404);
-  die('Category not found');
+  require_once __DIR__ . '/../core/serve-404.php';
+  exit;
 }
 
 $filters = [

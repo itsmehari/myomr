@@ -189,6 +189,9 @@ scratch-*.php
 # ============================================
 # Security & Sensitive Data
 # ============================================
+# Google Cloud / Search Console service account keys (never commit)
+/search-console-json/
+
 # SSH keys
 *.pem
 *.key

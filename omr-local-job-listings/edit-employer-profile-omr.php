@@ -3,15 +3,18 @@
  * Edit Employer Profile
  * Allows employers to update their profile information
  */
-// Enable error reporting for development
 require_once __DIR__ . '/includes/error-reporting.php';
-
 require_once __DIR__ . '/includes/employer-auth.php';
 requireEmployerAuth();
 
-$employerId = (int)($_SESSION['employer_id'] ?? 0);
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+require_once ROOT_PATH . '/core/omr-connect.php';
 
-require_once __DIR__ . '/../core/omr-connect.php';
+$employerId = (int)($_SESSION['employer_id'] ?? 0);
 
 // Get current employer data
 $stmt = $conn->prepare("SELECT * FROM employers WHERE id = ?");
@@ -69,13 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/job-listings-omr.css">
     <link rel="stylesheet" href="assets/omr-jobs-unified-design.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
     
     <!-- Google Analytics -->
     <?php $ga_user_id = (int)($_SESSION['employer_id'] ?? 0); $ga_user_properties = ['user_type' => 'employer']; include '../components/analytics.php'; ?>
 </head>
 <body class="modern-page">
 
-<?php require_once __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav('main'); ?>
 
 <section class="hero-modern py-4">
     <div class="container">
@@ -193,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </main>
 
-<?php require_once __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

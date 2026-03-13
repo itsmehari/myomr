@@ -83,6 +83,7 @@ RewriteRule ^favicon\.ico$ /My-OMR-Logo.png [L,R=302]
 
 # Root sitemap index
 RewriteRule ^sitemap\.xml$ generate-sitemap-index.php [L]
+RewriteRule ^sitemap-pages\.xml$ generate-sitemap-pages.php [L]
 
 # Module: Events – clean routes
 RewriteRule ^omr-local-events/sitemap\.xml$ omr-local-events/generate-events-sitemap.php [L]
@@ -98,6 +99,7 @@ RewriteRule ^omr-local-events/post/?$ omr-local-events/post-event-omr.php [L]
 # Module sitemaps
 RewriteRule ^omr-listings/sitemap\.xml$ omr-listings/generate-listings-sitemap.php [L]
 RewriteRule ^omr-local-job-listings/sitemap\.xml$ omr-local-job-listings/generate-sitemap.php [L]
+RewriteRule ^omr-local-job-listings/job/([0-9]+)(?:/([a-z0-9-]+))?/?$ omr-local-job-listings/job-detail-omr.php?id=$1 [L,QSA]
 RewriteRule ^omr-hostels-pgs/sitemap\.xml$ omr-hostels-pgs/generate-sitemap.php [L]
 RewriteRule ^omr-coworking-spaces/sitemap\.xml$ omr-coworking-spaces/generate-sitemap.php [L]
 RewriteRule ^pentahive/sitemap\.xml$ pentahive/generate-sitemap.php [L]

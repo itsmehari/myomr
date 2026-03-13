@@ -1,4 +1,4 @@
-﻿<?php include 'weblog/log.php' ?>
+<?php include 'weblog/log.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -194,8 +194,7 @@ color: #4c516D;
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v14.0" nonce="brAi0ji4"></script>
 
-    <a href="commonlogin.php">Login to your admin panel</a>
-    
+
    <!-- <a class="weatherwidget-io" href="https://forecast7.com/en/13d0880d27/chennai/" data-label_1="CHENNAI" data-label_2="WEATHER" data-theme="original" >CHENNAI WEATHER</a>
 <script>
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
@@ -250,7 +249,7 @@ color: #4c516D;
 
 <div class="container-fluid">
     <div class="row row-no-gutters" style="background-color: #F77F00;">
-    <div class="col-sm-4" style="padding:0 px; margin: 0px;  border-right: 2px solid white;  text-align:center;background-color: #F77F33;"><button class="button button1"><a href="sell-rent-property-house-plot-omr-chennai.php" style="text-decoration:none;">Looking to Rent or Sell your Property <br> do it here..</a></button></div>
+    <div class="col-sm-4" style="padding:0 px; margin: 0px;  border-right: 2px solid white;  text-align:center;background-color: #F77F33;"><button class="button button1"><a href="/omr-rent-lease/" style="text-decoration:none;">Browse Rent &amp; Lease in OMR <br> or List Your Property</a></button></div>
     <div class="col-sm-4" style="padding:0 px; margin: 0px; border-right: 2px solid white;  text-align:center;background-color: #F77F33;"><button class="button button1"><a href="search-and-post-jobs-job-vacancy-employment-platform-for-omr-chennai.php" style="text-decoration:none;">Looking for job or looking to hire candidates  <br> do it here..</a></button></div>
     <div class="col-sm-4" style="padding:0 px; margin: 0px;  border-right: 2px solid white;  text-align:center;background-color: #F77F33;"><button class="button button1"><a href="tutions-classes-courses-training-centers-in-omr-chennai.php" style="text-decoration:none;">Home Tutions <br>Learn Programming & Designing..</a></button></div>
   </div>
@@ -288,6 +287,9 @@ color: #4c516D;
     </div>
     <div class="col-sm-8">
       <!-- Navbar items -->
+   <div class="mb-4 p-3 rounded" style="background:#e8f5e9; border:1px solid #0d7a42;">
+     <strong>Rent &amp; Lease in OMR</strong> — <a href="/omr-rent-lease/">Browse listings</a> (houses, apartments, land) or <a href="/omr-rent-lease/add-property-omr.php">list your property</a>.
+   </div>
    <div id="navlist">
        <a href="#">Home</a>
        <a href="#">Our Products</a>

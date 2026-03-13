@@ -6,7 +6,9 @@
 if (!isset($links) || !is_array($links) || empty($links)) {
   $links = [
     [ 'label' => 'Events in OMR', 'url' => '/omr-local-events/' ],
+    [ 'label' => 'Events in OMR Today', 'url' => '/omr-local-events/today' ],
     [ 'label' => 'This Weekend in OMR', 'url' => '/omr-local-events/weekend' ],
+    [ 'label' => 'Free Events in OMR', 'url' => '/omr-local-events/?is_free=1' ],
     [ 'label' => 'IT Companies in OMR', 'url' => '/it-companies' ],
     [ 'label' => 'Hospitals in OMR', 'url' => '/hospitals' ],
     [ 'label' => 'Banks in OMR', 'url' => '/omr-listings/banks.php' ],

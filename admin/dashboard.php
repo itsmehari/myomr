@@ -5,6 +5,7 @@ if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
     exit;
 }
 require_once '../core/omr-connect.php';
+require_once __DIR__ . '/../omr-local-job-listings/includes/job-functions-omr.php';
 
 $username = $_SESSION['admin_username'] ?? 'Admin';
 
@@ -409,7 +410,7 @@ $pending_jobs    = qr($conn, "SELECT j.id, j.title, e.company_name, j.created_at
                 'expired' => 'secondary', 'rejected' => 'danger', default => 'light'
               }; ?>
           <tr>
-            <td><a href="/omr-local-job-listings/job-detail-omr.php?id=<?= (int)$j['id'] ?>" target="_blank"><?= htmlspecialchars(mb_strimwidth($j['title'], 0, 50, '…')) ?></a></td>
+            <td><a href="/omr-local-job-listings/<?= getJobDetailPath((int)$j['id'], $j['title'] ?? null) ?>" target="_blank"><?= htmlspecialchars(mb_strimwidth($j['title'], 0, 50, '…')) ?></a></td>
             <td><?= htmlspecialchars($j['company_name'] ?? '—') ?></td>
             <td><span class="badge bg-<?= $badge ?>"><?= htmlspecialchars($j['status']) ?></span></td>
           </tr>

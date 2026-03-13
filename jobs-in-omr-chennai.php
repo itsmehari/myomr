@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Job Portal - Primary Landing Page
  * Jobs in OMR Chennai - Main Landing Page
@@ -355,7 +355,7 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
                             </span>
                         <?php endif; ?>
                         <h5 class="mb-2">
-                            <a href="/omr-local-job-listings/job-detail-omr.php?id=<?php echo $job['id']; ?>" class="text-decoration-none text-dark">
+                            <a href="/omr-local-job-listings/<?php echo getJobDetailPath($job['id'], $job['title'] ?? null); ?>" class="text-decoration-none text-dark">
                                 <?php echo htmlspecialchars($job['title']); ?>
                             </a>
                         </h5>
@@ -378,7 +378,7 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
                                 </span>
                             <?php endif; ?>
                         </div>
-                        <a href="/omr-local-job-listings/job-detail-omr.php?id=<?php echo $job['id']; ?>" class="btn btn-success btn-sm w-100">
+                        <a href="/omr-local-job-listings/<?php echo getJobDetailPath($job['id'], $job['title'] ?? null); ?>" class="btn btn-success btn-sm w-100">
                             View Details & Apply
                         </a>
                     </div>

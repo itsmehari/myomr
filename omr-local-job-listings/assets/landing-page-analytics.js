@@ -99,13 +99,13 @@
         });
     }
 
-    // Track job listing clicks
+    // Track job listing clicks (handles both job/15/slug and legacy job-detail-omr.php?id=)
     function trackJobListingClicks() {
-        const jobLinks = document.querySelectorAll('a[href*="job-detail-omr.php"]');
+        const jobLinks = document.querySelectorAll('a[href*="omr-local-job-listings/job/"]');
         
         jobLinks.forEach(link => {
             link.addEventListener('click', function() {
-                const jobId = this.href.match(/id=(\d+)/);
+                const jobId = this.href.match(/\/job\/(\d+)/) || this.href.match(/id=(\d+)/);
                 const jobTitle = this.closest('.featured-job-card, .job-card')?.querySelector('h5, h3')?.textContent?.trim() || '';
                 
                 gtagSend('job_listing_click', {

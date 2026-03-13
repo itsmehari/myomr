@@ -45,6 +45,7 @@ $megamenu = [
       ['title' => 'Accommodation & Work', 'items' => [
         ['label' => 'Hostels & PGs', 'url' => '/omr-hostels-pgs/'],
         ['label' => 'Coworking Spaces', 'url' => '/omr-coworking-spaces/'],
+        ['label' => 'Rent & Lease', 'url' => '/omr-rent-lease/'],
       ]],
     ],
   ],
@@ -124,10 +125,11 @@ $megamenu = [
       ['title' => 'Listings', 'items' => [
         ['label' => 'Post a Job', 'url' => '/omr-local-job-listings/post-job-omr.php'],
         ['label' => 'List an Event', 'url' => '/omr-local-events/post-event-omr.php'],
-        ['label' => 'List a Property', 'url' => '/omr-hostels-pgs/owner-login.php'],
+        ['label' => 'List a Property', 'url' => '/omr-rent-lease/add-property-omr.php'],
+        ['label' => 'List Hostel/PG', 'url' => '/omr-hostels-pgs/owner-login.php'],
       ]],
       ['title' => 'Resources', 'items' => [
-        ['label' => 'Real Estate', 'url' => '/listings/sell-rent-property-house-plot-omr-chennai.php'],
+        ['label' => 'Rent & Lease', 'url' => '/omr-rent-lease/'],
         ['label' => 'Citizens Charter', 'url' => '/citizens-charter-old-mahabali-puram-road.php'],
       ]],
     ],

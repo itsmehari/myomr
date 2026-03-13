@@ -6,7 +6,7 @@ include __DIR__ . '/includes/dev-diagnostics.php';
 
 $slug = isset($_GET['slug']) ? sanitizeInput($_GET['slug']) : '';
 $localityLabel = $slug ? slugToLocality($slug) : '';
-if ($localityLabel === '') { http_response_code(404); die('Locality not found'); }
+if ($localityLabel === '') { require_once __DIR__ . '/../core/serve-404.php'; exit; }
 
 $filters = [
   'search' => '',

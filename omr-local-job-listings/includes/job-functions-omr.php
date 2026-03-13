@@ -16,6 +16,50 @@
  *  - Removed fallback LOWER/TRIM queries (data integrity should be fixed at DB).
  */
 
+// Canonical job_type values stored in DB (lowercase, hyphen). UI shows human labels.
+const JOB_TYPE_CANONICAL = ['full-time', 'part-time', 'contract', 'internship', 'walk-in'];
+
+/**
+ * Normalize job_type to canonical value for storage and filtering (industry standard: normalize at DB).
+ *
+ * @param string $value Raw value from form or DB (e.g. "Full-time", "Part-time")
+ * @return string Canonical value (e.g. "full-time", "part-time") or original trimmed/lowercased
+ */
+function normalizeJobType(string $value): string
+{
+    $v = strtolower(trim($value));
+    $v = str_replace(' ', '-', $v);
+    $map = [
+        'full-time' => 'full-time',
+        'fulltime'  => 'full-time',
+        'part-time' => 'part-time',
+        'parttime'  => 'part-time',
+        'contract'  => 'contract',
+        'internship'=> 'internship',
+        'walk-in'   => 'walk-in',
+        'walkin'    => 'walk-in',
+    ];
+    return $map[$v] ?? $v;
+}
+
+/**
+ * Human-readable label for canonical job_type (for display in UI).
+ *
+ * @param string $canonical Canonical job_type (e.g. "full-time")
+ * @return string Display label (e.g. "Full-time")
+ */
+function getJobTypeLabel(string $canonical): string
+{
+    $labels = [
+        'full-time'  => 'Full-time',
+        'part-time'  => 'Part-time',
+        'contract'   => 'Contract',
+        'internship' => 'Internship',
+        'walk-in'    => 'Walk-in',
+    ];
+    return $labels[normalizeJobType($canonical)] ?? ucfirst(str_replace('-', ' ', $canonical));
+}
+
 // ─── QUERY HELPERS ───────────────────────────────────────────────────────────
 
 /**
@@ -43,7 +87,7 @@ function _buildJobWhereClause(array $filters): array
 
     if (!empty($filters['job_type'])) {
         $conditions[] = 'j.job_type = ?';
-        $params[]     = $filters['job_type'];
+        $params[]     = normalizeJobType($filters['job_type']);
         $types       .= 's';
     }
 
@@ -119,7 +163,6 @@ function getJobListings(array $filters = [], int $limit = 20, int $offset = 0): 
                    e.email    AS employer_email,
                    e.phone    AS employer_phone,
                    e.address  AS company_address,
-                   e.company_logo,
                    c.name     AS category_name
             FROM job_postings j
             LEFT JOIN employers e ON j.employer_id = e.id
@@ -214,7 +257,6 @@ function getJobById(int $job_id): ?array
                 e.email   AS employer_email,
                 e.phone   AS employer_phone,
                 e.address AS company_address,
-                e.company_logo,
                 c.name    AS category_name
          FROM job_postings j
          LEFT JOIN employers e ON j.employer_id = e.id
@@ -249,7 +291,7 @@ function getRelatedJobs(int $job_id, string $category, int $limit = 3): array
     }
 
     $stmt = $conn->prepare(
-        "SELECT j.*, e.company_name, e.company_logo
+        "SELECT j.*, e.company_name
          FROM job_postings j
          LEFT JOIN employers e ON j.employer_id = e.id
          WHERE j.category = ? AND j.id != ? AND j.status = 'approved'
@@ -506,6 +548,44 @@ function createSlug(string $text): string
     $text = mb_strtolower(trim($text));
     $text = preg_replace('/[^a-z0-9]+/', '-', $text);
     return trim($text, '-');
+}
+
+/**
+ * Canonical, user-friendly job detail URL (supports optional slug for SEO).
+ *
+ * @param int         $id    Job ID
+ * @param string|null $title Job title (optional; adds slug when provided and non-empty)
+ * @return string Full URL e.g. https://myomr.in/omr-local-job-listings/job/15/femtosoft-internship
+ */
+function getJobDetailUrl(int $id, ?string $title = null): string
+{
+    $base = 'https://myomr.in/omr-local-job-listings/job/' . (int) $id;
+    if (!empty($title)) {
+        $slug = createSlug($title);
+        if ($slug !== '') {
+            $base .= '/' . $slug;
+        }
+    }
+    return $base;
+}
+
+/**
+ * Relative path for job detail (for href from pages in same folder).
+ *
+ * @param int         $id    Job ID
+ * @param string|null $title Job title (optional; adds slug when provided and non-empty)
+ * @return string e.g. job/15/femtosoft-internship
+ */
+function getJobDetailPath(int $id, ?string $title = null): string
+{
+    $base = 'job/' . (int) $id;
+    if (!empty($title)) {
+        $slug = createSlug($title);
+        if ($slug !== '') {
+            $base .= '/' . $slug;
+        }
+    }
+    return $base;
 }
 
 // ─── VALIDATION ───────────────────────────────────────────────────────────────

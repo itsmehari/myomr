@@ -1,0 +1,32 @@
+/* Rent & Lease OMR - Module Styles (max impact, production-ready) */
+.rent-lease-page { font-family: 'Poppins', sans-serif; }
+.rent-lease-page .skip-link:focus { left: 8px; top: 8px; padding: 8px 12px; background: #0d7a42; color: #fff; z-index: 10000; border-radius: 4px; }
+
+.rl-hero h1 { font-weight: 700; letter-spacing: -0.02em; }
+.rl-hero .btn-light:hover { background: rgba(255,255,255,0.95); color: #0b4d2c; }
+.rl-hero .form-control, .rl-hero .form-select { border-radius: 8px; border: 1px solid rgba(255,255,255,0.3); }
+.rl-hero .form-control:focus, .rl-hero .form-select:focus { border-color: #fff; box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25); }
+
+/* Listing cards - clear hierarchy, touch-friendly */
+.rent-lease-page .card { border-radius: 12px; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(0,0,0,0.06); overflow: hidden; }
+.rent-lease-page .card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(13,122,66,0.15); }
+.rent-lease-page .card .card-body { padding: 1.25rem; }
+.rent-lease-page .card .badge { font-weight: 600; font-size: 0.7rem; }
+.rent-lease-page .card .card-title { font-weight: 700; line-height: 1.35; }
+.rent-lease-page .card .btn-outline-success:hover { background: #0d7a42; color: #fff; }
+
+/* Empty state */
+.rent-lease-page .text-center.py-5 .fa-4x { opacity: 0.6; }
+.rent-lease-page .text-center.py-5 .btn-success { font-weight: 600; }
+
+/* Pagination */
+.rent-lease-page .pagination .page-link { border-radius: 8px; margin: 0 2px; }
+.rent-lease-page .pagination .page-item.active .page-link { background: #0d7a42; border-color: #0d7a42; }
+
+/* Locality pills */
+.rent-lease-page .btn-outline-secondary.active { background: #0d7a42; border-color: #0d7a42; color: #fff; }
+
+@media (max-width: 768px) {
+  .rl-hero .d-flex.flex-wrap.gap-2 { flex-direction: column; }
+  .rl-hero .form-control, .rl-hero .form-select { max-width: 100% !important; }
+}

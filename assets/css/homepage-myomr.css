@@ -596,3 +596,102 @@ input[type="email"]:focus-visible {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* ========================================
+   Events Homepage Strip (mirrors jobs banner)
+======================================== */
+.events-homepage-strip {
+  background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
+  color: #f0f9ff;
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.events-homepage-strip__label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.events-homepage-strip__label i {
+  color: #38bdf8;
+}
+
+.events-homepage-strip__track-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.events-homepage-strip__track {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: eventsScroll 50s linear infinite;
+  width: max-content;
+}
+
+.events-homepage-strip__track:hover {
+  animation-play-state: paused;
+}
+
+.events-homepage-strip__item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  color: #f0f9ff;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.events-homepage-strip__item:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.events-homepage-strip__title {
+  font-size: 0.9rem;
+}
+
+.events-homepage-strip__meta {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.events-homepage-strip__sep {
+  color: #38bdf8;
+  opacity: 0.7;
+  font-size: 0.7rem;
+}
+
+.events-homepage-strip__cta {
+  flex-shrink: 0;
+  padding: 0 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #38bdf8;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.events-homepage-strip__cta:hover {
+  color: #fff;
+}
+
+@keyframes eventsScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

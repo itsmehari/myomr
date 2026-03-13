@@ -1,4 +1,4 @@
-﻿<?php /* Unified Main Navigation Bar - Green Theme with Top Secondary Menu */ ?>
+<?php /* Unified Main Navigation Bar - Green Theme with Top Secondary Menu */ ?>
 <style>
 /* Top Secondary Menu Bar - 60px height */
 .top-secondary-menu {
@@ -536,6 +536,12 @@ function is_active($link, $current_uri) {
         <span>Coworking Spaces</span>
       </a>
     </li>
+    <li>
+      <a href="/omr-rent-lease/" class="<?php echo is_active('/omr-rent-lease/', $current_uri) ? 'active' : ''; ?>">
+        <i class="fas fa-house"></i>
+        <span>Rent & Lease</span>
+      </a>
+    </li>
   </ul>
   
   <ul class="top-right-icons">
@@ -593,7 +599,7 @@ function is_active($link, $current_uri) {
         <a href="/omr-local-events/" class="<?php echo is_active('/omr-local-events/', $current_uri) ? 'active' : ''; ?>">Events</a>
         <a href="/omr-hostels-pgs/" class="<?php echo is_active('/omr-hostels-pgs/', $current_uri) ? 'active' : ''; ?>">Hostels & PGs</a>
         <a href="/omr-coworking-spaces/" class="<?php echo is_active('/omr-coworking-spaces/', $current_uri) ? 'active' : ''; ?>">Coworking Spaces</a>
-        <a href="/listings/sell-rent-property-house-plot-omr-chennai.php" class="<?php echo is_active('/listings/sell-rent-property-house-plot-omr-chennai.php', $current_uri) ? 'active' : ''; ?>">Real Estate</a>
+        <a href="/omr-rent-lease/" class="<?php echo is_active('/omr-rent-lease/', $current_uri) ? 'active' : ''; ?>">Rent & Lease</a>
         <a href="/citizens-charter-old-mahabali-puram-road.php" class="<?php echo is_active('/citizens-charter-old-mahabali-puram-road.php', $current_uri) ? 'active' : ''; ?>">Citizens Charter</a>
       </div>
     </li>

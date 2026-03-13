@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -16,8 +16,7 @@ $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $id = extract_id_from_slug($slug);
 
 if ($id <= 0) {
-    http_response_code(404);
-    echo '<!DOCTYPE html><html><body><h1>Not Found</h1></body></html>';
+    require_once __DIR__ . '/../core/serve-404.php';
     exit;
 }
 
@@ -29,8 +28,7 @@ $school = $res ? $res->fetch_assoc() : null;
 $stmt->close();
 
 if (!$school) {
-    http_response_code(404);
-    echo '<!DOCTYPE html><html><body><h1>School not found</h1></body></html>';
+    require_once __DIR__ . '/../core/serve-404.php';
     exit;
 }
 
@@ -175,7 +173,7 @@ function extract_id_from_slug($slug) {
 
 $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $id = extract_id_from_slug($slug);
-if ($id <= 0) { http_response_code(404); echo '<!DOCTYPE html><html><body><h1>Not Found</h1></body></html>'; exit; }
+if ($id <= 0) { require_once __DIR__ . '/../core/serve-404.php'; exit; }
 
 $stmt = $conn->prepare('SELECT slno, schoolname, address, contact, landmark FROM omrschoolslist WHERE slno = ?');
 $stmt->bind_param('i', $id);
@@ -184,7 +182,7 @@ $res = $stmt->get_result();
 $item = $res ? $res->fetch_assoc() : null;
 $stmt->close();
 
-if (!$item) { http_response_code(404); echo '<!DOCTYPE html><html><body><h1>School not found</h1></body></html>'; exit; }
+if (!$item) { require_once __DIR__ . '/../core/serve-404.php'; exit; }
 
 $name = $item['schoolname'];
 $address = $item['address'];

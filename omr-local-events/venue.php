@@ -5,7 +5,7 @@ require_once __DIR__ . '/includes/event-functions-omr.php';
 include __DIR__ . '/includes/dev-diagnostics.php';
 
 $slug = isset($_GET['slug']) ? sanitizeInput($_GET['slug']) : '';
-if ($slug === '') { http_response_code(404); die('Venue not found'); }
+if ($slug === '') { require_once __DIR__ . '/../core/serve-404.php'; exit; }
 $venueLabel = slugToLabel($slug);
 
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;

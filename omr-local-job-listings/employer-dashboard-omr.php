@@ -8,15 +8,16 @@
  * @reference QuikrJobs-style employer dashboard
  */
 
-// Enable error reporting for development
 require_once __DIR__ . '/includes/error-reporting.php';
-
-// Require employer authentication
 require_once __DIR__ . '/includes/employer-auth.php';
 requireEmployerAuth();
 
-// Load database connection
-require_once __DIR__ . '/../core/omr-connect.php';
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+require_once ROOT_PATH . '/core/omr-connect.php';
 global $conn;
 
 // Verify connection
@@ -206,7 +207,7 @@ $canonical_url = "https://myomr.in/omr-local-job-listings/employer-dashboard-omr
     
 </head>
 <body class="modern-page">
-<?php require_once __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav('main'); ?>
 
 <!-- Header Section -->
 <section class="hero-modern py-4">
@@ -556,7 +557,7 @@ $canonical_url = "https://myomr.in/omr-local-job-listings/employer-dashboard-omr
     </div>
 </main>
 
-<?php require_once __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

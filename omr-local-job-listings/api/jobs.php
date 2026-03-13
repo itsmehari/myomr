@@ -114,7 +114,7 @@ $normalised = array_map(static function (array $job) use ($per_page): array {
         'deadline'         => (!empty($job['application_deadline']) && $job['application_deadline'] !== '0000-00-00')
                                 ? date('M j, Y', strtotime($job['application_deadline']))
                                 : null,
-        'url'              => '/omr-local-job-listings/job-detail-omr.php?id=' . (int)$job['id'],
+        'url'              => function_exists('getJobDetailUrl') ? getJobDetailUrl((int)$job['id'], $job['title'] ?? null) : '/omr-local-job-listings/job-detail-omr.php?id=' . (int)$job['id'],
     ];
 }, $jobs);
 
@@ -140,7 +140,7 @@ if (!empty($jobs)) {
         $apps     = (int)($job['applications_count'] ?? 0);
         $featured = !empty($job['featured']);
         $phone_clean = preg_replace('/\D/', '', $job['employer_phone'] ?? '');
-        $wa_msg = rawurlencode("Hi, I'm interested in the {$job['title']} role at {$job['company_name']} from MyOMR.in. Can you share more details? https://myomr.in/omr-local-job-listings/job-detail-omr.php?id=$jid");
+        $wa_msg = rawurlencode("Hi, I'm interested in the {$job['title']} role at {$job['company_name']} from MyOMR.in. Can you share more details? " . (function_exists('getJobDetailUrl') ? getJobDetailUrl($jid, $job['title'] ?? null) : "https://myomr.in/omr-local-job-listings/job-detail-omr.php?id=$jid"));
         $wa_href = $phone_clean ? "https://wa.me/{$phone_clean}?text={$wa_msg}" : "https://wa.me/?text={$wa_msg}";
 ?>
 <article class="jp-card<?= $featured ? ' featured' : '' ?>">
@@ -152,7 +152,7 @@ if (!empty($jobs)) {
       <div class="jp-card__logo-initial"><?= $initial ?></div>
     <?php endif; ?>
     <div class="jp-card__meta">
-      <a href="/omr-local-job-listings/job-detail-omr.php?id=<?= $jid ?>" class="jp-card__title"><?= htmlspecialchars($job['title']) ?></a>
+      <a href="/omr-local-job-listings/<?= getJobDetailPath($jid, $job['title'] ?? null) ?>" class="jp-card__title"><?= htmlspecialchars($job['title']) ?></a>
       <p class="jp-card__company"><?= htmlspecialchars($job['company_name'] ?? '') ?></p>
       <p class="jp-card__location"><i class="fas fa-map-marker-alt me-1"></i><?= $loc ?><?php if ($remote): ?> <span class="jp-badge jp-badge-remote ms-1"><i class="fas fa-home"></i> Remote</span><?php endif; ?></p>
     </div>
@@ -169,7 +169,7 @@ if (!empty($jobs)) {
     <div class="jp-card__actions">
       <button type="button" class="jp-btn-save" onclick="toggleSave(this,<?= $jid ?>)" aria-label="Save"><i class="far fa-heart"></i></button>
       <?php if ($phone_clean): ?><a href="<?= $wa_href ?>" target="_blank" rel="noopener" class="jp-btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a><?php endif; ?>
-      <a href="/omr-local-job-listings/job-detail-omr.php?id=<?= $jid ?>" class="jp-btn-view">View <i class="fas fa-arrow-right"></i></a>
+      <a href="/omr-local-job-listings/<?= getJobDetailPath($jid, $job['title'] ?? null) ?>" class="jp-btn-view">View <i class="fas fa-arrow-right"></i></a>
     </div>
   </footer>
 </article>

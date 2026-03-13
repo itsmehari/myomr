@@ -26,7 +26,5 @@ Disallow: /omr-local-job-listings/index.php?*is_remote*
 
 Allow: /
 
-Crawl-delay: 1
-
 # Sitemaps
 Sitemap: https://myomr.in/sitemap.xml

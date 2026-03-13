@@ -117,7 +117,7 @@ function getEvents(array $filters, int $limit, int $offset): array {
         $order = "ORDER BY start_datetime ASC";
         $whereSql = 'WHERE ' . implode(' AND ', $where);
 
-        $sql = "SELECT id, title, slug, category_id, location, locality, start_datetime, end_datetime, is_free, price, image_url, featured
+        $sql = "SELECT id, title, slug, category_id, location, locality, start_datetime, end_datetime, is_free, price, tickets_url, image_url, featured
                 FROM event_listings $whereSql $order LIMIT ? OFFSET ?";
 
         $stmt = $conn->prepare($sql);
@@ -137,6 +137,76 @@ function getEvents(array $filters, int $limit, int $offset): array {
         return $rows;
     } catch (Throwable $e) {
         error_log('Events: getEvents exception: ' . $e->getMessage());
+        return [];
+    }
+}
+
+/**
+ * Get event count per category (for filter counts)
+ */
+function getCategoryCounts(): array {
+    try {
+        global $conn;
+        if (!isset($conn) || !$conn || $conn->connect_error) { return []; }
+        $sql = "SELECT c.id, c.name, c.slug, COUNT(e.id) AS cnt
+                FROM event_categories c
+                LEFT JOIN event_listings e ON e.category_id = c.id AND e.status IN ('scheduled','ongoing')
+                WHERE c.is_active = 1
+                GROUP BY c.id, c.name, c.slug
+                ORDER BY c.display_order, c.name";
+        $res = $conn->query($sql);
+        if (!$res) return [];
+        $rows = [];
+        while ($row = $res->fetch_assoc()) { $rows[] = $row; }
+        return $rows;
+    } catch (Throwable $e) {
+        error_log('Events: getCategoryCounts exception: ' . $e->getMessage());
+        return [];
+    }
+}
+
+/**
+ * Get event count per locality (top localities with counts)
+ */
+function getLocalityCounts(int $limit = 15): array {
+    try {
+        global $conn;
+        if (!isset($conn) || !$conn || $conn->connect_error) { return []; }
+        $sql = "SELECT locality, COUNT(*) AS cnt FROM event_listings
+                WHERE status IN ('scheduled','ongoing') AND locality IS NOT NULL AND locality != ''
+                GROUP BY locality ORDER BY cnt DESC LIMIT ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $limit);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $rows = [];
+        while ($row = $res->fetch_assoc()) { $rows[] = $row; }
+        return $rows;
+    } catch (Throwable $e) {
+        error_log('Events: getLocalityCounts exception: ' . $e->getMessage());
+        return [];
+    }
+}
+
+/**
+ * Get featured events for hero block
+ */
+function getFeaturedEvents(int $limit = 2): array {
+    try {
+        global $conn;
+        if (!isset($conn) || !$conn || $conn->connect_error) { return []; }
+        $sql = "SELECT id, title, slug, location, locality, start_datetime, is_free, price, tickets_url, image_url
+                FROM event_listings WHERE featured = 1 AND status IN ('scheduled','ongoing')
+                ORDER BY start_datetime ASC LIMIT ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $limit);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $rows = [];
+        while ($row = $res->fetch_assoc()) { $rows[] = $row; }
+        return $rows;
+    } catch (Throwable $e) {
+        error_log('Events: getFeaturedEvents exception: ' . $e->getMessage());
         return [];
     }
 }

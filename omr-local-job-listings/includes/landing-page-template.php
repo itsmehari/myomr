@@ -4,6 +4,9 @@
  * Reusable template for SEO-optimized landing pages
  * Uses ROOT_PATH when defined; otherwise resolves from __DIR__.
  */
+if (!function_exists('getJobDetailPath')) {
+    require_once __DIR__ . '/job-functions-omr.php';
+}
 
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', realpath(__DIR__ . '/../..') ?: dirname(__DIR__, 2));
@@ -305,7 +308,7 @@ omr_nav('main');
                             </span>
                         <?php endif; ?>
                         <h5 class="mb-2">
-                            <a href="/omr-local-job-listings/job-detail-omr.php?id=<?php echo $job['id']; ?>" class="text-decoration-none text-dark">
+                            <a href="/omr-local-job-listings/<?php echo getJobDetailPath($job['id'], $job['title'] ?? null); ?>" class="text-decoration-none text-dark">
                                 <?php echo htmlspecialchars($job['title']); ?>
                             </a>
                         </h5>
@@ -331,7 +334,7 @@ omr_nav('main');
                                 </span>
                             <?php endif; ?>
                         </div>
-                        <a href="/omr-local-job-listings/job-detail-omr.php?id=<?php echo $job['id']; ?>" class="btn btn-success btn-sm w-100">
+                        <a href="/omr-local-job-listings/<?php echo getJobDetailPath($job['id'], $job['title'] ?? null); ?>" class="btn btn-success btn-sm w-100">
                             View Details & Apply
                         </a>
                     </div>

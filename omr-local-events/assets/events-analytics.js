@@ -12,6 +12,7 @@
     viewClicked: function(slug){ send('event_view', { event_category: 'Events', event_label: slug || '' }); },
     mapClicked: function(slug){ send('event_map', { event_category: 'Events', event_label: slug || '' }); },
     ticketClicked: function(slug){ send('event_ticket', { event_category: 'Events', event_label: slug || '' }); },
+    getTickets: function(slug){ send('event_ticket', { event_category: 'Events', event_label: slug || '' }); },
     shareClicked: function(channel, slug){ send('event_share', { event_category: 'Events', event_label: channel + '|' + (slug||'') }); },
     addToCalendar: function(slug){ send('event_calendar_add', { event_category: 'Events', event_label: slug || '' }); },
     icsDownloaded: function(slug){ send('event_ics_download', { event_category: 'Events', event_label: slug || '' }); },

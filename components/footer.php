@@ -57,6 +57,7 @@ $rootUrl = '/';
                         <li><a href="<?php echo $baseUrl; ?>omr-road-database-list.php">OMR Database</a></li>
                         <li><a href="<?php echo $baseUrl; ?>contact-my-omr-team.php">Contact us</a></li>
                         <li><a href="<?php echo $baseUrl; ?>local-news/news-highlights-from-omr-road.php">Latest News</a></li>
+                        <li><a href="<?php echo $baseUrl; ?>omr-rent-lease/">Rent & Lease</a></li>
                     </ul>
                 </div>
                 <div class="footer-nav__col">

@@ -9,8 +9,10 @@ require_once __DIR__ . '/includes/error-reporting.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
-require_once $root . '/core/include-path.php';
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
 require_once ROOT_PATH . '/components/component-includes.php';
 
 require_once __DIR__ . '/includes/job-functions-omr.php';
@@ -26,8 +28,8 @@ if (!isset($conn) || !$conn instanceof mysqli || $conn->connect_error) {
 /* ── Load job ─────────────────────────────────────────────────── */
 $job_id = max(0, (int)($_GET['id'] ?? 0));
 if ($job_id <= 0) {
-    http_response_code(404);
-    exit('<h1>404 — Invalid job ID</h1>');
+    require_once ROOT_PATH . '/core/serve-404.php';
+    exit;
 }
 
 $job = getJobById($job_id);
@@ -38,7 +40,7 @@ if (!$job) {
         $ps = $conn->prepare(
             "SELECT j.*, e.company_name, e.contact_person,
                     e.email AS employer_email, e.phone AS employer_phone,
-                    e.address AS company_address, e.company_logo,
+                    e.address AS company_address,
                     c.name AS category_name
              FROM job_postings j
              LEFT JOIN employers e ON j.employer_id = e.id
@@ -55,16 +57,7 @@ if (!$job) {
     }
 
     if (!$job) {
-        http_response_code(404);
-        require_once ROOT_PATH . '/components/skip-link.php';
-        omr_nav('main');
-        echo '<main id="main-content"><div class="container py-5 text-center">
-          <i class="fas fa-search fa-3x text-muted mb-3"></i>
-          <h1 class="h2">Job Not Found</h1>
-          <p class="text-muted">This listing may have been removed or filled.</p>
-          <a href="/omr-local-job-listings/" class="btn btn-success mt-2">Browse All Jobs</a>
-        </div></main>';
-        omr_footer();
+        require_once ROOT_PATH . '/core/serve-404.php';
         exit;
     }
 }
@@ -85,11 +78,29 @@ unset($_SESSION['application_errors']);
 $form_data = $_SESSION['application_form_data'] ?? [];
 if (empty($app_errors)) unset($_SESSION['application_form_data']);
 
-/* ── SEO ─────────────────────────────────────────────────────── */
-$page_title   = htmlspecialchars($job['title']) . " at " . htmlspecialchars($job['company_name'] ?? '') . " – OMR | MyOMR";
+/* ── SEO: canonical (user-friendly /job/15/slug) and geo-friendly title ─ */
+$canonical    = getJobDetailUrl($job_id, $job['title'] ?? null);
+$request_path = rtrim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/');
+$qs           = $_SERVER['QUERY_STRING'] ?? '';
+$redirect_url = $canonical . ($qs ? '?' . $qs : '');
+
+// 301 from old job-detail-omr.php?id= URL
+if (isset($_GET['id']) && (strpos($_SERVER['REQUEST_URI'] ?? '', 'job-detail-omr.php') !== false)) {
+    header('Location: ' . $redirect_url, true, 301);
+    exit;
+}
+// 301 from job/15 (no slug) to job/15/slug when slug is available
+if (preg_match('#/omr-local-job-listings/job/' . (int)$job_id . '$#', $request_path)) {
+    $slug = createSlug($job['title'] ?? '');
+    if ($slug !== '') {
+        header('Location: ' . $redirect_url, true, 301);
+        exit;
+    }
+}
+$page_title   = htmlspecialchars($job['title']) . " at " . htmlspecialchars($job['company_name'] ?? '') . " – OMR Chennai | MyOMR";
 $clean_desc   = trim(strip_tags($job['description'] ?? ''));
 $page_desc    = mb_strimwidth($clean_desc, 0, 155, '…');
-$canonical    = "https://myomr.in/omr-local-job-listings/job-detail-omr.php?id=$job_id";
+$location_seo = htmlspecialchars($job['location'] ?? 'OMR Chennai');
 
 /* ── WhatsApp link ───────────────────────────────────────────── */
 $phone_clean = preg_replace('/\D/', '', $job['employer_phone'] ?? '');
@@ -113,16 +124,19 @@ $apps_count = (int)($job['applications_count'] ?? 0);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= $page_title ?></title>
 <meta name="description" content="<?= $page_desc ?>">
-<meta name="keywords" content="<?= htmlspecialchars($job['title']) ?>, <?= htmlspecialchars($job['location'] ?? '') ?>, jobs in OMR">
+<meta name="keywords" content="<?= htmlspecialchars($job['title']) ?>, <?= $location_seo ?>, jobs in OMR Chennai, Old Mahabalipuram Road jobs, <?= htmlspecialchars($job['category_name'] ?? $job['category'] ?? '') ?>">
+<meta name="geo.region" content="IN-TN">
 <link rel="canonical" href="<?= $canonical ?>">
 
-<meta property="og:title"       content="<?= htmlspecialchars($job['title']) ?> | MyOMR Jobs">
+<meta property="og:title"       content="<?= htmlspecialchars($job['title']) ?> at <?= htmlspecialchars($job['company_name'] ?? '') ?> – OMR Chennai">
 <meta property="og:description" content="<?= $page_desc ?>">
 <meta property="og:url"         content="<?= $canonical ?>">
 <meta property="og:type"        content="website">
 <meta property="og:image"       content="https://myomr.in/My-OMR-Logo.png">
+<meta property="og:locale"      content="en_IN">
+<meta property="og:site_name"   content="MyOMR – Jobs in OMR Chennai">
 <meta name="twitter:card"       content="summary_large_image">
-<meta name="twitter:title"      content="<?= htmlspecialchars($job['title']) ?> | MyOMR Jobs">
+<meta name="twitter:title"      content="<?= htmlspecialchars($job['title']) ?> – OMR Chennai | MyOMR">
 <meta name="twitter:description" content="<?= $page_desc ?>">
 <meta name="twitter:image"      content="https://myomr.in/My-OMR-Logo.png">
 
@@ -235,7 +249,7 @@ $apps_count = (int)($job['applications_count'] ?? 0);
           </span>
           <span class="jp-highlight">
             <i class="fas fa-briefcase"></i>
-            <?= ucfirst(str_replace('-', ' ', $job['job_type'] ?? 'Full-time')) ?>
+            <?= getJobTypeLabel($job['job_type'] ?? 'full-time') ?>
           </span>
           <?php if ($salary_display !== 'Not Disclosed'): ?>
           <span class="jp-highlight">
@@ -399,7 +413,7 @@ $apps_count = (int)($job['applications_count'] ?? 0);
         <div class="jp-content-block">
           <h2><i class="fas fa-briefcase"></i> Similar Jobs</h2>
           <?php foreach ($related_jobs as $r): ?>
-          <a href="job-detail-omr.php?id=<?= $r['id'] ?>" class="jp-related-card">
+          <a href="<?= getJobDetailPath($r['id'], $r['title'] ?? null) ?>" class="jp-related-card">
             <div class="jp-related-card__initial">
               <?= htmlspecialchars(mb_substr($r['company_name'] ?? 'C', 0, 1)) ?>
             </div>
@@ -459,7 +473,7 @@ $apps_count = (int)($job['applications_count'] ?? 0);
               </tr>
               <tr>
                 <td>Type</td>
-                <td><?= ucfirst(str_replace('-',' ',$job['job_type'] ?? '')) ?></td>
+                <td><?= getJobTypeLabel($job['job_type'] ?? '') ?></td>
               </tr>
               <tr>
                 <td>Location</td>

@@ -223,7 +223,7 @@ if ($success) {
 } else {
     // Error - redirect back to job detail with errors
     $_SESSION['application_errors'] = $errors;
-    header('Location: job-detail-omr.php?id=' . $job_id . '&error=1');
+    header('Location: ' . getJobDetailPath((int)$job_id, $job_data['title'] ?? null) . '?error=1');
     exit;
 }
 ?>

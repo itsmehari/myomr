@@ -46,22 +46,30 @@ See `CREATE-HOSTELS-PGS-DATABASE.sql` for complete schema:
 - `property_reviews` - Reviews (future)
 - `saved_properties` - Bookmarks (future)
 
-## Folder Structure
+## Folder Structure (modular, root pattern)
+
+Pages use **module bootstrap** (`includes/bootstrap.php`) and **root layout** (ROOT_PATH meta, head-includes, skip-link, `omr_nav()`, `omr_footer()`, js-includes, sdg-badge) to match the site’s `index.php` pattern.
 
 ```
 omr-hostels-pgs/
 ├── includes/
+│   ├── bootstrap.php      # ROOT_PATH, include-path, page-bootstrap, DB, error-reporting, property-functions
 │   ├── error-reporting.php
 │   ├── property-functions.php
 │   ├── owner-auth.php
 │   └── seo-helper.php
+├── components/            # Section partials for index
+│   ├── hero-hostels.php
+│   ├── filters-bar.php
+│   ├── property-cards.php
+│   └── cta-owner.php
 ├── admin/
 │   └── (admin pages)
 ├── assets/
 │   ├── images/
 │   ├── hostels-pgs.css
 │   └── hostels-search.js
-├── index.php
+├── index.php              # Listings: bootstrap → data → meta/head → omr_nav → section includes → omr_footer
 ├── property-detail.php
 ├── owner-login.php
 ├── owner-register.php

@@ -21,6 +21,7 @@ $cats = [
   ['label' => 'Restaurants', 'url' => '/omr-listings/restaurants.php', 'icon' => 'fas fa-utensils', 'highlight' => false, 'table' => 'omr_restaurants'],
   ['label' => 'Jobs', 'url' => '/omr-local-job-listings/', 'icon' => 'fas fa-briefcase', 'highlight' => true, 'table' => null],
   ['label' => 'Events', 'url' => '/omr-local-events/', 'icon' => 'fas fa-calendar-day', 'highlight' => true, 'table' => 'event_listings'],
+  ['label' => 'Rent & Lease', 'url' => '/omr-rent-lease/', 'icon' => 'fas fa-house', 'highlight' => true, 'table' => 'rent_lease_properties'],
   ['label' => 'Hostels & PGs', 'url' => '/omr-hostels-pgs/', 'icon' => 'fas fa-bed', 'highlight' => false, 'table' => null],
   ['label' => 'Coworking', 'url' => '/omr-coworking-spaces/', 'icon' => 'fas fa-building', 'highlight' => false, 'table' => null],
   ['label' => 'Hospitals', 'url' => '/omr-listings/hospitals.php', 'icon' => 'fas fa-hospital', 'highlight' => false, 'table' => 'omrhospitalslist'],

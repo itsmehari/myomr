@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Events Listing - MyOMR
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
@@ -19,9 +19,16 @@ $per_page = 12;
 $offset = ($page - 1) * $per_page;
 
 $categories = getEventCategories();
+$categoryCounts = getCategoryCounts();
+$localityCounts = getLocalityCounts(15);
+$featuredEvents = getFeaturedEvents(2);
 $events = getEvents($filters, $per_page, $offset);
 $total = getEventCount($filters);
 $pages = max(1, (int)ceil($total / $per_page));
+
+// Build category id => count map
+$catCountMap = [];
+foreach ($categoryCounts as $cc) { $catCountMap[(int)$cc['id']] = (int)$cc['cnt']; }
 
 // SEO
 $page_title = 'Events in OMR Chennai – Local Community & Happenings | MyOMR';
@@ -67,6 +74,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
   <?php $orgSchema = __DIR__ . '/../components/organization-schema.php'; if (file_exists($orgSchema)) { include $orgSchema; } ?>
 </head>
 <body class="modern-page">
+<?php require_once __DIR__ . '/../components/skip-link.php'; ?>
 <?php include __DIR__ . '/../components/main-nav.php'; ?>
 
 <!-- Dashboard Header -->
@@ -87,8 +95,37 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
   </div>
 </div>
 
-<main class="py-5">
+<main id="main-content" class="py-5">
   <div class="container">
+    <!-- SEO intro block -->
+    <div class="events-intro mb-4 p-4 rounded bg-light">
+      <p class="mb-2"><strong>Welcome to Events in OMR</strong> — your one-stop directory for community events, workshops, meetups, concerts, and happenings across Old Mahabalipuram Road. Whether you&rsquo;re looking for <a href="index.php?is_free=1">free events in OMR</a>, <a href="today.php">events today</a>, or <a href="weekend.php">weekend events</a>, find what&rsquo;s happening near Sholinganallur, Perungudi, Navalur, Thoraipakkam & beyond.</p>
+      <p class="mb-0 small text-muted">Organizing an event? <a href="post-event-omr.php">List your event free</a> and reach thousands of OMR residents.</p>
+    </div>
+
+    <?php if (!empty($featuredEvents)): ?>
+    <!-- Featured events hero block -->
+    <div class="events-featured mb-4">
+      <h2 class="h5 mb-3">Featured Events</h2>
+      <div class="row g-3">
+        <?php foreach ($featuredEvents as $ev): $compact = false; ?>
+          <div class="col-md-6">
+            <?php include __DIR__ . '/components/event-card.php'; ?>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+    <?php endif; ?>
+
+    <!-- Prominent quick links -->
+    <div class="events-quick-links mb-4 d-flex flex-wrap gap-2 align-items-center">
+      <span class="me-2 fw-semibold">Browse:</span>
+      <a class="btn btn-sm btn-outline-primary" href="today.php"><i class="fas fa-calendar-day me-1"></i>Today</a>
+      <a class="btn btn-sm btn-outline-primary" href="weekend.php"><i class="fas fa-calendar-week me-1"></i>This Weekend</a>
+      <a class="btn btn-sm btn-outline-primary" href="month.php"><i class="fas fa-calendar-alt me-1"></i>This Month</a>
+      <a class="btn btn-sm btn-outline-success" href="index.php?is_free=1"><i class="fas fa-gift me-1"></i>Free Events</a>
+    </div>
+
     <!-- Filters -->
     <form class="card-modern mb-4 dashboard-toolbar" method="get">
       <div class="">
@@ -100,17 +137,28 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
           <div class="col-md-3">
             <label class="form-label-modern">Category</label>
             <select name="category" class="form-select-modern">
-              <option value="">All</option>
-              <?php foreach ($categories as $cat): ?>
+              <option value="">All Categories</option>
+              <?php foreach ($categories as $cat): $cnt = $catCountMap[(int)$cat['id']] ?? 0; ?>
                 <option value="<?php echo (int)$cat['id']; ?>" <?php echo ((int)$filters['category'] === (int)$cat['id']) ? 'selected' : ''; ?>>
-                  <?php echo htmlspecialchars($cat['name']); ?>
+                  <?php echo htmlspecialchars($cat['name']); ?><?php echo $cnt > 0 ? ' (' . $cnt . ')' : ''; ?>
                 </option>
               <?php endforeach; ?>
             </select>
           </div>
           <div class="col-md-3">
             <label class="form-label-modern">Locality</label>
-            <input type="text" class="form-control-modern" name="locality" value="<?php echo htmlspecialchars($filters['locality']); ?>" placeholder="e.g., Sholinganallur" />
+            <?php if (!empty($localityCounts)): ?>
+              <select name="locality" class="form-select-modern">
+                <option value="">All Localities</option>
+                <?php foreach ($localityCounts as $lc): ?>
+                  <option value="<?php echo htmlspecialchars($lc['locality']); ?>" <?php echo (($filters['locality'] ?? '') === $lc['locality']) ? 'selected' : ''; ?>>
+                    <?php echo htmlspecialchars($lc['locality']); ?> (<?php echo (int)$lc['cnt']; ?>)
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            <?php else: ?>
+              <input type="text" class="form-control-modern" name="locality" value="<?php echo htmlspecialchars($filters['locality']); ?>" placeholder="e.g., Sholinganallur" />
+            <?php endif; ?>
           </div>
           <div class="col-md-2">
             <label class="form-label-modern">Free</label>
@@ -165,30 +213,9 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
           <div class="alert-modern">No events found. Try different filters or <a href="post-event-omr.php">list an event</a>.</div>
         </div>
       <?php else: ?>
-        <?php foreach ($events as $ev): ?>
+        <?php foreach ($events as $ev): $compact = false; ?>
           <div class="col-md-6 col-lg-4 mb-4">
-            <div class="job-card-modern h-100 dashboard-card">
-              <div class="job-header">
-                <div class="job-title"><?php echo htmlspecialchars($ev['title']); ?></div>
-                <div class="company-name"><?php echo htmlspecialchars($ev['location']); ?><?php echo $ev['locality'] ? ' • ' . htmlspecialchars($ev['locality']) : ''; ?></div>
-                <div class="job-meta">
-                  <span class="badge-modern badge-modern-success"><i class="far fa-calendar"></i><?php echo date('M d, Y g:i a', strtotime($ev['start_datetime'])); ?></span>
-                  <?php if (!empty($ev['featured'])): ?>
-                    <span class="badge-modern badge-featured"><i class="fas fa-star"></i> Featured</span>
-                  <?php endif; ?>
-                  <?php if ($ev['is_free']): ?><span class="badge-modern badge-modern-primary">Free</span><?php endif; ?>
-                  <?php if (!empty($ev['locality'])): ?>
-                    <?php $locSlug = localityToSlug($ev['locality']); ?>
-                    <a class="badge-modern badge-modern-secondary" href="locality.php?slug=<?php echo urlencode($locSlug); ?>">#<?php echo htmlspecialchars($ev['locality']); ?></a>
-                  <?php endif; ?>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between align-items-center">
-                <a href="event/<?php echo urlencode($ev['slug']); ?>" class="btn-modern btn-modern-secondary" data-analytics="viewClicked" data-analytics-label="<?php echo htmlspecialchars($ev['slug']); ?>"><i class="fas fa-eye"></i><span>View</span></a>
-                <a href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode($ev['location'] . ' ' . ($ev['locality'] ?? 'OMR Chennai')); ?>" target="_blank" class="btn-modern btn-modern-secondary" data-analytics="mapClicked" data-analytics-label="<?php echo htmlspecialchars($ev['slug']); ?>"><i class="fas fa-map-marker-alt"></i><span>Map</span></a>
-                <a href="post-event-omr.php" class="btn-modern btn-modern-primary"><i class="fas fa-plus"></i><span>List Event</span></a>
-              </div>
-            </div>
+            <?php include __DIR__ . '/components/event-card.php'; ?>
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
@@ -210,6 +237,18 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
     <?php endif; ?>
   </div>
 </main>
+
+<!-- How to list an event - FAQ/SEO block -->
+<section class="py-4 bg-white">
+  <div class="container">
+    <h2 class="h5 mb-3">How to list your event on MyOMR</h2>
+    <ol class="mb-0 ps-3">
+      <li class="mb-2">Click <a href="post-event-omr.php">List an Event</a> and fill in the form (title, date, venue, description).</li>
+      <li class="mb-2">Add an image and ticket link if you have one. Free events get a &ldquo;Free&rdquo; badge.</li>
+      <li>After a quick review, your event goes live and appears in search and on our events directory.</li>
+    </ol>
+  </div>
+</section>
 
 <section class="py-4 bg-light">
   <div class="container d-flex justify-content-center">

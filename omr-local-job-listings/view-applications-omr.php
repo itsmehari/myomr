@@ -7,15 +7,16 @@
  * @version 1.0.0
  */
 
-// Enable error reporting for development
 require_once __DIR__ . '/includes/error-reporting.php';
-
-// Require employer authentication
 require_once __DIR__ . '/includes/employer-auth.php';
 requireEmployerAuth();
 
-// Load database connection directly (like test-jobs.php)
-require_once __DIR__ . '/../core/omr-connect.php';
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+require_once ROOT_PATH . '/core/omr-connect.php';
 global $conn;
 
 // Verify connection
@@ -182,7 +183,7 @@ $canonical_url = "https://myomr.in/omr-local-job-listings/view-applications-omr.
 <body class="modern-page">
 
 <!-- Navigation -->
-<?php require_once '../components/main-nav.php'; ?>
+<?php omr_nav('main'); ?>
 
 <!-- Hero Section -->
 <section class="hero-modern py-4">
@@ -199,7 +200,7 @@ $canonical_url = "https://myomr.in/omr-local-job-listings/view-applications-omr.
                 <a class="btn btn-outline-light" href="my-posted-jobs-omr.php">
                     <i class="fas fa-arrow-left me-2"></i>Back to Jobs
                 </a>
-                <a class="btn btn-outline-light" href="job-detail-omr.php?id=<?php echo $job_id; ?>" target="_blank">
+                <a class="btn btn-outline-light" href="<?php echo getJobDetailPath($job_id, $job['title'] ?? null); ?>" target="_blank">
                     <i class="fas fa-eye me-2"></i>View Job Posting
                 </a>
             </div>
@@ -347,7 +348,7 @@ $canonical_url = "https://myomr.in/omr-local-job-listings/view-applications-omr.
                     You haven't received any applications for this job posting yet. Share your job posting to reach more candidates!
                 </p>
                 <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <a href="job-detail-omr.php?id=<?php echo $job_id; ?>" class="btn btn-primary" target="_blank">
+                    <a href="<?php echo getJobDetailPath($job_id, $job['title'] ?? null); ?>" class="btn btn-primary" target="_blank">
                         <i class="fas fa-share-alt me-2"></i>Share Job Posting
                     </a>
                     <a href="my-posted-jobs-omr.php" class="btn btn-outline-secondary">
@@ -361,7 +362,7 @@ $canonical_url = "https://myomr.in/omr-local-job-listings/view-applications-omr.
 </main>
 
 <!-- Footer -->
-<?php require_once '../components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

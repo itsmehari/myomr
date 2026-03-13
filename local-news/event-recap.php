@@ -5,7 +5,11 @@ require_once __DIR__ . '/../omr-local-events/includes/event-functions-omr.php';
 
 $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $event = $slug ? getEventBySlug($slug) : null;
-if (!$event) { http_response_code(404); die('Event not found'); }
+if (!$event) {
+  if (!defined('ROOT_PATH')) define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+  require_once ROOT_PATH . '/core/serve-404.php';
+  exit;
+}
 
 $page_title = 'Recap: ' . $event['title'] . ' – Photos & Highlights';
 $canonical_url = 'https://myomr.in/local-news/event-recap.php?slug=' . urlencode($slug);

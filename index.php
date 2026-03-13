@@ -7,6 +7,7 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 $recent_jobs = [];
+$recent_events = [];
 $subscribed = isset($_GET['subscribed']);
 $sub_error = isset($_GET['subscribe_error']);
 $page_nav = 'homepage';
@@ -25,6 +26,10 @@ if (file_exists($core_file)) {
     $job_res = $conn->query("SELECT id, title, location FROM job_postings WHERE status = 'approved' ORDER BY created_at DESC LIMIT 12");
     if ($job_res && $job_res->num_rows > 0) {
       while ($row = $job_res->fetch_assoc()) $recent_jobs[] = $row;
+    }
+    $ev_res = @$conn->query("SELECT id, title, slug, start_datetime, location, locality FROM event_listings WHERE status IN ('scheduled','ongoing') ORDER BY start_datetime ASC LIMIT 6");
+    if ($ev_res && $ev_res->num_rows > 0) {
+      while ($row = $ev_res->fetch_assoc()) $recent_events[] = $row;
     }
   }
 }
@@ -272,7 +277,7 @@ if (file_exists($core_file)) {
       </div>
     </div>
     <div class="hero-search-wrap">
-      <form class="hero-search" action="/omr-local-job-listings/" method="get" role="search">
+      <form class="hero-search hero-search-unified" action="/omr-local-job-listings/" method="get" role="search" data-jobs-action="/omr-local-job-listings/" data-events-action="/omr-local-events/" data-places-action="/omr-listings/">
         <input type="search" name="search" placeholder="What are you looking for?" aria-label="Search OMR">
         <input type="text" name="location" placeholder="Area in OMR" aria-label="Location">
         <select name="category" aria-label="Category">
@@ -294,6 +299,7 @@ if (file_exists($core_file)) {
       <span><i class="fas fa-calendar-day"></i> Events</span>
       <span><i class="fas fa-bed"></i> Hostels</span>
       <span><i class="fas fa-building"></i> Coworking</span>
+      <span><i class="fas fa-house"></i> Rent & Lease</span>
     </div>
     <div class="hero-quick-links">
       <a href="/omr-local-job-listings/"><i class="fas fa-briefcase"></i> Jobs</a>
@@ -301,6 +307,7 @@ if (file_exists($core_file)) {
       <a href="/omr-listings/"><i class="fas fa-map-marker-alt"></i> Places</a>
       <a href="/omr-hostels-pgs/"><i class="fas fa-bed"></i> Hostels & PGs</a>
       <a href="/omr-coworking-spaces/"><i class="fas fa-building"></i> Coworking</a>
+      <a href="/omr-rent-lease/"><i class="fas fa-house"></i> Rent & Lease</a>
     </div>
     <div class="hero-dots" role="tablist" aria-label="Hero slides">
       <button type="button" role="tab" aria-selected="true" aria-label="Slide 1" class="active" data-dot="0"></button>
@@ -338,10 +345,28 @@ if (file_exists($core_file)) {
   });
   start();
 })();
+
+/* Hero search: route to events/places when category selected */
+(function(){
+  var form = document.querySelector('.hero-search-unified');
+  if (!form) return;
+  var catSelect = form.querySelector('select[name="category"]');
+  if (!catSelect) return;
+  form.addEventListener('submit', function() {
+    var cat = (catSelect.value || '').toLowerCase();
+    if (cat === 'events') form.action = form.getAttribute('data-events-action') || '/omr-local-events/';
+    else if (cat === 'places' || cat === 'schools' || cat === 'restaurants' || cat === 'hostels' || cat === 'coworking') form.action = form.getAttribute('data-places-action') || '/omr-listings/';
+    else form.action = form.getAttribute('data-jobs-action') || '/omr-local-job-listings/';
+  });
+})();
 </script>
 
 <?php if (!empty($recent_jobs)): ?>
 <?php include 'components/homepage-jobs-scroll-banner.php'; ?>
+<?php endif; ?>
+
+<?php if (!empty($recent_events)): ?>
+<?php include 'components/homepage-events-widget.php'; ?>
 <?php endif; ?>
 
 <main id="main-content" class="homepage-main">

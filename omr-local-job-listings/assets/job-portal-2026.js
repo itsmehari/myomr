@@ -34,11 +34,13 @@
     return params;
   }
 
-  function renderJobs(html, count) {
+  function renderJobs(html, pageCount, total) {
     const grid = $('jobs-grid');
     const countEl = $('filter-job-count');
+    const totalEl = $('filter-job-total');
     if (grid) grid.innerHTML = html;
-    if (countEl) countEl.textContent = count;
+    if (countEl) countEl.textContent = typeof pageCount === 'number' ? pageCount.toLocaleString() : pageCount;
+    if (totalEl) totalEl.textContent = typeof total === 'number' ? total.toLocaleString() : (total ?? totalEl.textContent);
     // Animate new cards
     qsa('#jobs-grid .jp-card').forEach((c, i) => {
       c.style.animationDelay = (i * 0.04) + 's';
@@ -57,7 +59,8 @@
       if (!r.ok) throw new Error('Network error');
       const d = await r.json();
       if (d.html !== undefined) {
-        renderJobs(d.html, d.total);
+        const pageCount = Array.isArray(d.jobs) ? d.jobs.length : (d.total || 0);
+        renderJobs(d.html, pageCount, d.total);
         // Update pagination
         const pag = $('jobs-pagination');
         if (pag && d.pagination) pag.innerHTML = d.pagination;

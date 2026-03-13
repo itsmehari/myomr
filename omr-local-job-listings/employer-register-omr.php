@@ -3,12 +3,15 @@
  * Employer Registration – MyOMR Job Portal
  * Creates or updates an employer profile and logs in the employer
  */
-
-// Enable error reporting during development (safe to keep; production can disable display_errors)
 require_once __DIR__ . '/includes/error-reporting.php';
-
-require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/employer-auth.php';
+
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+require_once ROOT_PATH . '/core/omr-connect.php';
 
 $error = '';
 
@@ -54,21 +57,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+$page_nav = 'main';
+$page_title = 'Register as Employer - MyOMR Job Portal';
+$page_description = 'Create your employer profile to post jobs and manage applications on MyOMR.';
+$canonical_url = 'https://myomr.in/omr-local-job-listings/employer-register-omr.php';
+$og_type = 'website';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register as Employer - MyOMR Job Portal</title>
+    <?php require_once ROOT_PATH . '/components/meta.php'; ?>
+    <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/omr-jobs-unified-design.css">
-    <?php include '../components/analytics.php'; ?>
 </head>
 <body class="modern-page">
 
-<?php require_once __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav($page_nav); ?>
 
 <!-- Hero -->
 <div class="hero-modern">
@@ -134,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </main>
 
+<?php omr_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

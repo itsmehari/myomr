@@ -1,11 +1,13 @@
 <?php
 /**
- * Property Owner Login - Email-based session login
+ * Property Owner Login – uses module bootstrap and root layout.
  */
-// Enable error reporting for development
-require_once __DIR__ . '/includes/error-reporting.php';
-
+require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/includes/owner-auth.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'my-properties.php';
 
@@ -43,24 +45,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+$page_nav = 'main';
+$page_title = 'Property Owner Login - MyOMR Hostels & PGs';
+$page_description = 'Sign in to manage your hostel or PG listings on MyOMR.';
+$canonical_url = 'https://myomr.in/omr-hostels-pgs/owner-login.php';
+$og_type = 'website';
+$breadcrumbs = [
+    ['https://myomr.in/', 'Home'],
+    ['https://myomr.in/omr-hostels-pgs/', 'Hostels & PGs in OMR'],
+    [$canonical_url, 'Owner Login'],
+];
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Owner Login - MyOMR Hostels & PGs</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/hostels-pgs.css">
-    
-    <!-- Google Analytics -->
-    <?php include '../components/analytics.php'; ?>
+    <?php require_once ROOT_PATH . '/components/meta.php'; ?>
+    <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
+    <link rel="stylesheet" href="/omr-hostels-pgs/assets/hostels-pgs.css">
 </head>
 <body class="modern-page">
 
-<?php require_once __DIR__ . '/../components/main-nav.php'; ?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav(); ?>
 
 <!-- Hero Section -->
 <div class="hero-modern">
@@ -113,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </main>
 
-<?php require_once __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   function gtagSend(name, params){
@@ -124,6 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     gtagSend('owner_login_submit', { method: 'email', email_length: email.length });
   });
 </script>
+<?php require_once ROOT_PATH . '/components/js-includes.php'; ?>
+<?php include ROOT_PATH . '/components/sdg-badge.php'; ?>
 </body>
 </html>
 

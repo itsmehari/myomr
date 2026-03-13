@@ -1,86 +1,25 @@
-﻿<?php
+<?php
 /**
  * MyOMR Hostels & PGs Portal - Property Detail Page
- * Individual property listing view with inquiry form
- * 
- * @package MyOMR Hostels & PGs
- * @version 1.0.0
+ * Individual property listing view with inquiry form.
+ * Uses module bootstrap and root layout (meta, omr_nav, omr_footer).
  */
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
-// Enable error reporting for development
-require_once __DIR__ . '/includes/error-reporting.php';
+require_once __DIR__ . '/includes/bootstrap.php';
+require_once __DIR__ . '/includes/seo-helper.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include helper functions
-require_once __DIR__ . '/includes/property-functions.php';
-require_once __DIR__ . '/includes/seo-helper.php';
+$property_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-// Load database connection directly
-require_once __DIR__ . '/../core/omr-connect.php';
-global $conn;
-
-// Verify connection
-if (!isset($conn) || !$conn instanceof mysqli || $conn->connect_error) {
-    header("HTTP/1.0 500 Internal Server Error");
-    echo "<h1>500 - Database Error</h1>";
-    echo "<p>Database connection failed. Please try again later.</p>";
-    exit;
-}
-
-// Get property ID from URL
-$property_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
-if ($property_id <= 0) {
-    header("HTTP/1.0 404 Not Found");
-    echo "<h1>404 - Property Not Found</h1>";
-    echo "<p>Invalid property ID.</p>";
-    exit;
-}
-
-// Get property details using direct query
-$property = null;
-
-// Try direct query first
-$directQuery = "SELECT h.*, p.full_name as owner_name, p.email as owner_email, p.phone as owner_phone
-                FROM hostels_pgs h
-                LEFT JOIN property_owners p ON h.owner_id = p.id
-                WHERE h.id = {$property_id} AND h.status = 'active'";
-
-$directResult = $conn->query($directQuery);
-
-if ($directResult && $directResult->num_rows > 0) {
-    $property = $directResult->fetch_assoc();
-} else {
-    // Fallback: Try without status check
-    $fallbackQuery = "SELECT h.*, p.full_name as owner_name, p.email as owner_email, p.phone as owner_phone
-                      FROM hostels_pgs h
-                      LEFT JOIN property_owners p ON h.owner_id = p.id
-                      WHERE h.id = {$property_id}";
-    
-    $fallbackResult = $conn->query($fallbackQuery);
-    if ($fallbackResult && $fallbackResult->num_rows > 0) {
-        $property = $fallbackResult->fetch_assoc();
-    } else {
-        // Last fallback
-        $lastQuery = "SELECT h.*, p.full_name as owner_name, p.email as owner_email, p.phone as owner_phone
-                      FROM hostels_pgs h
-                      LEFT JOIN property_owners p ON h.owner_id = p.id
-                      WHERE h.id = {$property_id} AND LOWER(TRIM(h.status)) = 'active'";
-        
-        $lastResult = $conn->query($lastQuery);
-        if ($lastResult && $lastResult->num_rows > 0) {
-            $property = $lastResult->fetch_assoc();
-        }
-    }
-}
-
+$property = ($property_id > 0) ? getPropertyById($property_id) : null;
 if (!$property) {
-    header("HTTP/1.0 404 Not Found");
-    echo "<h1>404 - Property Not Found</h1>";
-    echo "<p>The property you're looking for doesn't exist or has been removed.</p>";
+    require_once ROOT_PATH . '/core/serve-404.php';
     exit;
 }
 
@@ -93,59 +32,35 @@ $photos = getPropertyPhotos($property_id);
 // Get related properties
 $related_properties = getRelatedProperties($property_id, $property['locality'], 3);
 
-// SEO Meta
-$page_title = htmlspecialchars($property['property_name']) . " in " . htmlspecialchars($property['locality']) . " | MyOMR";
+// Page context for root layout (meta.php, head-includes, omr_nav, omr_footer)
+$page_nav = 'main';
+$page_title = htmlspecialchars($property['property_name']) . ' in ' . htmlspecialchars($property['locality']) . ' | MyOMR';
 $clean_description = trim(strip_tags($property['brief_overview'] ?? $property['full_description'] ?? ''));
 $page_description = strlen($clean_description) > 155
     ? substr($clean_description, 0, 155) . '...'
     : $clean_description;
-$canonical_url = "https://myomr.in/omr-hostels-pgs/property-detail.php?id=" . $property_id;
-$og_image = "https://myomr.in/omr-hostels-pgs/" . htmlspecialchars($property['featured_image'] ?? 'My-OMR-Logo.png');
+$page_keywords = htmlspecialchars($property['property_name']) . ', ' . htmlspecialchars($property['locality']) . ', ' . htmlspecialchars($property['property_type']) . ', OMR hostel, PG accommodation';
+$canonical_url = 'https://myomr.in/omr-hostels-pgs/property-detail.php?id=' . $property_id;
+$og_type = 'website';
+$og_image = !empty($property['featured_image'])
+    ? 'https://myomr.in/omr-hostels-pgs/' . htmlspecialchars($property['featured_image'])
+    : 'https://myomr.in/My-OMR-Logo.png';
+$breadcrumbs = [
+    ['https://myomr.in/', 'Home'],
+    ['https://myomr.in/omr-hostels-pgs/', 'Hostels & PGs in OMR'],
+    [$canonical_url, $property['property_name']],
+];
 
 // Parse JSON fields
 $room_types = json_decode($property['room_types'] ?? '[]', true);
 $facilities = json_decode($property['facilities'] ?? '[]', true);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $page_title; ?></title>
-    <meta name="description" content="<?php echo $page_description; ?>">
-    <meta name="keywords" content="<?php echo htmlspecialchars($property['property_name']); ?>, <?php echo htmlspecialchars($property['locality']); ?>, <?php echo htmlspecialchars($property['property_type']); ?>, OMR hostel, PG accommodation">
-    <link rel="canonical" href="<?php echo $canonical_url; ?>">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="<?php echo htmlspecialchars($property['property_name']); ?>">
-    <meta property="og:description" content="<?php echo $page_description; ?>">
-    <meta property="og:url" content="<?php echo $canonical_url; ?>">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="<?php echo $og_image; ?>">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<?php echo htmlspecialchars($property['property_name']); ?>">
-    <meta name="twitter:description" content="<?php echo $page_description; ?>">
-    <meta name="twitter:image" content="<?php echo $og_image; ?>">
-    
-    <!-- Google Analytics -->
-    <?php include '../components/analytics.php'; ?>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/core.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/hostels-pgs.css">
-    <!-- Universal Footer Styles -->
-    <link rel="stylesheet" href="/assets/css/footer.css">
-    
-    <!-- Structured Data -->
+    <?php require_once ROOT_PATH . '/components/meta.php'; ?>
+    <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
+    <link rel="stylesheet" href="/omr-hostels-pgs/assets/hostels-pgs.css">
     <?php echo generatePropertySchema($property); ?>
     <script type="application/ld+json">
     {
@@ -295,7 +210,8 @@ $facilities = json_decode($property['facilities'] ?? '[]', true);
 <body class="modern-page">
 
 <!-- Navigation -->
-<?php require_once '../components/main-nav.php'; ?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav(); ?>
 
 <!-- Skip Link -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -826,7 +742,7 @@ $facilities = json_decode($property['facilities'] ?? '[]', true);
 </div>
 
 <!-- Footer -->
-<?php require_once '../components/footer.php'; ?>
+<?php omr_footer(); ?>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -886,7 +802,8 @@ document.getElementById('inquiryForm')?.addEventListener('submit', function() {
     }
 });
 </script>
-
+<?php require_once ROOT_PATH . '/components/js-includes.php'; ?>
+<?php include ROOT_PATH . '/components/sdg-badge.php'; ?>
 </body>
 </html>
 

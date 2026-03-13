@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * SEO Helper Functions
  * Centralized SEO functions for job portal
@@ -245,6 +245,7 @@ function generateJobPostingSchema($job) {
     $address = resolveJobPostalAddress($job);
     $validThrough = resolveJobValidThrough($job);
     $salary = buildSalarySchema($job);
+    $jobUrl = function_exists('getJobDetailUrl') ? getJobDetailUrl((int)($job['id'] ?? 0), $job['title'] ?? null) : '';
     
     $schema = [
         "@context" => "https://schema.org",
@@ -252,7 +253,9 @@ function generateJobPostingSchema($job) {
         "title" => sanitizeSchemaText($job['title'], 150),
         "description" => sanitizeSchemaText($job['description'], 5000),
         "datePosted" => !empty($job['created_at']) ? date('Y-m-d', strtotime($job['created_at'])) : date('Y-m-d'),
+        "validThrough" => $validThrough,
         "employmentType" => sanitizeSchemaText($job['job_type'], 50),
+        "directApply" => true,
         "hiringOrganization" => array_filter([
             "@type" => "Organization",
             "name" => sanitizeSchemaText($job['company_name'] ?? 'MyOMR Employer', 200),
@@ -284,8 +287,11 @@ function generateJobPostingSchema($job) {
                 return $value !== null && $value !== '';
             }),
         ],
-        "validThrough" => $validThrough,
     ];
+    
+    if ($jobUrl !== '') {
+        $schema["url"] = $jobUrl;
+    }
     
     if (!empty($job['category_name'])) {
         $schema["industry"] = sanitizeSchemaText($job['category_name'], 120);

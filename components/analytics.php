@@ -23,6 +23,7 @@ if (!empty($ga_content_group) && is_string($ga_content_group)) {
         '/omr-local-events/'       => 'Local Events',
         '/omr-coworking-spaces/'   => 'Coworking Spaces',
         '/omr-hostels-pgs/'        => 'Hostels & PGs',
+        '/omr-rent-lease/'         => 'Rent & Lease',
         '/omr-listings/'           => 'Listings Directory',
         '/local-news/'             => 'Local News',
         '/discover-myomr/'         => 'Discover MyOMR',

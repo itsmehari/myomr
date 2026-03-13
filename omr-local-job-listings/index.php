@@ -9,9 +9,11 @@ require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/includes/job-functions-omr.php';
 require_once __DIR__ . '/includes/seo-helper.php';
 
-// Bootstrap: central path + component helpers
-$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
-require_once $root . '/core/include-path.php';
+// Bootstrap: use __DIR__ for reliable path on shared hosting (avoids DOCUMENT_ROOT issues)
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
 require_once ROOT_PATH . '/components/component-includes.php';
 
 require_once ROOT_PATH . '/core/omr-connect.php';
@@ -79,10 +81,10 @@ $base_url   = "/omr-local-job-listings/" . ($filter_qs ? "?$filter_qs" : '');
 <link rel="canonical" href="<?= $canonical ?>">
 
 <?php if ($current_page > 1): ?>
-<link rel="prev" href="<?= htmlspecialchars($base_url . (str_contains($base_url,'?') ? '&' : '?') . 'page=' . ($current_page - 1)) ?>">
+<link rel="prev" href="<?= htmlspecialchars($base_url . (strpos($base_url, '?') !== false ? '&' : '?') . 'page=' . ($current_page - 1)) ?>">
 <?php endif; ?>
 <?php if ($current_page < $total_pages): ?>
-<link rel="next" href="<?= htmlspecialchars($base_url . (str_contains($base_url,'?') ? '&' : '?') . 'page=' . ($current_page + 1)) ?>">
+<link rel="next" href="<?= htmlspecialchars($base_url . (strpos($base_url, '?') !== false ? '&' : '?') . 'page=' . ($current_page + 1)) ?>">
 <?php endif; ?>
 
 <!-- OG / Twitter -->
@@ -318,17 +320,17 @@ include ROOT_PATH . '/components/analytics.php'; ?>
         <?php if (!empty($filters)): ?>
         <div class="jp-active-filters" id="active-filter-tags">
           <?php foreach ($filters as $key => $val):
-            $label = match($key) {
-              'search'           => "\"$val\"",
-              'category'         => ucfirst($val),
-              'location'         => $val,
-              'job_type'         => ucfirst(str_replace('-',' ',$val)),
-              'experience_level' => $val,
-              'is_remote'        => 'Remote',
-              'salary_min'       => '₹' . number_format((int)$val) . '+ min',
-              'salary_max'       => '₹' . number_format((int)$val) . ' max',
-              default            => $val,
-            };
+            switch ($key) {
+              case 'search':           $label = "\"$val\""; break;
+              case 'category':         $label = ucfirst($val); break;
+              case 'location':         $label = $val; break;
+              case 'job_type':         $label = ucfirst(str_replace('-',' ',$val)); break;
+              case 'experience_level': $label = $val; break;
+              case 'is_remote':        $label = 'Remote'; break;
+              case 'salary_min':       $label = '₹' . number_format((int)$val) . '+ min'; break;
+              case 'salary_max':       $label = '₹' . number_format((int)$val) . ' max'; break;
+              default:                 $label = $val;
+            }
           ?>
           <span class="jp-filter-tag">
             <?= htmlspecialchars($label) ?>
@@ -352,7 +354,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
             </h2>
             <p class="jp-results-count" id="results-count">
               Showing <strong id="filter-job-count"><?= number_format(count($jobs)) ?></strong>
-              of <strong><?= number_format($total_jobs) ?></strong> jobs
+              of <strong id="filter-job-total"><?= number_format($total_jobs) ?></strong> jobs
               <?php if ($current_page > 1): ?> &mdash; Page <?= $current_page ?> of <?= $total_pages ?><?php endif; ?>
             </p>
           </div>
@@ -392,7 +394,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
           <div class="row g-2" id="spotlight-track">
             <?php foreach ($featured_jobs as $fj): ?>
             <div class="col-md-4">
-              <a href="job-detail-omr.php?id=<?= $fj['id'] ?>" class="jp-related-card" style="height:100%">
+              <a href="<?= getJobDetailPath($fj['id'], $fj['title'] ?? null) ?>" class="jp-related-card" style="height:100%">
                 <div class="jp-related-card__initial">
                   <?= htmlspecialchars(mb_substr($fj['company_name'] ?? 'C', 0, 1)) ?>
                 </div>
@@ -424,7 +426,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
           <?php if (!empty($jobs)): ?>
             <?php foreach ($jobs as $job):
               $loc      = htmlspecialchars($job['location'] ?? '');
-              $type     = ucfirst(str_replace('-', ' ', $job['job_type'] ?? 'Full-time'));
+              $type     = getJobTypeLabel($job['job_type'] ?? 'full-time');
               $cat      = htmlspecialchars($job['category_name'] ?? $job['category'] ?? 'General');
               $salary   = (!empty($job['salary_range']) && $job['salary_range'] !== 'Not Disclosed')
                           ? formatSalary($job['salary_range']) : '';
@@ -438,7 +440,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
               $featured = !empty($job['featured']);
 
               // Build WhatsApp message
-              $wa_msg = rawurlencode("Hi, I'm interested in the {$job['title']} role at {$job['company_name']} that I found on MyOMR.in. Can you share more details? Job link: https://myomr.in/omr-local-job-listings/job-detail-omr.php?id=$jid");
+              $wa_msg = rawurlencode("Hi, I'm interested in the {$job['title']} role at {$job['company_name']} that I found on MyOMR.in. Can you share more details? Job link: " . getJobDetailUrl($jid, $job['title'] ?? null));
               $wa_href = "https://wa.me/" . preg_replace('/\D/', '', $job['employer_phone'] ?? '') . "?text=$wa_msg";
             ?>
             <article class="jp-card<?= $featured ? ' featured' : '' ?>"
@@ -459,7 +461,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
                 <?php endif; ?>
 
                 <div class="jp-card__meta">
-                  <a href="job-detail-omr.php?id=<?= $jid ?>"
+                  <a href="<?= getJobDetailPath($jid, $job['title'] ?? null) ?>"
                      class="jp-card__title" itemprop="title">
                     <?= htmlspecialchars($job['title']) ?>
                   </a>
@@ -527,7 +529,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
                   </a>
                   <?php endif; ?>
                   <!-- View details -->
-                  <a href="job-detail-omr.php?id=<?= $jid ?>" class="jp-btn-view">
+                  <a href="<?= getJobDetailPath($jid, $job['title'] ?? null) ?>" class="jp-btn-view">
                     View <i class="fas fa-arrow-right"></i>
                   </a>
                 </div>
@@ -558,21 +560,21 @@ include ROOT_PATH . '/components/analytics.php'; ?>
         <?php if ($total_pages > 1): ?>
         <nav class="jp-pagination" aria-label="Pagination" id="jobs-pagination">
           <?php if ($current_page > 1): ?>
-          <a class="jp-page-btn" href="<?= htmlspecialchars($base_url . (str_contains($base_url,'?') ? '&' : '?') . 'page=' . ($current_page - 1)) ?>">
+          <a class="jp-page-btn" href="<?= htmlspecialchars($base_url . (strpos($base_url, '?') !== false ? '&' : '?') . 'page=' . ($current_page - 1)) ?>">
             <i class="fas fa-chevron-left"></i>
           </a>
           <?php endif; ?>
 
           <?php for ($p = max(1, $current_page - 2); $p <= min($total_pages, $current_page + 2); $p++): ?>
           <a class="jp-page-btn<?= $p === $current_page ? ' active' : '' ?>"
-             href="<?= htmlspecialchars($base_url . (str_contains($base_url,'?') ? '&' : '?') . 'page=' . $p) ?>"
+             href="<?= htmlspecialchars($base_url . (strpos($base_url, '?') !== false ? '&' : '?') . 'page=' . $p) ?>"
              <?= $p === $current_page ? 'aria-current="page"' : '' ?>>
             <?= $p ?>
           </a>
           <?php endfor; ?>
 
           <?php if ($current_page < $total_pages): ?>
-          <a class="jp-page-btn" href="<?= htmlspecialchars($base_url . (str_contains($base_url,'?') ? '&' : '?') . 'page=' . ($current_page + 1)) ?>">
+          <a class="jp-page-btn" href="<?= htmlspecialchars($base_url . (strpos($base_url, '?') !== false ? '&' : '?') . 'page=' . ($current_page + 1)) ?>">
             <i class="fas fa-chevron-right"></i>
           </a>
           <?php endif; ?>

@@ -36,6 +36,7 @@ $canonical_url = 'https://myomr.in/omr-local-events/weekend';
   <?php include __DIR__ . '/../components/organization-schema.php'; ?>
 </head>
 <body class="modern-page">
+<?php require_once __DIR__ . '/../components/skip-link.php'; ?>
 <?php include __DIR__ . '/../components/main-nav.php'; ?>
 
 <div class="dashboard-header">
@@ -54,27 +55,14 @@ $canonical_url = 'https://myomr.in/omr-local-events/weekend';
   </div>
 </div>
 
-<main class="py-5">
+<main id="main-content" class="py-5">
   <div class="container">
     <div class="row">
       <?php if (count($events) === 0): ?>
         <div class="col-12"><div class="alert-modern">No events found for this weekend.</div></div>
-      <?php else: foreach ($events as $ev): ?>
+      <?php else: foreach ($events as $ev): $compact = false; ?>
         <div class="col-md-6 col-lg-4 mb-4">
-          <div class="job-card-modern h-100 dashboard-card">
-            <div class="job-header">
-              <div class="job-title"><?php echo htmlspecialchars($ev['title']); ?></div>
-              <div class="company-name"><?php echo htmlspecialchars($ev['location']); ?><?php echo $ev['locality'] ? ' • ' . htmlspecialchars($ev['locality']) : ''; ?></div>
-              <div class="job-meta">
-                <span class="badge-modern badge-modern-success"><i class="far fa-calendar"></i><?php echo date('M d, Y g:i a', strtotime($ev['start_datetime'])); ?></span>
-                <?php if ($ev['is_free']): ?><span class="badge-modern badge-modern-primary">Free</span><?php endif; ?>
-              </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-              <a href="event-detail-omr.php?slug=<?php echo urlencode($ev['slug']); ?>" class="btn-modern btn-modern-secondary"><i class="fas fa-eye"></i><span>View</span></a>
-              <a href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode($ev['location'] . ' ' . ($ev['locality'] ?? 'OMR Chennai')); ?>" target="_blank" class="btn-modern btn-modern-secondary"><i class="fas fa-map-marker-alt"></i><span>Map</span></a>
-            </div>
-          </div>
+          <?php include __DIR__ . '/components/event-card.php'; ?>
         </div>
       <?php endforeach; endif; ?>
     </div>

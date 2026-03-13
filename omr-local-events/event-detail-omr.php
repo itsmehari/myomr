@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
@@ -6,6 +6,10 @@ include __DIR__ . '/includes/dev-diagnostics.php';
 
 $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $event = $slug ? getEventBySlug($slug) : null;
+if (!$event) {
+  require_once __DIR__ . '/../core/serve-404.php';
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,6 +91,7 @@ $event = $slug ? getEventBySlug($slug) : null;
   <?php include __DIR__ . '/../components/organization-schema.php'; ?>
 </head>
 <body class="modern-page">
+<?php require_once __DIR__ . '/../components/skip-link.php'; ?>
 <?php include __DIR__ . '/../components/main-nav.php'; ?>
 
 <div class="hero-modern">
@@ -98,11 +103,9 @@ $event = $slug ? getEventBySlug($slug) : null;
   </div>
 </div>
 
-<main class="py-5">
+<main id="main-content" class="py-5">
   <div class="container">
-    <?php if (!$event): ?>
-      <div class="alert alert-warning">Event not found.</div>
-    <?php else: ?>
+    <?php if ($event): ?>
       <div class="card-modern mb-4">
         <div class="p-4">
           <div class="row g-4">
@@ -148,7 +151,7 @@ $event = $slug ? getEventBySlug($slug) : null;
                   ]);
                 ?>
                 <a class="btn btn-sm btn-outline-primary" target="_blank" data-analytics="addToCalendar" data-analytics-label="<?php echo htmlspecialchars($slug); ?>" href="https://www.google.com/calendar/render?<?php echo $gcParams; ?>"><i class="far fa-calendar-plus"></i> Add to Google Calendar</a>
-                <a class="btn btn-sm btn-outline-primary" data-analytics="icsDownloaded" data-analytics-label="<?php echo htmlspecialchars($slug); ?>" href="event-ics.php?slug=<?php echo urlencode($slug); ?>"><i class="far fa-file"></i> Download ICS</a>
+                <a class="btn btn-sm btn-outline-primary" data-analytics="icsDownloaded" data-analytics-label="<?php echo htmlspecialchars($slug); ?>" href="/omr-local-events/event-ics.php?slug=<?php echo urlencode($slug); ?>"><i class="far fa-file"></i> Download ICS</a>
               </div>
             </div>
             <div class="col-md-4">
@@ -163,7 +166,7 @@ $event = $slug ? getEventBySlug($slug) : null;
                     <a class="btn-modern btn-modern-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode(($event['location'] ?: '') . ' ' . ($event['locality'] ?: 'OMR Chennai')); ?>"><i class="fas fa-map"></i><span>View on Map</span></a>
                     <a class="btn-modern btn-modern-secondary" href="post-event-omr.php"><i class="fas fa-plus"></i><span>List your event</span></a>
                     <?php if (!empty($event['tickets_url'])): ?>
-                      <a class="btn-modern btn-modern-primary" href="<?php echo htmlspecialchars($event['tickets_url']); ?>" target="_blank"><i class="fas fa-ticket"></i><span>Get Tickets</span></a>
+                      <a class="btn-modern btn-modern-primary" href="<?php echo htmlspecialchars($event['tickets_url']); ?>" target="_blank" data-analytics="getTickets" data-analytics-label="<?php echo htmlspecialchars($slug); ?>"><i class="fas fa-ticket"></i><span>Get Tickets</span></a>
                     <?php endif; ?>
                   </div>
                 </div>

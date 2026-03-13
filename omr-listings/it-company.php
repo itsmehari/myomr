@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -16,8 +16,7 @@ $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $id = extract_id_from_slug($slug);
 
 if ($id <= 0) {
-    http_response_code(404);
-    echo '<!DOCTYPE html><html><body><h1>Not Found</h1></body></html>';
+    require_once __DIR__ . '/../core/serve-404.php';
     exit;
 }
 
@@ -29,8 +28,7 @@ $company = $res ? $res->fetch_assoc() : null;
 $stmt->close();
 
 if (!$company) {
-    http_response_code(404);
-    echo '<!DOCTYPE html><html><body><h1>Company not found</h1></body></html>';
+    require_once __DIR__ . '/../core/serve-404.php';
     exit;
 }
 

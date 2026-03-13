@@ -1,11 +1,17 @@
 <?php
 /**
  * Employer Login - Email-based session login
+ * Uses site modular bootstrap (same as index.php) so nav and footer render correctly.
  */
-// Enable error reporting for development
 require_once __DIR__ . '/includes/error-reporting.php';
-
 require_once __DIR__ . '/includes/employer-auth.php';
+
+// Modular bootstrap — same pattern as root index.php
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+}
+require_once ROOT_PATH . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
 
 $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'my-posted-jobs-omr.php';
 
@@ -23,30 +29,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Please enter a valid email address.';
     }
 }
+
+// Page meta for modular meta.php and head-includes
+$page_nav = 'main';
+$page_title = 'Employer Login - MyOMR Job Portal';
+$page_description = 'Sign in using your email to manage job postings on MyOMR.';
+$canonical_url = 'https://myomr.in/omr-local-job-listings/employer-login-omr.php';
+if (!empty($_GET['redirect'])) {
+    $canonical_url .= '?redirect=' . rawurlencode($_GET['redirect']);
+}
+$og_type = 'website';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employer Login - MyOMR Job Portal</title>
-    <!-- Google Fonts -->
+    <?php require_once ROOT_PATH . '/components/meta.php'; ?>
+    <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
+    <!-- Job portal overrides and form styles (Bootstrap 5 + job CSS) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/job-listings-omr.css">
     <link rel="stylesheet" href="assets/post-job-form-modern.css">
     <link rel="stylesheet" href="assets/omr-jobs-unified-design.css">
-    
-    <!-- Google Analytics -->
-    <?php include '../components/analytics.php'; ?>
 </head>
 <body class="modern-page">
 
-<?php require_once __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav($page_nav); ?>
 
 <!-- Hero Section -->
 <div class="hero-modern">
@@ -99,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </main>
 
-<?php require_once __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   function gtagSend(name, params){
