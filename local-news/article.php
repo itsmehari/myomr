@@ -84,6 +84,8 @@ if (!$article) {
     $is_lpg_article = (strpos($article['slug'], 'lpg-shortage') !== false && substr($article['slug'], -6) !== '-tamil');
     // Fuel panic / petrol crisis articles: FAQPage schema (English slug only)
     $is_fuel_panic_article = (strpos($article['slug'], 'fuel-panic') !== false && substr($article['slug'], -6) !== '-tamil');
+    // Tamil Nadu Assembly Election 2026 article: FAQPage schema for rich results (English slug only)
+    $is_tn_election_2026_article = (strpos($article['slug'], 'tamil-nadu-assembly-election-2026') !== false && substr($article['slug'], -6) !== '-tamil');
     ?>
     
     <?php 
@@ -173,6 +175,50 @@ if (!$article) {
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "No. Officials have warned that filling fuel in plastic cans or containers is dangerous. Unnecessary hoarding can cause logistical pressure even when overall fuel availability is stable. Fuel stations maintain multiple days of inventory and receive regular supplies from depots."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
+    
+    // FAQPage schema for Tamil Nadu Assembly Election 2026 article (English) - supports FAQ rich results
+    if ($is_tn_election_2026_article): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "When is the Tamil Nadu Assembly election 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Polling for the Tamil Nadu Assembly election 2026 will be held on 23 April 2026 in a single phase. All 234 assembly constituencies will go to the polls on that day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When will Tamil Nadu election 2026 results be declared?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Counting of votes will take place on 4 May 2026. Results will be declared the same day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which assembly constituencies cover OMR (Old Mahabalipuram Road)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chennai South Lok Sabha constituency includes Velachery (AC 26), which covers Perungudi, Taramani and Adambakkam, and Sholinganallur (AC 27), the main OMR IT corridor. Thiruporur in Chengalpattu district is also part of the OMR corridor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which party has announced candidates for Tamil Nadu election 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "As of March 2026, Naam Tamilar Katchi (NTK) is the only party to have announced a full list of 234 candidates. NTK chief Seeman will contest from Karaikudi. DMK and AIADMK are yet to announce their full candidate lists for Chennai and other seats."
           }
         }
       ]
@@ -563,7 +609,14 @@ if (!$article) {
             <a href="https://twitter.com/intent/tweet?url=<?php echo rawurlencode($article_share_url); ?>&text=<?php echo $article_share_title; ?>" target="_blank" rel="noopener noreferrer" class="article-share-btn article-share-tw" title="Share on X (Twitter)" aria-label="Share on X"><i class="fab fa-x-twitter"></i></a>
             <button type="button" class="article-share-btn article-share-copy" title="Copy link" aria-label="Copy link" data-url="<?php echo htmlspecialchars($article_share_url); ?>"><i class="fas fa-link"></i></button>
         </div>
-        
+        <p class="article-whatsapp-cta" style="margin:0.75rem 0 0;font-size:0.9rem;">
+            <a href="<?php echo htmlspecialchars(defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi'); ?>" target="_blank" rel="noopener noreferrer" style="color:#25d366;font-weight:600;text-decoration:none;" aria-label="Join our WhatsApp group for more connectivity and updates"><i class="fab fa-whatsapp" style="margin-right:0.35rem;"></i>Join our WhatsApp group for more connectivity and updates</a>
+            <span style="color:#9ca3af;margin:0 0.4rem;" aria-hidden="true">|</span>
+            <a href="<?php echo htmlspecialchars(defined('MYOMR_FACEBOOK_GROUP_URL') ? MYOMR_FACEBOOK_GROUP_URL : 'https://www.facebook.com/groups/416854920508620'); ?>" target="_blank" rel="noopener noreferrer" style="color:#1877f2;font-weight:600;text-decoration:none;" aria-label="Join our Facebook group for OMR updates" title="Join our Facebook group"><i class="fab fa-facebook-f" style="margin-right:0.35rem;"></i>Join our Facebook group</a>
+        </p>
+
+        <?php omr_ad_slot('article-top', '728x90'); ?>
+
         <!-- In this article (table of contents) - populated by JS from h2s -->
         <nav id="article-toc" class="article-toc" aria-label="In this article" style="display: none;">
             <h2 class="article-toc-title">In this article</h2>
@@ -573,7 +626,9 @@ if (!$article) {
         <section class="article-content">
             <?php echo $article['content']; ?>
         </section>
-        
+
+        <?php omr_ad_slot('article-mid', '336x280'); ?>
+
         <!-- Related Articles Section -->
         <?php
         $related_articles = [];
@@ -642,7 +697,7 @@ if (!$article) {
             <div class="container">
                 <!-- WhatsApp Group CTA -->
                 <div style="text-align: center; margin-bottom: 2rem;">
-                    <a href="https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi" target="_blank" rel="noopener noreferrer" 
+                    <a href="<?php echo htmlspecialchars(defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi'); ?>" target="_blank" rel="noopener noreferrer" 
                        style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: #25d366; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(37,211,102,0.4); transition: transform 0.2s, box-shadow 0.2s;"
                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(37,211,102,0.5)';"
                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(37,211,102,0.4)';"

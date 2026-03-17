@@ -209,6 +209,8 @@
 .footer-social__link--ig {
   background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
 }
+.footer-social__link--wa { background: #25d366; }
+.footer-social__link--fb-group { background: #1877f2; }
 
 .footer-social__link i {
   font-size: 1rem;

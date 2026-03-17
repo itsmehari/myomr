@@ -8,6 +8,8 @@ error_reporting(E_ALL);
 
 $recent_jobs = [];
 $recent_events = [];
+$recent_buy_sell = [];
+$buy_sell_count = 0;
 $subscribed = isset($_GET['subscribed']);
 $sub_error = isset($_GET['subscribe_error']);
 $page_nav = 'homepage';
@@ -31,6 +33,9 @@ if (file_exists($core_file)) {
     if ($ev_res && $ev_res->num_rows > 0) {
       while ($row = $ev_res->fetch_assoc()) $recent_events[] = $row;
     }
+    require_once ROOT_PATH . '/omr-buy-sell/includes/listing-functions.php';
+    $buy_sell_count = getBuySellCount([]);
+    $recent_buy_sell = getBuySellListings([], 6, 0);
   }
 }
 ?>
@@ -230,10 +235,49 @@ if (file_exists($core_file)) {
     .hero-dots button:hover { background: rgba(255,255,255,0.4); }
     .hero-dots button.active { background: #fff; transform: scale(1.2); }
 
-    .homepage-hero .hero-cta {
+    .hero-cta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
       opacity: 0;
       animation: heroFadeUp 0.6s ease 0.6s forwards;
     }
+    .homepage-hero .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .homepage-hero .hero-cta-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      background: #25d366;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .homepage-hero .hero-cta-wa:hover { color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.5); }
+    .homepage-hero .hero-cta-fb {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      background: #1877f2;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .homepage-hero .hero-cta-fb:hover { color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(24,119,242,0.45); }
 
     @keyframes heroFadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -277,7 +321,7 @@ if (file_exists($core_file)) {
       </div>
     </div>
     <div class="hero-search-wrap">
-      <form class="hero-search hero-search-unified" action="/omr-local-job-listings/" method="get" role="search" data-jobs-action="/omr-local-job-listings/" data-events-action="/omr-local-events/" data-places-action="/omr-listings/">
+      <form class="hero-search hero-search-unified" action="/omr-local-job-listings/" method="get" role="search" data-jobs-action="/omr-local-job-listings/" data-events-action="/omr-local-events/" data-places-action="/omr-listings/" data-buysell-action="/omr-buy-sell/">
         <input type="search" name="search" placeholder="What are you looking for?" aria-label="Search OMR">
         <input type="text" name="location" placeholder="Area in OMR" aria-label="Location">
         <select name="category" aria-label="Category">
@@ -289,6 +333,7 @@ if (file_exists($core_file)) {
           <option value="restaurants">Restaurants</option>
           <option value="hostels">Hostels & PGs</option>
           <option value="coworking">Coworking</option>
+          <option value="buy-sell">Buy & Sell</option>
         </select>
         <button type="submit">Search</button>
       </form>
@@ -300,6 +345,7 @@ if (file_exists($core_file)) {
       <span><i class="fas fa-bed"></i> Hostels</span>
       <span><i class="fas fa-building"></i> Coworking</span>
       <span><i class="fas fa-house"></i> Rent & Lease</span>
+      <span><i class="fas fa-shopping-bag"></i> Buy & Sell</span>
     </div>
     <div class="hero-quick-links">
       <a href="/omr-local-job-listings/"><i class="fas fa-briefcase"></i> Jobs</a>
@@ -308,6 +354,7 @@ if (file_exists($core_file)) {
       <a href="/omr-hostels-pgs/"><i class="fas fa-bed"></i> Hostels & PGs</a>
       <a href="/omr-coworking-spaces/"><i class="fas fa-building"></i> Coworking</a>
       <a href="/omr-rent-lease/"><i class="fas fa-house"></i> Rent & Lease</a>
+      <a href="/omr-buy-sell/"><i class="fas fa-shopping-bag"></i> Buy & Sell</a>
     </div>
     <div class="hero-dots" role="tablist" aria-label="Hero slides">
       <button type="button" role="tab" aria-selected="true" aria-label="Slide 1" class="active" data-dot="0"></button>
@@ -315,7 +362,11 @@ if (file_exists($core_file)) {
       <button type="button" role="tab" aria-selected="false" aria-label="Slide 3" data-dot="2"></button>
       <button type="button" role="tab" aria-selected="false" aria-label="Slide 4" data-dot="3"></button>
     </div>
-    <a href="#subscribe" class="hero-cta">Join the Community</a>
+    <div class="hero-cta-wrap">
+      <a href="#subscribe" class="hero-cta">Join the Community</a>
+      <a href="<?php echo htmlspecialchars(defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi'); ?>" target="_blank" rel="noopener" class="hero-cta-wa" aria-label="Join our WhatsApp group for updates"><i class="fab fa-whatsapp"></i> Join WhatsApp Group</a>
+      <a href="<?php echo htmlspecialchars(defined('MYOMR_FACEBOOK_GROUP_URL') ? MYOMR_FACEBOOK_GROUP_URL : 'https://www.facebook.com/groups/416854920508620'); ?>" target="_blank" rel="noopener" class="hero-cta-fb" aria-label="Join our Facebook group for updates" title="Join our Facebook group"><i class="fab fa-facebook-f"></i> Join Facebook Group</a>
+    </div>
   </div>
 </section>
 
@@ -355,6 +406,7 @@ if (file_exists($core_file)) {
   form.addEventListener('submit', function() {
     var cat = (catSelect.value || '').toLowerCase();
     if (cat === 'events') form.action = form.getAttribute('data-events-action') || '/omr-local-events/';
+    else if (cat === 'buy-sell') form.action = form.getAttribute('data-buysell-action') || '/omr-buy-sell/';
     else if (cat === 'places' || cat === 'schools' || cat === 'restaurants' || cat === 'hostels' || cat === 'coworking') form.action = form.getAttribute('data-places-action') || '/omr-listings/';
     else form.action = form.getAttribute('data-jobs-action') || '/omr-local-job-listings/';
   });
@@ -368,6 +420,8 @@ if (file_exists($core_file)) {
 <?php if (!empty($recent_events)): ?>
 <?php include 'components/homepage-events-widget.php'; ?>
 <?php endif; ?>
+
+<?php include 'components/homepage-buy-sell-section.php'; ?>
 
 <main id="main-content" class="homepage-main">
 <!-- Latest News (Livemint-style editorial layout) -->

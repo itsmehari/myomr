@@ -116,6 +116,7 @@ $salary_display = (!empty($job['salary_range']) && $job['salary_range'] !== 'Not
     ? formatSalary($job['salary_range']) : 'Not Disclosed';
 
 $apps_count = (int)($job['applications_count'] ?? 0);
+$work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSegmentFromData($job)));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,11 +127,11 @@ $apps_count = (int)($job['applications_count'] ?? 0);
 <meta name="description" content="<?= $page_desc ?>">
 <meta name="keywords" content="<?= htmlspecialchars($job['title']) ?>, <?= $location_seo ?>, jobs in OMR Chennai, Old Mahabalipuram Road jobs, <?= htmlspecialchars($job['category_name'] ?? $job['category'] ?? '') ?>">
 <meta name="geo.region" content="IN-TN">
-<link rel="canonical" href="<?= $canonical ?>">
+<link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
 
 <meta property="og:title"       content="<?= htmlspecialchars($job['title']) ?> at <?= htmlspecialchars($job['company_name'] ?? '') ?> – OMR Chennai">
 <meta property="og:description" content="<?= $page_desc ?>">
-<meta property="og:url"         content="<?= $canonical ?>">
+<meta property="og:url"         content="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:type"        content="website">
 <meta property="og:image"       content="https://myomr.in/My-OMR-Logo.png">
 <meta property="og:locale"      content="en_IN">
@@ -143,6 +144,7 @@ $apps_count = (int)($job['applications_count'] ?? 0);
 <?php $ga_custom_params = [
   'job_category'     => $job['category_name'] ?? $job['category'] ?? '',
   'job_type'         => $job['job_type'] ?? '',
+  'work_segment'     => $work_segment,
   'locality'         => $job['location'] ?? '',
   'experience_level' => $job['experience_level'] ?? '',
 ]; include ROOT_PATH . '/components/analytics.php'; ?>
@@ -250,6 +252,10 @@ $apps_count = (int)($job['applications_count'] ?? 0);
           <span class="jp-highlight">
             <i class="fas fa-briefcase"></i>
             <?= getJobTypeLabel($job['job_type'] ?? 'full-time') ?>
+          </span>
+          <span class="jp-highlight">
+            <i class="fas fa-users-viewfinder"></i>
+            <?= htmlspecialchars(getJobSegmentLabel($work_segment)) ?>
           </span>
           <?php if ($salary_display !== 'Not Disclosed'): ?>
           <span class="jp-highlight">
@@ -476,6 +482,10 @@ $apps_count = (int)($job['applications_count'] ?? 0);
                 <td><?= getJobTypeLabel($job['job_type'] ?? '') ?></td>
               </tr>
               <tr>
+                <td>Segment</td>
+                <td><?= htmlspecialchars(getJobSegmentLabel($work_segment)) ?></td>
+              </tr>
+              <tr>
                 <td>Location</td>
                 <td><?= htmlspecialchars($job['location'] ?? '') ?></td>
               </tr>
@@ -545,6 +555,24 @@ $apps_count = (int)($job['applications_count'] ?? 0);
                 <i class="fas fa-envelope"></i> Share via Email
               </button>
             </div>
+          </div>
+
+          <!-- Join our WhatsApp group (community) -->
+          <div class="jp-sidebar-detail" style="background:linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%);border:1px solid #86efac;border-radius:10px;">
+            <h3><i class="fab fa-whatsapp" style="color:#25d366;"></i> Join Our WhatsApp Group</h3>
+            <p style="font-size:.9rem;color:#166534;margin-bottom:.75rem;">Get job alerts, local updates &amp; connect with the OMR community.</p>
+            <a href="<?= htmlspecialchars(defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi') ?>" target="_blank" rel="noopener" class="jp-share-btn jp-share-wa" style="justify-content:center;">
+              <i class="fab fa-whatsapp"></i> Join WhatsApp Group
+            </a>
+          </div>
+
+          <!-- Join our Facebook group (community) -->
+          <div class="jp-sidebar-detail" style="background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:1px solid #93c5fd;border-radius:10px;">
+            <h3><i class="fab fa-facebook-f" style="color:#1877f2;"></i> Join Our Facebook Group</h3>
+            <p style="font-size:.9rem;color:#1e3a8a;margin-bottom:.75rem;">Stay connected with OMR updates, discussions, and local opportunities.</p>
+            <a href="<?= htmlspecialchars(defined('MYOMR_FACEBOOK_GROUP_URL') ? MYOMR_FACEBOOK_GROUP_URL : 'https://www.facebook.com/groups/416854920508620') ?>" target="_blank" rel="noopener" class="jp-share-btn" style="justify-content:center;background:#1877f2;color:#fff;" aria-label="Join our Facebook group for OMR job updates" title="Join our Facebook group">
+              <i class="fab fa-facebook-f"></i> Join Facebook Group
+            </a>
           </div>
 
           <!-- Back link -->

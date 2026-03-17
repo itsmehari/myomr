@@ -44,8 +44,12 @@ $rootUrl = '/';
                     <span class="footer-social__label">Follow us</span>
                     <div class="footer-social__links">
                         <a href="https://www.facebook.com/myomrCommunity" target="_blank" rel="noopener" aria-label="Facebook" class="footer-social__link footer-social__link--fb"><i class="fab fa-facebook-f"></i></a>
+                        <?php $fb_group = defined('MYOMR_FACEBOOK_GROUP_URL') ? MYOMR_FACEBOOK_GROUP_URL : 'https://www.facebook.com/groups/416854920508620'; ?>
+                        <a href="<?php echo htmlspecialchars($fb_group); ?>" target="_blank" rel="noopener" aria-label="Join our Facebook group" class="footer-social__link footer-social__link--fb-group" title="Join our Facebook group"><i class="fas fa-users"></i></a>
                         <a href="https://twitter.com/MyomrNews" target="_blank" rel="noopener" aria-label="Twitter" class="footer-social__link footer-social__link--tw"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.instagram.com/myomrcommunity/" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social__link footer-social__link--ig"><i class="fab fa-instagram"></i></a>
+                        <?php $wa_group = defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi'; ?>
+                        <a href="<?php echo htmlspecialchars($wa_group); ?>" target="_blank" rel="noopener" aria-label="Join our WhatsApp group for updates" class="footer-social__link footer-social__link--wa" title="Join WhatsApp group"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
@@ -57,7 +61,10 @@ $rootUrl = '/';
                         <li><a href="<?php echo $baseUrl; ?>omr-road-database-list.php">OMR Database</a></li>
                         <li><a href="<?php echo $baseUrl; ?>contact-my-omr-team.php">Contact us</a></li>
                         <li><a href="<?php echo $baseUrl; ?>local-news/news-highlights-from-omr-road.php">Latest News</a></li>
+                        <li><a href="<?php echo $baseUrl; ?>elections-2026/">Elections 2026</a></li>
                         <li><a href="<?php echo $baseUrl; ?>omr-rent-lease/">Rent & Lease</a></li>
+                        <li><a href="<?php echo $baseUrl; ?>omr-buy-sell/">Buy & Sell</a></li>
+                        <li><a href="<?php echo $baseUrl; ?>omr-buy-sell/guidelines.php">Buy & Sell Guidelines</a></li>
                     </ul>
                 </div>
                 <div class="footer-nav__col">
