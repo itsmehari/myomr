@@ -41,6 +41,7 @@ $website = sanitizeInput($_POST['website'] ?? '');
 $title = sanitizeInput($_POST['title'] ?? '');
 $category = sanitizeInput($_POST['category'] ?? '');
 $job_type = normalizeJobType(sanitizeInput($_POST['job_type'] ?? ''));
+$work_segment = normalizeJobSegment(sanitizeInput($_POST['work_segment'] ?? 'office'));
 $location = sanitizeInput($_POST['location'] ?? '');
 $salary_range = sanitizeInput($_POST['salary_range'] ?? 'Not Disclosed');
 $description = sanitizeInput($_POST['description'] ?? '');
@@ -79,6 +80,10 @@ if (empty($category)) {
 
 if (empty($job_type)) {
     $errors[] = 'Job type is required.';
+}
+
+if (empty($work_segment) || !in_array($work_segment, JOB_SEGMENT_CANONICAL, true)) {
+    $errors[] = 'Job segment is required.';
 }
 
 if (empty($location)) {
@@ -125,32 +130,63 @@ if (empty($errors)) {
                 $stmt->execute();
                 
                 // Update job posting
-                $stmt = $conn->prepare("UPDATE job_postings SET
-                                        title = ?, 
-                                        category = ?, 
-                                        job_type = ?, 
-                                        location = ?, 
-                                        salary_range = ?, 
-                                        description = ?, 
-                                        requirements = ?, 
-                                        benefits = ?,
-                                        application_deadline = ?,
-                                        updated_at = NOW()
-                                        WHERE id = ? AND employer_id = ?");
-                
-                $stmt->bind_param("ssssssssssii", 
-                    $title, 
-                    $category, 
-                    $job_type, 
-                    $location, 
-                    $salary_range, 
-                    $description, 
-                    $requirements, 
-                    $benefits,
-                    $application_deadline,
-                    $job_id,
-                    $employer_id
-                );
+                if (jobPostingsHasColumn('work_segment')) {
+                    $stmt = $conn->prepare("UPDATE job_postings SET
+                                            title = ?, 
+                                            category = ?, 
+                                            job_type = ?, 
+                                            work_segment = ?,
+                                            location = ?, 
+                                            salary_range = ?, 
+                                            description = ?, 
+                                            requirements = ?, 
+                                            benefits = ?,
+                                            application_deadline = ?,
+                                            updated_at = NOW()
+                                            WHERE id = ? AND employer_id = ?");
+                    
+                    $stmt->bind_param("ssssssssssii", 
+                        $title, 
+                        $category, 
+                        $job_type,
+                        $work_segment,
+                        $location, 
+                        $salary_range, 
+                        $description, 
+                        $requirements, 
+                        $benefits,
+                        $application_deadline,
+                        $job_id,
+                        $employer_id
+                    );
+                } else {
+                    $stmt = $conn->prepare("UPDATE job_postings SET
+                                            title = ?, 
+                                            category = ?, 
+                                            job_type = ?, 
+                                            location = ?, 
+                                            salary_range = ?, 
+                                            description = ?, 
+                                            requirements = ?, 
+                                            benefits = ?,
+                                            application_deadline = ?,
+                                            updated_at = NOW()
+                                            WHERE id = ? AND employer_id = ?");
+                    
+                    $stmt->bind_param("ssssssssssii", 
+                        $title, 
+                        $category, 
+                        $job_type, 
+                        $location, 
+                        $salary_range, 
+                        $description, 
+                        $requirements, 
+                        $benefits,
+                        $application_deadline,
+                        $job_id,
+                        $employer_id
+                    );
+                }
                 
                 $stmt->execute();
                 
@@ -189,34 +225,85 @@ if (empty($errors)) {
                 $stmt->execute();
                 $employer_id = $conn->insert_id;
             }
-            
+
+            // Employer Pack: cap check for new job (only when employer has active paid plan)
+            if (jobEmployersTableHasPlanColumns($conn)) {
+                $empStmt = $conn->prepare("SELECT plan_type, plan_end_date FROM employers WHERE id = ? LIMIT 1");
+                $empStmt->bind_param("i", $employer_id);
+                $empStmt->execute();
+                $empRow = $empStmt->get_result()->fetch_assoc();
+                if ($empRow && isEmployerOnActivePlan($empRow)) {
+                    $cap = getPlanCap($empRow['plan_type']);
+                    if ($cap > 0) {
+                        $used = countJobsThisMonthForEmployer($conn, (int) $employer_id);
+                        if ($used >= $cap) {
+                            $renewal = !empty($empRow['plan_end_date']) ? date('d/m/Y', strtotime($empRow['plan_end_date'])) : 'end of month';
+                            $errors[] = "You have used your {$cap} job posts for this month. Your plan renews on {$renewal}. Please try again after renewal or contact us for extra slots.";
+                        }
+                    }
+                }
+            }
+            if (!empty($errors)) {
+                $conn->rollback();
+            } else {
             // Insert job posting
-            $stmt = $conn->prepare("INSERT INTO job_postings (
-                                        employer_id, 
-                                        title, 
-                                        category, 
-                                        job_type, 
-                                        location, 
-                                        salary_range, 
-                                        description, 
-                                        requirements, 
-                                        benefits,
-                                        application_deadline,
-                                        status
-                                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
-            
-            $stmt->bind_param("isssssssss", 
-                $employer_id, 
-                $title, 
-                $category, 
-                $job_type, 
-                $location, 
-                $salary_range, 
-                $description, 
-                $requirements, 
-                $benefits,
-                $application_deadline
-            );
+            if (jobPostingsHasColumn('work_segment')) {
+                $stmt = $conn->prepare("INSERT INTO job_postings (
+                                            employer_id, 
+                                            title, 
+                                            category, 
+                                            job_type,
+                                            work_segment, 
+                                            location, 
+                                            salary_range, 
+                                            description, 
+                                            requirements, 
+                                            benefits,
+                                            application_deadline,
+                                            status
+                                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
+                
+                $stmt->bind_param("issssssssss", 
+                    $employer_id, 
+                    $title, 
+                    $category, 
+                    $job_type,
+                    $work_segment,
+                    $location, 
+                    $salary_range, 
+                    $description, 
+                    $requirements, 
+                    $benefits,
+                    $application_deadline
+                );
+            } else {
+                $stmt = $conn->prepare("INSERT INTO job_postings (
+                                            employer_id, 
+                                            title, 
+                                            category, 
+                                            job_type, 
+                                            location, 
+                                            salary_range, 
+                                            description, 
+                                            requirements, 
+                                            benefits,
+                                            application_deadline,
+                                            status
+                                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
+                
+                $stmt->bind_param("isssssssss", 
+                    $employer_id, 
+                    $title, 
+                    $category, 
+                    $job_type, 
+                    $location, 
+                    $salary_range, 
+                    $description, 
+                    $requirements, 
+                    $benefits,
+                    $application_deadline
+                );
+            }
             
             $stmt->execute();
             $job_id = $conn->insert_id;
@@ -225,6 +312,7 @@ if (empty($errors)) {
             $conn->commit();
             
             $success = true;
+            }
         }
         
         // Clear CSRF token after successful submission

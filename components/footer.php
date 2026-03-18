@@ -1,9 +1,6 @@
 <?php
-if (!isset($baseUrl)) {
-    $base = dirname($_SERVER['SCRIPT_NAME'] ?? '');
-    $base = ($base === '/' || $base === '\\') ? '' : rtrim(str_replace('\\', '/', $base), '/');
-    $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? '') . $base . '/';
-}
+require_once __DIR__ . '/../core/site-navigation.php';
+$hubLinks = myomr_get_primary_hub_links();
 $rootUrl = '/';
 ?>
 <!--footer section begins -->
@@ -57,37 +54,35 @@ $rootUrl = '/';
                 <div class="footer-nav__col">
                     <h4 class="footer-nav__title">Useful Links</h4>
                     <ul>
-                        <li><a href="<?php echo $baseUrl; ?>index.php">Home</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>omr-road-database-list.php">OMR Database</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>contact-my-omr-team.php">Contact us</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>local-news/news-highlights-from-omr-road.php">Latest News</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>elections-2026/">Elections 2026</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>omr-rent-lease/">Rent & Lease</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>omr-buy-sell/">Buy & Sell</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>omr-buy-sell/guidelines.php">Buy & Sell Guidelines</a></li>
+                        <?php foreach ($hubLinks as $hub): ?>
+                            <li><a href="<?php echo htmlspecialchars($hub['path']); ?>"><?php echo htmlspecialchars($hub['label']); ?></a></li>
+                        <?php endforeach; ?>
+                        <li><a href="/elections-2026/">Elections 2026</a></li>
+                        <li><a href="/omr-rent-lease/">Rent & Lease</a></li>
+                        <li><a href="/omr-buy-sell/guidelines.php">Buy & Sell Guidelines</a></li>
                     </ul>
                 </div>
                 <div class="footer-nav__col">
                     <h4 class="footer-nav__title">Jobs by Location</h4>
                     <ul>
-                        <li><a href="<?php echo $baseUrl; ?>jobs-in-omr-chennai.php">Jobs in OMR Chennai</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>jobs-in-perungudi-omr.php">Jobs in Perungudi</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>jobs-in-sholinganallur-omr.php">Jobs in Sholinganallur</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>jobs-in-navalur-omr.php">Jobs in Navalur</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>jobs-in-thoraipakkam-omr.php">Jobs in Thoraipakkam</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>jobs-in-kelambakkam-omr.php">Jobs in Kelambakkam</a></li>
+                        <li><a href="/jobs-in-omr-chennai.php">Jobs in OMR Chennai</a></li>
+                        <li><a href="/jobs-in-perungudi-omr.php">Jobs in Perungudi</a></li>
+                        <li><a href="/jobs-in-sholinganallur-omr.php">Jobs in Sholinganallur</a></li>
+                        <li><a href="/jobs-in-navalur-omr.php">Jobs in Navalur</a></li>
+                        <li><a href="/jobs-in-thoraipakkam-omr.php">Jobs in Thoraipakkam</a></li>
+                        <li><a href="/jobs-in-kelambakkam-omr.php">Jobs in Kelambakkam</a></li>
                     </ul>
                 </div>
                 <div class="footer-nav__col">
                     <h4 class="footer-nav__title">Jobs by Industry</h4>
                     <ul>
-                        <li><a href="<?php echo $baseUrl; ?>it-jobs-omr-chennai.php">IT Jobs in OMR</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>teaching-jobs-omr-chennai.php">Teaching Jobs</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>healthcare-jobs-omr-chennai.php">Healthcare Jobs</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>retail-jobs-omr-chennai.php">Retail Jobs</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>hospitality-jobs-omr-chennai.php">Hospitality Jobs</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>fresher-jobs-omr-chennai.php">Fresher Jobs</a></li>
-                        <li><a href="<?php echo $baseUrl; ?>part-time-jobs-omr-chennai.php">Part-Time Jobs</a></li>
+                        <li><a href="/it-jobs-omr-chennai.php">IT Jobs in OMR</a></li>
+                        <li><a href="/teaching-jobs-omr-chennai.php">Teaching Jobs</a></li>
+                        <li><a href="/healthcare-jobs-omr-chennai.php">Healthcare Jobs</a></li>
+                        <li><a href="/retail-jobs-omr-chennai.php">Retail Jobs</a></li>
+                        <li><a href="/hospitality-jobs-omr-chennai.php">Hospitality Jobs</a></li>
+                        <li><a href="/fresher-jobs-omr-chennai.php">Fresher Jobs</a></li>
+                        <li><a href="/part-time-jobs-omr-chennai.php">Part-Time Jobs</a></li>
                     </ul>
                 </div>
             </nav>
@@ -105,10 +100,10 @@ $rootUrl = '/';
         <div class="footer-bottom__inner">
             <p class="footer-bottom__copy">© <?php echo date('Y'); ?> <a href="https://www.myomr.in">My OMR</a>. All rights reserved.</p>
             <nav class="footer-bottom__links" aria-label="Footer legal links">
-                <a href="<?php echo $baseUrl; ?>terms-and-conditions-my-omr.php">Terms</a>
-                <a href="<?php echo $baseUrl; ?>website-privacy-policy-of-my-omr.php">Privacy</a>
-                <a href="<?php echo $baseUrl; ?>general-data-policy-of-my-omr.php">Policy</a>
-                <a href="<?php echo $baseUrl; ?>webmaster-contact-my-omr.php">Contact</a>
+                <a href="/terms-and-conditions-my-omr.php">Terms</a>
+                <a href="/website-privacy-policy-of-my-omr.php">Privacy</a>
+                <a href="/general-data-policy-of-my-omr.php">Policy</a>
+                <a href="/webmaster-contact-my-omr.php">Contact</a>
             </nav>
         </div>
     </div>

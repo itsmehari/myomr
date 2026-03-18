@@ -15,5 +15,5 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $root = $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__);
 require_once $root . '/core/admin-auth.php';
-
+requireAdmin();
 

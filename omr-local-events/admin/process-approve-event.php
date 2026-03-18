@@ -13,8 +13,6 @@ require_once __DIR__ . '/../../core/admin-auth.php';
 requireAdmin();
 require_once __DIR__ . '/../includes/event-functions-omr.php';
 
-// if (empty($_SESSION['admin_logged_in'])) { die('Unauthorized'); }
-
 try {
   if (session_status() === PHP_SESSION_NONE) { session_start(); }
   if ($_SERVER['REQUEST_METHOD'] !== 'POST') { throw new Exception('Invalid method'); }

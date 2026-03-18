@@ -107,7 +107,7 @@ $sub_error    = isset($_GET['subscribe_error']);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($page_title) ?></title>
   <meta name="description" content="<?= htmlspecialchars($page_desc) ?>">
-  <link rel="canonical" href="<?= $canonical_url . ($cur_page > 1 ? '?page=' . $cur_page : '') ?>">
+  <link rel="canonical" href="<?= htmlspecialchars($canonical_url . ($cur_page > 1 ? '?page=' . $cur_page : ''), ENT_QUOTES, 'UTF-8') ?>">
   <meta property="og:title"       content="<?= htmlspecialchars($page_title) ?>">
   <meta property="og:description" content="<?= htmlspecialchars($page_desc) ?>">
   <meta property="og:url"         content="<?= $canonical_url ?>">

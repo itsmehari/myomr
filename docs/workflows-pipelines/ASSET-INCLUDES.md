@@ -156,6 +156,10 @@ Always use `ROOT_PATH` so includes work from any depth.
 
 The new include system targets the **homepage stack** and new pages. Legacy pages using `head-resources.php` can be migrated gradually.
 
+### 6.1 Standard for new and touched pages
+
+**New pages and pages under active development** should use `omr_nav()`, `omr_footer()`, and `head-includes.php` (or `page-bootstrap.php` + `head-includes.php`). Legacy pages may still use `main-nav.php` or `navbar.php` via relative include until migrated. When touching a file (e.g. for canonical or security), migrate that page to the modular stack if it is public-facing.
+
 ---
 
 ## 7. Migration Checklist
@@ -181,8 +185,14 @@ When adding the include system to a new page:
 
 ---
 
-## 8. References
+## 8. Error reporting
+
+- **Development:** Use `error_reporting(E_ALL)` or a module `error-reporting.php` (e.g. hostels, rent-lease) that sets E_ALL in dev.
+- **Production:** Use a shared helper that suppresses display and logs (e.g. `error_reporting(E_ALL & ~E_NOTICE)` and log to file). Avoid `error_reporting(0)` so issues are at least logged.
+
+## 9. References
 
 - `docs/INDEX-PAGE-DEPENDENCIES.md` — Index page structure
 - `components/head-resources.php` — Legacy head block (Bootstrap 4 stack)
 - `docs/ARCHITECTURE.md` — Overall file organization
+- `core/security-helpers.php` — CSRF: use `generate_csrf_token()` and `verify_csrf_token()` on all state-changing forms (admin CRUD and public post forms).

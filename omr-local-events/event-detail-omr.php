@@ -1,4 +1,5 @@
 <?php
+if (!defined('ROOT_PATH')) define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__));
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
@@ -7,7 +8,7 @@ include __DIR__ . '/includes/dev-diagnostics.php';
 $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $event = $slug ? getEventBySlug($slug) : null;
 if (!$event) {
-  require_once __DIR__ . '/../core/serve-404.php';
+  require_once ROOT_PATH . '/core/serve-404.php';
   exit;
 }
 ?>
@@ -19,11 +20,11 @@ if (!$event) {
   <title><?php echo $event ? htmlspecialchars($event['title']) . ' – MyOMR' : 'Event – MyOMR'; ?></title>
   <meta name="description" content="<?php echo $event ? htmlspecialchars(substr(strip_tags($event['description']),0,160)) : 'Event details'; ?>" />
   <?php if ($event): ?>
-  <link rel="canonical" href="<?php echo 'https://myomr.in/omr-local-events/event/' . urlencode($slug); ?>" />
+  <link rel="canonical" href="<?php echo htmlspecialchars('https://myomr.in/omr-local-events/event/' . $slug, ENT_QUOTES, 'UTF-8'); ?>" />
   <!-- Open Graph / Twitter for Event -->
   <meta property="og:title" content="<?php echo htmlspecialchars($event['title'] . ' – MyOMR'); ?>" />
   <meta property="og:description" content="<?php echo htmlspecialchars(substr(strip_tags($event['description']),0,160)); ?>" />
-  <meta property="og:url" content="<?php echo 'https://myomr.in/omr-local-events/event/' . urlencode($slug); ?>" />
+  <meta property="og:url" content="<?php echo htmlspecialchars('https://myomr.in/omr-local-events/event/' . $slug, ENT_QUOTES, 'UTF-8'); ?>" />
   <meta property="og:type" content="event" />
   <meta property="og:image" content="<?php echo htmlspecialchars($event['image_url'] ?: 'https://myomr.in/My-OMR-Logo.png'); ?>" />
   <meta name="twitter:card" content="summary_large_image" />

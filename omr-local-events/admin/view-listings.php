@@ -15,10 +15,14 @@ $rows = [];
 try {
   global $conn;
   if ($conn && !$conn->connect_error) {
-    $sql = "SELECT id, title, slug, start_datetime, end_datetime, status, location FROM event_listings";
-    if ($status !== '') { $sql .= " WHERE status = '" . $conn->real_escape_string($status) . "'"; }
-    $sql .= " ORDER BY start_datetime DESC LIMIT 200";
-    $res = $conn->query($sql);
+    if ($status !== '') {
+      $stmt = $conn->prepare("SELECT id, title, slug, start_datetime, end_datetime, status, location FROM event_listings WHERE status = ? ORDER BY start_datetime DESC LIMIT 200");
+      $stmt->bind_param('s', $status);
+      $stmt->execute();
+      $res = $stmt->get_result();
+    } else {
+      $res = $conn->query("SELECT id, title, slug, start_datetime, end_datetime, status, location FROM event_listings ORDER BY start_datetime DESC LIMIT 200");
+    }
     while ($r = $res->fetch_assoc()) { $rows[] = $r; }
   }
 } catch (Throwable $e) {

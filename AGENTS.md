@@ -36,6 +36,13 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 - Ensured `footer.css` is loaded on all pages
 - Security audit; slug URLs for job detail pages
 
+### Employer Pack (B2B job package)
+
+- **Product:** MyOMR Employer Pack — 10 jobs/month, featured placement, repeatable for any OMR business.
+- **DB:** `employers.plan_type`, `plan_start_date`, `plan_end_date`; migration in `dev-tools/migrations/2026-03-employer-pack-plan-columns.sql`.
+- **Logic:** Plan cap and helpers in `omr-local-job-listings/includes/job-functions-omr.php`; cap enforced in `process-job-omr.php`; admin auto-features package jobs in `admin/manage-jobs-omr.php`.
+- **Docs:** Package rules, pricing, subscriber lifecycle: `docs/product/EMPLOYER-PACK-PRODUCT.md`.
+
 ### Hostels & PGs
 
 - Component-based layout: `hero-hostels.php`, `filters-bar.php`, `property-cards.php`, `cta-owner.php`
@@ -57,6 +64,25 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 - Search Console audit: fix sitemaps, remove `Crawl-delay` from robots.txt
 - Slug URLs for detail pages (see skill `slug-urls-detail-pages`)
 
+### Sitelinks + Search Console automation
+
+- Implemented sitelink signal hardening:
+  - shared hub nav source (`core/site-navigation.php`)
+  - root-absolute footer links (`components/footer.php`)
+  - `SiteNavigationElement` JSON-LD (`components/meta.php`)
+  - hub cross-link component (`components/omr-topic-hubs.php`) across major hubs/spokes
+- Canonical sitemap entrypoint normalized: legacy `info/sitemap.xml` redirected to `/sitemap.xml`.
+- Search Console API submissions performed for root + child sitemaps using service-account auth.
+- Added local MCP server script for Search Console operations at:
+  - `dev-tools/mcp/search_console_mcp.py`
+
+### Analytics
+
+- **Single include:** All analytics run from `components/analytics.php` (included in `<head>`).
+- **Google Analytics 4:** Measurement ID `G-JYSF141J1H` — page views, content groups, optional custom params and user properties.
+- **Microsoft Clarity:** Project ID `vnpelcljv4` — session recordings, heatmaps. Loaded from the same component.
+- New public pages must include `<?php include ROOT_PATH . '/components/analytics.php'; ?>` in the head; do not add duplicate or alternate analytics scripts unless explicitly required.
+
 ---
 
 ## Agent Priorities
@@ -66,16 +92,18 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 3. **Load footer.css** — all pages need it for correct footer styling
 4. **Canonical URLs** — always `$canonical_url`, base `https://myomr.in`, set before meta.php, output with `htmlspecialchars()`. See `docs/analytics-seo/CANONICAL-URL-METHODOLOGY.md`
 5. **Consult docs** — `/docs`, module READMEs, and `.cursor/skills/` contain current patterns
+6. **For SERP/sitelinks work** — keep header/footer/schema hub links aligned from one shared source; avoid nav-label drift
+7. **For Search Console ops** — prefer API/MCP verification (`isPending`, `errors`, `warnings`, `lastSubmitted`) over unreliable direct HTTP checks
 
 ---
 
 ## Skills to Use When Relevant
 
-| Skill | Use when |
-|-------|----------|
+| Skill                    | Use when                                                                 |
+| ------------------------ | ------------------------------------------------------------------------ |
 | `slug-urls-detail-pages` | Creating or refactoring detail pages (jobs, events, hostels, properties) |
-| `dashboard-designer` | Building admin dashboards, employer panels |
-| `frontend-design` | Designing UI, landing pages, layouts |
+| `dashboard-designer`     | Building admin dashboards, employer panels                               |
+| `frontend-design`        | Designing UI, landing pages, layouts                                     |
 
 ---
 
@@ -107,3 +135,4 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 - Sanitize GET/POST with `htmlspecialchars()` or equivalent
 - Protect `/admin/` with `$_SESSION['admin_logged_in']`
 - Restrict file uploads (type, size, folder)
+- Never commit service-account JSON keys; rotate keys immediately if private key content is exposed in logs/chat/editor

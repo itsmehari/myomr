@@ -71,7 +71,6 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
   })();
   </script>
   <?php endif; ?>
-  <?php $orgSchema = __DIR__ . '/../components/organization-schema.php'; if (file_exists($orgSchema)) { include $orgSchema; } ?>
 </head>
 <body class="modern-page">
 <?php require_once __DIR__ . '/../components/skip-link.php'; ?>
@@ -258,6 +257,8 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
     <small>Quick links: <a href="today.php">Today</a> · <a href="weekend.php">This Weekend</a> · <a href="month.php">This Month</a></small>
   </div>
 </section>
+
+<?php include __DIR__ . '/../components/omr-topic-hubs.php'; ?>
 
 <?php
 // JSON-LD for listing page – emit Event objects for current page

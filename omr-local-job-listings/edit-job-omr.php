@@ -120,7 +120,7 @@ if (empty($_SESSION['csrf_token'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $page_title; ?></title>
     <meta name="description" content="<?php echo $page_description; ?>">
-    <link rel="canonical" href="<?php echo $canonical_url; ?>">
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     
     <!-- Google Analytics -->
     <?php $ga_user_id = (int)($_SESSION['employer_id'] ?? 0); $ga_user_properties = ['user_type' => 'employer']; include '../components/analytics.php'; ?>
@@ -292,6 +292,19 @@ if (empty($_SESSION['csrf_token'])) {
                                     ?><option value="<?php echo htmlspecialchars($val); ?>" <?php echo ($jt === $val) ? 'selected' : ''; ?>><?php echo htmlspecialchars($label); ?></option><?php
                                     endforeach;
                                     ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group-modern">
+                                <label for="work_segment" class="form-label-modern required-field">Job Segment</label>
+                                <?php $ws = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSegmentFromData($job))); ?>
+                                <select class="form-select-modern" id="work_segment" name="work_segment" required>
+                                    <option value="">Select Segment</option>
+                                    <option value="office" <?php echo ($ws === 'office') ? 'selected' : ''; ?>>Office / White-collar</option>
+                                    <option value="manpower" <?php echo ($ws === 'manpower') ? 'selected' : ''; ?>>Manpower / Blue-collar</option>
+                                    <option value="hybrid" <?php echo ($ws === 'hybrid') ? 'selected' : ''; ?>>Hybrid</option>
                                 </select>
                             </div>
                         </div>

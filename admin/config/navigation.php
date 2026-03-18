@@ -107,6 +107,18 @@ return [
                 'tags' => ['rent', 'lease', 'property'],
             ],
             [
+                'key' => 'buy_sell',
+                'name' => 'Buy & Sell',
+                'description' => 'Manage buy/sell classifieds listings in OMR.',
+                'path' => '/omr-buy-sell/admin/index.php',
+                'icon' => 'fa-shopping-bag',
+                'tags' => ['buy', 'sell', 'classifieds'],
+                'actions' => [
+                    ['label' => 'Manage Listings', 'path' => '/omr-buy-sell/admin/manage-listings-omr.php'],
+                    ['label' => 'Manage Categories', 'path' => '/omr-buy-sell/admin/manage-categories-omr.php'],
+                ],
+            ],
+            [
                 'key' => 'coworking',
                 'name' => 'Coworking Spaces',
                 'description' => 'Manage coworking space listings, approvals, and featured slots.',

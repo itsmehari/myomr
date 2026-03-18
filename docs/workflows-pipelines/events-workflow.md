@@ -95,7 +95,11 @@ flowchart TD
 - **Time zone offsets:** `process-event-omr.php` normalizes to IST; confirm time conversion for multi-day events.
 - **Attachment issues:** If image upload fails, request organizer to resend; admin can manually attach file via FTP and update listing.
 
-## 6. References
+## 6. Legacy event form
+
+- **events/submit-event.php** wrote to the legacy `events` table and is **deprecated**. It now redirects to `/omr-local-events/post-event-omr.php`. All new event submissions use the omr-local-events flow only (`event_submissions` → admin approval → `event_listings`).
+
+## 7. References
 
 - Public entry points: `post-event-omr.php`, `process-event-omr.php`, `event-detail-omr.php`, `generate-events-sitemap.php`
 - Admin utilities: `admin/index.php`, `admin/manage-events-omr.php`, `process-approve-event.php`, `process-reject-event.php`, `calendar-export.php`, `share-playbook.php`

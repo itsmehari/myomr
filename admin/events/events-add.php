@@ -1,10 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
-    header('Location: ../login.php');
-    exit;
-}
-include_once '../../core/omr-connect.php';
+require_once __DIR__ . '/../_bootstrap.php';
+include_once __DIR__ . '/../../core/omr-connect.php';
 $title = 'Add Event';
 $breadcrumbs = ['Events' => 'events-list.php', 'Add Event' => null];
 $msg = '';
@@ -20,14 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($title_val === '') $errors[] = 'Event title is required.';
     if ($date_val === '') $errors[] = 'Event date is required.';
     if (empty($errors)) {
-        $title_sql = $conn->real_escape_string($title_val);
-        $date_sql = $conn->real_escape_string($date_val);
-        $location_sql = $conn->real_escape_string($location_val);
-        $desc_sql = $conn->real_escape_string($desc_val);
-        $image_sql = $conn->real_escape_string($image_val);
-        $link_sql = $conn->real_escape_string($link_val);
-        $sql = "INSERT INTO events (title, event_date, location, description, image, link, status) VALUES ('$title_sql', '$date_sql', '$location_sql', '$desc_sql', '$image_sql', '$link_sql', 'published')";
-        if ($conn->query($sql)) {
+        $stmt = $conn->prepare("INSERT INTO events (title, event_date, location, description, image, link, status) VALUES (?, ?, ?, ?, ?, ?, 'published')");
+        $stmt->bind_param('ssssss', $title_val, $date_val, $location_val, $desc_val, $image_val, $link_val);
+        if ($stmt->execute()) {
             $_SESSION['flash_success'] = 'Event added successfully!';
             header('Location: events-list.php');
             exit;

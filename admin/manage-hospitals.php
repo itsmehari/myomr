@@ -1,6 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) { header('Location: /admin/login.php'); exit; }
+require_once __DIR__ . '/_bootstrap.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/../core/security-helpers.php';
 
@@ -16,10 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
 }
 
 $q = isset($_GET['q']) ? trim($_GET['q']) : '';
-$sql = 'SELECT slno, hospitalname, address, contact FROM omrhospitalslist';
-if ($q !== '') { $esc = '%' . $conn->real_escape_string($q) . '%'; $sql .= " WHERE hospitalname LIKE '" . $esc . "' OR address LIKE '" . $esc . "'"; }
-$sql .= ' ORDER BY hospitalname ASC LIMIT 200';
-$res = $conn->query($sql);
+$res = null;
+if ($q !== '') {
+    $like = '%' . $q . '%';
+    $stmt = $conn->prepare('SELECT slno, hospitalname, address, contact FROM omrhospitalslist WHERE hospitalname LIKE ? OR address LIKE ? ORDER BY hospitalname ASC LIMIT 200');
+    $stmt->bind_param('ss', $like, $like);
+    $stmt->execute();
+    $res = $stmt->get_result();
+} else {
+    $res = $conn->query('SELECT slno, hospitalname, address, contact FROM omrhospitalslist ORDER BY hospitalname ASC LIMIT 200');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

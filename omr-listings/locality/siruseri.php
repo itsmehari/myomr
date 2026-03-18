@@ -11,7 +11,7 @@ $og_title = $page_title; $og_description = $page_description; $og_url = 'https:/
 <!DOCTYPE html>
 <html lang="en"><head>
 <?php include '../../components/meta.php'; ?>
-<?php \ = ['locality' => \]; include '../../components/analytics.php'; ?>
+<?php $ga_content_group = 'Locality'; include '../../components/analytics.php'; ?>
 <?php include '../../components/head-resources.php'; ?>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>body{font-family:'Poppins',sans-serif}</style>

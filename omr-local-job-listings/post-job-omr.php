@@ -73,12 +73,12 @@ if (empty($_SESSION['csrf_token'])) {
     <title><?php echo $page_title; ?></title>
     <meta name="description" content="<?php echo $page_description; ?>">
     <meta name="keywords" content="post job OMR, job vacancy Chennai, hire employees OMR, job listing OMR">
-    <link rel="canonical" href="<?php echo $canonical_url; ?>">
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     
     <!-- Open Graph -->
     <meta property="og:title" content="<?php echo $page_title; ?>">
     <meta property="og:description" content="<?php echo $page_description; ?>">
-    <meta property="og:url" content="<?php echo $canonical_url; ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     
@@ -381,6 +381,20 @@ if (empty($_SESSION['csrf_token'])) {
                                 <div class="invalid-feedback-modern"><i class="fas fa-exclamation-circle"></i> Please select a job type.</div>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group-modern">
+                                <label for="work_segment" class="form-label-modern required-field">Job Segment</label>
+                                <select class="form-select-modern" id="work_segment" name="work_segment" required>
+                                    <option value="">Select Segment</option>
+                                    <option value="office">Office / White-collar</option>
+                                    <option value="manpower">Manpower / Blue-collar</option>
+                                    <option value="hybrid">Hybrid</option>
+                                </select>
+                                <div class="help-text-modern"><i class="fas fa-info-circle"></i> Helps job seekers find the right kind of work faster.</div>
+                                <div class="invalid-feedback-modern"><i class="fas fa-exclamation-circle"></i> Please select a job segment.</div>
+                            </div>
+                        </div>
                         
                         <div class="col-md-6">
                             <div class="form-group-modern">
@@ -520,7 +534,8 @@ if (empty($_SESSION['csrf_token'])) {
   document.getElementById('post-job-form')?.addEventListener('submit', function(){
     const title = document.getElementById('title')?.value || '';
     const category = document.getElementById('category')?.value || '';
-    gtagSend('job_post_submit', { title_length: title.length, category: category });
+    const workSegment = document.getElementById('work_segment')?.value || '';
+    gtagSend('job_post_submit', { title_length: title.length, category: category, work_segment: workSegment });
   });
 </script>
 
@@ -683,6 +698,17 @@ if (empty($_SESSION['csrf_token'])) {
     if (phone) {
         phone.addEventListener('input', function() {
             this.value = this.value.replace(/[^\d\s\-\+\(\)]/g, '');
+        });
+    }
+
+    // Auto-suggest segment from category (still editable by employer)
+    const categorySelect = document.getElementById('category');
+    const segmentSelect = document.getElementById('work_segment');
+    if (categorySelect && segmentSelect) {
+        const manpowerCategories = ['hospitality', 'construction', 'logistics', 'housekeeping', 'security'];
+        categorySelect.addEventListener('change', function() {
+            if (segmentSelect.value) return;
+            segmentSelect.value = manpowerCategories.includes(this.value) ? 'manpower' : 'office';
         });
     }
     

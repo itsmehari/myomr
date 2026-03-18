@@ -60,6 +60,22 @@ require_once ROOT_PATH . '/components/page-bootstrap.php';
 - Detail pages: prefer slug URLs `/{module}/{entity}/{id}/{slug}` — use skill **slug-urls-detail-pages**.
 - Sitemap URLs must match canonical URLs.
 
+## Sitelinks and SERP architecture (March 2026)
+
+- Google sitelinks are algorithmic; optimize signals rather than expecting manual control.
+- Keep one crawl-critical hub set consistent across header, footer, and structured data:
+  - `Home` -> `/`
+  - `Jobs` -> `/omr-local-job-listings/`
+  - `Events` -> `/omr-local-events/`
+  - `Explore Places` -> `/omr-listings/index.php`
+  - `Buy & Sell` -> `/omr-buy-sell/`
+  - `News Highlights` -> `/local-news/news-highlights-from-omr-road.php`
+  - `Contact` -> `/contact-my-omr-team.php`
+- Use `core/site-navigation.php` as single source for these hub links.
+- Footer links should be root-absolute (`/path`), not context-derived base URLs.
+- Generate `SiteNavigationElement` schema from the same nav source used by UI.
+- For non-branded intent (`omr road`, `omr`), add shared hub cross-links using `components/omr-topic-hubs.php`.
+
 ## 404 error handling
 
 - Use `require_once ROOT_PATH . '/core/serve-404.php'; exit;` when entity not found.
@@ -84,6 +100,34 @@ require_once ROOT_PATH . '/components/page-bootstrap.php';
 - Git deploy; `.cpanel.yml` drives copy; repository outside `public_html`.
 - Exclude uploads, sessions, .env from delete. `omr-buy-sell` and `elections-2026` are in the deploy list.
 - Refs: [CPANEL-CHECKLIST.md](CPANEL-CHECKLIST.md), [DEPLOYMENT-CPANEL.md](DEPLOYMENT-CPANEL.md).
+
+## Search Console API runbook (March 2026)
+
+- Use service-account JSON outside deploy/public folders (for local automation only).
+- Add service-account `client_email` as **Full** user in Search Console property.
+- Domain property identifier for automation: `sc-domain:myomr.in`.
+- Python tooling used:
+  - `google-api-python-client`
+  - `google-auth`
+  - `google-auth-httplib2`
+- Submit/re-submit sitemaps with Search Console API:
+  - root index: `https://myomr.in/sitemap.xml`
+  - child sitemaps from `generate-sitemap-index.php`
+- Prefer API status (`isPending`, `errors`, `warnings`, `lastSubmitted`) over ad-hoc HTTP checks when environment/network middleware returns non-representative responses.
+- Security: do not commit credential JSON; rotate keys if private key material is exposed.
+
+### Cursor MCP integration (Search Console)
+
+- Expected MCP script path in this repo:
+  - `dev-tools/mcp/search_console_mcp.py`
+- Typical Cursor MCP server config:
+  - command: `python`
+  - args: `E:/OneDrive/_myomr/_Root/dev-tools/mcp/search_console_mcp.py`
+  - env:
+    - `GSC_CREDENTIALS_PATH` = absolute path to service-account JSON
+    - `GSC_SITE_URL` = `sc-domain:myomr.in`
+    - optional `GSC_CHILD_SITEMAPS` = comma-separated sitemap URLs
+- If Cursor logs show: `can't open file .../search_console_mcp.py`, create/check this file path first.
 
 ## Documentation map
 
@@ -136,3 +180,48 @@ require_once ROOT_PATH . '/components/page-bootstrap.php';
 - **head-resources.php** and **Bootstrap 4** — used by omr-listings and many local-news pages; migrate when touching.
 - Some pages still use relative includes or **navbar.php**; prefer `omr_nav()` / `omr_footer()` when editing.
 - **Slug URLs** — not yet on hostels, rent-lease, coworking (they use query-string canonicals); prefer slug when adding new modules or refactoring.
+- Legacy `info/sitemap.xml` may exist in repo/history; canonical sitemap entry point is `/sitemap.xml` (index). Maintain redirects and avoid dual sitemap sources.
+
+## Jobs module patterns (March 2026)
+
+- **Work segment model:** Jobs now support `work_segment` classification:
+  - `office`
+  - `manpower`
+  - `hybrid`
+- **Where used:** detail page, listing filters, post/edit forms, API cards, segment landing pages, sitemap.
+- **UI labels:** Office Jobs, Manpower Jobs, Hybrid Jobs.
+
+### Migration and safety
+
+- Remote DB migration introduced `job_postings.work_segment` with backfill + default + index.
+- Keep helper fallback behavior for mixed deployments:
+  - `jobPostingsHasColumn()`
+  - `inferJobSegmentFromData()`
+- Segment landing pages must not hard-fail if helper updates lag; use `function_exists()` guarded fallback definitions as needed.
+
+### High-conversion detail page standards
+
+- Prioritize above-the-fold:
+  1. Role + employer context
+  2. Primary apply CTA
+  3. WhatsApp secondary CTA
+  4. Social proof and urgency
+- Include a scannable facts block (type, segment, salary, location) before long-form description.
+- Avoid inline styles; place reusable UI classes in `omr-local-job-listings/assets/job-portal-2026.css`.
+
+### API/SSR parity rule
+
+- If card/listing markup changes in `index.php`, mirror structure in:
+  - `omr-local-job-listings/api/jobs.php`
+  - `omr-local-job-listings/assets/job-ajax-search.js`
+- This prevents style mismatch during AJAX filtering and pagination.
+
+### Tracking
+
+- For job detail conversion tracking, use:
+  - `job_apply_cta_click`
+  - `job_whatsapp_click`
+- Detail page should provide dataset context on `<body>`:
+  - `data-job-id`
+  - `data-job-title`
+  - `data-company-name`

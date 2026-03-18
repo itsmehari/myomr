@@ -15,8 +15,8 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-# Security: disable indexes
-Options -Indexes
+# Security: disable indexes. (Options can cause 500 if host restricts AllowOverride)
+# Options -Indexes -MultiViews
 
 # Explicit directory index (helps avoid 403 when index.php not served)
 <IfModule mod_dir.c>
@@ -81,9 +81,11 @@ SetEnv MYOMR_ENV production
 # Favicon: redirect to logo (avoids 403 when favicon.ico missing)
 RewriteRule ^favicon\.ico$ /My-OMR-Logo.png [L,R=302]
 
-# Root sitemap index
-RewriteRule ^sitemap\.xml$ generate-sitemap-index.php [L]
-RewriteRule ^sitemap-pages\.xml$ generate-sitemap-pages.php [L]
+# Root sitemap index (leading slash helps on shared hosting)
+RewriteRule ^sitemap\.xml$ /generate-sitemap-index.php [L]
+RewriteRule ^sitemap-pages\.xml$ /generate-sitemap-pages.php [L]
+# Legacy static sitemap path -> canonical sitemap index
+RewriteRule ^info/sitemap\.xml$ /sitemap.xml [R=301,L]
 
 # Module: Events – clean routes
 RewriteRule ^omr-local-events/sitemap\.xml$ omr-local-events/generate-events-sitemap.php [L]
@@ -102,9 +104,14 @@ RewriteRule ^omr-local-job-listings/sitemap\.xml$ omr-local-job-listings/generat
 RewriteRule ^omr-local-job-listings/job/([0-9]+)(?:/([a-z0-9-]+))?/?$ omr-local-job-listings/job-detail-omr.php?id=$1 [L,QSA]
 RewriteRule ^omr-hostels-pgs/sitemap\.xml$ omr-hostels-pgs/generate-sitemap.php [L]
 RewriteRule ^omr-coworking-spaces/sitemap\.xml$ omr-coworking-spaces/generate-sitemap.php [L]
+RewriteRule ^omr-buy-sell/sitemap\.xml$ omr-buy-sell/generate-sitemap.php [L]
+RewriteRule ^omr-buy-sell/listing/([0-9]+)(?:/([a-z0-9-]+))?/?$ omr-buy-sell/listing-detail-omr.php?id=$1 [L,QSA]
+RewriteRule ^omr-buy-sell/category/([^/]+)/?$ omr-buy-sell/category.php?slug=$1 [L,QSA]
+RewriteRule ^omr-buy-sell/locality/([^/]+)/?$ omr-buy-sell/locality.php?slug=$1 [L,QSA]
 RewriteRule ^pentahive/sitemap\.xml$ pentahive/generate-sitemap.php [L]
 RewriteRule ^local-news/sitemap\.xml$ local-news/generate-sitemap.php [L]
 RewriteRule ^election-blo-details/sitemap\.xml$ election-blo-details/generate-blo-sitemap.php [L]
+RewriteRule ^elections-2026/sitemap\.xml$ elections-2026/generate-sitemap.php [L]
 
 # Root-level pages (files in sub-folders)
 RewriteRule ^contact-my-omr-team\.php$ weblog/contact-my-omr-team.php [L]

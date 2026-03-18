@@ -12,7 +12,7 @@
   // ── Config ──────────────────────────────────────────────────────────────────
   const API_URL        = '/omr-local-job-listings/api/jobs.php';
   const GRID_ID        = 'jobs-grid';
-  const SUMMARY_ID     = 'jobs-summary';
+  const SUMMARY_ID     = 'results-count';
   const PAGINATION_ID  = 'jobs-pagination';
   const SPINNER_ID     = 'jobs-spinner';
   const HERO_COUNT_ID  = 'hero-job-count';
@@ -61,6 +61,14 @@
     if (job.category_name) {
       out += `<span class="badge-modern badge-modern-primary">
                 <i class="fas fa-tag me-1"></i>${esc(job.category_name)}
+              </span>`;
+    }
+    if (job.work_segment) {
+      const segmentLabel = job.work_segment === 'manpower'
+        ? 'Manpower Jobs'
+        : (job.work_segment === 'office' ? 'Office Jobs' : 'Hybrid Jobs');
+      out += `<span class="badge-modern badge-modern-secondary">
+                <i class="fas fa-users me-1"></i>${esc(segmentLabel)}
               </span>`;
     }
     if (job.salary_display) {
@@ -208,11 +216,9 @@
   function updateSummary(total, page, perPage) {
     const el = document.getElementById(SUMMARY_ID);
     if (el) {
-      const from = ((page - 1) * perPage) + 1;
-      const to   = Math.min(page * perPage, total);
-      el.textContent = total
-        ? `Showing ${from}–${to} of ${total.toLocaleString()} jobs`
-        : 'No jobs found';
+      const showing = Math.min(perPage, total);
+      const pageLabel = page > 1 ? ` — Page ${page}` : '';
+      el.innerHTML = `Showing <strong id="filter-job-count">${showing.toLocaleString()}</strong> of <strong id="filter-job-total">${total.toLocaleString()}</strong> jobs${pageLabel}`;
     }
     const heroEl = document.getElementById(HERO_COUNT_ID);
     if (heroEl) heroEl.textContent = total.toLocaleString();
@@ -264,8 +270,20 @@
         return r.json();
       })
       .then(function (data) {
-        renderJobs(data.jobs);
-        renderPagination(data, params);
+        const grid = document.getElementById(GRID_ID);
+        if (grid) {
+          if (data.html && typeof data.html === 'string') grid.innerHTML = data.html;
+          else renderJobs(data.jobs || []);
+        }
+
+        const paginationContainer = document.getElementById(PAGINATION_ID);
+        if (paginationContainer) {
+          if (data.pagination && typeof data.pagination === 'string') {
+            paginationContainer.innerHTML = data.pagination;
+          } else {
+            renderPagination(data, params);
+          }
+        }
         updateSummary(data.total, data.page, data.per_page);
         setLoading(false);
       })

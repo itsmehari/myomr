@@ -116,7 +116,37 @@ $salary_display = (!empty($job['salary_range']) && $job['salary_range'] !== 'Not
     ? formatSalary($job['salary_range']) : 'Not Disclosed';
 
 $apps_count = (int)($job['applications_count'] ?? 0);
-$work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSegmentFromData($job)));
+$raw_work_segment = (string)($job['work_segment'] ?? '');
+if ($raw_work_segment === '' && function_exists('inferJobSegmentFromData')) {
+    $raw_work_segment = (string) inferJobSegmentFromData($job);
+}
+if ($raw_work_segment === '') {
+    $raw_work_segment = 'office';
+}
+if (function_exists('normalizeJobSegment')) {
+    $work_segment = normalizeJobSegment($raw_work_segment);
+} else {
+    // Deployment-safe fallback to avoid fatal errors when helper updates lag behind page updates.
+    $v = strtolower(trim($raw_work_segment));
+    $v = str_replace(['_', ' '], '-', $v);
+    $fallback_segment_map = [
+        'office'       => 'office',
+        'white-collar' => 'office',
+        'whitecollar'  => 'office',
+        'manpower'     => 'manpower',
+        'labour'       => 'manpower',
+        'labor'        => 'manpower',
+        'blue-collar'  => 'manpower',
+        'bluecollar'   => 'manpower',
+        'hybrid'       => 'hybrid',
+    ];
+    $work_segment = $fallback_segment_map[$v] ?? $v;
+}
+$posted_label = timeAgo($job['created_at'] ?? '');
+$posted_date = date('d M Y', strtotime($job['created_at'] ?? 'now'));
+$application_deadline_label = (!empty($job['application_deadline']) && $job['application_deadline'] !== '0000-00-00')
+    ? date('d M Y', strtotime($job['application_deadline']))
+    : 'Open until filled';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -153,7 +183,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="assets/job-portal-2026.css">
+<link rel="stylesheet" href="/omr-local-job-listings/assets/job-portal-2026.css">
 <link rel="stylesheet" href="/assets/css/footer.css">
 
 <!-- Structured Data -->
@@ -169,7 +199,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
 }
 </script>
 </head>
-<body class="job-portal-page">
+<body class="job-portal-page" data-job-id="<?= (int)$job['id'] ?>" data-job-title="<?= htmlspecialchars($job['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>" data-company-name="<?= htmlspecialchars($job['company_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 
 <?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
 <?php omr_nav('main'); ?>
@@ -190,9 +220,9 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
   <div class="container">
     <ol class="breadcrumb mb-0">
       <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i> Home</a></li>
-      <li class="breadcrumb-item"><a href="index.php">Jobs in OMR</a></li>
+      <li class="breadcrumb-item"><a href="/omr-local-job-listings/">Jobs in OMR</a></li>
       <li class="breadcrumb-item">
-        <a href="index.php?category=<?= urlencode($job['category'] ?? '') ?>">
+        <a href="/omr-local-job-listings/?category=<?= urlencode($job['category'] ?? '') ?>">
           <?= htmlspecialchars($job['category_name'] ?? $job['category'] ?? 'General') ?>
         </a>
       </li>
@@ -227,15 +257,14 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
           <?php if (!empty($job['company_logo'])): ?>
             <img src="<?= htmlspecialchars($job['company_logo']) ?>"
                  alt="<?= htmlspecialchars($job['company_name'] ?? '') ?> logo"
-                 class="jp-detail__company-logo"
-                 style="object-fit:contain">
+                 class="jp-detail__company-logo">
           <?php else: ?>
             <div class="jp-detail__company-logo">
               <?= htmlspecialchars(mb_substr($job['company_name'] ?? 'C', 0, 1)) ?>
             </div>
           <?php endif; ?>
           <div>
-            <p style="color:rgba(255,255,255,.75);font-size:.85rem;margin-bottom:.1rem">
+            <p class="jp-detail__company-kicker">
               <?= htmlspecialchars($job['company_name'] ?? '') ?>
             </p>
           </div>
@@ -254,7 +283,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
             <?= getJobTypeLabel($job['job_type'] ?? 'full-time') ?>
           </span>
           <span class="jp-highlight">
-            <i class="fas fa-users-viewfinder"></i>
+            <i class="fas fa-users"></i>
             <?= htmlspecialchars(getJobSegmentLabel($work_segment)) ?>
           </span>
           <?php if ($salary_display !== 'Not Disclosed'): ?>
@@ -282,7 +311,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
           </span>
           <?php endif; ?>
           <?php if (!empty($job['application_deadline']) && $job['application_deadline'] !== '0000-00-00'): ?>
-          <span class="jp-highlight" style="background:rgba(255,107,44,.2);border-color:rgba(255,107,44,.4)">
+          <span class="jp-highlight jp-highlight-deadline">
             <i class="fas fa-calendar-times"></i>
             Apply by <?= date('d M Y', strtotime($job['application_deadline'])) ?>
           </span>
@@ -292,33 +321,32 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
 
       <!-- Desktop apply panel (inside hero) -->
       <div class="col-lg-4 d-none d-lg-block">
-        <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:1.25rem">
+        <div class="jp-hero-cta-panel">
           <?php if ($already_applied): ?>
-          <button class="jp-btn-apply-main" disabled style="width:100%;background:#22c55e;color:#fff;border:none;border-radius:10px;padding:.9rem;font-size:1rem;font-weight:700;font-family:'Poppins',sans-serif;display:flex;align-items:center;justify-content:center;gap:.5rem">
+          <button class="jp-btn-apply-main jp-btn-applied" disabled>
             <i class="fas fa-check-circle"></i> Already Applied
           </button>
           <?php else: ?>
-          <button class="jp-btn-apply-main" data-bs-toggle="modal" data-bs-target="#applyModal"
-                  style="width:100%;background:#fff;color:#005c39;border:none;border-radius:10px;padding:.9rem;font-size:1.05rem;font-weight:800;font-family:'Poppins',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.6rem;transition:all .2s">
+          <button class="jp-btn-hero-apply" data-bs-toggle="modal" data-bs-target="#applyModal">
             <i class="fas fa-paper-plane"></i> Apply Now — It's Free
           </button>
           <a href="<?= $wa_href ?>" target="_blank" rel="noopener"
-             style="width:100%;background:#25d366;color:#fff;border:none;border-radius:10px;padding:.75rem;font-size:.95rem;font-weight:700;font-family:'Poppins',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none;margin-bottom:.6rem;transition:all .2s">
+             class="jp-btn-hero-wa">
             <i class="fab fa-whatsapp"></i> Apply via WhatsApp
           </a>
           <?php endif; ?>
           <!-- Social proof -->
-          <div class="d-flex gap-3 justify-content-center flex-wrap" style="padding-top:.6rem;border-top:1px solid rgba(255,255,255,.2)">
-            <span style="font-size:.78rem;color:rgba(255,255,255,.8)">
+          <div class="jp-hero-proof-row">
+            <span class="jp-hero-proof-item">
               <i class="fas fa-eye me-1"></i><?= number_format((int)($job['views'] ?? 0)) ?> views
             </span>
             <?php if ($apps_count > 0): ?>
-            <span style="font-size:.78rem;color:rgba(255,255,255,.8)">
+            <span class="jp-hero-proof-item">
               <i class="fas fa-users me-1"></i><?= $apps_count ?> applied
             </span>
             <?php endif; ?>
-            <span style="font-size:.78rem;color:rgba(255,255,255,.8)">
-              <i class="fas fa-clock me-1"></i><?= timeAgo($job['created_at'] ?? '') ?>
+            <span class="jp-hero-proof-item">
+              <i class="fas fa-clock me-1"></i><?= $posted_label ?>
             </span>
           </div>
         </div>
@@ -327,9 +355,40 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
   </div>
 </section>
 
+<section class="jp-conversion-strip" aria-label="Quick apply summary">
+  <div class="container">
+    <div class="jp-conversion-grid">
+      <div class="jp-conversion-metric">
+        <span class="jp-metric-label">Posted</span>
+        <strong><?= htmlspecialchars($posted_date) ?></strong>
+      </div>
+      <div class="jp-conversion-metric">
+        <span class="jp-metric-label">Applications</span>
+        <strong><?= number_format($apps_count) ?></strong>
+      </div>
+      <div class="jp-conversion-metric">
+        <span class="jp-metric-label">Apply before</span>
+        <strong><?= htmlspecialchars($application_deadline_label) ?></strong>
+      </div>
+      <div class="jp-conversion-actions">
+        <?php if (!$already_applied): ?>
+        <button class="jp-btn-apply-main" data-bs-toggle="modal" data-bs-target="#applyModal">
+          <i class="fas fa-paper-plane"></i> Quick Apply
+        </button>
+        <a href="<?= $wa_href ?>" target="_blank" rel="noopener" class="jp-btn-wa-apply">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <?php else: ?>
+        <span class="jp-conversion-applied"><i class="fas fa-check-circle"></i> You already applied</span>
+        <?php endif; ?>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── MAIN CONTENT ────────────────────────────────────────────── -->
 <main id="main-content">
-  <div class="container" style="padding-top:1.5rem;padding-bottom:3rem">
+  <div class="container jp-detail-main-wrap">
     <div class="row g-4">
 
       <!-- ── LEFT: Job Content ──────────────────────────────────── -->
@@ -337,7 +396,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
 
         <!-- Mobile sticky apply bar -->
         <?php if (!$already_applied): ?>
-        <div class="d-lg-none" style="position:sticky;top:0;z-index:100;background:#fff;padding:.75rem 0;border-bottom:1px solid #e5e7eb;margin:0 -12px;padding-left:12px;padding-right:12px;display:flex;gap:.5rem">
+        <div class="d-lg-none jp-mobile-sticky-apply">
           <button class="jp-btn-view flex-fill" data-bs-toggle="modal" data-bs-target="#applyModal">
             <i class="fas fa-paper-plane"></i> Apply Now
           </button>
@@ -365,6 +424,28 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
             <i class="fas fa-tag"></i> <?= htmlspecialchars($job['category_name']) ?>
           </span>
           <?php endif; ?>
+        </div>
+
+        <div class="jp-content-block jp-quick-facts">
+          <h2><i class="fas fa-bolt"></i> Quick Job Facts</h2>
+          <div class="jp-facts-grid">
+            <div class="jp-fact-item">
+              <span>Role type</span>
+              <strong><?= htmlspecialchars(getJobTypeLabel($job['job_type'] ?? 'full-time')) ?></strong>
+            </div>
+            <div class="jp-fact-item">
+              <span>Segment</span>
+              <strong><?= htmlspecialchars(getJobSegmentLabel($work_segment)) ?></strong>
+            </div>
+            <div class="jp-fact-item">
+              <span>Salary</span>
+              <strong><?= htmlspecialchars($salary_display) ?></strong>
+            </div>
+            <div class="jp-fact-item">
+              <span>Location</span>
+              <strong><?= htmlspecialchars($job['location'] ?? 'OMR, Chennai') ?></strong>
+            </div>
+          </div>
         </div>
 
         <!-- Job Description -->
@@ -406,7 +487,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
         <!-- Trust info -->
         <div class="jp-info-box">
           <h5><i class="fas fa-shield-alt me-1"></i> Application Guidelines</h5>
-          <ul class="mb-0 ps-3" style="line-height:1.8">
+          <ul class="mb-0 ps-3 jp-guidelines-list">
             <li>Your application goes directly to the employer — no intermediary fee.</li>
             <li>Keep your phone and email accessible. Employers will reach you directly.</li>
             <li>Follow up if you haven't heard within 2 weeks.</li>
@@ -419,7 +500,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
         <div class="jp-content-block">
           <h2><i class="fas fa-briefcase"></i> Similar Jobs</h2>
           <?php foreach ($related_jobs as $r): ?>
-          <a href="<?= getJobDetailPath($r['id'], $r['title'] ?? null) ?>" class="jp-related-card">
+          <a href="<?= getJobDetailUrl((int)$r['id'], $r['title'] ?? null) ?>" class="jp-related-card">
             <div class="jp-related-card__initial">
               <?= htmlspecialchars(mb_substr($r['company_name'] ?? 'C', 0, 1)) ?>
             </div>
@@ -434,7 +515,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
           </a>
           <?php endforeach; ?>
           <div class="text-center mt-3">
-            <a href="index.php<?= !empty($job['category']) ? '?category=' . urlencode($job['category']) : '' ?>" class="jp-btn-view">
+            <a href="/omr-local-job-listings/<?= !empty($job['category']) ? '?category=' . urlencode($job['category']) : '' ?>" class="jp-btn-view">
               <i class="fas fa-th-list me-1"></i> Browse All <?= htmlspecialchars($job['category_name'] ?? '') ?> Jobs
             </a>
           </div>
@@ -449,23 +530,23 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
 
           <!-- Apply buttons (desktop sidebar) -->
           <?php if (!$already_applied): ?>
-          <div class="jp-sidebar-detail" style="text-align:center">
+          <div class="jp-sidebar-detail jp-sidebar-detail-center">
             <button class="jp-btn-apply-main" data-bs-toggle="modal" data-bs-target="#applyModal">
               <i class="fas fa-paper-plane"></i> Apply Now — It's Free
             </button>
-            <div style="margin:.6rem 0;color:#9ca3af;font-size:.8rem">— or —</div>
+            <div class="jp-cta-or">— or —</div>
             <a href="<?= $wa_href ?>" target="_blank" rel="noopener" class="jp-btn-wa-apply">
               <i class="fab fa-whatsapp"></i> Apply via WhatsApp
             </a>
-            <p style="font-size:.78rem;color:#9ca3af;margin-top:.6rem">
+            <p class="jp-cta-note">
               Quick apply in under 60 seconds
             </p>
           </div>
           <?php else: ?>
           <div class="jp-sidebar-detail text-center">
-            <div style="color:#16a34a;font-size:2rem;margin-bottom:.5rem"><i class="fas fa-check-circle"></i></div>
-            <p style="font-weight:700;font-size:.95rem;color:#166534">You've already applied!</p>
-            <p style="font-size:.82rem;color:#6b7280">The employer will contact you directly if selected.</p>
+            <div class="jp-applied-icon"><i class="fas fa-check-circle"></i></div>
+            <p class="jp-applied-title">You've already applied!</p>
+            <p class="jp-applied-subtitle">The employer will contact you directly if selected.</p>
           </div>
           <?php endif; ?>
 
@@ -515,23 +596,23 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
           <!-- Company info -->
           <div class="jp-sidebar-detail">
             <h3><i class="fas fa-building"></i> About the Employer</h3>
-            <p style="font-weight:700;font-size:.95rem;margin-bottom:.5rem">
+            <p class="jp-employer-name">
               <?= htmlspecialchars($job['company_name'] ?? '') ?>
             </p>
             <?php if (!empty($job['company_address'])): ?>
-            <p style="font-size:.85rem;color:#6b7280;margin-bottom:.4rem">
+            <p class="jp-employer-meta">
               <i class="fas fa-map-marker-alt me-1 text-success"></i>
               <?= htmlspecialchars($job['company_address']) ?>
             </p>
             <?php endif; ?>
             <?php if (!empty($job['employer_email'])): ?>
-            <p style="font-size:.85rem;color:#6b7280;margin-bottom:.4rem">
+            <p class="jp-employer-meta">
               <i class="fas fa-envelope me-1 text-success"></i>
               <?= htmlspecialchars($job['employer_email']) ?>
             </p>
             <?php endif; ?>
             <?php if (!empty($job['employer_phone'])): ?>
-            <p style="font-size:.85rem;color:#6b7280;margin-bottom:0">
+            <p class="jp-employer-meta jp-employer-meta-last">
               <i class="fas fa-phone me-1 text-success"></i>
               <?= htmlspecialchars($job['employer_phone']) ?>
             </p>
@@ -558,26 +639,26 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
           </div>
 
           <!-- Join our WhatsApp group (community) -->
-          <div class="jp-sidebar-detail" style="background:linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%);border:1px solid #86efac;border-radius:10px;">
-            <h3><i class="fab fa-whatsapp" style="color:#25d366;"></i> Join Our WhatsApp Group</h3>
-            <p style="font-size:.9rem;color:#166534;margin-bottom:.75rem;">Get job alerts, local updates &amp; connect with the OMR community.</p>
-            <a href="<?= htmlspecialchars(defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi') ?>" target="_blank" rel="noopener" class="jp-share-btn jp-share-wa" style="justify-content:center;">
+          <div class="jp-sidebar-detail jp-community-card jp-community-card-wa">
+            <h3><i class="fab fa-whatsapp jp-community-icon-wa"></i> Join Our WhatsApp Group</h3>
+            <p class="jp-community-copy jp-community-copy-wa">Get job alerts, local updates &amp; connect with the OMR community.</p>
+            <a href="<?= htmlspecialchars(defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi') ?>" target="_blank" rel="noopener" class="jp-share-btn jp-share-wa jp-share-centered">
               <i class="fab fa-whatsapp"></i> Join WhatsApp Group
             </a>
           </div>
 
           <!-- Join our Facebook group (community) -->
-          <div class="jp-sidebar-detail" style="background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:1px solid #93c5fd;border-radius:10px;">
-            <h3><i class="fab fa-facebook-f" style="color:#1877f2;"></i> Join Our Facebook Group</h3>
-            <p style="font-size:.9rem;color:#1e3a8a;margin-bottom:.75rem;">Stay connected with OMR updates, discussions, and local opportunities.</p>
-            <a href="<?= htmlspecialchars(defined('MYOMR_FACEBOOK_GROUP_URL') ? MYOMR_FACEBOOK_GROUP_URL : 'https://www.facebook.com/groups/416854920508620') ?>" target="_blank" rel="noopener" class="jp-share-btn" style="justify-content:center;background:#1877f2;color:#fff;" aria-label="Join our Facebook group for OMR job updates" title="Join our Facebook group">
+          <div class="jp-sidebar-detail jp-community-card jp-community-card-fb">
+            <h3><i class="fab fa-facebook-f jp-community-icon-fb"></i> Join Our Facebook Group</h3>
+            <p class="jp-community-copy jp-community-copy-fb">Stay connected with OMR updates, discussions, and local opportunities.</p>
+            <a href="<?= htmlspecialchars(defined('MYOMR_FACEBOOK_GROUP_URL') ? MYOMR_FACEBOOK_GROUP_URL : 'https://www.facebook.com/groups/416854920508620') ?>" target="_blank" rel="noopener" class="jp-share-btn jp-share-fb jp-share-centered" aria-label="Join our Facebook group for OMR job updates" title="Join our Facebook group">
               <i class="fab fa-facebook-f"></i> Join Facebook Group
             </a>
           </div>
 
           <!-- Back link -->
           <div class="text-center mt-2">
-            <a href="index.php" style="font-size:.85rem;color:#6b7280;text-decoration:none">
+            <a href="/omr-local-job-listings/" class="jp-back-link">
               <i class="fas fa-arrow-left me-1"></i> Back to All Jobs
             </a>
           </div>
@@ -601,7 +682,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <form action="process-application-omr.php" method="POST"
+      <form action="/omr-local-job-listings/process-application-omr.php" method="POST"
             enctype="multipart/form-data" id="applyForm" novalidate>
         <div class="modal-body">
           <input type="hidden" name="job_id" value="<?= $job['id'] ?>">
@@ -651,13 +732,11 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
               Resume / CV <small class="text-muted">(PDF, DOC, DOCX — max 2 MB)</small>
             </label>
             <div class="jp-resume-upload" id="resumeDropZone"
-                 onclick="document.getElementById('resume').click()"
-                 style="position:relative">
+                 onclick="document.getElementById('resume').click()">
               <i class="fas fa-cloud-upload-alt d-block"></i>
               <p id="resumeLabel">Click to upload or drag &amp; drop your resume</p>
               <input type="file" id="resume" name="resume"
                      accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                     style="position:absolute;inset:0;opacity:0;cursor:pointer"
                      onchange="handleResumeChange(this)">
             </div>
           </div>
@@ -671,20 +750,19 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
                       placeholder="Why are you a good fit for this role?"><?= htmlspecialchars($form_data['cover_letter'] ?? '') ?></textarea>
           </div>
 
-          <div class="alert alert-light border mt-3 mb-0" style="font-size:.82rem">
+          <div class="alert alert-light border mt-3 mb-0 jp-apply-hint">
             <i class="fas fa-info-circle text-success me-1"></i>
             Your application is sent directly to the employer. MyOMR never charges applicants.
           </div>
         </div>
 
-        <div class="modal-footer" style="gap:.5rem">
+        <div class="modal-footer jp-modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
           <a href="<?= $wa_href ?>" target="_blank" rel="noopener"
-             class="btn btn-success" style="background:#25d366;border-color:#25d366">
+             class="btn btn-success jp-modal-btn-wa">
             <i class="fab fa-whatsapp me-1"></i> Apply via WhatsApp
           </a>
-          <button type="submit" class="btn btn-primary" id="submitBtn"
-                  style="background:var(--omr-green,#008552);border-color:var(--omr-green,#008552)">
+          <button type="submit" class="btn btn-primary jp-modal-btn-apply" id="submitBtn">
             <i class="fas fa-paper-plane me-1"></i> Submit Application
           </button>
         </div>
@@ -696,7 +774,7 @@ $work_segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSeg
 <?php omr_footer(); ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/job-analytics-events.js"></script>
+<script src="/omr-local-job-listings/assets/job-analytics-events.js"></script>
 
 <script>
 /* Resume file selection label */

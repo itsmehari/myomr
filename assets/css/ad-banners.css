@@ -1,0 +1,238 @@
+/**
+ * Ad banner templates — standard Google Ads sizes (728x90, 336x280, 300x250).
+ * High-quality designs for resumedoctor.in, mycovai.in, colourchemist.co.in
+ */
+
+/* --- Base ad slot wrapper --- */
+.omr-ad-slot {
+  display: block;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.omr-ad-slot__label {
+  display: block;
+  font-size: 0.7rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.omr-ad-banner {
+  display: block;
+  text-decoration: none;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.omr-ad-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Size containers (fixed dimensions, responsive max-width) --- */
+.omr-ad-banner--728x90 {
+  width: 728px;
+  max-width: 100%;
+  height: 90px;
+}
+
+.omr-ad-banner--336x280,
+.omr-ad-banner--300x250 {
+  width: 336px;
+  max-width: 100%;
+  height: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 400px) {
+  .omr-ad-banner--336x280,
+  .omr-ad-banner--300x250 {
+    width: 300px;
+    height: 250px;
+  }
+}
+
+/* ========== ResumeDoctor — Professional, navy/teal, trust --- */
+.omr-ad-banner--resumedoctor {
+  background: linear-gradient(135deg, #0f172a 0%, #0e7490 100%);
+  color: #fff;
+  position: relative;
+}
+
+.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.5rem;
+}
+
+.omr-ad-banner--728x90 .omr-ad-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.omr-ad-banner--resumedoctor.omr-ad-banner--336x280,
+.omr-ad-banner--resumedoctor.omr-ad-banner--300x250 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.omr-ad-banner--resumedoctor .omr-ad-icon {
+  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
+.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-icon {
+  font-size: 2rem;
+}
+
+.omr-ad-banner--resumedoctor .omr-ad-headline {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-headline {
+  font-size: 1.25rem;
+}
+
+.omr-ad-banner--resumedoctor .omr-ad-tagline {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-tagline {
+  font-size: 0.85rem;
+}
+
+/* ========== MyCovAI — Modern, tech-forward, gradient --- */
+.omr-ad-banner--mycovai {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  color: #fff;
+  position: relative;
+}
+
+.omr-ad-banner--mycovai::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.omr-ad-banner--mycovai.omr-ad-banner--728x90 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+.omr-ad-banner--mycovai.omr-ad-banner--336x280,
+.omr-ad-banner--mycovai.omr-ad-banner--300x250 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.omr-ad-banner--mycovai .omr-ad-icon {
+  font-size: 2.5rem;
+  opacity: 0.95;
+}
+
+.omr-ad-banner--mycovai.omr-ad-banner--728x90 .omr-ad-icon {
+  font-size: 2rem;
+}
+
+.omr-ad-banner--mycovai .omr-ad-headline {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.omr-ad-banner--mycovai.omr-ad-banner--728x90 .omr-ad-headline {
+  font-size: 1.25rem;
+}
+
+.omr-ad-banner--mycovai .omr-ad-tagline {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+/* ========== ColourChemist — Industrial, precision --- */
+.omr-ad-banner--colourchemist {
+  background: linear-gradient(135deg, #1e3a5f 0%, #164e63 50%, #0d9488 100%);
+  color: #fff;
+  position: relative;
+}
+
+.omr-ad-banner--colourchemist::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 20px,
+    rgba(255, 255, 255, 0.03) 20px,
+    rgba(255, 255, 255, 0.03) 21px
+  );
+  pointer-events: none;
+}
+
+.omr-ad-banner--colourchemist.omr-ad-banner--728x90 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+.omr-ad-banner--colourchemist.omr-ad-banner--336x280,
+.omr-ad-banner--colourchemist.omr-ad-banner--300x250 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.omr-ad-banner--colourchemist .omr-ad-icon {
+  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
+.omr-ad-banner--colourchemist.omr-ad-banner--728x90 .omr-ad-icon {
+  font-size: 2rem;
+}
+
+.omr-ad-banner--colourchemist .omr-ad-headline {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.omr-ad-banner--colourchemist.omr-ad-banner--728x90 .omr-ad-headline {
+  font-size: 1.25rem;
+}
+
+.omr-ad-banner--colourchemist .omr-ad-tagline {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}

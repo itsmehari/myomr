@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Pentahive Website Maintenance - Social Media Landing Page Variant
  * Optimized for Facebook/Instagram ads (awareness stage traffic)
@@ -62,12 +62,12 @@ $canonical_url = "https://myomr.in/pentahive/facebook";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($page_title); ?></title>
     <meta name="description" content="<?php echo htmlspecialchars($page_description); ?>">
-    <link rel="canonical" href="<?php echo $canonical_url; ?>">
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     
     <!-- Open Graph — required for Facebook/Instagram link previews -->
     <meta property="og:title"       content="<?php echo htmlspecialchars($page_title); ?>">
     <meta property="og:description" content="<?php echo htmlspecialchars($page_description); ?>">
-    <meta property="og:url"         content="<?php echo $canonical_url; ?>">
+    <meta property="og:url"         content="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     <meta property="og:type"        content="website">
     <meta property="og:image"       content="https://myomr.in/My-OMR-Logo.png">
     <meta property="og:site_name"   content="MyOMR — Pentahive">

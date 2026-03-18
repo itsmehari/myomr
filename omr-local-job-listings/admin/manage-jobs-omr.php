@@ -30,19 +30,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'bulk' && isset($_POST['bulk_action']) && is_array($_POST['ids'] ?? null)) {
         $bulkAction = $_POST['bulk_action'];
         if (in_array($bulkAction, ['approve', 'reject'], true)) {
+            $hasPlanCols = jobEmployersTableHasPlanColumns($conn);
             foreach ($_POST['ids'] as $rawId) {
                 $jid = (int)$rawId;
                 if ($jid <= 0) { continue; }
                 $status = $bulkAction === 'approve' ? 'approved' : 'rejected';
-                // fetch employer + title
-                $infoStmt = $conn->prepare("SELECT j.title, e.email FROM job_postings j INNER JOIN employers e ON j.employer_id = e.id WHERE j.id = ? LIMIT 1");
+                $infoCols = "j.title, e.email";
+                if ($hasPlanCols) {
+                    $infoCols .= ", e.plan_type, e.plan_end_date";
+                }
+                $infoStmt = $conn->prepare("SELECT {$infoCols} FROM job_postings j INNER JOIN employers e ON j.employer_id = e.id WHERE j.id = ? LIMIT 1");
                 $infoStmt->bind_param("i", $jid);
                 $infoStmt->execute();
                 $infoRes = $infoStmt->get_result();
                 $info = $infoRes->fetch_assoc();
-                // update
-                $u = $conn->prepare("UPDATE job_postings SET status = ? WHERE id = ?");
-                $u->bind_param("si", $status, $jid);
+                $featured = 0;
+                if ($status === 'approved' && $info && $hasPlanCols) {
+                    $employerRow = ['plan_type' => $info['plan_type'] ?? 'free', 'plan_end_date' => $info['plan_end_date'] ?? null];
+                    if (isEmployerOnActivePlan($employerRow)) {
+                        $featured = 1;
+                    }
+                }
+                $u = $conn->prepare("UPDATE job_postings SET status = ?, featured = ? WHERE id = ?");
+                $u->bind_param("sii", $status, $featured, $jid);
                 $u->execute();
                 // audit
                 $adminUser = $_SESSION['admin_role'] ?? 'admin';
@@ -64,15 +74,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($job_id > 0 && in_array($action, ['approve', 'reject'])) {
         $status = $action === 'approve' ? 'approved' : 'rejected';
 
-        // Fetch employer email + job title
-        $infoStmt = $conn->prepare("SELECT j.title, e.email FROM job_postings j INNER JOIN employers e ON j.employer_id = e.id WHERE j.id = ? LIMIT 1");
+        // Fetch employer email, title, and plan (for auto-featured on approve)
+        $infoCols = "j.title, e.email";
+        if (jobEmployersTableHasPlanColumns($conn)) {
+            $infoCols .= ", e.plan_type, e.plan_end_date";
+        }
+        $infoStmt = $conn->prepare("SELECT {$infoCols} FROM job_postings j INNER JOIN employers e ON j.employer_id = e.id WHERE j.id = ? LIMIT 1");
         $infoStmt->bind_param("i", $job_id);
         $infoStmt->execute();
         $infoRes = $infoStmt->get_result();
         $info = $infoRes->fetch_assoc();
 
-        $stmt = $conn->prepare("UPDATE job_postings SET status = ? WHERE id = ?");
-        $stmt->bind_param("si", $status, $job_id);
+        $featured = 0;
+        if ($status === 'approved' && $info && jobEmployersTableHasPlanColumns($conn)) {
+            $employerRow = ['plan_type' => $info['plan_type'] ?? 'free', 'plan_end_date' => $info['plan_end_date'] ?? null];
+            if (isEmployerOnActivePlan($employerRow)) {
+                $featured = 1;
+            }
+        }
+        $stmt = $conn->prepare("UPDATE job_postings SET status = ?, featured = ? WHERE id = ?");
+        $stmt->bind_param("sii", $status, $featured, $job_id);
         $stmt->execute();
 
         // Audit log
@@ -99,12 +120,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Get all jobs
-$result = $conn->query("SELECT j.*, e.company_name, e.email as employer_email 
-                        FROM job_postings j 
-                        JOIN employers e ON j.employer_id = e.id 
-                        ORDER BY j.created_at DESC");
-$jobs = $result->fetch_all(MYSQLI_ASSOC);
+// Get all jobs (include employer plan for Plan column and auto-featured logic)
+$jobsQuery = "SELECT j.*, e.company_name, e.email AS employer_email";
+if (jobEmployersTableHasPlanColumns($conn)) {
+    $jobsQuery .= ", e.plan_type, e.plan_end_date";
+}
+$jobsQuery .= " FROM job_postings j JOIN employers e ON j.employer_id = e.id ORDER BY j.created_at DESC";
+$result = $conn->query($jobsQuery);
+$jobs = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 
 ?>
 <!DOCTYPE html>
@@ -148,7 +171,9 @@ $jobs = $result->fetch_all(MYSQLI_ASSOC);
                     <th><input type="checkbox" id="checkAll"></th>
                     <th>Title</th>
                     <th>Company</th>
+                    <?php if (jobEmployersTableHasPlanColumns($conn)): ?><th>Plan</th><?php endif; ?>
                     <th>Status</th>
+                    <th>Segment</th>
                     <th>Views</th>
                     <th>Applications</th>
                     <th>Posted</th>
@@ -161,12 +186,27 @@ $jobs = $result->fetch_all(MYSQLI_ASSOC);
                         <td><?php if ($job['status']==='pending'): ?><input type="checkbox" name="ids[]" value="<?php echo (int)$job['id']; ?>" class="row-check"><?php endif; ?></td>
                         <td><?php echo htmlspecialchars($job['title']); ?></td>
                         <td><?php echo htmlspecialchars($job['company_name']); ?></td>
+                        <?php if (isset($job['plan_type'])): ?>
+                        <td>
+                            <?php
+                                $pt = $job['plan_type'] ?? 'free';
+                                $planBadge = ($pt !== '' && $pt !== 'free') ? 'primary' : 'secondary';
+                            ?>
+                            <span class="badge bg-<?php echo $planBadge; ?>"><?php echo htmlspecialchars(getPlanLabel($pt)); ?></span>
+                        </td>
+                        <?php endif; ?>
                         <td>
                             <?php
                                 $status = $job['status'];
                                 $badge = ['pending' => 'warning', 'approved' => 'success', 'rejected' => 'danger', 'closed' => 'dark'][$status] ?? 'secondary';
                             ?>
                             <span class="badge bg-<?php echo $badge; ?>"><?php echo ucfirst($status); ?></span>
+                        </td>
+                        <td>
+                            <?php
+                                $segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSegmentFromData($job)));
+                                echo htmlspecialchars(getJobSegmentLabel($segment));
+                            ?>
                         </td>
                         <td><?php echo (int)$job['views']; ?></td>
                         <td><?php echo (int)$job['applications_count']; ?></td>

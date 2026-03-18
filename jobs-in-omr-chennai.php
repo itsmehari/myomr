@@ -82,12 +82,12 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
     <title><?php echo $page_title; ?></title>
     <meta name="description" content="<?php echo $page_description; ?>">
     <meta name="keywords" content="jobs in OMR Chennai, jobs in OMR, IT jobs OMR, teaching jobs OMR, healthcare jobs OMR, fresher jobs OMR, part time jobs OMR, local job portal, OMR job portal">
-    <link rel="canonical" href="<?php echo $canonical_url; ?>">
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     
     <!-- Open Graph -->
     <meta property="og:title" content="<?php echo $page_title; ?>">
     <meta property="og:description" content="<?php echo $page_description; ?>">
-    <meta property="og:url" content="<?php echo $canonical_url; ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     
@@ -210,6 +210,8 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
                             <a href="/omr-local-job-listings/?job_type=part-time" class="btn btn-outline-light btn-sm">Part-Time Jobs</a>
                             <a href="/omr-local-job-listings/?category=it" class="btn btn-outline-light btn-sm">IT Jobs</a>
                             <a href="/omr-local-job-listings/?category=teaching" class="btn btn-outline-light btn-sm">Teaching Jobs</a>
+                            <a href="/office-jobs-omr-chennai.php" class="btn btn-outline-light btn-sm">Office Jobs</a>
+                            <a href="/manpower-jobs-omr-chennai.php" class="btn btn-outline-light btn-sm">Manpower Jobs</a>
                             <a href="/omr-local-job-listings/" class="btn btn-outline-light btn-sm">View All Jobs</a>
                         </div>
                     </div>
@@ -579,6 +581,22 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
                         </div>
                     </a>
                 </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="/office-jobs-omr-chennai.php" class="card card-hover text-decoration-none h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-building fa-2x text-primary mb-2"></i>
+                            <h5 class="card-title mb-0">Office Jobs</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="/manpower-jobs-omr-chennai.php" class="card card-hover text-decoration-none h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-helmet-safety fa-2x text-primary mb-2"></i>
+                            <h5 class="card-title mb-0">Manpower Jobs</h5>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -611,6 +629,8 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
     </section>
 
 </main>
+
+<?php include ROOT_PATH . '/components/omr-topic-hubs.php'; ?>
 
 <style>
 .card-hover {

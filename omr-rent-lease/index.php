@@ -56,7 +56,7 @@ $localities = ['Perungudi', 'Sholinganallur', 'Thoraipakkam', 'Navalur', 'Kelamb
 <title><?= $page_title ?></title>
 <meta name="description" content="<?= $page_desc ?>">
 <meta name="keywords" content="rent house OMR, rent apartment Chennai, lease land OMR, property for rent OMR Chennai">
-<link rel="canonical" href="<?= $canonical ?>">
+<link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:title" content="<?= $page_title ?>">
 <meta property="og:description" content="<?= $page_desc ?>">
 <meta property="og:url" content="<?= $canonical ?>">

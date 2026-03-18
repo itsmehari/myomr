@@ -21,7 +21,7 @@ global $conn;
 
 /* ── Sanitize & collect filters ─────────────────────────────── */
 $filters = [];
-$allowed  = ['search','category','location','job_type','experience_level','is_remote','salary_min','salary_max'];
+$allowed  = ['search','category','location','job_type','experience_level','is_remote','salary_min','salary_max','work_segment'];
 foreach ($allowed as $k) {
     if (isset($_GET[$k]) && $_GET[$k] !== '') {
         $filters[$k] = sanitizeInput($_GET[$k]);
@@ -46,6 +46,8 @@ $categories   = [];
 $count_wfh    = 0;
 $count_fresher = 0;
 $count_pt     = 0;
+$count_office = 0;
+$count_manpower = 0;
 
 try {
     $total_jobs   = getJobCount($filters);
@@ -56,6 +58,20 @@ try {
     $count_wfh    = getJobCount(['is_remote' => 1]);
     $count_fresher = getJobCount(['experience_level' => 'Fresher']);
     $count_pt     = getJobCount(['job_type' => 'part-time']);
+
+    if (jobPostingsHasColumn('work_segment')) {
+        $count_office = getJobCount(['work_segment' => 'office']);
+        $count_manpower = getJobCount(['work_segment' => 'manpower']);
+    } else {
+        $officeCategories = ['it', 'customer-service', 'finance-accounting', 'teaching-education', 'healthcare'];
+        $manpowerCategories = ['hospitality', 'construction'];
+        foreach ($officeCategories as $cat) {
+            $count_office += getJobCount(['category' => $cat]);
+        }
+        foreach ($manpowerCategories as $cat) {
+            $count_manpower += getJobCount(['category' => $cat]);
+        }
+    }
 } catch (Throwable $e) {
     if (defined('DEVELOPMENT_MODE') && DEVELOPMENT_MODE) {
         error_log('omr-local-job-listings/index.php data fetch: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
@@ -77,8 +93,8 @@ $base_url   = "/omr-local-job-listings/" . ($filter_qs ? "?$filter_qs" : '');
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= $page_title ?></title>
 <meta name="description" content="<?= $page_desc ?>">
-<meta name="keywords" content="jobs in OMR Chennai, IT jobs OMR, teaching jobs, healthcare jobs OMR, fresher jobs, part time jobs, walk-in jobs, Old Mahabalipuram Road jobs">
-<link rel="canonical" href="<?= $canonical ?>">
+<meta name="keywords" content="jobs in OMR Chennai, manpower jobs OMR, office jobs OMR, IT jobs OMR, teaching jobs, healthcare jobs OMR, fresher jobs, part time jobs, walk-in jobs, Old Mahabalipuram Road jobs">
+<link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
 
 <?php if ($current_page > 1): ?>
 <link rel="prev" href="<?= htmlspecialchars($base_url . (strpos($base_url, '?') !== false ? '&' : '?') . 'page=' . ($current_page - 1)) ?>">
@@ -90,7 +106,7 @@ $base_url   = "/omr-local-job-listings/" . ($filter_qs ? "?$filter_qs" : '');
 <!-- OG / Twitter -->
 <meta property="og:title"       content="<?= $page_title ?>">
 <meta property="og:description" content="<?= $page_desc ?>">
-<meta property="og:url"         content="<?= $canonical ?>">
+<meta property="og:url"         content="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:type"        content="website">
 <meta property="og:image"       content="https://myomr.in/My-OMR-Logo.png">
 <meta name="twitter:card"       content="summary_large_image">
@@ -104,6 +120,7 @@ if (!empty($filters['category']))        $ga_custom_params['job_category']     =
 if (!empty($filters['job_type']))        $ga_custom_params['job_type']         = $filters['job_type'];
 if (!empty($filters['location']))        $ga_custom_params['locality']         = $filters['location'];
 if (!empty($filters['experience_level'])) $ga_custom_params['experience_level'] = $filters['experience_level'];
+if (!empty($filters['work_segment']))     $ga_custom_params['work_segment']     = $filters['work_segment'];
 include ROOT_PATH . '/components/analytics.php'; ?>
 <?php if (!empty($filters['search'])): ?>
 <script>
@@ -261,6 +278,14 @@ include ROOT_PATH . '/components/analytics.php'; ?>
       <i class="fas fa-clock"></i> Part-Time
       <span class="jp-pill-count"><?= number_format($count_pt) ?></span>
     </a>
+    <a href="?work_segment=office" class="jp-pill <?= ($filters['work_segment'] ?? '') === 'office' ? 'active' : '' ?>">
+      <i class="fas fa-building"></i> Office Jobs
+      <span class="jp-pill-count"><?= number_format($count_office) ?></span>
+    </a>
+    <a href="?work_segment=manpower" class="jp-pill <?= ($filters['work_segment'] ?? '') === 'manpower' ? 'active' : '' ?>">
+      <i class="fas fa-helmet-safety"></i> Manpower Jobs
+      <span class="jp-pill-count"><?= number_format($count_manpower) ?></span>
+    </a>
     <a href="?category=it" class="jp-pill <?= ($filters['category'] ?? '') === 'it' ? 'active' : '' ?>">
       <i class="fas fa-laptop-code"></i> IT Jobs
     </a>
@@ -278,6 +303,27 @@ include ROOT_PATH . '/components/analytics.php'; ?>
     </a>
   </div>
 </nav>
+
+<section class="jp-segment-switch">
+  <div class="container">
+    <a href="?work_segment=office" class="jp-segment-card <?= ($filters['work_segment'] ?? '') === 'office' ? 'active' : '' ?>">
+      <div class="jp-segment-icon"><i class="fas fa-building"></i></div>
+      <div>
+        <h3>Office Jobs</h3>
+        <p>IT, Admin, Accounts, Support, Executive roles</p>
+      </div>
+      <strong><?= number_format($count_office) ?></strong>
+    </a>
+    <a href="?work_segment=manpower" class="jp-segment-card <?= ($filters['work_segment'] ?? '') === 'manpower' ? 'active' : '' ?>">
+      <div class="jp-segment-icon"><i class="fas fa-helmet-safety"></i></div>
+      <div>
+        <h3>Manpower Jobs</h3>
+        <p>Field, Hospitality, Labour, Delivery, Service roles</p>
+      </div>
+      <strong><?= number_format($count_manpower) ?></strong>
+    </a>
+  </div>
+</section>
 
 <!-- Mobile sidebar overlay -->
 <div class="jp-sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
@@ -325,6 +371,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
               case 'category':         $label = ucfirst($val); break;
               case 'location':         $label = $val; break;
               case 'job_type':         $label = ucfirst(str_replace('-',' ',$val)); break;
+              case 'work_segment':     $label = getJobSegmentLabel($val); break;
               case 'experience_level': $label = $val; break;
               case 'is_remote':        $label = 'Remote'; break;
               case 'salary_min':       $label = '₹' . number_format((int)$val) . '+ min'; break;
@@ -438,6 +485,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
               $remote   = !empty($job['is_remote']);
               $apps     = (int)($job['applications_count'] ?? 0);
               $featured = !empty($job['featured']);
+              $segment  = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSegmentFromData($job)));
 
               // Build WhatsApp message
               $wa_msg = rawurlencode("Hi, I'm interested in the {$job['title']} role at {$job['company_name']} that I found on MyOMR.in. Can you share more details? Job link: " . getJobDetailUrl($jid, $job['title'] ?? null));
@@ -496,6 +544,9 @@ include ROOT_PATH . '/components/analytics.php'; ?>
                   <i class="fas fa-user-clock"></i> <?= htmlspecialchars($exp) ?>
                 </span>
                 <?php endif; ?>
+                <span class="jp-badge jp-badge-cat">
+                  <i class="fas fa-users"></i> <?= htmlspecialchars(getJobSegmentLabel($segment)) ?>
+                </span>
               </div>
 
               <!-- Description snippet -->
@@ -597,6 +648,13 @@ include ROOT_PATH . '/components/analytics.php'; ?>
     </div><!-- /.jp-layout -->
   </div><!-- /.container -->
 </main>
+
+<?php
+$topic_hubs_component = ROOT_PATH . '/components/omr-topic-hubs.php';
+if (is_file($topic_hubs_component)) {
+    include $topic_hubs_component;
+}
+?>
 
 <?php omr_footer(); ?>
 

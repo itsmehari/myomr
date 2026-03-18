@@ -252,6 +252,27 @@
   background: #0d5d56; /* Even darker on hover */
 }
 
+/* Buy & Sell Button - Green */
+.pill-buysell {
+  background: linear-gradient(135deg, #0d7a42, #0b4d2c);
+  color: #fff;
+}
+
+.pill-buysell .pill-accent {
+  background: #0a3d22;
+}
+
+.pill-buysell:hover {
+  background: linear-gradient(135deg, #0b4d2c, #0a3d22);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 122, 66, 0.4);
+  color: #fff;
+}
+
+.pill-buysell:hover .pill-accent {
+  background: #082d19;
+}
+
 .main-navbar .logo {
   display: flex;
   align-items: center;
@@ -490,8 +511,11 @@
 </style>
 
 <?php
+require_once __DIR__ . '/../core/site-navigation.php';
+
 // Get the current request URI for active class comparison
 $current_uri = $_SERVER['REQUEST_URI'];
+$hub_links = myomr_get_primary_hub_links();
 
 // Helper function to determine if a link is active
 function is_active($link, $current_uri) {
@@ -512,18 +536,23 @@ function is_active($link, $current_uri) {
 <!-- Top Secondary Menu Bar -->
 <nav class="top-secondary-menu" role="navigation" aria-label="Secondary">
   <ul class="secondary-links">
-    <li>
-      <a href="/omr-local-job-listings/" class="<?php echo is_active('/omr-local-job-listings/', $current_uri) ? 'active' : ''; ?>">
-        <i class="fas fa-briefcase"></i>
-        <span>Jobs</span>
-      </a>
-    </li>
-    <li>
-      <a href="/omr-local-events/" class="<?php echo is_active('/omr-local-events/', $current_uri) ? 'active' : ''; ?>">
-        <i class="fas fa-calendar-alt"></i>
-        <span>Events</span>
-      </a>
-    </li>
+    <?php foreach ($hub_links as $hub): ?>
+      <?php if (in_array($hub['label'], ['Home', 'Contact', 'News Highlights'], true)) { continue; } ?>
+      <li>
+        <a href="<?php echo htmlspecialchars($hub['path']); ?>" class="<?php echo is_active($hub['path'], $current_uri) ? 'active' : ''; ?>">
+          <?php if ($hub['label'] === 'Jobs'): ?>
+            <i class="fas fa-briefcase"></i>
+          <?php elseif ($hub['label'] === 'Events'): ?>
+            <i class="fas fa-calendar-alt"></i>
+          <?php elseif ($hub['label'] === 'Explore Places'): ?>
+            <i class="fas fa-compass"></i>
+          <?php elseif ($hub['label'] === 'Buy & Sell'): ?>
+            <i class="fas fa-shopping-bag"></i>
+          <?php endif; ?>
+          <span><?php echo htmlspecialchars($hub['label']); ?></span>
+        </a>
+      </li>
+    <?php endforeach; ?>
     <li>
       <a href="/omr-hostels-pgs/" class="<?php echo is_active('/omr-hostels-pgs/', $current_uri) ? 'active' : ''; ?>">
         <i class="fas fa-bed"></i>
@@ -585,6 +614,7 @@ function is_active($link, $current_uri) {
     <li><a href="/about-myomr-omr-community-portal.php" class="<?php echo is_active('/about-myomr-omr-community-portal.php', $current_uri) ? 'active' : ''; ?>">About My OMR</a></li>
     <li><a href="/local-news/news-highlights-from-omr-road.php" class="<?php echo is_active('/local-news/news-highlights-from-omr-road.php', $current_uri) ? 'active' : ''; ?>">News Highlights</a></li>
     <li><a href="/local-news/image-video-gallery-old-mahabalipuram-road-news.php" class="<?php echo is_active('/local-news/image-video-gallery-old-mahabalipuram-road-news.php', $current_uri) ? 'active' : ''; ?>">Gallery</a></li>
+    <li><a href="/elections-2026/" class="<?php echo (is_active('/elections-2026/', $current_uri) || strpos($current_uri, 'elections-2026') !== false) ? 'active' : ''; ?>">Elections 2026</a></li>
     <li class="dropdown">
       <a href="#" tabindex="0" aria-label="Services menu" aria-haspopup="true" aria-expanded="false">Services ▾</a>
       <div class="dropdown-content">
@@ -600,6 +630,7 @@ function is_active($link, $current_uri) {
         <a href="/omr-hostels-pgs/" class="<?php echo is_active('/omr-hostels-pgs/', $current_uri) ? 'active' : ''; ?>">Hostels & PGs</a>
         <a href="/omr-coworking-spaces/" class="<?php echo is_active('/omr-coworking-spaces/', $current_uri) ? 'active' : ''; ?>">Coworking Spaces</a>
         <a href="/omr-rent-lease/" class="<?php echo is_active('/omr-rent-lease/', $current_uri) ? 'active' : ''; ?>">Rent & Lease</a>
+        <a href="/omr-buy-sell/" class="<?php echo is_active('/omr-buy-sell/', $current_uri) ? 'active' : ''; ?>">Buy & Sell</a>
         <a href="/citizens-charter-old-mahabali-puram-road.php" class="<?php echo is_active('/citizens-charter-old-mahabali-puram-road.php', $current_uri) ? 'active' : ''; ?>">Citizens Charter</a>
       </div>
     </li>
@@ -641,6 +672,13 @@ function is_active($link, $current_uri) {
       <div class="pill-content">
         <i class="fas fa-home"></i>
         <span>List a Property</span>
+      </div>
+    </a>
+    <a href="/omr-buy-sell/post-listing-omr.php" class="action-pill pill-buysell">
+      <div class="pill-accent"></div>
+      <div class="pill-content">
+        <i class="fas fa-shopping-bag"></i>
+        <span>Post Ad</span>
       </div>
     </a>
   </div>

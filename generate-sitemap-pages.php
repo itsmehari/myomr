@@ -61,9 +61,10 @@ $pages = [
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
+$xmlFlags = defined('ENT_XML1') ? (ENT_XML1 | ENT_QUOTES) : ENT_QUOTES;
 foreach ($pages as $p) {
     echo "  <url>\n";
-    echo '    <loc>' . htmlspecialchars($p['loc'], ENT_XML1 | ENT_COMPAT, 'UTF-8') . "</loc>\n";
+    echo '    <loc>' . htmlspecialchars($p['loc'] ?? '', $xmlFlags, 'UTF-8') . "</loc>\n";
     echo '    <lastmod>' . $today . "</lastmod>\n";
     echo '    <changefreq>' . htmlspecialchars($p['changefreq']) . "</changefreq>\n";
     echo '    <priority>' . htmlspecialchars($p['priority']) . "</priority>\n";

@@ -1,9 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
-    header('Location: login.php');
-    exit;
-}
+require_once __DIR__ . '/_bootstrap.php';
 require_once '../core/omr-connect.php';
 
 $title = 'Manage Parks';

@@ -1,9 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
-    header('Location: login.php');
-    exit;
-}
+require_once __DIR__ . '/_bootstrap.php';
 
 // Safety: restrict to super-admins if role exists; otherwise, require a secret token in querystring
 $secret = $_GET['secret'] ?? '';

@@ -1,6 +1,6 @@
 <?php
-session_start();
-include_once '../core/omr-connect.php';
+require_once __DIR__ . '/_bootstrap.php';
+include_once __DIR__ . '/../core/omr-connect.php';
 $msg = '';
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);

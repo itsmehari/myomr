@@ -35,6 +35,15 @@ if (!function_exists('omr_nav')) {
 }
 
 /**
+ * Output ad banner slot. Loads ad-banner-slot component when first used.
+ * Usage: omr_ad_slot('article-top', '728x90');
+ */
+if (!function_exists('omr_ad_slot')) {
+    $base = defined('ROOT_PATH') ? ROOT_PATH : dirname(__DIR__);
+    require_once $base . '/components/ad-banner-slot.php';
+}
+
+/**
  * Output footer. Skip if $page_footer === false (set before call).
  */
 if (!function_exists('omr_footer')) {

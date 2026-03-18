@@ -48,6 +48,28 @@
   <?php endforeach; ?>
 </div>
 
+<!-- Job Segment -->
+<div class="jp-sidebar-card">
+  <h3><i class="fas fa-users me-1"></i> Job Segment</h3>
+  <?php
+  $segments = [
+    ''         => 'All segments',
+    'office'   => 'Office / White-collar',
+    'manpower' => 'Manpower / Blue-collar',
+    'hybrid'   => 'Hybrid',
+  ];
+  foreach ($segments as $val => $label): ?>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="work_segment"
+           id="ws_<?= $val ?: 'all' ?>"
+           value="<?= htmlspecialchars($val) ?>"
+           form="main-search-form"
+           <?= ($filters['work_segment'] ?? '') === $val ? 'checked' : '' ?>>
+    <label class="form-check-label" for="ws_<?= $val ?: 'all' ?>"><?= htmlspecialchars($label) ?></label>
+  </div>
+  <?php endforeach; ?>
+</div>
+
 <!-- Experience -->
 <div class="jp-sidebar-card">
   <h3><i class="fas fa-user-clock me-1"></i> Experience</h3>

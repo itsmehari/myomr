@@ -3,7 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require '../core/omr-connect.php';
+require_once __DIR__ . '/../core/include-path.php';
+require __DIR__ . '/../core/omr-connect.php';
 
 function extract_id_from_slug($slug) {
     if (!is_string($slug) || $slug === '') { return 0; }
@@ -14,7 +15,7 @@ function extract_id_from_slug($slug) {
 
 $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $id = extract_id_from_slug($slug);
-if ($id <= 0) { require_once __DIR__ . '/../core/serve-404.php'; exit; }
+if ($id <= 0) { require_once ROOT_PATH . '/core/serve-404.php'; exit; }
 
 $stmt = $conn->prepare('SELECT slno, bankname, address, contact, landmark, website FROM omrbankslist WHERE slno = ?');
 $stmt->bind_param('i', $id);
@@ -23,7 +24,7 @@ $res = $stmt->get_result();
 $bank = $res ? $res->fetch_assoc() : null;
 $stmt->close();
 
-if (!$bank) { require_once __DIR__ . '/../core/serve-404.php'; exit; }
+if (!$bank) { require_once ROOT_PATH . '/core/serve-404.php'; exit; }
 
 $name = $bank['bankname'];
 $address = $bank['address'];

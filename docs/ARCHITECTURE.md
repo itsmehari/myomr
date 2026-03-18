@@ -71,7 +71,7 @@
 
 ### Frontend Dependencies
 
-- **Bootstrap 4.6.1** - CSS framework for responsive design
+- **Bootstrap 5** - Current standard for new pages and modules. **Bootstrap 4.6.1** remains in `head-resources.php` for legacy omr-listings and some local-news pages.
 - **jQuery 3.6.0** - JavaScript library
 - **Font Awesome 6.0.0** - Icon library
 - **Google Fonts** - Typography (Playfair Display, Josefin Sans, Roboto)
@@ -148,7 +148,7 @@
 
 ### External Services
 
-- **Google Analytics** - Website analytics (G-JX509Z0779)
+- **Google Analytics** - Website analytics (GA4: G-JYSF141J1H). Legacy ID G-JX509Z0779 removed.
 - **Google Maps API** - Map integration (requires API key)
 - **Facebook SDK** - Social media integration
 - **WhatsApp** - Community chat integration

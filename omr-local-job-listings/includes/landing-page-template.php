@@ -54,12 +54,12 @@ if (isset($location)) {
     <title><?php echo htmlspecialchars($page_title); ?></title>
     <meta name="description" content="<?php echo htmlspecialchars($page_description); ?>">
     <meta name="keywords" content="<?php echo htmlspecialchars($page_keywords ?? 'jobs in OMR Chennai, OMR job portal, local jobs'); ?>">
-    <link rel="canonical" href="<?php echo $canonical_url; ?>">
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     
     <!-- Open Graph -->
     <meta property="og:title" content="<?php echo htmlspecialchars($page_title); ?>">
     <meta property="og:description" content="<?php echo htmlspecialchars($page_description); ?>">
-    <meta property="og:url" content="<?php echo $canonical_url; ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
     
@@ -234,6 +234,15 @@ omr_nav('main');
                         </a>
                         <a href="/omr-local-job-listings/employer-register-omr.php" class="btn btn-outline-light btn-lg">
                             <i class="fas fa-plus me-2"></i> Post a Job (Free)
+                        </a>
+                    </div>
+
+                    <div class="mt-3 d-flex flex-wrap gap-2">
+                        <a href="/office-jobs-omr-chennai.php" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-building me-1"></i> Office Jobs
+                        </a>
+                        <a href="/manpower-jobs-omr-chennai.php" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-helmet-safety me-1"></i> Manpower Jobs
                         </a>
                     </div>
                 </div>

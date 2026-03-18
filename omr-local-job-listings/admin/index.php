@@ -112,6 +112,15 @@ $stats['total_employers'] = $result['count'] ?? 0;
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-crown me-2"></i>Package Subscribers</h5>
+                    <p class="card-text">Employer Pack — view active plans, usage, and renewal dates</p>
+                    <a href="package-subscribers-omr.php" class="btn btn-primary">Package Subscribers</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

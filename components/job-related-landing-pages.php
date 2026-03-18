@@ -20,8 +20,9 @@ if (isset($current_page_type)) {
             $related_pages = [
                 ['url' => '/it-jobs-omr-chennai.php', 'title' => 'IT Jobs in OMR', 'icon' => 'laptop-code'],
                 ['url' => '/teaching-jobs-omr-chennai.php', 'title' => 'Teaching Jobs in OMR', 'icon' => 'chalkboard-teacher'],
+                ['url' => '/office-jobs-omr-chennai.php', 'title' => 'Office Jobs in OMR', 'icon' => 'building'],
                 ['url' => '/fresher-jobs-omr-chennai.php', 'title' => 'Fresher Jobs in OMR', 'icon' => 'user-graduate'],
-                ['url' => '/part-time-jobs-omr-chennai.php', 'title' => 'Part-Time Jobs in OMR', 'icon' => 'clock'],
+                ['url' => '/manpower-jobs-omr-chennai.php', 'title' => 'Manpower Jobs in OMR', 'icon' => 'helmet-safety'],
             ];
             break;
             
@@ -30,8 +31,9 @@ if (isset($current_page_type)) {
             $related_pages = [
                 ['url' => '/jobs-in-sholinganallur-omr.php', 'title' => 'Jobs in Sholinganallur', 'icon' => 'map-marker-alt'],
                 ['url' => '/jobs-in-perungudi-omr.php', 'title' => 'Jobs in Perungudi', 'icon' => 'map-marker-alt'],
+                ['url' => '/office-jobs-omr-chennai.php', 'title' => 'Office Jobs in OMR', 'icon' => 'building'],
                 ['url' => '/fresher-jobs-omr-chennai.php', 'title' => 'Fresher Jobs', 'icon' => 'user-graduate'],
-                ['url' => '/experienced-jobs-omr-chennai.php', 'title' => 'Experienced Jobs', 'icon' => 'user-tie'],
+                ['url' => '/manpower-jobs-omr-chennai.php', 'title' => 'Manpower Jobs', 'icon' => 'helmet-safety'],
             ];
             break;
             
@@ -40,7 +42,8 @@ if (isset($current_page_type)) {
             $related_pages = [
                 ['url' => '/it-jobs-omr-chennai.php', 'title' => 'IT Jobs for Freshers', 'icon' => 'laptop-code'],
                 ['url' => '/jobs-in-sholinganallur-omr.php', 'title' => 'Jobs in Sholinganallur', 'icon' => 'map-marker-alt'],
-                ['url' => '/part-time-jobs-omr-chennai.php', 'title' => 'Part-Time Jobs', 'icon' => 'clock'],
+                ['url' => '/office-jobs-omr-chennai.php', 'title' => 'Office Jobs', 'icon' => 'building'],
+                ['url' => '/manpower-jobs-omr-chennai.php', 'title' => 'Manpower Jobs', 'icon' => 'helmet-safety'],
             ];
             break;
             
@@ -49,6 +52,7 @@ if (isset($current_page_type)) {
             $related_pages = [
                 ['url' => '/retail-jobs-omr-chennai.php', 'title' => 'Retail Jobs', 'icon' => 'shopping-bag'],
                 ['url' => '/jobs-in-navalur-omr.php', 'title' => 'Jobs in Navalur', 'icon' => 'map-marker-alt'],
+                ['url' => '/office-jobs-omr-chennai.php', 'title' => 'Office Jobs', 'icon' => 'building'],
                 ['url' => '/fresher-jobs-omr-chennai.php', 'title' => 'Fresher Jobs', 'icon' => 'user-graduate'],
             ];
             break;
@@ -58,8 +62,8 @@ if (isset($current_page_type)) {
             $related_pages = [
                 ['url' => '/it-jobs-omr-chennai.php', 'title' => 'IT Jobs in OMR', 'icon' => 'laptop-code'],
                 ['url' => '/jobs-in-sholinganallur-omr.php', 'title' => 'Jobs in Sholinganallur', 'icon' => 'map-marker-alt'],
-                ['url' => '/fresher-jobs-omr-chennai.php', 'title' => 'Fresher Jobs', 'icon' => 'user-graduate'],
-                ['url' => '/part-time-jobs-omr-chennai.php', 'title' => 'Part-Time Jobs', 'icon' => 'clock'],
+                ['url' => '/office-jobs-omr-chennai.php', 'title' => 'Office Jobs in OMR', 'icon' => 'building'],
+                ['url' => '/manpower-jobs-omr-chennai.php', 'title' => 'Manpower Jobs in OMR', 'icon' => 'helmet-safety'],
             ];
     }
 }

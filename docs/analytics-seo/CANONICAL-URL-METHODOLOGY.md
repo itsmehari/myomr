@@ -79,6 +79,14 @@
 - **Slug format:** Lowercase, hyphens, no special chars: `/local-news/my-article-slug`
 - **Detail URLs:** Prefer `/{module}/{entity}/{id}/{slug}` per slug-urls-detail-pages skill
 
+### 3.1 Current module status
+
+| Module | Detail canonical format |
+|--------|-------------------------|
+| Jobs | Slug: `/omr-local-job-listings/job/{id}/{slug}` |
+| Buy-Sell | Slug: `/omr-buy-sell/listing/{id}/{slug}` |
+| Hostels, Rent-Lease, Coworking | Query-string (e.g. `?id=X`). Prefer slug when adding new modules or refactoring. |
+
 ---
 
 ## 4. Helpers

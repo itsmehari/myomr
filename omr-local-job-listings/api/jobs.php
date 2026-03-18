@@ -8,7 +8,8 @@
  *   search          string  free-text search (title, description, company)
  *   category        string  category slug
  *   location        string  partial location match
- *   job_type        string  Full-time | Part-time | Contract | Internship
+ *   job_type        string  full-time | part-time | contract | internship | walk-in
+ *   work_segment    string  office | manpower | hybrid
  *   experience_level string Fresher | Junior | Mid-level | Senior | Lead | Any
  *   is_remote       int     0 or 1
  *   salary_min      int     monthly INR
@@ -41,18 +42,21 @@ $raw_search   = trim($_GET['search']   ?? '');
 $raw_category = trim($_GET['category'] ?? '');
 $raw_location = trim($_GET['location'] ?? '');
 $raw_job_type = trim($_GET['job_type'] ?? '');
+$raw_work_segment = trim($_GET['work_segment'] ?? '');
 $raw_exp      = trim($_GET['experience_level'] ?? '');
 $raw_remote   = $_GET['is_remote'] ?? '';
 $raw_sal_min  = $_GET['salary_min']  ?? '';
 $raw_sal_max  = $_GET['salary_max']  ?? '';
 
-$allowed_job_types = ['Full-time', 'Part-time', 'Contract', 'Internship', 'walk-in'];
+$allowed_job_types = ['full-time', 'part-time', 'contract', 'internship', 'walk-in'];
+$allowed_work_segments = ['office', 'manpower', 'hybrid'];
 $allowed_exp       = ['Fresher', 'Junior', 'Mid-level', 'Senior', 'Lead', 'Any'];
 
 if ($raw_search !== '')                               { $filters['search']           = sanitizeInput($raw_search); }
 if ($raw_category !== '')                             { $filters['category']         = sanitizeInput($raw_category); }
 if ($raw_location !== '')                             { $filters['location']         = sanitizeInput($raw_location); }
-if (in_array($raw_job_type, $allowed_job_types, true)){ $filters['job_type']         = $raw_job_type; }
+if (in_array(normalizeJobType($raw_job_type), $allowed_job_types, true)) { $filters['job_type'] = normalizeJobType($raw_job_type); }
+if (in_array(normalizeJobSegment($raw_work_segment), $allowed_work_segments, true)) { $filters['work_segment'] = normalizeJobSegment($raw_work_segment); }
 if (in_array($raw_exp, $allowed_exp, true))           { $filters['experience_level'] = $raw_exp; }
 if ($raw_remote !== '' && in_array((int)$raw_remote, [0, 1], true)) {
     $filters['is_remote'] = (int)$raw_remote;
@@ -99,6 +103,7 @@ $normalised = array_map(static function (array $job) use ($per_page): array {
         'company_logo'     => $logo,
         'location'         => $job['location']         ?? '',
         'job_type'         => $job['job_type']         ?? '',
+        'work_segment'     => normalizeJobSegment((string)($job['work_segment'] ?? inferJobSegmentFromData($job))),
         'category'         => $job['category']         ?? '',
         'category_name'    => $job['category_name']    ?? '',
         'experience_level' => $job['experience_level'] ?? 'Any',
@@ -127,7 +132,7 @@ ob_start();
 if (!empty($jobs)) {
     foreach ($jobs as $job):
         $loc      = htmlspecialchars($job['location'] ?? '');
-        $type     = ucfirst(str_replace('-', ' ', $job['job_type'] ?? 'Full-time'));
+        $type     = getJobTypeLabel($job['job_type'] ?? 'full-time');
         $cat      = htmlspecialchars($job['category_name'] ?? $job['category'] ?? 'General');
         $salary   = (!empty($job['salary_range']) && $job['salary_range'] !== 'Not Disclosed')
                     ? formatSalary($job['salary_range']) : '';
@@ -136,6 +141,7 @@ if (!empty($jobs)) {
         $desc     = htmlspecialchars(mb_substr(strip_tags($job['description'] ?? ''), 0, 140));
         $jid      = (int)$job['id'];
         $exp      = $job['experience_level'] ?? '';
+        $segment  = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSegmentFromData($job)));
         $remote   = !empty($job['is_remote']);
         $apps     = (int)($job['applications_count'] ?? 0);
         $featured = !empty($job['featured']);
@@ -162,6 +168,7 @@ if (!empty($jobs)) {
     <span class="jp-badge jp-badge-cat"><i class="fas fa-tag"></i> <?= $cat ?></span>
     <?php if ($salary): ?><span class="jp-badge jp-badge-salary"><i class="fas fa-rupee-sign"></i> <?= $salary ?></span><?php endif; ?>
     <?php if ($exp && $exp !== 'Any'): ?><span class="jp-badge jp-badge-exp"><i class="fas fa-user-clock"></i> <?= htmlspecialchars($exp) ?></span><?php endif; ?>
+    <span class="jp-badge jp-badge-cat"><i class="fas fa-users"></i> <?= htmlspecialchars(getJobSegmentLabel($segment)) ?></span>
   </div>
   <p class="jp-card__desc"><?= $desc ?>…</p>
   <footer class="jp-card__footer">

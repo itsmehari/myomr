@@ -1,0 +1,27 @@
+/* OMR Buy-Sell — Module Styles */
+.buy-sell-page { font-family: 'Poppins', sans-serif; }
+.buy-sell-page .skip-link:focus { left: 8px; top: 8px; padding: 8px 12px; background: #0d7a42; color: #fff; z-index: 10000; border-radius: 4px; }
+
+.bs-hero h1 { font-weight: 700; letter-spacing: -0.02em; }
+.bs-hero .btn-light:hover { background: rgba(255,255,255,0.95); color: #0b4d2c; }
+.bs-hero .form-control, .bs-hero .form-select { border-radius: 8px; border: 1px solid rgba(255,255,255,0.3); }
+.bs-hero .form-control:focus, .bs-hero .form-select:focus { border-color: #fff; box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25); }
+
+.buy-sell-page .card { border-radius: 12px; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(0,0,0,0.06); overflow: hidden; }
+.buy-sell-page .card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(13,122,66,0.15); }
+.buy-sell-page .card .card-body { padding: 1.25rem; }
+.buy-sell-page .card .badge { font-weight: 600; font-size: 0.7rem; }
+.buy-sell-page .card .card-title { font-weight: 700; line-height: 1.35; }
+.buy-sell-page .card .btn-outline-success:hover { background: #0d7a42; color: #fff; }
+
+.buy-sell-page .btn-outline-secondary.active { background: #0d7a42; border-color: #0d7a42; color: #fff; }
+.buy-sell-page .pagination .page-link { border-radius: 8px; margin: 0 2px; }
+.buy-sell-page .pagination .page-item.active .page-link { background: #0d7a42; border-color: #0d7a42; }
+
+.bs-card-img { aspect-ratio: 4/3; object-fit: cover; }
+.bs-contact-btn { min-height: 44px; }
+
+@media (max-width: 768px) {
+  .bs-hero .d-flex.flex-wrap.gap-2 { flex-direction: column; }
+  .bs-hero .form-control, .bs-hero .form-select { max-width: 100% !important; }
+}

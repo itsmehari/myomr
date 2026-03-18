@@ -1,7 +1,8 @@
 <?php
 /**
- * MyOMR Google Analytics 4 — Base Include
- * Measurement ID: G-JYSF141J1H
+ * MyOMR Analytics — Base Include
+ * - Google Analytics 4: G-JYSF141J1H
+ * - Microsoft Clarity: vnpelcljv4 (session recordings, heatmaps)
  *
  * Include in <head>. Tracks page views + basic content grouping.
  *
@@ -64,4 +65,12 @@ gtag('config', '<?= $ga_id ?>', <?= json_encode($ga_config, _GA_JSON_FLAGS) ?>);
 <?php if (!empty($ga_user_props)): ?>
 gtag('set', 'user_properties', <?= json_encode($ga_user_props, _GA_JSON_FLAGS) ?>);
 <?php endif; ?>
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "vnpelcljv4");
 </script>

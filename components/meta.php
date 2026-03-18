@@ -1,8 +1,11 @@
-﻿<!-- Meta/SEO Tags Component -->
+<!-- Meta/SEO Tags Component -->
 <?php
 // Load URL helper functions if not already loaded
 if (!function_exists('get_canonical_url')) {
     require_once __DIR__ . '/../core/url-helpers.php';
+}
+if (!function_exists('myomr_get_primary_hub_links')) {
+    require_once __DIR__ . '/../core/site-navigation.php';
 }
 
 // Generate canonical URL - use provided canonical_url or generate from current page
@@ -36,16 +39,33 @@ $canonical_url = isset($canonical_url) ? $canonical_url : get_canonical_url();
 $org = [
   '@context' => 'https://schema.org',
   '@type' => 'Organization',
-  'name' => 'My OMR',
+  'name' => 'MyOMR',
   'url' => 'https://myomr.in/',
   'logo' => 'https://myomr.in/My-OMR-Logo.png',
   'sameAs' => [
-    'https://www.facebook.com/MyOMR.in',
-    'https://www.instagram.com/myomr.in',
+    'https://www.facebook.com/myomrCommunity',
+    'https://www.instagram.com/myomrcommunity/',
     'https://x.com/MyomrNews'
   ]
 ];
 echo json_encode($org, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+?>
+</script>
+<script type="application/ld+json">
+<?php
+$navGraph = ['@context' => 'https://schema.org', '@graph' => []];
+foreach (myomr_get_primary_hub_links() as $hubLink) {
+  $path = (string)($hubLink['path'] ?? '');
+  if ($path === '') {
+    continue;
+  }
+  $navGraph['@graph'][] = [
+    '@type' => 'SiteNavigationElement',
+    'name' => (string)($hubLink['label'] ?? ''),
+    'url' => 'https://myomr.in' . ($path === '/' ? '/' : $path)
+  ];
+}
+echo json_encode($navGraph, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 ?>
 </script>
 <?php if (!empty($breadcrumbs) && is_array($breadcrumbs)): ?>

@@ -13,7 +13,7 @@ $canonical_url = "https://myomr.in/local-news/GCC-announces-100-tonne-windrow-co
     <?php include '../components/analytics.php'; ?>
     <title><?= $page_title ?></title>
     <meta name="description" content="<?= $meta_description ?>">
-    <link rel="canonical" href="<?= $canonical_url ?>">
+    <link rel="canonical" href="<?= htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8') ?>">
     <!-- Open Graph -->
     <meta property="og:title" content="<?= $page_title ?>">
     <meta property="og:description" content="<?= $meta_description ?>">

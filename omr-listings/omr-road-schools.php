@@ -1,13 +1,13 @@
-﻿```php
+```php
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Define the base path for includes
-define('BASE_PATH', dirname(__DIR__));
-
-require BASE_PATH . '/core/omr-connect.php';
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__));
+}
+require ROOT_PATH . '/core/omr-connect.php';
 
 // Pagination settings
 $schools_per_page = 10;
@@ -118,7 +118,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v14.0" nonce="brAi0ji4"></script>
 
     <!-- Navbar -->
-    <?php include BASE_PATH . '/components/main-nav.php'; ?>
+    <?php include ROOT_PATH . '/components/main-nav.php'; ?>
 
     <!-- Hero Section -->
     <section class="hero-section">

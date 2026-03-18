@@ -1,9 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
-    header('Location: login.php');
-    exit;
-}
+require_once __DIR__ . '/_bootstrap.php';
 require_once '../core/omr-connect.php';
 $title = 'Change Password';
 $breadcrumbs = ['Change Password' => null];
@@ -38,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $success = 'Password updated successfully!';
                     session_unset();
                     session_destroy();
-                    header('Location: login.php');
+                    header('Location: /admin/login.php');
                     exit;
                 } else {
                     $error = 'Error updating password.';

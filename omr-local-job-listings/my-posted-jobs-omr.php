@@ -253,6 +253,28 @@ foreach ($jobs as $job) {
                 </div>
             </div>
         </div>
+
+        <?php
+        $showPlanBlock = $employer && $conn && jobEmployersTableHasPlanColumns($conn)
+            && !empty($employer['plan_type']) && trim($employer['plan_type']) !== '' && trim($employer['plan_type']) !== 'free'
+            && !empty($employer['plan_end_date']) && strtotime($employer['plan_end_date']) >= strtotime(date('Y-m-d'));
+        if ($showPlanBlock):
+            $planCap = getPlanCap($employer['plan_type']);
+            $planUsed = $planCap > 0 ? countJobsThisMonthForEmployer($conn, (int)$employerId) : 0;
+            $renewalDate = !empty($employer['plan_end_date']) ? date('d M Y', strtotime($employer['plan_end_date'])) : '—';
+        ?>
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card-modern p-3">
+                    <div class="d-flex flex-wrap align-items-center gap-3">
+                        <span class="badge bg-primary fs-6 px-3 py-2"><i class="fas fa-crown me-2"></i><?php echo htmlspecialchars(getPlanLabel($employer['plan_type'])); ?></span>
+                        <span class="stat-value" style="font-size:1.1rem;">Used: <strong><?php echo (int)$planUsed; ?>/<?php echo (int)$planCap; ?></strong> this month</span>
+                        <span class="text-muted">Renews: <?php echo htmlspecialchars($renewalDate); ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
         
         <?php if (!empty($jobs)): ?>
         <div class="row g-3 mb-4">

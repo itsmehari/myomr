@@ -17,6 +17,10 @@ if (session_status() === PHP_SESSION_NONE) {
 // Include helper functions
 require_once __DIR__ . '/includes/space-functions.php';
 
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__));
+}
+
 // Load database connection directly
 require_once __DIR__ . '/../core/omr-connect.php';
 global $conn;
@@ -33,7 +37,7 @@ if (!isset($conn) || !$conn instanceof mysqli || $conn->connect_error) {
 $space_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($space_id <= 0) {
-    if (!defined('ROOT_PATH')) define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+    if (!defined('ROOT_PATH')) define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__));
     require_once ROOT_PATH . '/core/serve-404.php';
     exit;
 }
@@ -76,7 +80,7 @@ if ($directResult && $directResult->num_rows > 0) {
 }
 
 if (!$space) {
-    if (!defined('ROOT_PATH')) define('ROOT_PATH', realpath(__DIR__ . '/..') ?: (__DIR__ . '/..'));
+    if (!defined('ROOT_PATH')) define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__));
     require_once ROOT_PATH . '/core/serve-404.php';
     exit;
 }
@@ -112,12 +116,12 @@ $amenities = json_decode($space['amenities'] ?? '[]', true);
     <title><?php echo $page_title; ?></title>
     <meta name="description" content="<?php echo $page_description; ?>">
     <meta name="keywords" content="<?php echo htmlspecialchars($space['space_name']); ?>, <?php echo htmlspecialchars($space['locality']); ?>, coworking OMR, shared workspace OMR">
-    <link rel="canonical" href="<?php echo $canonical_url; ?>">
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     
     <!-- Open Graph -->
     <meta property="og:title" content="<?php echo htmlspecialchars($space['space_name']); ?>">
     <meta property="og:description" content="<?php echo $page_description; ?>">
-    <meta property="og:url" content="<?php echo $canonical_url; ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     <meta property="og:type" content="website">
     <meta property="og:image" content="<?php echo $og_image; ?>">
     
@@ -128,7 +132,7 @@ $amenities = json_decode($space['amenities'] ?? '[]', true);
     <meta name="twitter:image" content="<?php echo $og_image; ?>">
     
     <!-- Google Analytics -->
-    <?php include '../components/analytics.php'; ?>
+    <?php require_once ROOT_PATH . '/components/analytics.php'; ?>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

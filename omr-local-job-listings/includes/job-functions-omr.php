@@ -16,8 +16,77 @@
  *  - Removed fallback LOWER/TRIM queries (data integrity should be fixed at DB).
  */
 
-// Canonical job_type values stored in DB (lowercase, hyphen). UI shows human labels.
+// Canonical job_type values stored in app layer (lowercase, hyphen). UI shows human labels.
 const JOB_TYPE_CANONICAL = ['full-time', 'part-time', 'contract', 'internship', 'walk-in'];
+const JOB_SEGMENT_CANONICAL = ['office', 'manpower', 'hybrid'];
+
+/**
+ * Check if employers table has Employer Pack columns (plan_type, etc.). Safe before/after migration.
+ */
+function jobEmployersTableHasPlanColumns(mysqli $conn): bool
+{
+    static $cache = null;
+    if ($cache !== null) {
+        return $cache;
+    }
+    if (!$conn instanceof mysqli || $conn->connect_error) {
+        $cache = false;
+        return false;
+    }
+    $stmt = $conn->prepare("
+        SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'employers' AND COLUMN_NAME = 'plan_type'
+        LIMIT 1
+    ");
+    if (!$stmt || !$stmt->execute()) {
+        $cache = false;
+        return false;
+    }
+    $cache = (bool) $stmt->get_result()->fetch_assoc();
+    return $cache;
+}
+
+/**
+ * Cache-aware check for job_postings table column existence.
+ */
+function jobPostingsHasColumn(string $column): bool
+{
+    static $cache = [];
+
+    $column = trim($column);
+    if ($column === '') {
+        return false;
+    }
+    if (array_key_exists($column, $cache)) {
+        return $cache[$column];
+    }
+
+    require_once __DIR__ . '/../../core/omr-connect.php';
+    global $conn;
+    if (!$conn instanceof mysqli || $conn->connect_error) {
+        $cache[$column] = false;
+        return false;
+    }
+
+    $stmt = $conn->prepare("
+        SELECT 1
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = DATABASE()
+          AND TABLE_NAME = 'job_postings'
+          AND COLUMN_NAME = ?
+        LIMIT 1
+    ");
+    if (!$stmt) {
+        $cache[$column] = false;
+        return false;
+    }
+
+    $stmt->bind_param('s', $column);
+    $stmt->execute();
+    $exists = (bool) $stmt->get_result()->fetch_assoc();
+    $cache[$column] = $exists;
+    return $exists;
+}
 
 /**
  * Normalize job_type to canonical value for storage and filtering (industry standard: normalize at DB).
@@ -43,6 +112,22 @@ function normalizeJobType(string $value): string
 }
 
 /**
+ * Convert canonical job_type value to DB enum casing.
+ */
+function getJobTypeDbValue(string $value): string
+{
+    $canonical = normalizeJobType($value);
+    $map = [
+        'full-time'  => 'Full-time',
+        'part-time'  => 'Part-time',
+        'contract'   => 'Contract',
+        'internship' => 'Internship',
+        'walk-in'    => 'Walk-in',
+    ];
+    return $map[$canonical] ?? $value;
+}
+
+/**
  * Human-readable label for canonical job_type (for display in UI).
  *
  * @param string $canonical Canonical job_type (e.g. "full-time")
@@ -58,6 +143,140 @@ function getJobTypeLabel(string $canonical): string
         'walk-in'    => 'Walk-in',
     ];
     return $labels[normalizeJobType($canonical)] ?? ucfirst(str_replace('-', ' ', $canonical));
+}
+
+/**
+ * Normalize job segment classification.
+ */
+function normalizeJobSegment(string $value): string
+{
+    $v = strtolower(trim($value));
+    $v = str_replace(['_', ' '], '-', $v);
+    $map = [
+        'office'      => 'office',
+        'white-collar'=> 'office',
+        'whitecollar' => 'office',
+        'manpower'    => 'manpower',
+        'labour'      => 'manpower',
+        'labor'       => 'manpower',
+        'blue-collar' => 'manpower',
+        'bluecollar'  => 'manpower',
+        'hybrid'      => 'hybrid',
+    ];
+    return $map[$v] ?? $v;
+}
+
+/**
+ * Human-readable label for job segment.
+ */
+function getJobSegmentLabel(string $segment): string
+{
+    $labels = [
+        'office'   => 'Office Jobs',
+        'manpower' => 'Manpower Jobs',
+        'hybrid'   => 'Hybrid Jobs',
+    ];
+    $normalized = normalizeJobSegment($segment);
+    return $labels[$normalized] ?? ucfirst(str_replace('-', ' ', $segment));
+}
+
+/**
+ * Infer job segment for backward compatibility when DB column is unavailable.
+ */
+function inferJobSegmentFromData(array $job): string
+{
+    $haystack = strtolower(
+        trim(
+            ($job['category_name'] ?? '') . ' ' .
+            ($job['category'] ?? '') . ' ' .
+            ($job['title'] ?? '') . ' ' .
+            ($job['description'] ?? '')
+        )
+    );
+
+    $manpowerKeywords = [
+        'driver', 'delivery', 'helper', 'loader', 'warehouse', 'tea master', 'cook',
+        'cleaner', 'housekeeping', 'electrician', 'plumber', 'welder', 'security',
+        'technician', 'mechanic', 'labour', 'labor', 'waiter', 'kitchen', 'billing'
+    ];
+    foreach ($manpowerKeywords as $kw) {
+        if ($kw !== '' && strpos($haystack, $kw) !== false) {
+            return 'manpower';
+        }
+    }
+
+    return 'office';
+}
+
+// ─── EMPLOYER PACK (B2B plan) ─────────────────────────────────────────────────
+
+/** Job cap per plan type (jobs per calendar month). Used for Employer Pack enforcement. */
+const EMPLOYER_PLAN_CAP = [
+    'free'            => 0,   // no cap (or optional 3 later)
+    'employer_pack_10' => 10,
+    'employer_pack_20' => 20,
+];
+
+/**
+ * Get monthly job cap for a plan type. Returns 0 for free/unknown (no cap enforced).
+ */
+function getPlanCap(string $planType): int
+{
+    $planType = trim($planType);
+    if ($planType === '' || $planType === 'free') {
+        return 0;
+    }
+    return EMPLOYER_PLAN_CAP[$planType] ?? 0;
+}
+
+/**
+ * Whether the employer row has an active paid plan (plan_end_date >= today).
+ */
+function isEmployerOnActivePlan(array $employer): bool
+{
+    $plan = trim($employer['plan_type'] ?? 'free');
+    if ($plan === '' || $plan === 'free') {
+        return false;
+    }
+    $end = $employer['plan_end_date'] ?? null;
+    if ($end === null || $end === '') {
+        return false;
+    }
+    return strtotime($end) >= strtotime(date('Y-m-d'));
+}
+
+/**
+ * Count approved jobs posted by this employer in the current calendar month.
+ */
+function countJobsThisMonthForEmployer(mysqli $conn, int $employerId): int
+{
+    $firstDay = date('Y-m-01');
+    $lastDay  = date('Y-m-t');
+    $stmt = $conn->prepare(
+        "SELECT COUNT(*) AS cnt FROM job_postings 
+         WHERE employer_id = ? AND status = 'approved' 
+         AND DATE(created_at) BETWEEN ? AND ?"
+    );
+    if (!$stmt) {
+        return 0;
+    }
+    $stmt->bind_param('iss', $employerId, $firstDay, $lastDay);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+    return (int) ($row['cnt'] ?? 0);
+}
+
+/**
+ * Human-readable plan label for UI.
+ */
+function getPlanLabel(string $planType): string
+{
+    $labels = [
+        'free'            => 'Free',
+        'employer_pack_10' => 'Employer Pack (10/mo)',
+        'employer_pack_20' => 'Employer Pack (20/mo)',
+    ];
+    return $labels[trim($planType)] ?? ucfirst(str_replace('_', ' ', $planType));
 }
 
 // ─── QUERY HELPERS ───────────────────────────────────────────────────────────
@@ -87,32 +306,38 @@ function _buildJobWhereClause(array $filters): array
 
     if (!empty($filters['job_type'])) {
         $conditions[] = 'j.job_type = ?';
-        $params[]     = normalizeJobType($filters['job_type']);
+        $params[]     = getJobTypeDbValue($filters['job_type']);
         $types       .= 's';
     }
 
-    if (!empty($filters['experience_level'])) {
+    if (!empty($filters['experience_level']) && jobPostingsHasColumn('experience_level')) {
         $conditions[] = 'j.experience_level = ?';
         $params[]     = $filters['experience_level'];
         $types       .= 's';
     }
 
-    if (isset($filters['is_remote']) && $filters['is_remote'] !== '') {
+    if (isset($filters['is_remote']) && $filters['is_remote'] !== '' && jobPostingsHasColumn('is_remote')) {
         $conditions[] = 'j.is_remote = ?';
         $params[]     = (int) $filters['is_remote'];
         $types       .= 'i';
     }
 
-    if (!empty($filters['salary_min'])) {
+    if (!empty($filters['salary_min']) && jobPostingsHasColumn('salary_min')) {
         $conditions[] = 'j.salary_min >= ?';
         $params[]     = (int) $filters['salary_min'];
         $types       .= 'i';
     }
 
-    if (!empty($filters['salary_max'])) {
+    if (!empty($filters['salary_max']) && jobPostingsHasColumn('salary_max')) {
         $conditions[] = '(j.salary_max <= ? OR j.salary_max IS NULL OR j.salary_max = 0)';
         $params[]     = (int) $filters['salary_max'];
         $types       .= 'i';
+    }
+
+    if (!empty($filters['work_segment']) && jobPostingsHasColumn('work_segment')) {
+        $conditions[] = 'j.work_segment = ?';
+        $params[]     = normalizeJobSegment($filters['work_segment']);
+        $types       .= 's';
     }
 
     if (!empty($filters['search'])) {

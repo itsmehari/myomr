@@ -38,20 +38,24 @@ $sitemaps = [
     // Coworking Spaces
     ['loc' => $base . '/omr-coworking-spaces/sitemap.xml',                    'lastmod' => $today],
 
+    // Buy & Sell
+    ['loc' => $base . '/omr-buy-sell/sitemap.xml',                            'lastmod' => $today],
+
     // Pentahive
     ['loc' => $base . '/pentahive/sitemap.xml',                               'lastmod' => $today],
 
-    // Election BLO
-    ['loc' => $base . '/election-blo-details/sitemap.xml',                    'lastmod' => $today],
+    // Elections 2026 subsite
+    ['loc' => $base . '/elections-2026/sitemap.xml',                           'lastmod' => $today],
 ];
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
+$xmlFlags = defined('ENT_XML1') ? (ENT_XML1 | ENT_QUOTES) : ENT_QUOTES;
 foreach ($sitemaps as $s) {
     echo "  <sitemap>\n";
-    echo '    <loc>' . htmlspecialchars($s['loc'], ENT_XML1 | ENT_COMPAT, 'UTF-8') . "</loc>\n";
-    echo '    <lastmod>' . $s['lastmod'] . "</lastmod>\n";
+    echo '    <loc>' . htmlspecialchars($s['loc'] ?? '', $xmlFlags, 'UTF-8') . "</loc>\n";
+    echo '    <lastmod>' . ($s['lastmod'] ?? $today) . "</lastmod>\n";
     echo "  </sitemap>\n";
 }
 

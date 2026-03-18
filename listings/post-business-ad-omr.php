@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Advertise Your Business in OMR — Inquiry Page
  * Rebuilt from placeholder to full advertising inquiry page
@@ -59,7 +59,7 @@ $og_image      = 'https://myomr.in/My-OMR-Logo.png';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($page_title) ?></title>
   <meta name="description" content="<?= htmlspecialchars($page_desc) ?>">
-  <link rel="canonical" href="<?= $canonical_url ?>">
+  <link rel="canonical" href="<?= htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8') ?>">
   <meta property="og:title"       content="<?= htmlspecialchars($page_title) ?>">
   <meta property="og:description" content="<?= htmlspecialchars($page_desc) ?>">
   <meta property="og:url"         content="<?= $canonical_url ?>">

@@ -1,9 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
-    header('Location: login.php');
-    exit;
-}
+require_once __DIR__ . '/_bootstrap.php';
 
 $lookerUrl = getenv('MYOMR_LOOKER_DASHBOARD_URL') ?: '';
 $propertyId = getenv('MYOMR_GA_PROPERTY_ID') ?: '';

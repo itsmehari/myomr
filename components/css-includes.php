@@ -32,5 +32,9 @@ $omr_css_core     = isset($omr_css_core) ? (bool) $omr_css_core : false;
 <?php endif; ?>
 <link rel="stylesheet" href="/assets/css/main.css">
 <?php if ($omr_css_homepage): ?>
-<link rel="stylesheet" href="/assets/css/homepage-myomr.css">
+<?php
+  $homepage_css_path = ROOT_PATH . '/assets/css/homepage-myomr.css';
+  $homepage_css_ver = file_exists($homepage_css_path) ? (string) filemtime($homepage_css_path) : '1';
+?>
+<link rel="stylesheet" href="/assets/css/homepage-myomr.css?v=<?php echo htmlspecialchars($homepage_css_ver, ENT_QUOTES, 'UTF-8'); ?>">
 <?php endif; ?>

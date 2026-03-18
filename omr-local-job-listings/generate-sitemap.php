@@ -40,6 +40,9 @@ $pages = [
     // Job-type landing pages
     ['loc' => '/part-time-jobs-omr-chennai.php', 'priority' => '0.9', 'changefreq' => 'daily'],
     ['loc' => '/work-from-home-jobs-omr.php', 'priority' => '0.9', 'changefreq' => 'daily'],
+    // Segment landing pages
+    ['loc' => '/office-jobs-omr-chennai.php', 'priority' => '0.9', 'changefreq' => 'daily'],
+    ['loc' => '/manpower-jobs-omr-chennai.php', 'priority' => '0.9', 'changefreq' => 'daily'],
 ];
 
 // Add base pages

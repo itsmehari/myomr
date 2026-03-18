@@ -1,10 +1,9 @@
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(EALL);
+error_reporting(E_ALL);
 
-session_start();
-if (empty($_SESSION['admin_logged_in'])) { header('Location: /admin/login.php'); exit; }
+require_once __DIR__ . '/../_bootstrap.php';
 require __DIR__ . '/../../core/omr-connect.php';
 
 function sanitize_str($s) { return trim(filter_var($s, FILTER_UNSAFE_RAW)); }

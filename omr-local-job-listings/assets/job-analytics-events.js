@@ -80,12 +80,12 @@ function trackShareAction(platform, jobId, jobTitle) {
 // Auto-track page views for job detail pages
 document.addEventListener('DOMContentLoaded', function() {
     // Track job views on job detail page
-    const jobId = document.querySelector('[itemprop="jobPosting"]')?.getAttribute('data-job-id');
-    const jobTitle = document.querySelector('h1')?.textContent;
-    const companyName = document.querySelector('[itemprop="hiringOrganization"]')?.textContent;
+    const pageJobId = document.body?.dataset?.jobId || '';
+    const pageJobTitle = document.body?.dataset?.jobTitle || document.querySelector('h1')?.textContent || '';
+    const pageCompanyName = document.body?.dataset?.companyName || document.querySelector('[itemprop="hiringOrganization"]')?.textContent || '';
     
-    if (jobId && jobTitle) {
-        trackJobView(jobId, jobTitle, companyName || '');
+    if (pageJobId && pageJobTitle) {
+        trackJobView(pageJobId, pageJobTitle, pageCompanyName || '');
     }
     
     // Track search form submissions
@@ -107,14 +107,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const applyForm = document.getElementById('applyForm');
     if (applyForm) {
         applyForm.addEventListener('submit', function() {
-            const jobId = document.querySelector('input[name="job_id"]')?.value;
-            const jobTitle = document.querySelector('.modal-title')?.textContent.replace('Apply for ', '');
+            const jobId = document.querySelector('input[name="job_id"]')?.value || pageJobId;
+            const jobTitle = pageJobTitle || document.querySelector('.modal-title')?.textContent.replace('Apply for ', '');
             
             if (jobId && jobTitle) {
                 trackJobApplication(jobId, jobTitle, '');
             }
         });
     }
+
+    const applyCtas = document.querySelectorAll('[data-bs-target="#applyModal"], .jp-btn-apply-main, .jp-btn-hero-apply');
+    applyCtas.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'job_apply_cta_click', {
+                    event_category: 'Job Detail',
+                    event_label: pageJobTitle,
+                    job_id: pageJobId
+                });
+            }
+        });
+    });
+
+    const waCtas = document.querySelectorAll('a[href*="wa.me"]');
+    waCtas.forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'job_whatsapp_click', {
+                    event_category: 'Job Detail',
+                    event_label: pageJobTitle,
+                    job_id: pageJobId
+                });
+            }
+        });
+    });
     
     // Track job posting form submissions
     const postJobForm = document.getElementById('post-job-form');
