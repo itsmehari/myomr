@@ -38,10 +38,18 @@ ul {
 #omrCtaSubscribe {
   display: none !important;
 }
+/* When shown: use flex so .modal-dialog-centered keeps the dialog in the viewport center (display: block breaks Bootstrap 5 centering). */
 #omrCtaPostJob.show,
 #omrCtaEmployerPack.show,
 #omrCtaSubscribe.show {
-  display: block !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 1055;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 /* Legacy custom modal (e.g. news-highlights, citizens-charter). Scoped to .modal-overlay so Bootstrap modals are not styled. */
