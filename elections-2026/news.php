@@ -41,8 +41,8 @@ if (isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
     }
 }
 
-// Fallback curated slugs if query returns nothing
-if (empty($articles)) {
+// Fallback curated slugs if query returns nothing (only when DB is available)
+if (empty($articles) && isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
     $fallback_slugs = [
         'tamil-nadu-assembly-election-2026-dates-ec-omr-constituencies',
         'find-your-blo-officer-shozhinganallur-electoral-roll-revision',

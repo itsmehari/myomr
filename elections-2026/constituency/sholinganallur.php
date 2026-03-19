@@ -6,6 +6,10 @@ require_once __DIR__ . '/../includes/bootstrap.php';
 require_once __DIR__ . '/../includes/constituency-data.php';
 
 $ac_slug = 'sholinganallur';
+if (empty($elections_2026_constituencies[$ac_slug])) {
+    require_once ROOT_PATH . '/core/serve-404.php';
+    exit;
+}
 $ac = $elections_2026_constituencies[$ac_slug];
 
 $page_nav = 'main';

@@ -95,6 +95,7 @@ flowchart TD
 
 ## 5. Edge Cases & Recovery
 
+- **Manual job posting (SQL):** For one-off or support posts bypassing the form: insert/update `employers`, then insert into `job_postings` with `status='approved'`; keep title/description SEO-friendly. After insert, regenerate sitemap and submit in Search Console. Application code must use prepared statements; this is for occasional manual SQL only. See [.cursor/LEARNINGS.md](../../.cursor/LEARNINGS.md) (Replication and one-off operations).
 - **Silent failures in prepared statements:** Module uses direct queries to avoid binding issues; if fallback triggers log entry, capture details in `HUMAN-TESTING-CHECKLIST.md`.
 - **Employer mismatch:** `employer_id` in session may differ from DB; system auto-refreshes via email lookup, but QA should confirm via `employer-auth.php`.
 - **Filter returning zero:** Ensure filters only apply when values present (`array_filter` in index).

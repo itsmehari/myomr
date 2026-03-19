@@ -261,3 +261,15 @@ When shipping feature + design + DB changes together on MyOMR:
 ### Takeaway
 
 For **running migrations or any PHP script against the remote DB from a dev machine**: set `DB_HOST` to the server hostname, ensure that machine’s **public IP** is in cPanel Remote MySQL, and that the network allows outbound 3306. Refer to `README-REMOTE-DATABASE.md` for full prerequisites and troubleshooting.
+
+---
+
+## Replication and one-off operations (March 2026)
+
+### Replication to another project
+
+When replicating a MyOMR feature to another project (e.g. banner ads to mycovai.in): (a) analyse how it works in this codebase (registry, slots, placements, helpers), and (b) produce a short prompt or implementation summary tailored to the target project's structure. See [.cursor/skills/myomr-project/SKILL.md](.cursor/skills/myomr-project/SKILL.md) (Banner ads) and [docs/inbox/BANNER-ADS-IMPLEMENTATION-PLAN-FOR-MYCOVAI.md](docs/inbox/BANNER-ADS-IMPLEMENTATION-PLAN-FOR-MYCOVAI.md) for an example.
+
+### Manual job posting (SQL)
+
+For support or one-off job posts (bypassing the normal employer form flow): insert/update `employers`, then insert into `job_postings` with `status='approved'`; ensure title/description are SEO-friendly. After insert, regenerate the job sitemap and consider submitting in Search Console. In application code, always use prepared statements; this note is for occasional manual SQL only. See [docs/workflows-pipelines/job-portal-workflow.md](docs/workflows-pipelines/job-portal-workflow.md) for the normal flow.
