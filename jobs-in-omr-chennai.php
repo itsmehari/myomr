@@ -249,6 +249,8 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
         </div>
     </section>
 
+    <div class="container py-3"><?php omr_ad_slot('global-top', '728x90'); ?></div>
+
     <!-- Problem Section (Job Seekers) -->
     <section class="py-5 bg-light">
         <div class="container">

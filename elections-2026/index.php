@@ -11,6 +11,7 @@ $page_description = 'Tamil Nadu Assembly election 2026: poll 23 April, counting 
 $page_keywords = 'elections 2026 OMR, Tamil Nadu election 2026, Chennai South, Sholinganallur election, Velachery MLA, Thiruporur constituency, OMR polling, MyOMR';
 $canonical_url = 'https://myomr.in/elections-2026/';
 $og_type = 'website';
+$tamil_hub_url = 'https://myomr.in/elections-2026/index-tamil.php';
 $breadcrumbs = [
     ['https://myomr.in/', 'Home'],
     [$canonical_url, 'Elections 2026'],
@@ -20,6 +21,8 @@ $breadcrumbs = [
 <html lang="en">
 <head>
     <?php require_once ROOT_PATH . '/components/meta.php'; ?>
+    <link rel="alternate" hreflang="ta" href="<?php echo htmlspecialchars($tamil_hub_url); ?>">
+    <meta property="og:locale:alternate" content="ta_IN">
     <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link rel="stylesheet" href="/assets/css/footer.css">
 </head>
@@ -38,13 +41,35 @@ $breadcrumbs = [
             </nav>
             <h1 class="h2 mb-2">Elections 2026 – OMR &amp; Vicinity</h1>
             <p class="lead text-muted mb-0">Your guide to the Tamil Nadu Assembly election for Old Mahabalipuram Road and Chennai South constituencies.</p>
+            <?php
+            $poll_date = new DateTime('2026-04-23');
+            $today = new DateTime('today');
+            $days_to_poll = $today->diff($poll_date)->days;
+            $is_past_poll = ($today > $poll_date);
+            ?>
+            <?php if (!$is_past_poll): ?>
+            <p class="mb-0 mt-2"><strong><?php echo $days_to_poll; ?> days to poll</strong> (23 April 2026)</p>
+            <?php else: ?>
+            <p class="mb-0 mt-2 text-muted">Poll was on 23 April 2026. <a href="<?php echo ELECTIONS_2026_BASE_URL; ?>/results-2026.php">See results</a></p>
+            <?php endif; ?>
+            <p class="mt-2 small"><a href="<?php echo htmlspecialchars($tamil_hub_url); ?>" hreflang="ta">தமிழில்</a></p>
         </div>
     </header>
+
+    <div class="container py-3"><?php omr_ad_slot('elections-top', '728x90'); ?></div>
 
     <section class="py-4 py-md-5">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body p-4">
+                            <h2 class="h6 text-muted mb-2">Share this guide</h2>
+                            <p class="small mb-2">Help neighbours find dates, BLO and constituencies.</p>
+                            <a href="https://wa.me/?text=<?php echo rawurlencode('OMR election 2026 – dates, BLO, constituencies: ' . $canonical_url); ?>" class="btn btn-success btn-sm me-2" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a>
+                            <a href="https://twitter.com/intent/tweet?text=<?php echo rawurlencode('OMR election 2026 – dates, BLO, constituencies on MyOMR ' . $canonical_url); ?>" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">Twitter / X</a>
+                        </div>
+                    </div>
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body p-4">
                             <h2 class="h5 mb-3">Key dates</h2>
@@ -113,7 +138,18 @@ $breadcrumbs = [
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h3 class="h6 card-title">Are you ready to vote?</h3>
+                                    <p class="card-text small">Quick quiz: constituency, ID, poll day.</p>
+                                    <a href="<?php echo ELECTIONS_2026_BASE_URL; ?>/quiz.php" class="card-link">Take the quiz</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <?php omr_ad_slot('elections-mid', '336x280'); ?>
 
                     <div class="card border-0 shadow-sm mt-4">
                         <div class="card-body p-4">
@@ -125,6 +161,13 @@ $breadcrumbs = [
                     </div>
                 </div>
                 <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body p-3">
+                            <h2 class="h6 card-title">Results 2026</h2>
+                            <p class="small mb-2">Winners for OMR constituencies after counting.</p>
+                            <a href="<?php echo ELECTIONS_2026_BASE_URL; ?>/results-2026.php" class="btn btn-outline-secondary btn-sm">View results</a>
+                        </div>
+                    </div>
                     <div class="card bg-primary text-white border-0">
                         <div class="card-body p-4">
                             <h2 class="h6 card-title">Get OMR election updates</h2>

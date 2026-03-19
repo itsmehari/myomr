@@ -312,6 +312,8 @@ $facilities = json_decode($property['facilities'] ?? '[]', true);
                         <?php endif; ?>
                     </div>
                 </div>
+
+                <?php omr_ad_slot('hostels-detail-mid', '336x280'); ?>
                 
                 <!-- Photos Gallery -->
                 <?php if (!empty($photos)): ?>

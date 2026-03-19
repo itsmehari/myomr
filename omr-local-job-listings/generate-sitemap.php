@@ -2,6 +2,7 @@
 /**
  * Generate Sitemap for Job Portal
  */
+define('SITEMAP_REQUEST', true);
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/job-functions-omr.php';
 

@@ -1,5 +1,7 @@
 <?php
 if (!defined('ROOT_PATH')) define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__));
+require_once ROOT_PATH . '/core/include-path.php';
+require_once ROOT_PATH . '/components/component-includes.php';
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
@@ -107,6 +109,7 @@ if (!$event) {
 <main id="main-content" class="py-5">
   <div class="container">
     <?php if ($event): ?>
+      <?php omr_ad_slot('events-detail-mid', '336x280'); ?>
       <div class="card-modern mb-4">
         <div class="p-4">
           <div class="row g-4">

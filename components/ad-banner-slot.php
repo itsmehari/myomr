@@ -5,8 +5,8 @@
  *
  * Usage: omr_ad_slot('article-top', '728x90');
  *
- * @param string $slot_id Slot identifier (e.g. article-top, article-mid)
- * @param string $size Banner size: 728x90, 336x280, or 300x250
+ * @param string $slot_id Slot identifier (e.g. article-top, content-top, homepage-top)
+ * @param string $size Banner size: 728x90, 336x280, 300x250, or 320x50 (mobile)
  */
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__));
@@ -17,6 +17,9 @@ if (!function_exists('omr_ad_slot')) {
         $base = defined('ROOT_PATH') ? ROOT_PATH : dirname(__DIR__);
         $registry_file = $base . '/core/ad-registry.php';
         if (!file_exists($registry_file)) {
+            if (isset($_GET['omr_ad_debug']) && $_GET['omr_ad_debug'] === '1') {
+                echo '<!-- omr_ad_slot: registry not found at ' . htmlspecialchars($registry_file, ENT_QUOTES, 'UTF-8') . ' -->';
+            }
             return;
         }
 
@@ -31,6 +34,9 @@ if (!function_exists('omr_ad_slot')) {
 
         $eligible = array_values($eligible);
         if (empty($eligible)) {
+            if (isset($_GET['omr_ad_debug']) && $_GET['omr_ad_debug'] === '1') {
+                echo '<!-- omr_ad_slot: no eligible ads for slot_id=' . htmlspecialchars($slot_id, ENT_QUOTES, 'UTF-8') . ' size=' . htmlspecialchars($size, ENT_QUOTES, 'UTF-8') . ' -->';
+            }
             return;
         }
 
@@ -66,6 +72,9 @@ if (!function_exists('omr_ad_slot')) {
                             <span class="omr-ad-tagline"><?php echo $tagline; ?></span>
                         <?php endif; ?>
                     </span>
+                <?php elseif ($size === '320x50'): ?>
+                    <span class="omr-ad-icon"><?php echo $icon; ?></span>
+                    <span class="omr-ad-headline"><?php echo $headline; ?></span>
                 <?php else: ?>
                     <span class="omr-ad-icon"><?php echo $icon; ?></span>
                     <span class="omr-ad-headline"><?php echo $headline; ?></span>

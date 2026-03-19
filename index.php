@@ -10,6 +10,8 @@ $recent_jobs = [];
 $recent_events = [];
 $recent_buy_sell = [];
 $buy_sell_count = 0;
+$total_jobs_home = 0;
+$total_employers_home = 0;
 $subscribed = isset($_GET['subscribed']);
 $sub_error = isset($_GET['subscribe_error']);
 $page_nav = 'homepage';
@@ -36,6 +38,10 @@ if (file_exists($core_file)) {
     require_once ROOT_PATH . '/omr-buy-sell/includes/listing-functions.php';
     $buy_sell_count = getBuySellCount([]);
     $recent_buy_sell = getBuySellListings([], 6, 0);
+    $jr = $conn->query("SELECT COUNT(*) AS c FROM job_postings WHERE status = 'approved'");
+    if ($jr && $row = $jr->fetch_assoc()) $total_jobs_home = (int)$row['c'];
+    $er = $conn->query("SELECT COUNT(DISTINCT id) AS c FROM employers");
+    if ($er && $row = $er->fetch_assoc()) $total_employers_home = (int)$row['c'];
   }
 }
 ?>
@@ -304,18 +310,22 @@ if (file_exists($core_file)) {
     <div class="hero-badge"><i class="fas fa-check-circle"></i> 100% Free &middot; No signup needed</div>
     <div class="hero-text-slider">
       <div class="hero-slide active" data-slide="0" role="region" aria-live="polite">
-        <h1 class="hero-headline" id="hero-heading">Explore OMR</h1>
-        <p class="hero-subtitle">Your local directory for Old Mahabalipuram Road — find businesses, places, events, jobs, hostels & coworking spaces, or add your own listing.</p>
+        <h1 class="hero-headline" id="hero-heading">IT Jobs on OMR</h1>
+        <p class="hero-subtitle">Find IT jobs in Chennai&rsquo;s IT corridor. Connect with top employers on Old Mahabalipuram Road — post or apply, 100% free.</p>
       </div>
       <div class="hero-slide" data-slide="1">
+        <h1 class="hero-headline">Explore OMR</h1>
+        <p class="hero-subtitle">Your local directory for Old Mahabalipuram Road — businesses, places, events, jobs, hostels & coworking spaces.</p>
+      </div>
+      <div class="hero-slide" data-slide="2">
         <h1 class="hero-headline">Find Jobs in OMR</h1>
         <p class="hero-subtitle">Connect with top employers. Browse IT, Teaching, Healthcare, Retail & more. Post or apply — 100% free.</p>
       </div>
-      <div class="hero-slide" data-slide="2">
+      <div class="hero-slide" data-slide="3">
         <h1 class="hero-headline">Discover Local Events</h1>
         <p class="hero-subtitle">What's happening in OMR. Community events, workshops, meetups, festivals. Add your event or explore.</p>
       </div>
-      <div class="hero-slide" data-slide="3">
+      <div class="hero-slide" data-slide="4">
         <h1 class="hero-headline">Places & Listings</h1>
         <p class="hero-subtitle">Schools, restaurants, hostels, coworking spaces, banks, hospitals. Your guide to OMR and beyond.</p>
       </div>
@@ -348,7 +358,8 @@ if (file_exists($core_file)) {
       <span><i class="fas fa-shopping-bag"></i> Buy & Sell</span>
     </div>
     <div class="hero-quick-links">
-      <a href="/omr-local-job-listings/"><i class="fas fa-briefcase"></i> Jobs</a>
+      <a href="/it-jobs-omr-chennai.php"><i class="fas fa-laptop-code"></i> IT Jobs</a>
+      <a href="/omr-local-job-listings/"><i class="fas fa-briefcase"></i> All Jobs</a>
       <a href="/omr-local-events/"><i class="fas fa-calendar-day"></i> Events</a>
       <a href="/omr-listings/"><i class="fas fa-map-marker-alt"></i> Places</a>
       <a href="/omr-hostels-pgs/"><i class="fas fa-bed"></i> Hostels & PGs</a>
@@ -361,6 +372,7 @@ if (file_exists($core_file)) {
       <button type="button" role="tab" aria-selected="false" aria-label="Slide 2" data-dot="1"></button>
       <button type="button" role="tab" aria-selected="false" aria-label="Slide 3" data-dot="2"></button>
       <button type="button" role="tab" aria-selected="false" aria-label="Slide 4" data-dot="3"></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Slide 5" data-dot="4"></button>
     </div>
     <div class="hero-cta-wrap">
       <a href="#subscribe" class="hero-cta">Join the Community</a>
@@ -370,12 +382,16 @@ if (file_exists($core_file)) {
   </div>
 </section>
 
+<div class="container" style="margin-top: 1rem; margin-bottom: 1rem;">
+<?php omr_ad_slot('homepage-top', '728x90'); ?>
+</div>
+
 <script>
 (function(){
   var slides = document.querySelectorAll('.hero-slide');
   var bgSlides = document.querySelectorAll('.hero-bg-slide');
   var dots = document.querySelectorAll('.hero-dots button');
-  var total = 4;
+  var total = 5;
   var current = 0;
   var interval;
 
@@ -413,6 +429,13 @@ if (file_exists($core_file)) {
 })();
 </script>
 
+<?php if ($total_jobs_home > 0 || $total_employers_home > 0): ?>
+<div class="container text-center py-2" style="background:#f0fdf4;border-radius:8px;margin-bottom:1rem;">
+  <span class="me-3"><strong><?php echo number_format($total_jobs_home); ?></strong> live jobs</span>
+  <span><strong><?php echo number_format($total_employers_home); ?></strong> employers on OMR</span>
+  <a href="/omr-local-job-listings/" class="ms-3 btn btn-success btn-sm">Browse jobs</a>
+</div>
+<?php endif; ?>
 <?php if (!empty($recent_jobs)): ?>
 <?php include 'components/homepage-jobs-scroll-banner.php'; ?>
 <?php endif; ?>
@@ -429,6 +452,7 @@ if (file_exists($core_file)) {
   <?php include 'components/myomr-news-bulletin.php'; ?>
   <?php include 'components/featured-news-links.php'; ?>
 </section>
+<?php omr_ad_slot('homepage-mid', '336x280'); ?>
 </main>
 
 <section id="subscribe" class="homepage-section" aria-labelledby="subscribe-heading">

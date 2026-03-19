@@ -68,6 +68,22 @@ incrementJobViews($job_id);
 /* ── Related jobs ────────────────────────────────────────────── */
 $related_jobs = getRelatedJobs($job_id, $job['category'], 4);
 
+/* ── Related IT/career articles (for "Read" block) ────────────── */
+$related_articles = [];
+$it_cats = ['IT Career', 'Career Tips', 'OMR Jobs', 'Jobs', 'IT'];
+$placeholders = implode(',', array_fill(0, count($it_cats), '?'));
+$art_sql = "SELECT slug, title, published_date FROM articles WHERE status = 'published' AND slug NOT LIKE '%-tamil' AND (category IN ($placeholders) OR tags LIKE ? OR tags LIKE ?) ORDER BY published_date DESC LIMIT 3";
+$art_stmt = $conn->prepare($art_sql);
+if ($art_stmt) {
+    $art_types = str_repeat('s', count($it_cats)) . 'ss';
+    $art_params = array_merge($it_cats, ['%it-corridor%', '%it-career%']);
+    $art_stmt->bind_param($art_types, ...$art_params);
+    $art_stmt->execute();
+    $art_res = $art_stmt->get_result();
+    while ($row = $art_res->fetch_assoc()) $related_articles[] = $row;
+    $art_stmt->close();
+}
+
 /* ── Application state ───────────────────────────────────────── */
 $already_applied = false;
 if (!empty($_COOKIE['applicant_email'])) {
@@ -406,6 +422,17 @@ $application_deadline_label = (!empty($job['application_deadline']) && $job['app
         </div>
         <?php endif; ?>
 
+        <!-- Share this job (WhatsApp) -->
+        <?php
+        $job_page_url = getJobDetailUrl($job_id, $job['title'] ?? null);
+        $share_wa_text = rawurlencode('Check this job on MyOMR: ' . ($job['title'] ?? 'Job') . ' — ' . $job_page_url);
+        ?>
+        <div class="mb-2">
+          <a href="https://wa.me/?text=<?= $share_wa_text ?>" target="_blank" rel="noopener" class="btn btn-outline-success btn-sm">
+            <i class="fab fa-whatsapp me-1"></i> Share this job
+          </a>
+        </div>
+
         <!-- Social proof strip -->
         <div class="jp-social-proof">
           <span class="jp-social-proof-item">
@@ -425,6 +452,8 @@ $application_deadline_label = (!empty($job['application_deadline']) && $job['app
           </span>
           <?php endif; ?>
         </div>
+
+        <?php omr_ad_slot('jobs-detail-mid', '336x280'); ?>
 
         <div class="jp-content-block jp-quick-facts">
           <h2><i class="fas fa-bolt"></i> Quick Job Facts</h2>
@@ -519,6 +548,23 @@ $application_deadline_label = (!empty($job['application_deadline']) && $job['app
               <i class="fas fa-th-list me-1"></i> Browse All <?= htmlspecialchars($job['category_name'] ?? '') ?> Jobs
             </a>
           </div>
+        </div>
+        <?php endif; ?>
+
+        <!-- Read: Career tips for OMR -->
+        <?php if (!empty($related_articles)): ?>
+        <div class="jp-content-block">
+          <h2><i class="fas fa-newspaper"></i> Career tips &amp; hiring news</h2>
+          <p class="text-muted small mb-2">Read the latest from OMR&rsquo;s IT corridor.</p>
+          <ul class="list-unstyled mb-0">
+            <?php foreach ($related_articles as $ra): ?>
+            <li class="mb-2">
+              <a href="/local-news/<?= htmlspecialchars($ra['slug']) ?>"><?= htmlspecialchars($ra['title']) ?></a>
+              <?php if (!empty($ra['published_date'])): ?><span class="text-muted small"> · <?= date('M j, Y', strtotime($ra['published_date'])) ?></span><?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+          </ul>
+          <a href="/discover-myomr/it-careers-omr.php" class="btn btn-outline-success btn-sm mt-2">More career articles</a>
         </div>
         <?php endif; ?>
 

@@ -8,6 +8,7 @@
 header('Content-Type: application/xml; charset=utf-8');
 header('Cache-Control: public, max-age=3600');
 
+define('SITEMAP_REQUEST', true);
 require_once __DIR__ . '/../core/omr-connect.php';
 
 $base_url = 'https://myomr.in';

@@ -690,6 +690,23 @@ if (!$article) {
             </div>
             <?php endif; ?>
         </div>
+
+        <?php
+        $art_cat = isset($article['category']) ? trim((string)$article['category']) : '';
+        $art_tags = isset($article['tags']) ? strtolower((string)$article['tags']) : '';
+        $is_it_career = in_array($art_cat, ['IT Career', 'Career Tips', 'OMR Jobs', 'Jobs', 'IT'], true)
+            || strpos($art_tags, 'it-corridor') !== false
+            || strpos($art_tags, 'it-career') !== false;
+        if ($is_it_career): ?>
+        <div class="mt-4 p-4 rounded" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+            <h3 class="h5 mb-2"><i class="fas fa-briefcase me-1"></i> Find jobs on OMR</h3>
+            <p class="mb-2 small text-muted">Browse local opportunities in Chennai&rsquo;s IT corridor.</p>
+            <a href="/omr-local-job-listings/" class="btn btn-success btn-sm me-2 mb-1">All jobs in OMR</a>
+            <a href="/it-jobs-omr-chennai.php" class="btn btn-outline-success btn-sm me-2 mb-1">IT jobs</a>
+            <a href="/fresher-jobs-omr-chennai.php" class="btn btn-outline-success btn-sm me-2 mb-1">Fresher jobs</a>
+            <a href="/discover-myomr/it-careers-omr.php" class="btn btn-outline-success btn-sm mb-1">More career articles</a>
+        </div>
+        <?php endif; ?>
         
         <?php if ($show_community_section): ?>
         <!-- MyOMR Community Awareness Section (All Articles) -->

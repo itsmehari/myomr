@@ -67,7 +67,7 @@ $breadcrumbs = [
                         <li>Do not take a selfie or photograph inside the booth.</li>
                     </ul>
 
-                    <p><a href="<?php echo ELECTIONS_2026_BASE_URL; ?>/faq.php">FAQ</a> · <a href="<?php echo ELECTIONS_2026_BASE_URL; ?>/">Elections 2026</a></p>
+                    <p><a href="<?php echo ELECTIONS_2026_BASE_URL; ?>/quiz.php">Are you ready to vote? (quiz)</a> · <a href="<?php echo ELECTIONS_2026_BASE_URL; ?>/faq.php">FAQ</a> · <a href="<?php echo ELECTIONS_2026_BASE_URL; ?>/">Elections 2026</a></p>
                 </div>
             </div>
         </div>

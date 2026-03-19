@@ -59,6 +59,8 @@ body { font-family: 'Poppins', sans-serif; background: #f8fafc; }
         <p class="mb-0">Find schools, IT companies, banks, hospitals, restaurants, hostels and more across Old Mahabalipuram Road, Chennai.</p>
     </section>
 
+    <?php omr_ad_slot('listings-index-top', '728x90'); ?>
+
     <section class="row g-3 listings-grid">
         <?php foreach ($cards as $card): ?>
             <div class="col-md-6 col-lg-4">

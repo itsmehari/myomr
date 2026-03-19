@@ -1,4 +1,7 @@
 <?php
+// Ensure we never output HTML or PHP errors (Google reports "Couldn't fetch" for non-XML)
+@ini_set('display_errors', '0');
+define('SITEMAP_REQUEST', true);
 require_once __DIR__ . '/../core/omr-connect.php';
 header('Content-Type: application/xml; charset=utf-8');
 

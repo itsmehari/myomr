@@ -3,6 +3,7 @@
  * MyOMR — Local News Sitemap Generator
  * Routes as: /local-news/sitemap.xml  (via .htaccess)
  */
+define('SITEMAP_REQUEST', true);
 require_once __DIR__ . '/../core/omr-connect.php';
 
 header('Content-Type: application/xml; charset=utf-8');

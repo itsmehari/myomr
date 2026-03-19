@@ -23,6 +23,12 @@ $megamenu = [
     'active' => nav_is_active('/', $current_path),
   ],
   [
+    'label'  => 'IT Jobs',
+    'url'    => '/it-jobs-omr-chennai.php',
+    'icon'   => 'fas fa-laptop-code',
+    'active' => nav_is_active('/it-jobs-omr-chennai.php', $current_path),
+  ],
+  [
     'label'   => 'Explore Places',
     'url'     => '/omr-listings/',
     'icon'    => 'fas fa-map-marker-alt',

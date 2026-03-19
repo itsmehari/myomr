@@ -3,7 +3,10 @@
  * MyOMR — Master Sitemap Index Generator
  * Served at https://myomr.in/sitemap.xml via .htaccess rewrite.
  *
- * Lists all module sitemaps so Google can crawl the entire site from one entry point.
+ * This file is a SITEMAP INDEX: it lists ~12 child sitemap URLs, not 200+ page URLs.
+ * The 200+ pages live inside those child sitemaps (sitemap-pages, omr-listings, jobs, events, etc.).
+ * Open each <loc> URL in a browser to see the actual page URLs per section.
+ *
  * To add a new module: append a $sitemaps[] entry below.
  */
 

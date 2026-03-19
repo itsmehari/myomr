@@ -200,6 +200,54 @@
 
 ---
 
+## Why only ~12–15 “files” show in the main sitemap
+
+**https://myomr.in/sitemap.xml** is a **sitemap index**, not a single list of all 200 pages. It contains roughly **12 entries**, each pointing to a *child sitemap* (e.g. `sitemap-pages.xml`, `omr-listings/sitemap.xml`, `omr-local-job-listings/sitemap.xml`). That’s why you only see about 12–15 “files” when you open it.
+
+The **200+ page URLs** are spread across those child sitemaps:
+
+| Child sitemap | What it lists (approx.) |
+|---------------|-------------------------|
+| `sitemap-pages.xml` | ~22 static pages (homepage, contact, discover-myomr, info, module indexes) |
+| `omr-listings/sitemap.xml` | 250+ (schools, hospitals, banks, restaurants, IT companies, parks, etc.) |
+| `omr-local-job-listings/sitemap.xml` | 20+ base pages + all approved job detail URLs |
+| `omr-local-events/sitemap.xml` | Events, categories, localities, venues |
+| `local-news/sitemap.xml` | Articles + static news pages |
+| `omr-hostels-pgs/sitemap.xml` | Hostel/PG listings |
+| `omr-buy-sell/sitemap.xml` | Buy/sell listings, categories, localities |
+| `omr-coworking-spaces/sitemap.xml` | Coworking spaces |
+| `elections-2026/sitemap.xml` | ~16 elections subsite pages |
+| `it-parks/sitemap.xml` | IT park detail pages |
+| `pentahive/sitemap.xml` | Pentahive service pages |
+
+To see all URLs: open **sitemap.xml** → then open each `<loc>` URL in the list; each of those XML files contains the actual page URLs for that section.
+
+---
+
+## 🔧 Troubleshooting: Search Console "Couldn't fetch"
+
+If a **sub-sitemap** (e.g. `omr-listings/sitemap.xml`) shows **"Couldn't fetch"** in Google Search Console, Google is unable to read that URL. The sitemap index may show "Success" while individual child sitemaps fail.
+
+### Why "Couldn't fetch" happens
+- **Non-XML response:** The URL returns HTML (e.g. a DB error page or "Database connection failed") instead of valid sitemap XML. Google then reports "Couldn't fetch".
+- **HTTP errors:** 404, 500, or timeouts when Google requests the sitemap URL.
+- **Rewrite not applied:** `.htaccess` not deployed or overridden, so `/omr-listings/sitemap.xml` doesn’t hit the PHP generator.
+
+### What we fixed (March 2026)
+- **DB failure:** If the database is down, sitemap scripts that use `omr-connect.php` now return **valid empty XML** instead of HTML (constant `SITEMAP_REQUEST` in `core/omr-connect.php`). All module sitemap generators that include `omr-connect.php` define `SITEMAP_REQUEST` before the include.
+- **PHP errors:** `omr-listings/generate-listings-sitemap.php` sets `display_errors` off so notices/warnings don’t break the XML output.
+
+### What to check on the server
+1. **Fetch the URL as Googlebot would:**  
+   `https://myomr.in/omr-listings/sitemap.xml` — must return `Content-Type: application/xml` and valid `<urlset>` XML (no HTML, no PHP errors above the XML).
+2. **Confirm rewrite:** Requesting `/omr-listings/sitemap.xml` should be handled by `omr-listings/generate-listings-sitemap.php` (see `.htaccess`).
+3. **Database:** On the server, DB connection must succeed for the sitemap to list all URLs; if it fails, the sitemap now returns empty valid XML instead of an HTML error page.
+4. **Timeouts:** If the listings sitemap is very large, consider increasing PHP `max_execution_time` for that request or pre-generating a static `sitemap.xml` via cron.
+
+After fixes are deployed, re-submit the sitemap index in Search Console (`https://myomr.in/sitemap.xml`); Google will re-fetch the child sitemaps.
+
+---
+
 ## ✅ Verification Checklist
 
 - [x] Main sitemap generator includes all static pages

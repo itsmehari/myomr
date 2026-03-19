@@ -33,17 +33,26 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once ROOT_PATH . '/core/omr-connect.php';
 global $conn;
 
-// Pre-fill form with employer's saved profile data
+// Pre-fill form with employer's saved profile data (+ plan columns for usage line when on Employer Pack)
 $employer_profile = [];
+$post_job_plan_used = null;
+$post_job_plan_cap = null;
 if (!empty($_SESSION['employer_id']) && $conn instanceof mysqli) {
-    $empStmt = $conn->prepare(
-        "SELECT company_name, contact_person, email, phone, address, website
-         FROM employers WHERE id = ? LIMIT 1"
-    );
+    $cols = "company_name, contact_person, email, phone, address, website";
+    if (jobEmployersTableHasPlanColumns($conn)) {
+        $cols .= ", plan_type, plan_end_date";
+    }
+    $empStmt = $conn->prepare("SELECT {$cols} FROM employers WHERE id = ? LIMIT 1");
     if ($empStmt) {
         $empStmt->bind_param('i', $_SESSION['employer_id']);
         $empStmt->execute();
         $employer_profile = $empStmt->get_result()->fetch_assoc() ?: [];
+        if (jobEmployersTableHasPlanColumns($conn) && !empty($employer_profile) && isEmployerOnActivePlan($employer_profile)) {
+            $post_job_plan_cap = getPlanCap($employer_profile['plan_type']);
+            if ($post_job_plan_cap > 0) {
+                $post_job_plan_used = countJobsThisMonthForEmployer($conn, (int)$_SESSION['employer_id']);
+            }
+        }
     }
 }
 
@@ -226,6 +235,13 @@ if (empty($_SESSION['csrf_token'])) {
                 </div>
             </div>
             
+            <?php if ($post_job_plan_cap !== null && $post_job_plan_used !== null): ?>
+            <div class="card-modern p-3 mb-4">
+                <span class="text-muted">Employer Pack usage this month:</span>
+                <span class="stat-value" style="font-size:1rem;">Used <strong><?php echo (int)$post_job_plan_used; ?>/<?php echo (int)$post_job_plan_cap; ?></strong> job posts</span>
+            </div>
+            <?php endif; ?>
+
             <!-- Form -->
             <?php if (empty($categories)): ?>
                 <div class="alert alert-warning mb-4" role="alert">

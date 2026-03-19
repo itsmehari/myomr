@@ -161,6 +161,16 @@ include ROOT_PATH . '/components/analytics.php'; ?>
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"How do I apply for jobs?","acceptedAnswer":{"@type":"Answer","text":"Click Apply Now on any job to open the application form. Submit your name, email, phone, resume and optional cover letter. Applications go directly to the employer. Applying is free."}},
+    {"@type":"Question","name":"Is it free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. Job seekers can browse and apply for free. Employers can post one free job; the Employer Pack offers 10 featured jobs per month for companies that need more visibility."}},
+    {"@type":"Question","name":"Where are the offices located?","acceptedAnswer":{"@type":"Answer","text":"All jobs listed here are in or around Old Mahabalipuram Road (OMR), Chennai — the IT corridor. Locations include Perungudi, Sholinganallur, Navalur, Thoraipakkam, Kelambakkam and nearby areas."}}
+  ]
+}
+</script>
 </head>
 <body class="job-portal-page">
 
@@ -251,6 +261,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
           <a href="post-job-omr.php" style="background:#fff;color:#005c39;border-radius:8px;padding:.6rem 1.5rem;font-weight:700;font-size:.9rem;text-decoration:none;display:inline-block">
             <i class="fas fa-plus me-1"></i> Post a Job – Free
           </a>
+          <a href="#" data-omr-cta="post-job" class="ms-2 btn btn-outline-light btn-sm" style="font-size:.9rem" aria-label="See hiring options">Hire on OMR</a>
         </div>
       </div>
     </div>
@@ -338,6 +349,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
 <!-- ── MAIN LAYOUT ─────────────────────────────────────────────── -->
 <main id="main-content">
   <div class="container">
+    <?php omr_ad_slot('jobs-index-top', '728x90'); ?>
     <div class="jp-layout">
 
       <!-- ── SIDEBAR (desktop) ─────────────────────────────────── -->
@@ -461,12 +473,37 @@ include ROOT_PATH . '/components/analytics.php'; ?>
         </div>
         <?php endif; ?>
 
+        <?php omr_ad_slot('jobs-index-mid', '336x280'); ?>
+
         <!-- Loading Spinner -->
         <div class="jp-spinner-wrap" id="jobs-spinner" aria-live="polite">
           <div class="spinner-border text-success" role="status" style="width:2.5rem;height:2.5rem">
             <span class="visually-hidden">Loading jobs…</span>
           </div>
         </div>
+
+        <!-- Empty state: no jobs found -->
+        <?php if (empty($jobs) && $total_jobs > 0): ?>
+        <div class="alert alert-light border text-center py-4 mb-4" role="region" aria-labelledby="no-results-heading">
+          <h2 id="no-results-heading" class="h5 mb-2">No jobs match your current filters</h2>
+          <p class="text-muted mb-3">Try broadening your search or browse by category and location.</p>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <a href="/omr-local-job-listings/" class="btn btn-outline-primary btn-sm">All jobs</a>
+            <a href="/it-jobs-omr-chennai.php" class="btn btn-outline-success btn-sm">IT jobs</a>
+            <a href="/fresher-jobs-omr-chennai.php" class="btn btn-outline-success btn-sm">Fresher jobs</a>
+            <a href="/jobs-in-perungudi-omr.php" class="btn btn-outline-secondary btn-sm">Perungudi</a>
+            <a href="/jobs-in-sholinganallur-omr.php" class="btn btn-outline-secondary btn-sm">Sholinganallur</a>
+            <a href="/jobs-in-navalur-omr.php" class="btn btn-outline-secondary btn-sm">Navalur</a>
+          </div>
+        </div>
+        <?php endif; ?>
+        <?php if (empty($jobs) && $total_jobs === 0): ?>
+        <div class="alert alert-light border text-center py-4 mb-4" role="region" aria-labelledby="no-jobs-heading">
+          <h2 id="no-jobs-heading" class="h5 mb-2">No jobs posted yet</h2>
+          <p class="text-muted mb-3">Check back soon. Employers on OMR post here regularly.</p>
+          <a href="/omr-local-job-listings/post-job-omr.php" class="btn btn-success">Post a job (employers)</a>
+        </div>
+        <?php endif; ?>
 
         <!-- Job Cards Grid -->
         <div id="jobs-grid">
@@ -642,7 +679,41 @@ include ROOT_PATH . '/components/analytics.php'; ?>
           <a href="employer-register-omr.php" class="jp-btn-outline-white">
             <i class="fas fa-building"></i> Employer Register
           </a>
+          <p class="mt-3 mb-0" style="font-size:0.95rem;opacity:0.95;">
+            <strong>Get more visibility:</strong> <a href="employer-pack-landing-omr.php" class="text-white text-decoration-underline">Employer Pack</a> — 10 featured jobs/month for OMR companies.
+          </p>
         </div>
+
+        <!-- FAQ -->
+        <section class="jp-content-block mt-4" aria-labelledby="faq-heading">
+          <h2 id="faq-heading" class="h4 mb-3"><i class="fas fa-question-circle me-2"></i> Frequently asked questions</h2>
+          <div class="accordion" id="jobFaqAccordion">
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">How do I apply for jobs?</button>
+              </h3>
+              <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#jobFaqAccordion">
+                <div class="accordion-body">Click &quot;Apply Now&quot; on any job to open the application form. Submit your name, email, phone, resume and optional cover letter. Applications go directly to the employer. Applying is free.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">Is it free to use?</button>
+              </h3>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#jobFaqAccordion">
+                <div class="accordion-body">Yes. Job seekers can browse and apply for free. Employers can post one free job; the Employer Pack offers 10 featured jobs per month for companies that need more visibility.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">Where are the offices located?</button>
+              </h3>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#jobFaqAccordion">
+                <div class="accordion-body">All jobs listed here are in or around Old Mahabalipuram Road (OMR), Chennai — the IT corridor. Locations include Perungudi, Sholinganallur, Navalur, Thoraipakkam, Kelambakkam and nearby areas. Use the location filter to narrow results.</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
       </section><!-- /main content -->
     </div><!-- /.jp-layout -->

@@ -3,7 +3,7 @@
  * Generate XML Sitemap for Coworking Spaces
  * Run this script via cron or manual execution
  */
-
+define('SITEMAP_REQUEST', true);
 require_once __DIR__ . '/../core/omr-connect.php';
 global $conn;
 

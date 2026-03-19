@@ -1,6 +1,9 @@
 <?php
 // Events Listing - MyOMR
 require_once __DIR__ . '/includes/error-reporting.php';
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/component-includes.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
 include __DIR__ . '/includes/dev-diagnostics.php';
@@ -96,6 +99,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 
 <main id="main-content" class="py-5">
   <div class="container">
+    <?php omr_ad_slot('events-index-top', '728x90'); ?>
     <!-- SEO intro block -->
     <div class="events-intro mb-4 p-4 rounded bg-light">
       <p class="mb-2"><strong>Welcome to Events in OMR</strong> — your one-stop directory for community events, workshops, meetups, concerts, and happenings across Old Mahabalipuram Road. Whether you&rsquo;re looking for <a href="index.php?is_free=1">free events in OMR</a>, <a href="today.php">events today</a>, or <a href="weekend.php">weekend events</a>, find what&rsquo;s happening near Sholinganallur, Perungudi, Navalur, Thoraipakkam & beyond.</p>
@@ -116,6 +120,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
     </div>
     <?php endif; ?>
 
+    <?php omr_ad_slot('events-index-mid', '336x280'); ?>
     <!-- Prominent quick links -->
     <div class="events-quick-links mb-4 d-flex flex-wrap gap-2 align-items-center">
       <span class="me-2 fw-semibold">Browse:</span>

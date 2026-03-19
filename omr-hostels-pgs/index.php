@@ -146,12 +146,14 @@ $breadcrumbs = [
 
 <main id="main-content">
     <?php include HOSTELS_PGS_PATH . '/components/hero-hostels.php'; ?>
+    <div class="container py-3"><?php omr_ad_slot('hostels-index-top', '728x90'); ?></div>
     <?php include HOSTELS_PGS_PATH . '/components/filters-bar.php'; ?>
 
     <section class="property-listings-section py-5">
         <div class="container">
             <?php include HOSTELS_PGS_PATH . '/components/property-cards.php'; ?>
         </div>
+        <?php omr_ad_slot('hostels-index-mid', '336x280'); ?>
     </section>
 
     <?php include HOSTELS_PGS_PATH . '/components/cta-owner.php'; ?>

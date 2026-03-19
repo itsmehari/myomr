@@ -278,6 +278,8 @@ omr_nav('main');
         </div>
     </section>
 
+    <div class="container py-2"><?php if (function_exists('omr_ad_slot')) { omr_ad_slot('listing-top', '728x90'); } ?></div>
+
     <?php if (isset($location_description) || isset($content_section)): ?>
     <!-- Content Section -->
     <section class="py-5">

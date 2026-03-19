@@ -1,6 +1,7 @@
 /**
- * Ad banner templates — standard Google Ads sizes (728x90, 336x280, 300x250).
+ * Ad banner templates — standard IAB sizes (728x90, 336x280, 300x250, 320x50 mobile).
  * High-quality designs for resumedoctor.in, mycovai.in, colourchemist.co.in
+ * Touch-friendly; reserves space to avoid CLS.
  */
 
 /* --- Base ad slot wrapper --- */
@@ -25,6 +26,7 @@
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 50px; /* reserve space, reduce CLS */
 }
 
 .omr-ad-banner:hover {
@@ -54,6 +56,25 @@
     width: 300px;
     height: 250px;
   }
+}
+
+/* --- 320x50 mobile leaderboard (touch-friendly, min 44px tap area) --- */
+.omr-ad-banner--320x50 {
+  width: 320px;
+  max-width: 100%;
+  height: 50px;
+  min-height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+}
+
+.omr-ad-banner--320x50 .omr-ad-headline {
+  font-size: clamp(0.75rem, 2.5vw, 0.9rem);
 }
 
 /* ========== ResumeDoctor — Professional, navy/teal, trust --- */
@@ -115,6 +136,22 @@
   font-size: 0.85rem;
 }
 
+.omr-ad-banner--resumedoctor.omr-ad-banner--320x50 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+}
+
+.omr-ad-banner--resumedoctor.omr-ad-banner--320x50 .omr-ad-icon {
+  font-size: 1.25rem;
+}
+
+.omr-ad-banner--resumedoctor.omr-ad-banner--320x50 .omr-ad-headline {
+  font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+}
+
 /* ========== MyCovAI — Modern, tech-forward, gradient --- */
 .omr-ad-banner--mycovai {
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
@@ -171,6 +208,22 @@
 .omr-ad-banner--mycovai .omr-ad-tagline {
   font-size: 0.8rem;
   opacity: 0.9;
+}
+
+.omr-ad-banner--mycovai.omr-ad-banner--320x50 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+}
+
+.omr-ad-banner--mycovai.omr-ad-banner--320x50 .omr-ad-icon {
+  font-size: 1.25rem;
+}
+
+.omr-ad-banner--mycovai.omr-ad-banner--320x50 .omr-ad-headline {
+  font-size: clamp(0.75rem, 2.5vw, 0.9rem);
 }
 
 /* ========== ColourChemist — Industrial, precision --- */
@@ -235,4 +288,20 @@
 .omr-ad-banner--colourchemist .omr-ad-tagline {
   font-size: 0.8rem;
   opacity: 0.9;
+}
+
+.omr-ad-banner--colourchemist.omr-ad-banner--320x50 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+}
+
+.omr-ad-banner--colourchemist.omr-ad-banner--320x50 .omr-ad-icon {
+  font-size: 1.25rem;
+}
+
+.omr-ad-banner--colourchemist.omr-ad-banner--320x50 .omr-ad-headline {
+  font-size: clamp(0.75rem, 2.5vw, 0.9rem);
 }

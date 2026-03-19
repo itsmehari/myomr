@@ -2,6 +2,9 @@
 require_once __DIR__ . '/../core/site-navigation.php';
 $hubLinks = myomr_get_primary_hub_links();
 $rootUrl = '/';
+if (function_exists('omr_flash_message')) {
+    omr_flash_message();
+}
 ?>
 <!--footer section begins -->
 <footer class="footer-section" role="contentinfo">
@@ -86,7 +89,7 @@ $rootUrl = '/';
                     </ul>
                 </div>
             </nav>
-            <div class="footer-subscribe">
+            <div class="footer-subscribe" id="footer-subscribe">
                 <h4 class="footer-subscribe__title">Stay updated</h4>
                 <p class="footer-subscribe__desc">Get OMR news, events & job alerts in your inbox.</p>
                 <form class="footer-subscribe__form" action="#" method="post">
@@ -109,6 +112,11 @@ $rootUrl = '/';
     </div>
 </footer>
     <!--footer section ends -->
+<?php
+if (file_exists(__DIR__ . '/modal-cta.php')) {
+    require_once __DIR__ . '/modal-cta.php';
+}
+?>
 <script>
 /* MyOMR GA4 — CTA click tracker (phone, WhatsApp, directions) */
 (function () {

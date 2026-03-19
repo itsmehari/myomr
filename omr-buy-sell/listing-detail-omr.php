@@ -160,6 +160,8 @@ echo json_encode($breadcrumb, JSON_UNESCAPED_SLASHES);
 
       <div class="mb-4"><?= nl2br(htmlspecialchars($listing['description'] ?? '')) ?></div>
 
+      <?php omr_ad_slot('buy-sell-detail-mid', '336x280'); ?>
+
       <?php if (!empty($related)): ?>
       <h2 class="h5 mb-3">Similar Listings</h2>
       <div class="row g-3">

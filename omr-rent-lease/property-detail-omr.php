@@ -63,6 +63,7 @@ $wa_href = "https://wa.me/" . preg_replace('/\D/', '', $property['contact_phone'
       <p class="h4 text-success mb-3">₹<?= number_format($property['monthly_rent']) ?>/month</p>
       <?php endif; ?>
       <div class="mb-4"><?= nl2br(htmlspecialchars($property['property_details'] ?? '')) ?></div>
+      <?php omr_ad_slot('rent-lease-detail-mid', '336x280'); ?>
       <?php if (!empty($property['amenities'])): ?>
       <h3 class="h6">Amenities</h3>
       <p><?= nl2br(htmlspecialchars($property['amenities'])) ?></p>

@@ -44,6 +44,19 @@ if (!function_exists('omr_ad_slot')) {
 }
 
 /**
+ * Output site-wide flash messages (site_flash_success, site_flash_error, site_flash_info).
+ * Call once per page, e.g. at top of main or include from footer.
+ */
+if (!function_exists('omr_flash_message')) {
+    function omr_flash_message() {
+        $base = defined('ROOT_PATH') ? ROOT_PATH : dirname(__DIR__);
+        if (file_exists($base . '/components/flash-message.php')) {
+            require_once $base . '/components/flash-message.php';
+        }
+    }
+}
+
+/**
  * Output footer. Skip if $page_footer === false (set before call).
  */
 if (!function_exists('omr_footer')) {

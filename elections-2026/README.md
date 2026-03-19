@@ -23,7 +23,7 @@ Tables live in this module. You can either run SQL by hand or use the migration 
 
 **Option A – From repo (when DB is reachable):**  
 From repo root: `php elections-2026/dev-tools/run-election-2026-migration.php`  
-This runs both `create-election-2026-tables.sql` and `seed-election-2026.sql` using `core/omr-connect.php`. If your DB is remote, run this on the server or a machine that can connect to the DB.
+For **remote DB** (cPanel), set `DB_HOST=myomr.in` (or your MySQL host) and run the script. See **[dev-tools/README-REMOTE-DB.md](dev-tools/README-REMOTE-DB.md)** for how the connection works, prerequisites (PHP, mysqli, outbound port 3306, cPanel Remote MySQL), and why it may fail on another laptop (different IP, blocked port, etc.).
 
 **Option B – phpMyAdmin:**  
 1. Run **`elections-2026/dev-tools/create-election-2026-tables.sql`** to create:

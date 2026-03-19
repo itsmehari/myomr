@@ -1,7 +1,10 @@
-﻿<?php
+<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/component-includes.php';
 ?>
 <?php include '../weblog/log.php'; ?>
 <!DOCTYPE html>
@@ -101,6 +104,7 @@ body { font-family: 'Poppins', sans-serif; }
   <p class="text-center mb-4">
     Want a quick list? Visit the <a href="/omr-listings/it-parks-in-omr.php">IT Parks Directory</a>.
   </p>
+  <?php omr_ad_slot('discover-top', '728x90'); ?>
 
   <h2 class="section-title mt-4">Why IT Parks Matter</h2>
   <ul>

@@ -2,6 +2,7 @@
 /**
  * OMR Buy-Sell — Sitemap Generator
  */
+define('SITEMAP_REQUEST', true);
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/../core/omr-localities-buy-sell.php';
 require_once __DIR__ . '/includes/listing-functions.php';

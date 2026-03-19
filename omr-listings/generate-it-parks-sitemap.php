@@ -1,4 +1,5 @@
 <?php
+define('SITEMAP_REQUEST', true);
 require_once __DIR__ . '/../core/omr-connect.php';
 
 header('Content-Type: application/xml; charset=UTF-8');

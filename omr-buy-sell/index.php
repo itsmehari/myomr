@@ -121,6 +121,8 @@ $page_nav = 'main';
   </div>
 </section>
 
+<div class="container py-3"><?php omr_ad_slot('buy-sell-index-top', '728x90'); ?></div>
+
 <section class="py-4">
   <div class="container">
     <div class="d-flex flex-wrap gap-2 mb-3">

@@ -3,7 +3,7 @@
  * Generate XML Sitemap for Hostels & PGs
  * Run this script via cron or manual execution
  */
-
+define('SITEMAP_REQUEST', true);
 require_once __DIR__ . '/../core/omr-connect.php';
 global $conn;
 

@@ -53,6 +53,11 @@ $breadcrumbs = [
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    <div class="mb-4 p-3 bg-light rounded small">
+                        <strong>Share this guide:</strong>
+                        <a href="https://wa.me/?text=<?php echo rawurlencode('Velachery AC 26 – Election 2026: ' . $canonical_url); ?>" target="_blank" rel="noopener noreferrer" class="me-2">WhatsApp</a>
+                        <a href="https://twitter.com/intent/tweet?text=<?php echo rawurlencode('Velachery AC 26 – Election 2026 on MyOMR ' . $canonical_url); ?>" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+                    </div>
                     <h2 class="h5 mb-3">Areas in this constituency</h2>
                     <p><?php echo htmlspecialchars(implode(', ', $ac['areas'])); ?>.</p>
 

@@ -76,6 +76,13 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 - Added local MCP server script for Search Console operations at:
   - `dev-tools/mcp/search_console_mcp.py`
 
+### Remote database connection (migrations)
+
+- **From local to remote DB:** PHP’s mysqli can connect from your machine to the cPanel MySQL server. Set `DB_HOST` to the server hostname (e.g. `myomr.in`) and run migration scripts from repo root; credentials come from `core/omr-connect.php` or env vars (`DB_USER`, `DB_PASS`, `DB_NAME`).
+- **Server:** cPanel → **Remote MySQL®** must list the **public IP** of each machine that will connect (or `%` for any host). Port 3306 must be open for those IPs.
+- **Local:** PHP CLI, mysqli extension, and outbound port 3306 allowed. If connection works on one laptop but not another, the other machine’s **public IP** must be added in Remote MySQL; that network may also block outbound 3306.
+- **Docs:** Full prerequisites, troubleshooting, and commands: **`README-REMOTE-DATABASE.md`** (repo root). Module-specific: `elections-2026/dev-tools/README-REMOTE-DB.md`.
+
 ### Analytics
 
 - **Single include:** All analytics run from `components/analytics.php` (included in `<head>`).

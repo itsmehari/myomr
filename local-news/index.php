@@ -4,7 +4,10 @@
  * Paginated news listing (9 per page) with category filter + keyword search.
  */
 
-require_once '../core/omr-connect.php';
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/component-includes.php';
+require_once ROOT_PATH . '/core/omr-connect.php';
 
 $per_page   = 9;
 $cur_page   = max(1, (int)($_GET['page']     ?? 1));
@@ -299,6 +302,10 @@ $sub_error    = isset($_GET['subscribe_error']);
     <?php endforeach; ?>
   </div>
 </section>
+
+<div class="container py-3">
+<?php omr_ad_slot('listing-top', '728x90'); ?>
+</div>
 
 <main class="py-5">
   <div class="container">
