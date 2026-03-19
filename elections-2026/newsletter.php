@@ -10,6 +10,11 @@ $page_description = 'Subscribe for OMR election 2026 updates: key dates, candida
 $page_keywords = 'election 2026 subscribe, OMR election updates';
 $canonical_url = 'https://myomr.in/elections-2026/newsletter.php';
 $og_type = 'website';
+$og_title = $page_title;
+$og_description = $page_description;
+$og_url = $canonical_url;
+$twitter_title = $page_title;
+$twitter_description = $page_description;
 $breadcrumbs = [
     ['https://myomr.in/', 'Home'],
     ['https://myomr.in/elections-2026/', 'Elections 2026'],

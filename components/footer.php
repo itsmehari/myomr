@@ -39,7 +39,7 @@ if (function_exists('omr_flash_message')) {
                 <a href="<?php echo htmlspecialchars($rootUrl); ?>" class="footer-brand__logo">
                     <img src="<?php echo htmlspecialchars($rootUrl); ?>My-OMR-Idhu-Namma-OMR-Logo.jpg" alt="MyOMR - OMR Community" width="120" height="auto" loading="lazy">
                 </a>
-                <p class="footer-brand__tagline">Your local news portal and community hub for OMR — SRP Tools, Kandhanchavadi, Mettukuppam, Dollar Stop, IT corridor, Tidel Park, Madhya Kailash, Thazhambur & beyond.</p>
+                <p class="footer-brand__tagline">Chennai's IT corridor – jobs first. Your local news portal and community hub for OMR — SRP Tools, Kandhanchavadi, Mettukuppam, Dollar Stop, IT corridor, Tidel Park, Madhya Kailash, Thazhambur & beyond.</p>
                 <div class="footer-social">
                     <span class="footer-social__label">Follow us</span>
                     <div class="footer-social__links">
@@ -60,7 +60,6 @@ if (function_exists('omr_flash_message')) {
                         <?php foreach ($hubLinks as $hub): ?>
                             <li><a href="<?php echo htmlspecialchars($hub['path']); ?>"><?php echo htmlspecialchars($hub['label']); ?></a></li>
                         <?php endforeach; ?>
-                        <li><a href="/elections-2026/">Elections 2026</a></li>
                         <li><a href="/omr-rent-lease/">Rent & Lease</a></li>
                         <li><a href="/omr-buy-sell/guidelines.php">Buy & Sell Guidelines</a></li>
                     </ul>
@@ -79,6 +78,7 @@ if (function_exists('omr_flash_message')) {
                 <div class="footer-nav__col">
                     <h4 class="footer-nav__title">Jobs by Industry</h4>
                     <ul>
+                        <li><a href="/omr-local-job-listings/companies-hiring-omr.php">Companies hiring on OMR</a></li>
                         <li><a href="/it-jobs-omr-chennai.php">IT Jobs in OMR</a></li>
                         <li><a href="/teaching-jobs-omr-chennai.php">Teaching Jobs</a></li>
                         <li><a href="/healthcare-jobs-omr-chennai.php">Healthcare Jobs</a></li>

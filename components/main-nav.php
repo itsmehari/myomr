@@ -548,6 +548,8 @@ function is_active($link, $current_uri) {
             <i class="fas fa-compass"></i>
           <?php elseif ($hub['label'] === 'Buy & Sell'): ?>
             <i class="fas fa-shopping-bag"></i>
+          <?php elseif ($hub['label'] === 'Elections 2026'): ?>
+            <i class="fas fa-vote-yea"></i>
           <?php endif; ?>
           <span><?php echo htmlspecialchars($hub['label']); ?></span>
         </a>

@@ -92,9 +92,11 @@ if (!function_exists('omr_ad_slot')) {
             case 'resumedoctor':
                 return '<i class="fas fa-file-alt" aria-hidden="true"></i>';
             case 'mycovai':
-                return '<i class="fas fa-microchip" aria-hidden="true"></i>';
+                return '<i class="fas fa-map-marker-alt" aria-hidden="true"></i>';
             case 'colourchemist':
                 return '<i class="fas fa-flask" aria-hidden="true"></i>';
+            case 'bseri':
+                return '<i class="fas fa-certificate" aria-hidden="true"></i>';
             default:
                 return '<i class="fas fa-bullhorn" aria-hidden="true"></i>';
         }

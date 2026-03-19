@@ -13,7 +13,7 @@ if (!defined('ROOT_PATH')) {
 $jobs_base = '/omr-local-job-listings';
 ?>
 <!-- Post a job CTA modal -->
-<div class="modal fade" id="omrCtaPostJob" tabindex="-1" aria-labelledby="omrCtaPostJobLabel" aria-hidden="true">
+<div class="modal fade" id="omrCtaPostJob" tabindex="-1" aria-labelledby="omrCtaPostJobLabel" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -38,7 +38,7 @@ $jobs_base = '/omr-local-job-listings';
 </div>
 
 <!-- Employer Pack CTA modal -->
-<div class="modal fade" id="omrCtaEmployerPack" tabindex="-1" aria-labelledby="omrCtaEmployerPackLabel" aria-hidden="true">
+<div class="modal fade" id="omrCtaEmployerPack" tabindex="-1" aria-labelledby="omrCtaEmployerPackLabel" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -57,8 +57,8 @@ $jobs_base = '/omr-local-job-listings';
     </div>
 </div>
 
-<!-- Subscribe / Job alerts CTA modal -->
-<div class="modal fade" id="omrCtaSubscribe" tabindex="-1" aria-labelledby="omrCtaSubscribeLabel" aria-hidden="true">
+<!-- Subscribe / Job alerts CTA modal. Backdrop click and Escape close. -->
+<div class="modal fade" id="omrCtaSubscribe" tabindex="-1" aria-labelledby="omrCtaSubscribeLabel" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -79,6 +79,20 @@ $jobs_base = '/omr-local-job-listings';
 
 <script>
 (function() {
+    function closeCtaModal(modalEl) {
+        if (!modalEl) return;
+        if (typeof bootstrap !== 'undefined') {
+            var inst = bootstrap.Modal.getInstance(modalEl);
+            if (inst) inst.hide(); else new bootstrap.Modal(modalEl).hide();
+        } else {
+            modalEl.classList.remove('show');
+            modalEl.setAttribute('aria-hidden', 'true');
+            modalEl.style.display = 'none';
+            document.body.classList.remove('modal-open');
+            var backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) backdrop.remove();
+        }
+    }
     document.addEventListener('DOMContentLoaded', function() {
         var triggers = document.querySelectorAll('[data-omr-cta]');
         triggers.forEach(function(el) {
@@ -93,6 +107,13 @@ $jobs_base = '/omr-local-job-listings';
                         m.show();
                     }
                 }
+            });
+        });
+        ['omrCtaPostJob', 'omrCtaEmployerPack', 'omrCtaSubscribe'].forEach(function(id) {
+            var modal = document.getElementById(id);
+            if (!modal) return;
+            modal.querySelectorAll('[data-bs-dismiss="modal"], .btn-close').forEach(function(btn) {
+                btn.addEventListener('click', function() { closeCtaModal(modal); });
             });
         });
     });

@@ -23,3 +23,6 @@ if (!defined('ELECTIONS_2026_PATH')) {
 if (!defined('ELECTIONS_2026_BASE_URL')) {
     define('ELECTIONS_2026_BASE_URL', '/elections-2026');
 }
+
+// So head-includes/css-includes load Bootstrap 5 CSS (modal, cards, layout).
+$omr_css_bootstrap5 = true;

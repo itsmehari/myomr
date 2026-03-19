@@ -12,6 +12,11 @@ $page_description = 'Assembly election 2026 results for Sholinganallur, Velacher
 $page_keywords = 'election 2026 results, OMR results, Sholinganallur Velachery Thiruporur winner';
 $canonical_url = 'https://myomr.in/elections-2026/results-2026.php';
 $og_type = 'website';
+$og_title = $page_title;
+$og_description = $page_description;
+$og_url = $canonical_url;
+$twitter_title = $page_title;
+$twitter_description = $page_description;
 $breadcrumbs = [
     ['https://myomr.in/', 'Home'],
     ['https://myomr.in/elections-2026/', 'Elections 2026'],

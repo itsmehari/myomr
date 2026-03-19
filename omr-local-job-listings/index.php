@@ -21,16 +21,23 @@ global $conn;
 
 /* ── Sanitize & collect filters ─────────────────────────────── */
 $filters = [];
-$allowed  = ['search','category','location','job_type','experience_level','is_remote','salary_min','salary_max','work_segment'];
+$allowed  = ['search','category','location','job_type','experience_level','is_remote','salary_min','salary_max','work_segment','employer_id'];
 foreach ($allowed as $k) {
     if (isset($_GET[$k]) && $_GET[$k] !== '') {
-        $filters[$k] = sanitizeInput($_GET[$k]);
+        $filters[$k] = $k === 'employer_id' ? (int)$_GET[$k] : sanitizeInput($_GET[$k]);
     }
 }
 
 // Walk-in shortcut
 if (!empty($_GET['walk_in'])) {
     $filters['job_type'] = 'walk-in';
+}
+
+$employer_filter_name = null;
+if (!empty($filters['employer_id']) && isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
+    $eid = (int)$filters['employer_id'];
+    $er = $conn->query("SELECT company_name FROM employers WHERE id = $eid LIMIT 1");
+    if ($er && $row = $er->fetch_assoc()) $employer_filter_name = $row['company_name'];
 }
 
 /* ── Pagination & data (with graceful fallback on failure) ───── */
@@ -80,7 +87,7 @@ try {
 
 /* ── SEO ─────────────────────────────────────────────────────── */
 $page_title = "Jobs in OMR Chennai – Find Local Opportunities | MyOMR";
-$page_desc  = "Find " . number_format($total_jobs) . "+ jobs in OMR Chennai – IT, Teaching, Healthcare, BPO, Hospitality & more. Apply directly. Updated daily.";
+$page_desc  = "Chennai's IT corridor – jobs first. Find " . number_format($total_jobs) . "+ jobs in OMR – IT, Teaching, Healthcare, BPO, Hospitality & more. Apply directly. Updated daily.";
 $canonical  = "https://myomr.in/omr-local-job-listings/";
 
 $filter_qs  = http_build_query(array_filter($filters));
@@ -388,6 +395,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
               case 'is_remote':        $label = 'Remote'; break;
               case 'salary_min':       $label = '₹' . number_format((int)$val) . '+ min'; break;
               case 'salary_max':       $label = '₹' . number_format((int)$val) . ' max'; break;
+              case 'employer_id':      $label = 'Company: ' . ($employer_filter_name ?? '#' . $val); break;
               default:                 $label = $val;
             }
           ?>
@@ -534,6 +542,12 @@ include ROOT_PATH . '/components/analytics.php'; ?>
               <?php if ($featured): ?>
               <span class="jp-featured-badge"><i class="fas fa-star me-1"></i>Featured</span>
               <?php endif; ?>
+              <?php if ($remote): ?>
+              <span class="badge bg-info text-white ms-1" style="font-size:0.7rem;">Remote</span>
+              <?php endif; ?>
+              <?php if (strtolower((string)$exp) === 'fresher'): ?>
+              <span class="badge bg-success text-white ms-1" style="font-size:0.7rem;">Fresher</span>
+              <?php endif; ?>
 
               <!-- Header: logo + title + company -->
               <div class="jp-card__header">
@@ -616,6 +630,11 @@ include ROOT_PATH . '/components/analytics.php'; ?>
                     <i class="fab fa-whatsapp"></i> WhatsApp
                   </a>
                   <?php endif; ?>
+                  <!-- Quick apply (opens detail page with apply modal) -->
+                  <?php $detailPath = getJobDetailPath($jid, $job['title'] ?? null); $quickApplyHref = '/omr-local-job-listings/' . ltrim($detailPath, '/') . (strpos($detailPath, '?') !== false ? '&' : '?') . 'open=apply'; ?>
+                  <a href="<?= htmlspecialchars($quickApplyHref, ENT_QUOTES, 'UTF-8') ?>" class="jp-btn-apply btn btn-success btn-sm">
+                    Quick apply
+                  </a>
                   <!-- View details -->
                   <a href="<?= getJobDetailPath($jid, $job['title'] ?? null) ?>" class="jp-btn-view">
                     View <i class="fas fa-arrow-right"></i>

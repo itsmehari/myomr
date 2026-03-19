@@ -349,6 +349,12 @@ function _buildJobWhereClause(array $filters): array
         $types       .= 'sss';
     }
 
+    if (!empty($filters['employer_id']) && (int)$filters['employer_id'] > 0) {
+        $conditions[] = 'j.employer_id = ?';
+        $params[]     = (int)$filters['employer_id'];
+        $types       .= 'i';
+    }
+
     // Featured-only spotlight filter
     if (!empty($filters['is_featured'])) {
         $conditions[] = 'j.featured = 1';

@@ -5,6 +5,7 @@ $omrTopicHubs = [
     ['label' => 'Events in OMR Road', 'url' => '/omr-local-events/'],
     ['label' => 'Explore Places in OMR Road', 'url' => '/omr-listings/index.php'],
     ['label' => 'Buy & Sell in OMR Road', 'url' => '/omr-buy-sell/'],
+    ['label' => 'Elections 2026', 'url' => '/elections-2026/'],
     ['label' => 'News Highlights from OMR Road', 'url' => '/local-news/news-highlights-from-omr-road.php'],
 ];
 ?>

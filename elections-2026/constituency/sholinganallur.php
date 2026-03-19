@@ -14,6 +14,11 @@ $page_description = 'Sholinganallur AC 27: areas, current MLA S. Aravind Ramesh 
 $page_keywords = 'Sholinganallur election 2026, AC 27, OMR constituency, Sholinganallur MLA, Chennai South';
 $canonical_url = 'https://myomr.in/elections-2026/constituency/sholinganallur.php';
 $og_type = 'website';
+$og_title = $page_title;
+$og_description = $page_description;
+$og_url = $canonical_url;
+$twitter_title = $page_title;
+$twitter_description = $page_description;
 $breadcrumbs = [
     ['https://myomr.in/', 'Home'],
     ['https://myomr.in/elections-2026/', 'Elections 2026'],
@@ -27,7 +32,16 @@ $breadcrumbs = [
     <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link rel="stylesheet" href="/assets/css/footer.css">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Place","name":"Sholinganallur Assembly Constituency","description":"Assembly constituency AC 27 in Chennai South, covering the OMR IT corridor: Sholinganallur, Thoraipakkam, Perumbakkam, Navalur, Karapakkam, Kandanchavadi, Okkiyam Thuraipakkam.","containedInPlace":{"@type":"Place","name":"Chennai South"}}
+    <?php
+    echo json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'Place',
+        'name' => 'Sholinganallur Assembly Constituency',
+        'description' => 'Assembly constituency AC 27 in Chennai South, covering the OMR IT corridor: Sholinganallur, Thoraipakkam, Perumbakkam, Navalur, Karapakkam, Kandanchavadi, Okkiyam Thuraipakkam.',
+        'url' => $canonical_url,
+        'containedInPlace' => ['@type' => 'Place', 'name' => 'Chennai South'],
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    ?>
     </script>
 </head>
 <body class="modern-page">

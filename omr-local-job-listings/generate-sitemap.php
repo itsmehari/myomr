@@ -21,6 +21,7 @@ $pages = [
     ['loc' => '/omr-local-job-listings/', 'priority' => '1.0', 'changefreq' => 'daily'],
     ['loc' => '/omr-local-job-listings/post-job-omr.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
     ['loc' => '/omr-local-job-listings/employer-register-omr.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
+    ['loc' => '/omr-local-job-listings/companies-hiring-omr.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
     // Primary landing page
     ['loc' => '/jobs-in-omr-chennai.php', 'priority' => '1.0', 'changefreq' => 'daily'],
     // Location-specific landing pages

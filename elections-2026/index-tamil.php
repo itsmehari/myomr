@@ -11,6 +11,11 @@ $page_description = 'தமிழ்நாடு சட்டமன்ற தே
 $page_keywords = 'தேர்தல் 2026 ஓஎம்ஆர், தமிழ்நாடு தேர்தல் 2026, சென்னை தெற்கு, சோழிங்கநல்லூர், வேளச்சேரி, திருப்போரூர்';
 $canonical_url = 'https://myomr.in/elections-2026/index-tamil.php';
 $og_type = 'website';
+$og_title = $page_title;
+$og_description = $page_description;
+$og_url = $canonical_url;
+$twitter_title = $page_title;
+$twitter_description = $page_description;
 $english_hub_url = 'https://myomr.in/elections-2026/';
 $breadcrumbs = [
     ['https://myomr.in/', 'முகப்பு'],

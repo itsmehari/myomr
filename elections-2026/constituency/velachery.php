@@ -14,6 +14,11 @@ $page_description = 'Velachery AC 26: Perungudi, Taramani, Adambakkam. Current M
 $page_keywords = 'Velachery election 2026, AC 26, Perungudi constituency, Velachery MLA, Chennai South';
 $canonical_url = 'https://myomr.in/elections-2026/constituency/velachery.php';
 $og_type = 'website';
+$og_title = $page_title;
+$og_description = $page_description;
+$og_url = $canonical_url;
+$twitter_title = $page_title;
+$twitter_description = $page_description;
 $breadcrumbs = [
     ['https://myomr.in/', 'Home'],
     ['https://myomr.in/elections-2026/', 'Elections 2026'],
@@ -27,7 +32,16 @@ $breadcrumbs = [
     <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link rel="stylesheet" href="/assets/css/footer.css">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Place","name":"Velachery Assembly Constituency","description":"Assembly constituency AC 26 in Chennai South, covering Velachery, Perungudi, Taramani, Adambakkam.","containedInPlace":{"@type":"Place","name":"Chennai South"}}
+    <?php
+    echo json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'Place',
+        'name' => 'Velachery Assembly Constituency',
+        'description' => 'Assembly constituency AC 26 in Chennai South, covering Velachery, Perungudi, Taramani, Adambakkam.',
+        'url' => $canonical_url,
+        'containedInPlace' => ['@type' => 'Place', 'name' => 'Chennai South'],
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    ?>
     </script>
 </head>
 <body class="modern-page">

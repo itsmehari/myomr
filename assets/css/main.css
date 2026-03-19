@@ -32,6 +32,7 @@ ul {
 @import url("https://fonts.googleapis.com/css2?family=Factor+A:wght@400;700&family=Inter:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=League+Gothic&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+/* Legacy custom modal (e.g. news-highlights, citizens-charter). Scoped to .modal-overlay so Bootstrap modals are not styled. */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -47,22 +48,25 @@ ul {
   transition: opacity 0.3s, visibility 0.3s;
   z-index: 9999;
 }
-.modal {
+.modal-overlay .modal {
   display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  z-index: 1;
   background: #ffd700;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
   width: 500px;
-  height: 480px;
+  max-width: 90vw;
+  height: auto;
+  min-height: 200px;
+  max-height: 90vh;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
-.modal h2 {
+.modal-overlay .modal h2 {
   margin: 0 0 10px;
   font-size: 22px;
   padding-top: 20px;
@@ -70,27 +74,25 @@ ul {
   font-family: "Roboto", sans-serif !important;
   font-size: 32px;
 }
-.modal ul {
+.modal-overlay .modal ul {
   align: center;
   list-style: none;
   padding: 20px;
-  text-align: left;image.png
+  text-align: left;
   margin: 10px 0;
   background: none !important;
   width: 100%;
   display: block !important;
 }
-.modal ul li {
+.modal-overlay .modal ul li {
   margin-bottom: 8px;
   font-size: 16px;
   color: #333;
   font-family: "Inter", Arial, sans-serif;
-  font-size: 16px;
   width: 100%;
-  display: flex !important;
   display: block !important;
 }
-.modal button {
+.modal-overlay .modal button {
   background: #5a2d82;
   color: #fff;
   border: none;
@@ -100,12 +102,11 @@ ul {
   cursor: pointer;
   width: 100%;
   font-family: "Inter", Arial, sans-serif;
-  font-size: 16px;
 }
-.modal button:hover {
+.modal-overlay .modal button:hover {
   background: #48236b;
 }
-.close-btn {
+.modal-overlay .close-btn {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -350,7 +351,7 @@ ul {
   .news-grid {
     grid-template-columns: 1fr;
   }
-  .modal {
+  .modal-overlay .modal {
     width: 90%;
     height: auto;
     max-height: 80vh;

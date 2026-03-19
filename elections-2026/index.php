@@ -11,6 +11,11 @@ $page_description = 'Tamil Nadu Assembly election 2026: poll 23 April, counting 
 $page_keywords = 'elections 2026 OMR, Tamil Nadu election 2026, Chennai South, Sholinganallur election, Velachery MLA, Thiruporur constituency, OMR polling, MyOMR';
 $canonical_url = 'https://myomr.in/elections-2026/';
 $og_type = 'website';
+$og_title = $page_title;
+$og_description = $page_description;
+$og_url = $canonical_url;
+$twitter_title = $page_title;
+$twitter_description = $page_description;
 $tamil_hub_url = 'https://myomr.in/elections-2026/index-tamil.php';
 $breadcrumbs = [
     ['https://myomr.in/', 'Home'],
@@ -23,6 +28,46 @@ $breadcrumbs = [
     <?php require_once ROOT_PATH . '/components/meta.php'; ?>
     <link rel="alternate" hreflang="ta" href="<?php echo htmlspecialchars($tamil_hub_url); ?>">
     <meta property="og:locale:alternate" content="ta_IN">
+    <script type="application/ld+json">
+    <?php
+    $hub_schema = [
+        '@context' => 'https://schema.org',
+        '@graph' => [
+            [
+                '@type' => 'WebPage',
+                '@id' => $canonical_url . '#webpage',
+                'url' => $canonical_url,
+                'name' => $page_title,
+                'description' => $page_description,
+                'isPartOf' => ['@id' => 'https://myomr.in/#website'],
+                'primaryImageOfPage' => ['@type' => 'ImageObject', 'url' => 'https://myomr.in/My-OMR-Logo.png'],
+            ],
+            [
+                '@type' => 'Event',
+                'name' => 'Tamil Nadu Assembly Election 2026 – Poll',
+                'description' => 'Voting for all 234 assembly constituencies including Sholinganallur, Velachery, Thiruporur (OMR).',
+                'startDate' => '2026-04-23T07:00:00+05:30',
+                'endDate' => '2026-04-23T18:00:00+05:30',
+                'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+                'eventStatus' => 'https://schema.org/EventScheduled',
+                'location' => ['@type' => 'Place', 'name' => 'Tamil Nadu', 'address' => ['@type' => 'PostalAddress', 'addressRegion' => 'Tamil Nadu']],
+                'url' => $canonical_url,
+            ],
+            [
+                '@type' => 'Event',
+                'name' => 'Tamil Nadu Assembly Election 2026 – Counting',
+                'description' => 'Counting of votes and declaration of results for Tamil Nadu Assembly election 2026.',
+                'startDate' => '2026-05-04T08:00:00+05:30',
+                'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+                'eventStatus' => 'https://schema.org/EventScheduled',
+                'location' => ['@type' => 'Place', 'name' => 'Tamil Nadu'],
+                'url' => $canonical_url,
+            ],
+        ],
+    ];
+    echo json_encode($hub_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    ?>
+    </script>
     <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link rel="stylesheet" href="/assets/css/footer.css">
 </head>

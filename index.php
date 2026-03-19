@@ -17,7 +17,7 @@ $sub_error = isset($_GET['subscribe_error']);
 $page_nav = 'homepage';
 $omr_css_homepage = true;
 $page_title = 'MyOMR.in – OMR Road News & Community';
-$page_description = 'News, events, jobs, and community for Old Mahabalipuram Road (OMR), Chennai. Find businesses, hostels, coworking spaces, and local happenings.';
+$page_description = 'Chennai\'s IT corridor – jobs first. News, events, jobs, and community for Old Mahabalipuram Road (OMR). Find businesses, hostels, coworking spaces, and local happenings.';
 $canonical_url = 'https://myomr.in/';
 $og_type = 'website';
 $core_file = __DIR__ . '/core/omr-connect.php';
@@ -366,6 +366,7 @@ if (file_exists($core_file)) {
       <a href="/omr-coworking-spaces/"><i class="fas fa-building"></i> Coworking</a>
       <a href="/omr-rent-lease/"><i class="fas fa-house"></i> Rent & Lease</a>
       <a href="/omr-buy-sell/"><i class="fas fa-shopping-bag"></i> Buy & Sell</a>
+      <a href="/elections-2026/"><i class="fas fa-vote-yea"></i> Elections 2026</a>
     </div>
     <div class="hero-dots" role="tablist" aria-label="Hero slides">
       <button type="button" role="tab" aria-selected="true" aria-label="Slide 1" class="active" data-dot="0"></button>
@@ -445,6 +446,8 @@ if (file_exists($core_file)) {
 <?php endif; ?>
 
 <?php include 'components/homepage-buy-sell-section.php'; ?>
+
+<?php include 'components/homepage-elections-2026-section.php'; ?>
 
 <main id="main-content" class="homepage-main">
 <!-- Latest News (Livemint-style editorial layout) -->

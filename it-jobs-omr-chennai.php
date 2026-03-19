@@ -12,6 +12,7 @@ $category = 'it';
 $category_jobs = [];
 $category_job_count = 0;
 
+$salary_insights = [];
 if (isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
     $categoryQuery = "SELECT j.*, e.company_name 
                      FROM job_postings j
@@ -32,6 +33,10 @@ if (isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
     if ($countResult) {
         $row = $countResult->fetch_assoc();
         $category_job_count = (int)($row['total'] ?? 0);
+    }
+    $salaryRes = $conn->query("SELECT MIN(salary_min) AS smin, MAX(salary_max) AS smax FROM job_postings WHERE status = 'approved' AND (category = 'it' OR category LIKE '%it%') AND salary_min > 0 AND salary_max > 0");
+    if ($salaryRes && $row = $salaryRes->fetch_assoc() && $row['smin'] && $row['smax']) {
+        $salary_insights = ['min' => (int)$row['smin'], 'max' => (int)$row['smax']];
     }
 }
 

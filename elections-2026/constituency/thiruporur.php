@@ -14,6 +14,11 @@ $page_description = 'Thiruporur constituency: Kelambakkam, OMR corridor in Cheng
 $page_keywords = 'Thiruporur election 2026, Kelambakkam constituency, Thiruporur MLA, Chengalpattu OMR';
 $canonical_url = 'https://myomr.in/elections-2026/constituency/thiruporur.php';
 $og_type = 'website';
+$og_title = $page_title;
+$og_description = $page_description;
+$og_url = $canonical_url;
+$twitter_title = $page_title;
+$twitter_description = $page_description;
 $breadcrumbs = [
     ['https://myomr.in/', 'Home'],
     ['https://myomr.in/elections-2026/', 'Elections 2026'],
@@ -27,7 +32,16 @@ $breadcrumbs = [
     <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link rel="stylesheet" href="/assets/css/footer.css">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Place","name":"Thiruporur Assembly Constituency","description":"Assembly constituency in Chengalpattu district, part of the OMR corridor: Thiruporur, Kelambakkam.","containedInPlace":{"@type":"Place","name":"Chengalpattu"}}
+    <?php
+    echo json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'Place',
+        'name' => 'Thiruporur Assembly Constituency',
+        'description' => 'Assembly constituency in Chengalpattu district, part of the OMR corridor: Thiruporur, Kelambakkam.',
+        'url' => $canonical_url,
+        'containedInPlace' => ['@type' => 'Place', 'name' => 'Chengalpattu'],
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    ?>
     </script>
 </head>
 <body class="modern-page">

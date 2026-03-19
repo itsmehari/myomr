@@ -970,3 +970,175 @@ input[type="email"]:focus-visible {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* ========================================
+   Homepage Elections 2026 Section
+   Attention-grabbing, SEO-strong block
+======================================== */
+.elections-2026-homepage {
+  --el-bg: linear-gradient(160deg, #f0fdf4 0%, #dcfce7 40%, #ecfdf5 100%);
+  --el-border: #86efac;
+  --el-accent: var(--omr-green, #008552);
+  --el-accent-dark: var(--omr-deep-green, #14532d);
+  --el-text: var(--omr-text, #333);
+  --el-muted: var(--omr-text-muted, #6b7280);
+  background: var(--el-bg);
+  border-top: 3px solid var(--el-border);
+  border-bottom: 3px solid var(--el-border);
+  padding: var(--omr-section-padding-lg, 2.5rem) 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.elections-2026-homepage::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(34, 197, 94, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.elections-2026-homepage .el-inner {
+  max-width: var(--omr-max-width, 1280px);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.elections-2026-homepage .el-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body, "Poppins", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--el-accent-dark);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--el-border);
+  margin-bottom: 0.75rem;
+}
+
+.elections-2026-homepage .el-title {
+  font-family: var(--font-display, "Fraunces", serif);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: var(--el-accent-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.elections-2026-homepage .el-countdown {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--el-accent);
+  margin-bottom: 0.75rem;
+}
+
+.elections-2026-homepage .el-lead {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--el-text);
+  max-width: 56ch;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.elections-2026-homepage .el-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .elections-2026-homepage .el-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .elections-2026-homepage .el-actions {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.elections-2026-homepage .el-action-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--omr-white, #fff);
+  border: 1px solid var(--el-border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--el-accent-dark);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.elections-2026-homepage .el-action-card:hover {
+  border-color: var(--el-accent);
+  box-shadow: 0 4px 14px var(--omr-shadow-hover, rgba(20, 83, 45, 0.2));
+  transform: translateY(-2px);
+  color: var(--el-accent-dark);
+}
+
+.elections-2026-homepage .el-action-card i {
+  font-size: 1.25rem;
+  color: var(--el-accent);
+  flex-shrink: 0;
+}
+
+.elections-2026-homepage .el-cta-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.elections-2026-homepage .el-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.85rem 1.75rem;
+  background: var(--el-accent);
+  color: var(--omr-white) !important;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.elections-2026-homepage .el-cta-primary:hover {
+  background: var(--el-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--omr-shadow-hover);
+  color: var(--omr-white) !important;
+}
+
+.elections-2026-homepage .el-cta-secondary {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--el-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.elections-2026-homepage .el-cta-secondary:hover {
+  color: var(--el-accent-dark);
+  border-bottom-color: var(--el-accent-dark);
+}

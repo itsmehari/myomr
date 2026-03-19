@@ -280,6 +280,21 @@ omr_nav('main');
 
     <div class="container py-2"><?php if (function_exists('omr_ad_slot')) { omr_ad_slot('listing-top', '728x90'); } ?></div>
 
+    <?php if (!empty($salary_insights) && isset($salary_insights['min']) && isset($salary_insights['max'])): ?>
+    <section class="py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="p-3 rounded border" style="background:#f8fafc;">
+                        <h3 class="h6 mb-1">Salary range for IT roles on OMR</h3>
+                        <p class="mb-0 small text-muted">Based on recent listings: ₹<?php echo number_format((int)$salary_insights['min']); ?> – ₹<?php echo number_format((int)$salary_insights['max']); ?> per month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
     <?php if (isset($location_description) || isset($content_section)): ?>
     <!-- Content Section -->
     <section class="py-5">
@@ -396,6 +411,9 @@ omr_nav('main');
                             <i class="fas fa-briefcase me-2"></i> Post a Job (Free)
                         </a>
                     </div>
+                    <p class="mt-3 mb-0 opacity-90 small">
+                        <i class="fas fa-bell me-1"></i> Get job alerts when new jobs are posted — <a href="/omr-local-job-listings/" class="text-white text-decoration-underline">visit our job board</a> and sign up in the sidebar.
+                    </p>
                 </div>
             </div>
         </div>

@@ -13,7 +13,11 @@
 $omr_css_megamenu = isset($omr_css_megamenu) ? (bool) $omr_css_megamenu : true;
 $omr_css_homepage = isset($omr_css_homepage) ? (bool) $omr_css_homepage : false;
 $omr_css_core     = isset($omr_css_core) ? (bool) $omr_css_core : false;
+$omr_css_bootstrap5 = isset($omr_css_bootstrap5) ? (bool) $omr_css_bootstrap5 : false;
 ?>
+<?php if ($omr_css_bootstrap5): ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<?php endif; ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

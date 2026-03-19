@@ -14,8 +14,13 @@ One place for OMR and Chennai South: Tamil Nadu Assembly election 2026 – key d
 - **News:** `/elections-2026/news.php`
 - **Announcements:** `/elections-2026/announcements.php`
 - **Newsletter:** `/elections-2026/newsletter.php`
+- **Tamil hub:** `/elections-2026/index-tamil.php`
+- **Quiz:** `/elections-2026/quiz.php`
+- **Results 2026:** `/elections-2026/results-2026.php`
 - **Constituency pages:** `/elections-2026/constituency/sholinganallur.php`, `velachery.php`, `thiruporur.php`
 - **Sitemap:** `/elections-2026/sitemap.xml` (via `generate-sitemap.php`)
+
+**Plan and context for AI:** See `docs/ELECTIONS-2026-PLAN.md` (full plan) and `docs/ELECTIONS-2026-SUBPROJECT-RECORD.md` (what was done in the Phase 3 thread).
 
 ## Optional database tables
 
@@ -32,6 +37,8 @@ For **remote DB** (cPanel), set `DB_HOST=myomr.in` (or your MySQL host) and run 
 2. Run **`elections-2026/dev-tools/seed-election-2026.sql`** to load NTK candidates (OMR) and ECI/NTK announcements.
 
 Without these tables, candidates and announcements pages show static/fallback content. To refresh candidates after nominations, use ECI affidavit portal (affidavit.eci.gov.in) and party announcements.
+
+**Verify tables on live:** From repo root run: `DB_HOST=myomr.in php elections-2026/dev-tools/verify-election-tables-live.php` (PowerShell: `$env:DB_HOST='myomr.in'; php elections-2026/dev-tools/verify-election-tables-live.php`). The script reports whether both tables exist and their row counts.
 
 ## Newsletter
 

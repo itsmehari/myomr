@@ -229,3 +229,35 @@ When shipping feature + design + DB changes together on MyOMR:
 - [ ] Submit sitemap in Search Console
 - [ ] Request/re-notify indexing (if Indexing API is enabled)
 - [ ] Run live smoke checks (desktop + mobile + key CTAs)
+
+---
+
+## Remote database connection (March 2026)
+
+### What we did
+
+- Ran Elections 2026 DB migration (create tables + seed) from the local machine against the **remote** MySQL database on cPanel (myomr.in).
+- Migration script uses **environment variable `DB_HOST`**: when set, PHP connects to that host instead of `localhost`, so the same script works locally (no DB_HOST) or against remote (DB_HOST=myomr.in).
+- Documented prerequisites (local: PHP CLI, mysqli, outbound 3306; server: cPanel Remote MySQL, IP allowlist) and why connection can work on one laptop but fail on another (different public IP, blocked port, etc.).
+
+### Key decisions
+
+1. **Env-based remote host**  
+   Script reads `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME`. If `DB_HOST` is set, it builds the connection with those values; otherwise it uses `core/omr-connect.php`. Credentials default to omr-connect values so repo stays single-source; only host (and optionally port) is overridden for remote.
+
+2. **One README at repo root**  
+   Created `README-REMOTE-DATABASE.md` in the project root as the main reference for any remote DB use (migrations, scripts). Module-specific copy remains in `elections-2026/dev-tools/README-REMOTE-DB.md` for that module’s migration.
+
+3. **Why “other laptop” fails**  
+   Each network has its own **public IP**. cPanel Remote MySQL allows connections only from IPs you add. So the second laptop must have **its** public IP added in cPanel; also, that network must allow outbound TCP to port 3306 (many corporate/school Wi‑Fi block it).
+
+### Files involved
+
+- `README-REMOTE-DATABASE.md` (root) — how connection works, prerequisites, commands, checklist for failing laptop.
+- `elections-2026/dev-tools/run-election-2026-migration.php` — supports `DB_HOST` (and optional `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME`) for remote run.
+- `elections-2026/dev-tools/README-REMOTE-DB.md` — same content as root README, scoped to elections migration.
+- `elections-2026/README.md` — points to Option A (script with DB_HOST) and Option B (phpMyAdmin), and links to README-REMOTE-DB.
+
+### Takeaway
+
+For **running migrations or any PHP script against the remote DB from a dev machine**: set `DB_HOST` to the server hostname, ensure that machine’s **public IP** is in cPanel Remote MySQL, and that the network allows outbound 3306. Refer to `README-REMOTE-DATABASE.md` for full prerequisites and troubleshooting.

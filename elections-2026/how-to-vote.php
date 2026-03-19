@@ -10,6 +10,11 @@ $page_description = 'Voter checklist for Tamil Nadu election 2026: EPIC card, ID
 $page_keywords = 'how to vote 2026, EPIC card, voter ID, polling station OMR, election checklist';
 $canonical_url = 'https://myomr.in/elections-2026/how-to-vote.php';
 $og_type = 'website';
+$og_title = $page_title;
+$og_description = $page_description;
+$og_url = $canonical_url;
+$twitter_title = $page_title;
+$twitter_description = $page_description;
 $breadcrumbs = [
     ['https://myomr.in/', 'Home'],
     ['https://myomr.in/elections-2026/', 'Elections 2026'],
@@ -22,6 +27,26 @@ $breadcrumbs = [
     <?php require_once ROOT_PATH . '/components/meta.php'; ?>
     <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link rel="stylesheet" href="/assets/css/footer.css">
+    <script type="application/ld+json">
+    <?php
+    $howto_schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'HowTo',
+        'name' => 'How to vote in Tamil Nadu Assembly election 2026',
+        'description' => 'Voter checklist: EPIC/ID, polling station, poll day 23 April 2026, dos and don\'ts for OMR voters.',
+        'totalTime' => 'PT1H',
+        'step' => [
+            ['@type' => 'HowToStep', 'name' => 'Check electoral roll', 'text' => 'Check your name in the electoral roll. Find your BLO (Sholinganallur AC) for roll and polling station.'],
+            ['@type' => 'HowToStep', 'name' => 'Carry valid photo ID', 'text' => 'Carry EPIC (Voter ID) or any ECI-approved photo ID: passport, driving licence, PAN. Original document required.'],
+            ['@type' => 'HowToStep', 'name' => 'Know your polling station', 'text' => 'Know your polling station and part number. Your BLO or voter slip can help.'],
+            ['@type' => 'HowToStep', 'name' => 'On poll day (23 April 2026)', 'text' => 'Polling hours typically 7 AM to 6 PM. Carry original ID. Do not carry mobile or camera inside the booth where prohibited.'],
+            ['@type' => 'HowToStep', 'name' => 'Verify your vote', 'text' => 'Verify your vote on the VVPAT slip after pressing the button. Do not reveal whom you voted for.'],
+        ],
+        'url' => $canonical_url,
+    ];
+    echo json_encode($howto_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    ?>
+    </script>
 </head>
 <body class="modern-page">
 <?php require_once ROOT_PATH . '/components/skip-link.php'; ?>

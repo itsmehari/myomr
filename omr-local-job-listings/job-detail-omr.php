@@ -287,6 +287,12 @@ $application_deadline_label = (!empty($job['application_deadline']) && $job['app
         </div>
 
         <h1 class="jp-detail__title"><?= htmlspecialchars($job['title']) ?></h1>
+        <?php if (!empty($job['is_remote'])): ?>
+        <span class="badge bg-info text-white me-1">Remote</span>
+        <?php endif; ?>
+        <?php if (!empty($job['experience_level']) && strtolower((string)$job['experience_level']) === 'fresher'): ?>
+        <span class="badge bg-success text-white">Fresher-friendly</span>
+        <?php endif; ?>
 
         <!-- Highlights bar -->
         <div class="jp-highlights">
@@ -896,6 +902,17 @@ function handleResumeChange(input) {
 document.addEventListener('DOMContentLoaded', function() {
   new bootstrap.Modal(document.getElementById('applyModal')).show();
 });
+<?php endif; ?>
+
+/* Quick apply: open modal when URL has open=apply (skip if we already open for errors) */
+<?php if (empty($app_errors)): ?>
+(function() {
+  if (window.location.search.indexOf('open=apply') === -1) return;
+  document.addEventListener('DOMContentLoaded', function() {
+    var el = document.getElementById('applyModal');
+    if (el && typeof bootstrap !== 'undefined') bootstrap.Modal.getOrCreateInstance(el).show();
+  });
+})();
 <?php endif; ?>
 </script>
 

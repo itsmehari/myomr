@@ -1,7 +1,7 @@
 /**
  * Ad banner templates — standard IAB sizes (728x90, 336x280, 300x250, 320x50 mobile).
- * High-quality designs for resumedoctor.in, mycovai.in, colourchemist.co.in
- * Touch-friendly; reserves space to avoid CLS.
+ * Rotating promotions: ResumeDoctor, MyCovai, ColourChemist, BSERI.
+ * Premium horizontal layout; touch-friendly; reserves space to avoid CLS.
  */
 
 /* --- Base ad slot wrapper --- */
@@ -23,15 +23,16 @@
 .omr-ad-banner {
   display: block;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-  min-height: 50px; /* reserve space, reduce CLS */
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+  min-height: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .omr-ad-banner:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
 }
 
 /* --- Size containers (fixed dimensions, responsive max-width) --- */
@@ -118,13 +119,15 @@
 }
 
 .omr-ad-banner--resumedoctor .omr-ad-headline {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
+  letter-spacing: -0.02em;
 }
 
 .omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-headline {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
+  line-height: 1.3;
 }
 
 .omr-ad-banner--resumedoctor .omr-ad-tagline {
@@ -196,13 +199,15 @@
 }
 
 .omr-ad-banner--mycovai .omr-ad-headline {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
+  letter-spacing: -0.02em;
 }
 
 .omr-ad-banner--mycovai.omr-ad-banner--728x90 .omr-ad-headline {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
+  line-height: 1.3;
 }
 
 .omr-ad-banner--mycovai .omr-ad-tagline {
@@ -276,13 +281,15 @@
 }
 
 .omr-ad-banner--colourchemist .omr-ad-headline {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
+  letter-spacing: -0.02em;
 }
 
 .omr-ad-banner--colourchemist.omr-ad-banner--728x90 .omr-ad-headline {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
+  line-height: 1.3;
 }
 
 .omr-ad-banner--colourchemist .omr-ad-tagline {
@@ -303,5 +310,87 @@
 }
 
 .omr-ad-banner--colourchemist.omr-ad-banner--320x50 .omr-ad-headline {
+  font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+}
+
+/* ========== BSERI — ISO standards education, corporate trust --- */
+.omr-ad-banner--bseri {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  color: #fff;
+  position: relative;
+}
+
+.omr-ad-banner--bseri::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: radial-gradient(ellipse at 100% 50%, rgba(245, 158, 11, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.omr-ad-banner--bseri.omr-ad-banner--728x90 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+.omr-ad-banner--bseri.omr-ad-banner--336x280,
+.omr-ad-banner--bseri.omr-ad-banner--300x250 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.omr-ad-banner--bseri .omr-ad-icon {
+  font-size: 2.5rem;
+  opacity: 0.95;
+  color: #fbbf24;
+}
+
+.omr-ad-banner--bseri.omr-ad-banner--728x90 .omr-ad-icon {
+  font-size: 2rem;
+}
+
+.omr-ad-banner--bseri .omr-ad-headline {
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.omr-ad-banner--bseri.omr-ad-banner--728x90 .omr-ad-headline {
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.omr-ad-banner--bseri .omr-ad-tagline {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.omr-ad-banner--bseri.omr-ad-banner--728x90 .omr-ad-tagline {
+  font-size: 0.85rem;
+}
+
+.omr-ad-banner--bseri.omr-ad-banner--320x50 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+}
+
+.omr-ad-banner--bseri.omr-ad-banner--320x50 .omr-ad-icon {
+  font-size: 1.25rem;
+  color: #fbbf24;
+}
+
+.omr-ad-banner--bseri.omr-ad-banner--320x50 .omr-ad-headline {
   font-size: clamp(0.75rem, 2.5vw, 0.9rem);
 }

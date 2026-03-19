@@ -10,6 +10,11 @@ $page_description = 'Find which assembly constituency you belong to: Sholinganal
 $page_keywords = 'know your constituency OMR, Sholinganallur constituency, Velachery AC, Thiruporur assembly, OMR election 2026';
 $canonical_url = 'https://myomr.in/elections-2026/know-your-constituency.php';
 $og_type = 'website';
+$og_title = $page_title;
+$og_description = $page_description;
+$og_url = $canonical_url;
+$twitter_title = $page_title;
+$twitter_description = $page_description;
 $breadcrumbs = [
     ['https://myomr.in/', 'Home'],
     ['https://myomr.in/elections-2026/', 'Elections 2026'],

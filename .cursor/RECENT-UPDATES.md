@@ -6,6 +6,22 @@ Summary of notable changes for deployment and context. Keep this updated when sh
 
 ## March 2026
 
+### Remote database connection + Elections 2026 migration
+
+**Shipped:** Ability to run DB migrations from the local dev machine against the **remote** cPanel MySQL database, plus documentation so the same approach works on other machines (e.g. another laptop).
+
+| Change | Location |
+|--------|----------|
+| Root-level doc: prerequisites, how connection works, why “other laptop” fails, commands | `README-REMOTE-DATABASE.md` (repo root) |
+| Migration script supports remote: `DB_HOST`, optional `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME` | `elections-2026/dev-tools/run-election-2026-migration.php` |
+| Module-level remote DB doc (same content as root) | `elections-2026/dev-tools/README-REMOTE-DB.md` |
+| README points to remote option and root doc | `elections-2026/README.md` |
+
+**How it works:** PHP mysqli connects from your machine to the server (e.g. `myomr.in:3306`). cPanel **Remote MySQL®** must list the **public IP** of each connecting machine. If one laptop works and another doesn’t, add the other laptop’s public IP in Remote MySQL and ensure that network allows outbound port 3306.
+
+**Learnings:** See [.cursor/LEARNINGS.md](.cursor/LEARNINGS.md) — “Remote database connection (March 2026)”.  
+**Reference:** [README-REMOTE-DATABASE.md](README-REMOTE-DATABASE.md) (root).
+
 ### Session summary: learnings/tasks snapshot (latest)
 
 **Completed in this session:**
