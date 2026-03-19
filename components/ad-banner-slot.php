@@ -72,15 +72,18 @@ if (!function_exists('omr_ad_slot')) {
                             <span class="omr-ad-tagline"><?php echo $tagline; ?></span>
                         <?php endif; ?>
                     </span>
+                    <span class="omr-ad-cta">Visit site</span>
                 <?php elseif ($size === '320x50'): ?>
                     <span class="omr-ad-icon"><?php echo $icon; ?></span>
                     <span class="omr-ad-headline"><?php echo $headline; ?></span>
+                    <span class="omr-ad-cta">Visit</span>
                 <?php else: ?>
                     <span class="omr-ad-icon"><?php echo $icon; ?></span>
                     <span class="omr-ad-headline"><?php echo $headline; ?></span>
                     <?php if ($tagline): ?>
                         <span class="omr-ad-tagline"><?php echo $tagline; ?></span>
                     <?php endif; ?>
+                    <span class="omr-ad-cta">Learn more</span>
                 <?php endif; ?>
             </a>
         </div>
@@ -100,5 +103,30 @@ if (!function_exists('omr_ad_slot')) {
             default:
                 return '<i class="fas fa-bullhorn" aria-hidden="true"></i>';
         }
+    }
+}
+
+/**
+ * Output a row of multiple ad slots (e.g. two side-by-side on desktop).
+ * Uses 336x280 so two fit in a 2-column grid within max-width.
+ *
+ * @param string $slot_id Slot identifier (e.g. homepage-top)
+ * @param int    $count   Number of slots to render (default 2)
+ */
+if (!function_exists('omr_ad_slot_row')) {
+    function omr_ad_slot_row($slot_id, $count = 2) {
+        if (!function_exists('omr_ad_slot')) {
+            $base = defined('ROOT_PATH') ? ROOT_PATH : dirname(__DIR__);
+            require_once $base . '/components/ad-banner-slot.php';
+        }
+        if (!defined('OMR_AD_BANNERS_CSS_LOADED')) {
+            define('OMR_AD_BANNERS_CSS_LOADED', true);
+            echo '<link rel="stylesheet" href="/assets/css/ad-banners.css">';
+        }
+        echo '<div class="omr-ad-zone omr-ad-zone--row">';
+        for ($i = 0; $i < $count; $i++) {
+            omr_ad_slot($slot_id, '336x280');
+        }
+        echo '</div>';
     }
 }

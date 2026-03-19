@@ -752,6 +752,95 @@ input[type="email"]:focus-visible {
 }
 
 /* ========================================
+   Jobs + Events scrollers: responsive / mobile-friendly
+======================================== */
+@media (max-width: 767px) {
+  .jobs-scroll-banner,
+  .events-homepage-strip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .jobs-scroll-banner__label,
+  .events-homepage-strip__label {
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .jobs-scroll-banner__track-wrap,
+  .events-homepage-strip__track-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding: 0.25rem 0;
+  }
+
+  .jobs-scroll-banner__track-wrap::-webkit-scrollbar,
+  .events-homepage-strip__track-wrap::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .jobs-scroll-banner__track,
+  .events-homepage-strip__track {
+    padding-right: 1rem;
+    animation: none;
+  }
+
+  .jobs-scroll-banner__item,
+  .events-homepage-strip__item {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .jobs-scroll-banner__title,
+  .events-homepage-strip__title {
+    font-size: 0.85rem;
+  }
+
+  .jobs-scroll-banner__location,
+  .events-homepage-strip__meta {
+    font-size: 0.7rem;
+  }
+
+  .jobs-scroll-banner__cta,
+  .events-homepage-strip__cta {
+    display: block;
+    text-align: center;
+    padding: 0.6rem 0.75rem;
+    min-height: 44px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .jobs-scroll-banner__label,
+  .events-homepage-strip__label {
+    font-size: 0.75rem;
+  }
+  .jobs-scroll-banner__title,
+  .events-homepage-strip__title {
+    font-size: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jobs-scroll-banner__track,
+  .events-homepage-strip__track {
+    animation: none;
+  }
+  .jobs-scroll-banner__track-wrap,
+  .events-homepage-strip__track-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ========================================
    Buy & Sell Homepage Section
 ======================================== */
 .buy-sell-homepage-section {

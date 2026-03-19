@@ -1,20 +1,67 @@
 /**
  * Ad banner templates — standard IAB sizes (728x90, 336x280, 300x250, 320x50 mobile).
  * Rotating promotions: ResumeDoctor, MyCovai, ColourChemist, BSERI.
- * Premium horizontal layout; touch-friendly; reserves space to avoid CLS.
+ * Card-style layout; aligns with MyOMR section look (--omr-* vars when available).
  */
 
-/* --- Base ad slot wrapper --- */
+/* --- Ad zone (wrapper for single or row of slots) --- */
+.omr-ad-zone {
+  display: block;
+  max-width: var(--omr-max-width, 1280px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.omr-ad-zone--row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 992px) {
+  .omr-ad-zone--row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.omr-ad-zone--row .omr-ad-slot {
+  margin: 0;
+}
+
+/* --- Ad zone wrapper (aligns with homepage sections) --- */
+.omr-ad-zone-wrap {
+  max-width: var(--omr-max-width, 1280px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.omr-ad-zone-wrap--homepage-top {
+  padding: 1rem 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .omr-ad-zone-wrap--homepage-top {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+/* --- Base ad slot wrapper (card-aligned) --- */
 .omr-ad-slot {
   display: block;
   margin: 1.5rem 0;
   text-align: center;
+  max-width: 100%;
 }
 
 .omr-ad-slot__label {
   display: block;
   font-size: 0.7rem;
-  color: #6b7280;
+  color: var(--omr-text-muted, #6b7280);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
@@ -23,16 +70,64 @@
 .omr-ad-banner {
   display: block;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
   min-height: 50px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px var(--omr-shadow, rgba(0, 0, 0, 0.08));
+  border: 1px solid var(--omr-border, rgba(0, 0, 0, 0.06));
 }
 
 .omr-ad-banner:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 8px 24px var(--omr-shadow-hover, rgba(0, 0, 0, 0.14));
+  border-color: var(--omr-border, rgba(0, 0, 0, 0.1));
+}
+
+/* --- CTA pill (all sizes) --- */
+.omr-ad-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35em 0.75em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.omr-ad-banner:hover .omr-ad-cta {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* 728x90: CTA on the right */
+.omr-ad-banner--728x90 {
+  position: relative;
+}
+
+.omr-ad-banner--728x90 .omr-ad-cta {
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+/* 336x280 / 300x250: CTA below copy, centered */
+.omr-ad-banner--336x280 .omr-ad-cta,
+.omr-ad-banner--300x250 .omr-ad-cta {
+  margin-top: 0.75rem;
+}
+
+/* 320x50: compact CTA */
+.omr-ad-banner--320x50 .omr-ad-cta {
+  padding: 0.25em 0.5em;
+  font-size: 0.65rem;
+  margin-left: auto;
 }
 
 /* --- Size containers (fixed dimensions, responsive max-width) --- */
@@ -40,6 +135,30 @@
   width: 728px;
   max-width: 100%;
   height: 90px;
+}
+
+/* 728x90 responsive: smaller padding and font when viewport narrow */
+@media (max-width: 767px) {
+  .omr-ad-banner--728x90 {
+    min-height: 70px;
+    height: auto;
+    padding: 0.5rem 0.75rem !important;
+    gap: 0.5rem !important;
+  }
+  .omr-ad-banner--728x90 .omr-ad-icon {
+    font-size: 1.5rem !important;
+  }
+  .omr-ad-banner--728x90 .omr-ad-headline {
+    font-size: 0.95rem !important;
+  }
+  .omr-ad-banner--728x90 .omr-ad-tagline {
+    font-size: 0.7rem !important;
+  }
+  .omr-ad-banner--728x90 .omr-ad-cta {
+    padding: 0.25em 0.5em;
+    font-size: 0.65rem;
+    margin-left: 0.25rem;
+  }
 }
 
 .omr-ad-banner--336x280,
@@ -76,6 +195,22 @@
 
 .omr-ad-banner--320x50 .omr-ad-headline {
   font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+}
+
+/* 320x50: ensure min tap area and no overflow on very narrow screens */
+@media (max-width: 380px) {
+  .omr-ad-banner--320x50 {
+    width: 100%;
+    min-width: 0;
+    padding: 0 0.5rem;
+  }
+  .omr-ad-banner--320x50 .omr-ad-headline {
+    font-size: 0.75rem;
+  }
+  .omr-ad-banner--320x50 .omr-ad-cta {
+    min-height: 44px;
+    padding: 0.35em 0.6em;
+  }
 }
 
 /* ========== ResumeDoctor — Professional, navy/teal, trust --- */

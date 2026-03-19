@@ -8,7 +8,7 @@ if (!function_exists('myomr_get_primary_hub_links')) {
     function myomr_get_primary_hub_links() {
         return [
             ['label' => 'Home', 'path' => '/'],
-            ['label' => 'Jobs', 'path' => '/omr-local-job-listings/'],
+            ['label' => 'Jobs', 'path' => '/omr-local-job-listings/jobs-hub-omr.php'],
             ['label' => 'IT Career News', 'path' => '/discover-myomr/it-careers-omr.php'],
             ['label' => 'Events', 'path' => '/omr-local-events/'],
             ['label' => 'Explore Places', 'path' => '/omr-listings/index.php'],

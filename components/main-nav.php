@@ -620,8 +620,8 @@ function is_active($link, $current_uri) {
     <li class="dropdown">
       <a href="#" tabindex="0" aria-label="Services menu" aria-haspopup="true" aria-expanded="false">Services ▾</a>
       <div class="dropdown-content">
-        <a href="/jobs-in-omr-chennai.php" class="<?php echo (is_active('/jobs-in-omr-chennai.php', $current_uri) || strpos($current_uri, 'jobs-in-') !== false || strpos($current_uri, 'it-jobs') !== false || strpos($current_uri, 'fresher-jobs') !== false || strpos($current_uri, 'part-time-jobs') !== false) ? 'active' : ''; ?>">Find Jobs in OMR</a>
-        <a href="/omr-local-job-listings/" class="<?php echo is_active('/omr-local-job-listings/', $current_uri) ? 'active' : ''; ?>">Browse All Jobs</a>
+        <a href="/omr-local-job-listings/jobs-hub-omr.php" class="<?php echo (is_active('/omr-local-job-listings/jobs-hub-omr.php', $current_uri) || strpos($current_uri, 'jobs-in-') !== false || strpos($current_uri, 'it-jobs') !== false || strpos($current_uri, 'fresher-jobs') !== false || strpos($current_uri, 'part-time-jobs') !== false) ? 'active' : ''; ?>">Find Jobs in OMR</a>
+        <a href="/omr-local-job-listings/" class="<?php echo (is_active('/omr-local-job-listings/', $current_uri) && strpos($current_uri, 'jobs-hub') === false) ? 'active' : ''; ?>">Browse All Jobs</a>
         <div class="dropdown-divider"></div>
         <a href="/it-jobs-omr-chennai.php" class="dropdown-sub-item">IT Jobs</a>
         <a href="/teaching-jobs-omr-chennai.php" class="dropdown-sub-item">Teaching Jobs</a>

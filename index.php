@@ -359,7 +359,7 @@ if (file_exists($core_file)) {
     </div>
     <div class="hero-quick-links">
       <a href="/it-jobs-omr-chennai.php"><i class="fas fa-laptop-code"></i> IT Jobs</a>
-      <a href="/omr-local-job-listings/"><i class="fas fa-briefcase"></i> All Jobs</a>
+      <a href="/omr-local-job-listings/jobs-hub-omr.php"><i class="fas fa-briefcase"></i> All Jobs</a>
       <a href="/omr-local-events/"><i class="fas fa-calendar-day"></i> Events</a>
       <a href="/omr-listings/"><i class="fas fa-map-marker-alt"></i> Places</a>
       <a href="/omr-hostels-pgs/"><i class="fas fa-bed"></i> Hostels & PGs</a>
@@ -383,8 +383,8 @@ if (file_exists($core_file)) {
   </div>
 </section>
 
-<div class="container" style="margin-top: 1rem; margin-bottom: 1rem;">
-<?php omr_ad_slot('homepage-top', '728x90'); ?>
+<div class="omr-ad-zone-wrap omr-ad-zone-wrap--homepage-top">
+<?php omr_ad_slot_row('homepage-top', 2); ?>
 </div>
 
 <script>
@@ -434,7 +434,7 @@ if (file_exists($core_file)) {
 <div class="container text-center py-2" style="background:#f0fdf4;border-radius:8px;margin-bottom:1rem;">
   <span class="me-3"><strong><?php echo number_format($total_jobs_home); ?></strong> live jobs</span>
   <span><strong><?php echo number_format($total_employers_home); ?></strong> employers on OMR</span>
-  <a href="/omr-local-job-listings/" class="ms-3 btn btn-success btn-sm">Browse jobs</a>
+  <a href="/omr-local-job-listings/jobs-hub-omr.php" class="ms-3 btn btn-success btn-sm">Browse jobs</a>
 </div>
 <?php endif; ?>
 <?php if (!empty($recent_jobs)): ?>
