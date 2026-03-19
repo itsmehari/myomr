@@ -383,10 +383,6 @@ if (file_exists($core_file)) {
   </div>
 </section>
 
-<div class="omr-ad-zone-wrap omr-ad-zone-wrap--homepage-top">
-<?php omr_ad_slot_row('homepage-top', 2); ?>
-</div>
-
 <script>
 (function(){
   var slides = document.querySelectorAll('.hero-slide');
@@ -445,7 +441,14 @@ if (file_exists($core_file)) {
 <?php include 'components/homepage-events-widget.php'; ?>
 <?php endif; ?>
 
-<?php include 'components/homepage-buy-sell-section.php'; ?>
+<div class="homepage-buysell-ad-row">
+  <div class="homepage-buysell-ad-row__left">
+    <?php include 'components/homepage-buy-sell-section.php'; ?>
+  </div>
+  <div class="homepage-buysell-ad-row__right">
+    <?php omr_ad_slot('homepage-top', '336x280'); ?>
+  </div>
+</div>
 
 <?php include 'components/homepage-elections-2026-section.php'; ?>
 

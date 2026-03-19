@@ -1,0 +1,147 @@
+/**
+ * Adobe-style overrides for MyOMR CTA modals (Post job, Employer Pack, Subscribe).
+ * Load after Bootstrap 5 CSS. Scoped to footer CTA modal IDs.
+ */
+
+/* Backdrop: dimmed, full viewport */
+#omrCtaPostJob .modal-backdrop,
+#omrCtaEmployerPack .modal-backdrop,
+#omrCtaSubscribe .modal-backdrop,
+.modal-backdrop.show {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+/* Modal dialog: centered, constrained width, clean shadow */
+#omrCtaPostJob .modal-dialog,
+#omrCtaEmployerPack .modal-dialog,
+#omrCtaSubscribe .modal-dialog {
+  max-width: 480px;
+  margin: 1.75rem auto;
+}
+
+#omrCtaPostJob .modal-content,
+#omrCtaEmployerPack .modal-content,
+#omrCtaSubscribe .modal-content {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* Header: clear typography, subtle border, close X */
+#omrCtaPostJob .modal-header,
+#omrCtaEmployerPack .modal-header,
+#omrCtaSubscribe .modal-header {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1.25rem 1.5rem;
+}
+
+#omrCtaPostJob .modal-title,
+#omrCtaEmployerPack .modal-title,
+#omrCtaSubscribe .modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+#omrCtaPostJob .btn-close,
+#omrCtaEmployerPack .btn-close,
+#omrCtaSubscribe .btn-close {
+  padding: 0.5rem;
+  margin: -0.5rem -0.5rem -0.5rem auto;
+  opacity: 0.6;
+  border-radius: 0.375rem;
+}
+
+#omrCtaPostJob .btn-close:hover,
+#omrCtaEmployerPack .btn-close:hover,
+#omrCtaSubscribe .btn-close:hover {
+  opacity: 1;
+  background-color: #f3f4f6;
+}
+
+/* Body: ample padding, hierarchy */
+#omrCtaPostJob .modal-body,
+#omrCtaEmployerPack .modal-body,
+#omrCtaSubscribe .modal-body {
+  padding: 1.5rem 1.5rem;
+}
+
+#omrCtaPostJob .modal-body p,
+#omrCtaEmployerPack .modal-body p,
+#omrCtaSubscribe .modal-body p {
+  color: #374151;
+  line-height: 1.5;
+}
+
+#omrCtaPostJob .modal-body ul,
+#omrCtaEmployerPack .modal-body ul,
+#omrCtaSubscribe .modal-body ul {
+  padding-left: 1.25rem;
+  margin-bottom: 0;
+}
+
+/* Footer: spacing, MyOMR primary green for main CTA */
+#omrCtaPostJob .modal-footer,
+#omrCtaEmployerPack .modal-footer,
+#omrCtaSubscribe .modal-footer {
+  border-top: 1px solid #e5e7eb;
+  padding: 1rem 1.5rem 1.25rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#omrCtaPostJob .modal-footer .btn-primary,
+#omrCtaEmployerPack .modal-footer .btn-primary,
+#omrCtaSubscribe .modal-footer .btn-primary {
+  background-color: #008552;
+  border-color: #008552;
+}
+
+#omrCtaPostJob .modal-footer .btn-primary:hover,
+#omrCtaEmployerPack .modal-footer .btn-primary:hover,
+#omrCtaSubscribe .modal-footer .btn-primary:hover {
+  background-color: #0a9f63;
+  border-color: #0a9f63;
+}
+
+#omrCtaPostJob .modal-footer .btn-success,
+#omrCtaEmployerPack .modal-footer .btn-success,
+#omrCtaSubscribe .modal-footer .btn-success {
+  background-color: #008552;
+  border-color: #008552;
+}
+
+#omrCtaPostJob .modal-footer .btn-success:hover,
+#omrCtaEmployerPack .modal-footer .btn-success:hover,
+#omrCtaSubscribe .modal-footer .btn-success:hover {
+  background-color: #0a9f63;
+  border-color: #0a9f63;
+}
+
+@media (max-width: 576px) {
+  #omrCtaPostJob .modal-dialog,
+  #omrCtaEmployerPack .modal-dialog,
+  #omrCtaSubscribe .modal-dialog {
+    margin: 0.5rem;
+    max-width: calc(100% - 1rem);
+  }
+
+  #omrCtaPostJob .modal-header,
+  #omrCtaEmployerPack .modal-header,
+  #omrCtaSubscribe .modal-header,
+  #omrCtaPostJob .modal-body,
+  #omrCtaEmployerPack .modal-body,
+  #omrCtaSubscribe .modal-body {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #omrCtaPostJob .modal-footer,
+  #omrCtaEmployerPack .modal-footer,
+  #omrCtaSubscribe .modal-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

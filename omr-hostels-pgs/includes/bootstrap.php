@@ -19,7 +19,10 @@ if (file_exists($core_file)) {
     require_once $core_file;
 }
 
-require_once __DIR__ . '/error-reporting.php';
+$err_report = __DIR__ . '/error-reporting.php';
+if (file_exists($err_report)) {
+    require_once $err_report;
+}
 require_once __DIR__ . '/property-functions.php';
 
 if (!defined('HOSTELS_PGS_PATH')) {

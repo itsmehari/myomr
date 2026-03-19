@@ -3,7 +3,7 @@
  * Site-wide CTA modals: Post job, Employer Pack, Subscribe / Job alerts.
  * Include once per layout (e.g. in footer). Modals are shown by triggers
  * (data-omr-cta="post-job" | "employer-pack" | "subscribe") or optional JS.
- * Uses Bootstrap 5 modal. Does not auto-open; pages/JS control visibility.
+ * Auto-show: one modal on first visit per session (after short delay); then one modal every 5 minutes in rotation.
  */
 if (!defined('ROOT_PATH')) {
     $ROOT_PATH = $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__, 2);
@@ -79,6 +79,12 @@ $jobs_base = '/omr-local-job-listings';
 
 <script>
 (function() {
+    var CTA_MODAL_IDS = ['omrCtaPostJob', 'omrCtaEmployerPack', 'omrCtaSubscribe'];
+    var FIRST_VISIT_KEY = 'myomr_cta_first_visit_shown';
+    var ROTATION_INDEX_KEY = 'myomr_cta_rotation_index';
+    var FIRST_VISIT_DELAY_MS = 1500;
+    var ROTATION_INTERVAL_MS = 5 * 60 * 1000;
+
     function closeCtaModal(modalEl) {
         if (!modalEl) return;
         if (typeof bootstrap !== 'undefined') {
@@ -93,6 +99,44 @@ $jobs_base = '/omr-local-job-listings';
             if (backdrop) backdrop.remove();
         }
     }
+
+    function showCtaModalById(modalId) {
+        var modal = document.getElementById(modalId);
+        if (modal && typeof bootstrap !== 'undefined') {
+            var m = bootstrap.Modal.getOrCreateInstance(modal);
+            m.show();
+        }
+    }
+
+    function closeAnyOpenCtaModal() {
+        CTA_MODAL_IDS.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el && el.classList.contains('show')) closeCtaModal(el);
+        });
+    }
+
+    function getNextRotationIndex() {
+        try {
+            var idx = parseInt(sessionStorage.getItem(ROTATION_INDEX_KEY), 10);
+            if (isNaN(idx)) idx = 0;
+            return idx % CTA_MODAL_IDS.length;
+        } catch (e) { return 0; }
+    }
+
+    function setNextRotationIndex() {
+        try {
+            var idx = (getNextRotationIndex() + 1) % CTA_MODAL_IDS.length;
+            sessionStorage.setItem(ROTATION_INDEX_KEY, String(idx));
+        } catch (e) {}
+    }
+
+    function showNextInRotation() {
+        closeAnyOpenCtaModal();
+        var idx = getNextRotationIndex();
+        showCtaModalById(CTA_MODAL_IDS[idx]);
+        setNextRotationIndex();
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         var triggers = document.querySelectorAll('[data-omr-cta]');
         triggers.forEach(function(el) {
@@ -101,21 +145,33 @@ $jobs_base = '/omr-local-job-listings';
                 var modalId = id === 'post-job' ? 'omrCtaPostJob' : (id === 'employer-pack' ? 'omrCtaEmployerPack' : (id === 'subscribe' ? 'omrCtaSubscribe' : null));
                 if (modalId) {
                     e.preventDefault();
-                    var modal = document.getElementById(modalId);
-                    if (modal && typeof bootstrap !== 'undefined') {
-                        var m = bootstrap.Modal.getOrCreateInstance(modal);
-                        m.show();
-                    }
+                    showCtaModalById(modalId);
                 }
             });
         });
-        ['omrCtaPostJob', 'omrCtaEmployerPack', 'omrCtaSubscribe'].forEach(function(id) {
+        CTA_MODAL_IDS.forEach(function(id) {
             var modal = document.getElementById(id);
             if (!modal) return;
             modal.querySelectorAll('[data-bs-dismiss="modal"], .btn-close').forEach(function(btn) {
                 btn.addEventListener('click', function() { closeCtaModal(modal); });
             });
         });
+
+        /* First visit this session: show one modal after short delay */
+        try {
+            if (!sessionStorage.getItem(FIRST_VISIT_KEY)) {
+                setTimeout(function() {
+                    showCtaModalById(CTA_MODAL_IDS[0]);
+                    sessionStorage.setItem(FIRST_VISIT_KEY, '1');
+                    sessionStorage.setItem(ROTATION_INDEX_KEY, '1');
+                }, FIRST_VISIT_DELAY_MS);
+            }
+        } catch (e) {}
+
+        /* Every 5 minutes: show next modal in rotation */
+        setInterval(function() {
+            showNextInRotation();
+        }, ROTATION_INTERVAL_MS);
     });
 })();
 </script>

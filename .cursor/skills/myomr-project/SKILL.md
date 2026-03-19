@@ -95,11 +95,28 @@ require_once ROOT_PATH . '/components/page-bootstrap.php';
 - Restrict file uploads (type, size, folder).
 - Use CSRF: `generate_csrf_token()` and `verify_csrf_token()` from `core/security-helpers.php` on state-changing forms.
 
+## CTA modals
+
+- CTA modals in `components/modal-cta.php` (included via footer) require **Bootstrap 5 CSS and JS** so `.modal`, `.modal-dialog`, and `bootstrap.Modal` work. Load Bootstrap 5 in the footer before `modal-cta.php` if the head does not already load it.
+- **Defensive CSS** must hide modal containers by default (e.g. `#omrCtaPostJob, #omrCtaEmployerPack, #omrCtaSubscribe { display: none !important; }`); show only when Bootstrap adds `.show`. Prevents modals appearing as raw blocks when Bootstrap is missing or before JS runs.
+- Only one modal open at a time; avoid loading Bootstrap twice if the page already loads it in head.
+
 ## Deployment (cPanel)
 
 - Git deploy; `.cpanel.yml` drives copy; repository outside `public_html`.
 - Exclude uploads, sessions, .env from delete. `omr-buy-sell` and `elections-2026` are in the deploy list.
 - Refs: [CPANEL-CHECKLIST.md](CPANEL-CHECKLIST.md), [DEPLOYMENT-CPANEL.md](DEPLOYMENT-CPANEL.md).
+
+### Deployment: module includes
+
+- After adding a new module or new required file (e.g. `includes/error-reporting.php`), ensure it is committed and that the deploy process copies that path (the parent folder must be in .cpanel.yml so the full tree is deployed).
+- If a live page fatals with "Failed to open stream" for a file under a module, first check that the file exists in the repo and that the module folder is deployed in full.
+
+### Sitemap generators
+
+- Sitemap scripts must return **valid XML only**; any PHP notice or HTML output causes Search Console "Couldn't fetch".
+- At the very top of each sitemap script, set a flag (e.g. `define('SITEMAP_REQUEST', true);`) and suppress display of errors: e.g. `if (defined('SITEMAP_REQUEST')) { ini_set('display_errors', '0'); }`.
+- On DB/connection failure, output a minimal valid sitemap (e.g. root URL only or empty `<urlset>`) instead of error output so the response is always valid XML.
 
 ## Search Console API runbook (March 2026)
 
@@ -150,6 +167,7 @@ require_once ROOT_PATH . '/components/page-bootstrap.php';
 - Section-by-section: fetch `$recent_jobs`, `$recent_events`; include components that expect them in scope.
 - Conditional: `<?php if (!empty($recent_jobs)): ?>` for data-dependent sections.
 - Set `$omr_css_homepage = true` before head-includes for homepage styles.
+- For every new homepage component, add the corresponding CSS (e.g. for its BEM classes) to `assets/css/homepage-myomr.css` (or a stylesheet included when `$omr_css_homepage` is true) so the section is not unstyled.
 
 ## Standard patterns (resolved)
 
@@ -174,6 +192,14 @@ require_once ROOT_PATH . '/components/page-bootstrap.php';
   `<?php echo htmlspecialchars(defined('MYOMR_FACEBOOK_GROUP_URL') ? MYOMR_FACEBOOK_GROUP_URL : 'https://www.facebook.com/groups/416854920508620'); ?>`
 - **Placements:** Homepage hero, article detail (compact CTA near share bar), job detail sidebar, footer (Follow us).
 - **Footer icon:** Class `footer-social__link--fb-group` in `assets/css/footer.css` (Facebook blue #1877f2).
+
+## Banner ads
+
+- **Registry:** `core/ad-registry.php` defines slot IDs and optional creative config.
+- **Component:** `components/ad-banner-slot.php`; loaded via `omr_ad_slot()` from `component-includes.php`. Use `omr_ad_slot($slot_id, $size)` e.g. `omr_ad_slot('article-top', '728x90')` or `omr_ad_slot('homepage-top', '336x280')`.
+- **Placements:** Article pages (`article-top`, `article-mid`), homepage (e.g. in 65/35 row with Buy & Sell), job listing/detail, events; add new slot IDs in the registry when adding new placements.
+- **CSS:** `assets/css/ad-banners.css`; ensure it is loaded on pages that show ad slots.
+- **Replication:** For implementing the same pattern on another project (e.g. mycovai.in), see [.cursor/rules/ad-banner-component.mdc](.cursor/rules/ad-banner-component.mdc) and [docs/inbox/BANNER-ADS-IMPLEMENTATION-PLAN-FOR-MYCOVAI.md](docs/inbox/BANNER-ADS-IMPLEMENTATION-PLAN-FOR-MYCOVAI.md) for a prompt/summary approach.
 
 ## Known legacy
 

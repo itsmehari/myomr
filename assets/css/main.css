@@ -32,6 +32,18 @@ ul {
 @import url("https://fonts.googleapis.com/css2?family=Factor+A:wght@400;700&family=Inter:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=League+Gothic&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+/* CTA modals (footer): hidden by default so they never appear in flow before Bootstrap loads. */
+#omrCtaPostJob,
+#omrCtaEmployerPack,
+#omrCtaSubscribe {
+  display: none !important;
+}
+#omrCtaPostJob.show,
+#omrCtaEmployerPack.show,
+#omrCtaSubscribe.show {
+  display: block !important;
+}
+
 /* Legacy custom modal (e.g. news-highlights, citizens-charter). Scoped to .modal-overlay so Bootstrap modals are not styled. */
 .modal-overlay {
   position: fixed;
