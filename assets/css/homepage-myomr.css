@@ -371,6 +371,133 @@
 }
 
 /* ========================================
+   Explore OMR — category grid (MyCovai-style)
+======================================== */
+.homepage-explore-omr {
+  max-width: var(--omr-max-width);
+  margin: 0 auto;
+  padding: var(--omr-section-padding) 1.5rem;
+}
+
+.homepage-explore-omr__inner {
+  width: 100%;
+}
+
+.homepage-explore-omr__label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--omr-text-muted);
+  margin: 0 0 0.5rem;
+}
+
+.homepage-explore-omr__label::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--omr-green);
+  margin-top: 0.35rem;
+}
+
+.homepage-explore-omr__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.homepage-explore-omr__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 1rem;
+  background: var(--omr-white);
+  border: 1px solid var(--omr-border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--omr-text);
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.homepage-explore-omr__card:hover {
+  border-color: var(--omr-green);
+  background: var(--omr-off-white);
+  box-shadow: 0 4px 12px var(--omr-shadow);
+  color: var(--omr-text);
+}
+
+.homepage-explore-omr__card:focus-visible {
+  outline: 3px solid var(--omr-green);
+  outline-offset: 2px;
+}
+
+.homepage-explore-omr__card-icon {
+  font-size: 1.25rem;
+  color: var(--omr-green);
+  line-height: 1;
+}
+
+.homepage-explore-omr__card-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.homepage-explore-omr__card-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--omr-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Highlighted card (e.g. Jobs) */
+.homepage-explore-omr__card--highlight {
+  background: var(--omr-green);
+  border-color: var(--omr-green);
+  color: var(--omr-white);
+}
+
+.homepage-explore-omr__card--highlight:hover {
+  background: var(--omr-deep-green);
+  border-color: var(--omr-deep-green);
+  color: var(--omr-white);
+  box-shadow: 0 4px 14px var(--omr-shadow-hover);
+}
+
+.homepage-explore-omr__card--highlight .homepage-explore-omr__card-icon,
+.homepage-explore-omr__card--highlight .homepage-explore-omr__card-title,
+.homepage-explore-omr__card--highlight .homepage-explore-omr__card-subtitle {
+  color: var(--omr-white);
+}
+
+@media (min-width: 576px) {
+  .homepage-explore-omr__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .homepage-explore-omr__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .homepage-explore-omr__grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ========================================
    Subscribe Section (single block)
 ======================================== */
 .homepage-subscribe {

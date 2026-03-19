@@ -42,6 +42,9 @@ if (file_exists($core_file)) {
     if ($jr && $row = $jr->fetch_assoc()) $total_jobs_home = (int)$row['c'];
     $er = $conn->query("SELECT COUNT(DISTINCT id) AS c FROM employers");
     if ($er && $row = $er->fetch_assoc()) $total_employers_home = (int)$row['c'];
+    if (file_exists(ROOT_PATH . '/core/homepage-categories.php')) {
+      require_once ROOT_PATH . '/core/homepage-categories.php';
+    }
   }
 }
 ?>
@@ -425,6 +428,8 @@ if (file_exists($core_file)) {
   });
 })();
 </script>
+
+<?php include ROOT_PATH . '/components/homepage-explore-omr.php'; ?>
 
 <?php if ($total_jobs_home > 0 || $total_employers_home > 0): ?>
 <div class="container text-center py-2" style="background:#f0fdf4;border-radius:8px;margin-bottom:1rem;">
