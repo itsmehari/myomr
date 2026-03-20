@@ -2,8 +2,6 @@
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
-if (file_exists(__DIR__ . '/includes/dev-diagnostics.php')) { include __DIR__ . '/includes/dev-diagnostics.php'; }
-
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 if (empty($_SESSION['organizer_csrf'])) { $_SESSION['organizer_csrf'] = bin2hex(random_bytes(16)); }
 

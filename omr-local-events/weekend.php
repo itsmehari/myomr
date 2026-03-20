@@ -2,8 +2,6 @@
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
-if (file_exists(__DIR__ . '/includes/dev-diagnostics.php')) { include __DIR__ . '/includes/dev-diagnostics.php'; }
-
 $sat = date('Y-m-d', strtotime('saturday this week'));
 $sun = date('Y-m-d', strtotime('sunday this week'));
 $filters = [

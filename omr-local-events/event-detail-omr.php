@@ -5,8 +5,6 @@ require_once ROOT_PATH . '/components/component-includes.php';
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
-if (file_exists(__DIR__ . '/includes/dev-diagnostics.php')) { include __DIR__ . '/includes/dev-diagnostics.php'; }
-
 $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $event = $slug ? getEventBySlug($slug) : null;
 if (!$event) {

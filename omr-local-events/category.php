@@ -3,8 +3,6 @@ if (!defined('ROOT_PATH')) define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] ?? dirn
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
-if (file_exists(__DIR__ . '/includes/dev-diagnostics.php')) { include __DIR__ . '/includes/dev-diagnostics.php'; }
-
 $slug = isset($_GET['slug']) ? sanitizeInput($_GET['slug']) : '';
 $category = $slug ? getCategoryBySlug($slug) : null;
 if (!$category) {
