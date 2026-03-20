@@ -1,8 +1,7 @@
 <?php
 // Events Listing - MyOMR
 require_once __DIR__ . '/includes/error-reporting.php';
-$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
-require_once $root . '/core/include-path.php';
+require_once __DIR__ . '/../core/include-path.php';
 require_once ROOT_PATH . '/components/component-includes.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
@@ -63,6 +62,11 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
   <link rel="stylesheet" href="../omr-local-job-listings/assets/post-job-form-modern.css" />
   <link rel="stylesheet" href="assets/events-dashboard.css" />
   <?php include __DIR__ . '/../components/analytics.php'; ?>
+  <?php
+  if (!defined('_GA_JSON_FLAGS')) {
+      define('_GA_JSON_FLAGS', JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+  }
+  ?>
   <?php if (!empty($filters['search'])): ?>
   <script>
   (function() {

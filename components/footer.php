@@ -62,6 +62,8 @@ if (function_exists('omr_flash_message')) {
                         <?php endforeach; ?>
                         <li><a href="/omr-rent-lease/">Rent & Lease</a></li>
                         <li><a href="/omr-buy-sell/guidelines.php">Buy & Sell Guidelines</a></li>
+                        <li><a href="/omr-classified-ads/">OMR Classified Ads</a></li>
+                        <li><a href="/omr-classified-ads/guidelines.php">Classified Ads Guidelines</a></li>
                     </ul>
                 </div>
                 <div class="footer-nav__col">

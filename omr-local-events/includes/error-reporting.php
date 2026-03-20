@@ -46,6 +46,8 @@ function eventsCustomErrorHandler($errno, $errstr, $errfile, $errline) {
 set_error_handler('eventsCustomErrorHandler');
 
 function eventsCustomExceptionHandler($exception) {
+    $msg = 'Events uncaught: ' . $exception->getMessage() . ' in ' . $exception->getFile() . ':' . $exception->getLine();
+    error_log($msg);
     if (DEVELOPMENT_MODE) {
         echo "<div style='background:#fee; border:2px solid #f00; padding:15px; margin:10px; border-radius:5px;'>";
         echo "<strong>Uncaught Exception (Events):</strong><br>";
@@ -54,6 +56,12 @@ function eventsCustomExceptionHandler($exception) {
         echo "<strong>Line:</strong> " . $exception->getLine() . "<br>";
         echo "<strong>Stack Trace:</strong><pre>" . htmlspecialchars($exception->getTraceAsString()) . "</pre>";
         echo "</div>";
+    } else {
+        http_response_code(500);
+        $friendly = __DIR__ . '/../../errors/500.php';
+        if (file_exists($friendly)) {
+            include $friendly;
+        }
     }
 }
 
@@ -71,7 +79,7 @@ register_shutdown_function(function() {
                 echo "<strong>Line:</strong> " . $error['line'] . "<br>";
                 echo "</div>";
             } else {
-                // Friendly error page in production
+                error_log('Events fatal: ' . $error['message'] . ' in ' . $error['file'] . ':' . $error['line']);
                 http_response_code(500);
                 $friendly = __DIR__ . '/../../errors/500.php';
                 if (file_exists($friendly)) { include $friendly; }

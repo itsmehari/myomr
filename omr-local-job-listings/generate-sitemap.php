@@ -19,6 +19,7 @@ $base_url = 'https://myomr.in';
 $pages = [
     // Main job portal pages
     ['loc' => '/omr-local-job-listings/', 'priority' => '1.0', 'changefreq' => 'daily'],
+    ['loc' => '/omr-local-job-listings/employer-landing-omr.php', 'priority' => '0.9', 'changefreq' => 'weekly'],
     ['loc' => '/omr-local-job-listings/post-job-omr.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
     ['loc' => '/omr-local-job-listings/employer-register-omr.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
     ['loc' => '/omr-local-job-listings/companies-hiring-omr.php', 'priority' => '0.8', 'changefreq' => 'weekly'],

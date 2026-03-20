@@ -19,6 +19,7 @@ $omr_ad_slot_ids = [
     'hostels-index-top', 'hostels-index-mid', 'hostels-detail-mid',
     'rent-lease-index-top', 'rent-lease-detail-mid',
     'buy-sell-index-top', 'buy-sell-detail-mid',
+    'classified-ads-index-top', 'classified-ads-detail-mid',
     'listings-index-top', 'listings-detail-mid',
     'events-index-top', 'events-index-mid', 'events-detail-mid',
     'coworking-index-top', 'coworking-detail-mid',

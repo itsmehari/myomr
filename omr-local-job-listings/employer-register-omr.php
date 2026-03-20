@@ -59,14 +59,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 $page_nav = 'main';
 $page_title = 'Register as Employer - MyOMR Job Portal';
-$page_description = 'Create your employer profile to post jobs and manage applications on MyOMR.';
+$page_description = 'Create your employer profile to post jobs and manage applications on MyOMR. Reach 1000+ local job seekers in OMR Chennai.';
 $canonical_url = 'https://myomr.in/omr-local-job-listings/employer-register-omr.php';
+$page_keywords = 'employer register OMR, post job Chennai, MyOMR job portal, hire talent Old Mahabalipuram Road';
 $og_type = 'website';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php require_once ROOT_PATH . '/components/meta.php'; ?>
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="geo.region" content="IN-TN">
+    <meta name="geo.placename" content="Chennai, Old Mahabalipuram Road, OMR">
+    <meta name="geo.position" content="12.9064;80.2322">
+    <meta name="ICBM" content="12.9064, 80.2322">
     <?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/omr-jobs-unified-design.css">

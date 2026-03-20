@@ -10,6 +10,8 @@ $recent_jobs = [];
 $recent_events = [];
 $recent_buy_sell = [];
 $buy_sell_count = 0;
+$recent_classified_ads = [];
+$classified_ads_count = 0;
 $total_jobs_home = 0;
 $total_employers_home = 0;
 $subscribed = isset($_GET['subscribed']);
@@ -38,6 +40,12 @@ if (file_exists($core_file)) {
     require_once ROOT_PATH . '/omr-buy-sell/includes/listing-functions.php';
     $buy_sell_count = getBuySellCount([]);
     $recent_buy_sell = getBuySellListings([], 6, 0);
+    $ca_chk = @$conn->query("SHOW TABLES LIKE 'omr_classified_ads_listings'");
+    if ($ca_chk && $ca_chk->num_rows > 0) {
+      require_once ROOT_PATH . '/omr-classified-ads/includes/listing-functions.php';
+      $classified_ads_count = getClassifiedAdsCount([]);
+      $recent_classified_ads = getClassifiedAdsListings([], 6, 0);
+    }
     $jr = $conn->query("SELECT COUNT(*) AS c FROM job_postings WHERE status = 'approved'");
     if ($jr && $row = $jr->fetch_assoc()) $total_jobs_home = (int)$row['c'];
     $er = $conn->query("SELECT COUNT(DISTINCT id) AS c FROM employers");
@@ -334,7 +342,7 @@ if (file_exists($core_file)) {
       </div>
     </div>
     <div class="hero-search-wrap">
-      <form class="hero-search hero-search-unified" action="/omr-local-job-listings/" method="get" role="search" data-jobs-action="/omr-local-job-listings/" data-events-action="/omr-local-events/" data-places-action="/omr-listings/" data-buysell-action="/omr-buy-sell/">
+      <form class="hero-search hero-search-unified" action="/omr-local-job-listings/" method="get" role="search" data-jobs-action="/omr-local-job-listings/" data-events-action="/omr-local-events/" data-places-action="/omr-listings/" data-buysell-action="/omr-buy-sell/" data-classified-action="/omr-classified-ads/">
         <input type="search" name="search" placeholder="What are you looking for?" aria-label="Search OMR">
         <input type="text" name="location" placeholder="Area in OMR" aria-label="Location">
         <select name="category" aria-label="Category">
@@ -347,6 +355,7 @@ if (file_exists($core_file)) {
           <option value="hostels">Hostels & PGs</option>
           <option value="coworking">Coworking</option>
           <option value="buy-sell">Buy & Sell</option>
+          <option value="classified-ads">OMR Classified Ads</option>
         </select>
         <button type="submit">Search</button>
       </form>
@@ -423,6 +432,7 @@ if (file_exists($core_file)) {
     var cat = (catSelect.value || '').toLowerCase();
     if (cat === 'events') form.action = form.getAttribute('data-events-action') || '/omr-local-events/';
     else if (cat === 'buy-sell') form.action = form.getAttribute('data-buysell-action') || '/omr-buy-sell/';
+    else if (cat === 'classified-ads') form.action = form.getAttribute('data-classified-action') || '/omr-classified-ads/';
     else if (cat === 'places' || cat === 'schools' || cat === 'restaurants' || cat === 'hostels' || cat === 'coworking') form.action = form.getAttribute('data-places-action') || '/omr-listings/';
     else form.action = form.getAttribute('data-jobs-action') || '/omr-local-job-listings/';
   });
@@ -454,6 +464,8 @@ if (file_exists($core_file)) {
     <?php omr_ad_slot('homepage-top', '336x280'); ?>
   </div>
 </div>
+
+<?php include 'components/homepage-classified-ads-section.php'; ?>
 
 <?php include 'components/homepage-elections-2026-section.php'; ?>
 

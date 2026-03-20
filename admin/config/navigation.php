@@ -119,6 +119,18 @@ return [
                 ],
             ],
             [
+                'key' => 'classified_ads',
+                'name' => 'OMR Classified Ads',
+                'description' => 'Approve services, wanted, and community notice listings (10-day expiry).',
+                'path' => '/omr-classified-ads/admin/index.php',
+                'icon' => 'fa-newspaper',
+                'tags' => ['classifieds', 'community', 'moderation'],
+                'actions' => [
+                    ['label' => 'Manage Listings', 'path' => '/omr-classified-ads/admin/manage-listings-omr.php'],
+                    ['label' => 'Reports', 'path' => '/omr-classified-ads/admin/view-reports-omr.php'],
+                ],
+            ],
+            [
                 'key' => 'coworking',
                 'name' => 'Coworking Spaces',
                 'description' => 'Manage coworking space listings, approvals, and featured slots.',

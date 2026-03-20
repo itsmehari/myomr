@@ -1,8 +1,18 @@
 <?php
-$servername = "localhost:3306";
-$username = "metap8ok_myomr_admin";
-$password = "myomr@123";
-$database = "metap8ok_myomr";
+/**
+ * DB connection. On the server, uses localhost. For remote CLI migrations from your PC, set:
+ *   DB_HOST=myomr.in (optional DB_PORT, DB_USER, DB_PASS, DB_NAME)
+ */
+$db_host = getenv('DB_HOST');
+if ($db_host !== false && $db_host !== '') {
+    $db_port = getenv('DB_PORT') ?: '3306';
+    $servername = $db_host . ':' . $db_port;
+} else {
+    $servername = 'localhost:3306';
+}
+$username = getenv('DB_USER') ?: 'metap8ok_myomr_admin';
+$password = getenv('DB_PASS') ?: 'myomr@123';
+$database = getenv('DB_NAME') ?: 'metap8ok_myomr';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);

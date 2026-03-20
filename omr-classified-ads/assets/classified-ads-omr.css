@@ -1,0 +1,8 @@
+/* OMR Classified Ads — extends Bootstrap; teal theme */
+.classified-ads-page .ca-card-placeholder {
+  min-height: 140px;
+}
+.classified-ads-page .ca-hero .form-control,
+.classified-ads-page .ca-hero .form-select {
+  border-radius: 8px;
+}

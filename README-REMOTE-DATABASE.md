@@ -96,6 +96,13 @@ cd /path/to/repo/root
 php elections-2026/dev-tools/run-election-2026-migration.php
 ```
 
+**OMR Classified Ads (combined migration):** from repo root with `DB_HOST=myomr.in` (same overrides as above):
+
+```powershell
+$env:DB_HOST='myomr.in'
+php dev-tools/migrations/run_classified_ads_migration.php
+```
+
 Optional env vars: `DB_PORT` (default 3306), `DB_USER`, `DB_PASS`, `DB_NAME` if you need to override `core/omr-connect.php`.
 
 ---

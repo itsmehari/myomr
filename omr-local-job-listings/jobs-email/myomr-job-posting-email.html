@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Post Jobs on MyOMR – Reach Local Talent in OMR</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; overflow-x: hidden; background-color: #f0ece4; font-family: 'DM Sans', Arial, sans-serif; color: #1a1a1a; -webkit-font-smoothing: antialiased; }
+    .email-outer { width: 100%; padding: 0; }
+    .email-wrapper { width: 100%; max-width: 600px; min-width: 280px; margin: 0 auto; background: #f0ece4; }
+
+    /* HEADER */
+    .header { background: #0f2a1e; padding: 28px 40px 0; position: relative; overflow: hidden; }
+    .header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(255,195,0,0.18) 0%, transparent 70%); }
+    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .logo-block { display: flex; align-items: center; gap: 10px; }
+    .logo-dot { width: 34px; height: 34px; background: #ffc300; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 16px; color: #0f2a1e; }
+    .logo-text { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 18px; color: #fff; letter-spacing: -0.3px; }
+    .logo-text span { color: #ffc300; }
+    .tag-pill { background: rgba(255,195,0,0.12); border: 1px solid rgba(255,195,0,0.3); color: #ffc300; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; padding: 5px 12px; border-radius: 20px; }
+    .hero-area { padding-bottom: 36px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,195,0,0.12); border-left: 3px solid #ffc300; padding: 6px 14px; border-radius: 0 4px 4px 0; font-size: 11.5px; font-weight: 600; color: #ffc300; letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 20px; }
+    .hero-headline { font-family: 'Sora', sans-serif; font-size: 36px; font-weight: 800; line-height: 1.15; color: #fff; letter-spacing: -1px; margin-bottom: 16px; }
+    .hero-headline .hl { color: #ffc300; }
+    .hero-subtext { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.65; max-width: 460px; margin-bottom: 28px; }
+    .cta-primary { display: inline-block; background: #ffc300; color: #0f2a1e; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 15px; padding: 14px 30px; border-radius: 8px; text-decoration: none; }
+
+    /* STAT STRIP */
+    .stat-strip { background: #ffc300; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .stat-item { text-align: center; flex: 1; }
+    .stat-number { font-family: 'Sora', sans-serif; font-size: 23px; font-weight: 800; color: #0f2a1e; line-height: 1; display: block; }
+    .stat-label { font-size: 10.5px; font-weight: 600; color: rgba(15,42,30,0.6); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; display: block; }
+    .stat-div { width: 1px; height: 36px; background: rgba(15,42,30,0.2); }
+
+    /* LOCALITY BAND */
+    .locality-band { background: #0f2a1e; padding: 20px 40px 24px; }
+    .locality-band-title { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #ffc300; margin-bottom: 12px; opacity: 0.85; }
+    .locality-scroll { display: flex; flex-wrap: wrap; gap: 8px; }
+    .loc-tag { background: rgba(255,195,0,0.1); border: 1px solid rgba(255,195,0,0.22); color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600; padding: 5px 13px; border-radius: 20px; }
+    .loc-tag.active { background: #ffc300; border-color: #ffc300; color: #0f2a1e; }
+
+    /* SECTIONS */
+    .body-section { padding: 40px 40px 0; }
+    .section-label { font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #0f2a1e; opacity: 0.38; margin-bottom: 8px; }
+    .section-title { font-family: 'Sora', sans-serif; font-size: 24px; font-weight: 800; color: #0f2a1e; letter-spacing: -0.5px; line-height: 1.25; margin-bottom: 14px; }
+    .section-body { font-size: 14.5px; color: #3d3d3d; line-height: 1.7; }
+    .divider { height: 1px; background: #ddd6c8; margin: 36px 40px 0; }
+
+    /* WHY CARDS */
+    .why-grid { display: flex; flex-direction: column; gap: 14px; margin: 28px 0 0; }
+    .why-card { background: #fff; border-radius: 12px; padding: 20px 22px; display: flex; gap: 16px; align-items: flex-start; border: 1.5px solid #e8e1d5; }
+    .why-icon { width: 44px; height: 44px; background: #0f2a1e; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; }
+    .why-title { font-family: 'Sora', sans-serif; font-size: 14.5px; font-weight: 700; color: #0f2a1e; margin-bottom: 4px; }
+    .why-desc { font-size: 13px; color: #666; line-height: 1.55; }
+
+    /* STEPS */
+    .steps-section { padding: 40px 40px 0; }
+    .steps-row { display: flex; gap: 0; margin-top: 24px; position: relative; }
+    .steps-row::before { content: ''; position: absolute; top: 22px; left: 22px; right: 22px; height: 2px; background: repeating-linear-gradient(to right, #0f2a1e 0 6px, transparent 6px 12px); opacity: 0.15; }
+    .step { flex: 1; text-align: center; padding: 0 8px; position: relative; }
+    .step-num { width: 44px; height: 44px; background: #0f2a1e; color: #ffc300; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 17px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; position: relative; z-index: 1; }
+    .step-title { font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; color: #0f2a1e; margin-bottom: 5px; }
+    .step-desc { font-size: 12px; color: #777; line-height: 1.5; }
+
+    /* LOCALITY GRID */
+    .locality-section { padding: 40px 40px 0; }
+    .locality-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; }
+    .locality-card { background: #fff; border: 1.5px solid #e8e1d5; border-radius: 11px; padding: 16px 18px; }
+    .locality-card.featured { background: #0f2a1e; border-color: #0f2a1e; grid-column: 1 / -1; }
+    .locality-name { font-family: 'Sora', sans-serif; font-size: 13.5px; font-weight: 700; color: #0f2a1e; margin-bottom: 5px; }
+    .locality-card.featured .locality-name { color: #ffc300; font-size: 14.5px; }
+    .locality-desc { font-size: 12.5px; color: #888; line-height: 1.5; }
+    .locality-card.featured .locality-desc { color: rgba(255,255,255,0.65); }
+
+    /* INDUSTRIES */
+    .industry-section { padding: 36px 40px 0; }
+    .industry-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .ind-item { background: #fff; border: 1.5px solid #e8e1d5; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 600; color: #333; }
+
+    /* TESTIMONIAL */
+    .testimonial-section { padding: 36px 40px 0; }
+    .testi-card { background: #0f2a1e; border-radius: 16px; padding: 28px 28px 24px; position: relative; overflow: hidden; }
+    .testi-card::after { content: '"'; position: absolute; top: -10px; right: 20px; font-family: 'Sora', sans-serif; font-size: 120px; font-weight: 800; color: rgba(255,195,0,0.12); line-height: 1; }
+    .testi-text { font-size: 15px; color: rgba(255,255,255,0.88); line-height: 1.7; font-style: italic; margin-bottom: 18px; position: relative; z-index: 1; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar { width: 40px; height: 40px; background: #ffc300; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 16px; color: #0f2a1e; }
+    .testi-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13.5px; color: #fff; }
+    .testi-biz { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+    /* PRICING */
+    .pricing-section { padding: 40px 40px 0; }
+    .pricing-intro { font-size: 14.5px; color: #3d3d3d; line-height: 1.7; margin-bottom: 24px; }
+    .plan-free { background: #fff; border: 2px solid #e8e1d5; border-radius: 14px; padding: 24px 26px; margin-bottom: 14px; display: flex; align-items: center; gap: 18px; }
+    .free-badge-box { background: #f0f7f0; border: 2px solid #b8ddb8; color: #0a5a1a; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 22px; padding: 10px 18px; border-radius: 10px; line-height: 1; flex-shrink: 0; text-align: center; }
+    .plan-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 800; color: #0f2a1e; margin-bottom: 6px; }
+    .plan-desc { font-size: 13.5px; color: #666; line-height: 1.6; }
+
+    .plan-bulk { background: #0f2a1e; border-radius: 14px; padding: 24px 26px; margin-bottom: 14px; position: relative; overflow: hidden; }
+    .plan-bulk::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(255,195,0,0.15) 0%, transparent 65%); }
+    .best-badge { display: inline-block; background: #ffc300; color: #0f2a1e; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 10.5px; letter-spacing: 0.7px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-bottom: 14px; }
+    .bulk-price-row { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 16px; position: relative; z-index: 1; flex-wrap: wrap; }
+    .bulk-price-box { background: #ffc300; border-radius: 10px; padding: 12px 20px; text-align: center; flex-shrink: 0; }
+    .bulk-price-main { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 26px; color: #0f2a1e; line-height: 1; display: block; }
+    .bulk-price-sub { font-size: 11px; font-weight: 600; color: rgba(15,42,30,0.7); text-transform: uppercase; letter-spacing: 0.4px; display: block; margin-top: 3px; }
+    .bulk-details { flex: 1; min-width: 180px; }
+    .bulk-details .plan-title { color: #fff; }
+    .bulk-details .plan-desc { color: rgba(255,255,255,0.68); }
+    .feature-list { list-style: none; margin-top: 4px; position: relative; z-index: 1; }
+    .feature-list li { font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.55; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: flex-start; gap: 8px; }
+    .feature-list li:last-child { border-bottom: none; }
+    .chk { color: #ffc300; flex-shrink: 0; margin-top: 1px; }
+    .pricing-note { background: rgba(255,195,0,0.07); border: 1px solid rgba(255,195,0,0.22); border-radius: 9px; padding: 14px 16px; font-size: 13.5px; color: #444; line-height: 1.65; margin-top: 8px; }
+    .pricing-note strong { color: #0f2a1e; }
+
+    /* CTA */
+    .cta-section { padding: 40px 40px; }
+    .cta-box { background: #0f2a1e; border-radius: 18px; padding: 36px 32px; text-align: center; position: relative; overflow: hidden; }
+    .cta-box::before { content: ''; position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(255,195,0,0.14) 0%, transparent 70%); }
+    .cta-box::after { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, rgba(255,195,0,0.1) 0%, transparent 70%); }
+    .cta-title { font-family: 'Sora', sans-serif; font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 12px; position: relative; z-index: 1; }
+    .cta-title span { color: #ffc300; }
+    .cta-subtitle { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 24px; position: relative; z-index: 1; }
+    .cta-btn { display: inline-block; background: #ffc300; color: #0f2a1e; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 15.5px; padding: 16px 36px; border-radius: 10px; text-decoration: none; position: relative; z-index: 1; }
+    .cta-note { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 14px; position: relative; z-index: 1; }
+
+    /* FOOTER */
+    .footer { background: #e8e1d5; padding: 28px 40px; text-align: center; }
+    .footer-logo { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 18px; color: #0f2a1e; margin-bottom: 10px; }
+    .footer-logo span { color: #b08800; }
+    .footer-tagline { font-size: 12.5px; color: #888; margin-bottom: 18px; }
+    .footer-links { margin-bottom: 16px; }
+    .footer-links a { font-size: 12px; color: #555; text-decoration: none; margin: 0 10px; }
+    .footer-fine { font-size: 11px; color: #aaa; line-height: 1.6; }
+    .footer-fine a { color: #aaa; }
+
+    @media (max-width: 600px) {
+      .email-wrapper { width: 100% !important; max-width: 100% !important; }
+    }
+    @media (max-width: 480px) {
+      .header, .locality-band { padding-left: 22px; padding-right: 22px; }
+      .header-top { flex-wrap: wrap; gap: 12px; }
+      .tag-pill { order: 3; width: 100%; text-align: center; }
+      .hero-headline { font-size: 28px; }
+      .stat-strip { padding: 16px 22px; flex-wrap: wrap; gap: 12px 0; justify-content: center; }
+      .stat-item { flex: 0 0 50%; min-width: 120px; }
+      .stat-div { display: none; }
+      .body-section, .steps-section, .locality-section, .industry-section, .testimonial-section, .pricing-section { padding: 28px 22px 0; }
+      .cta-section { padding: 28px 22px; }
+      .footer { padding: 22px; }
+      .divider { margin: 26px 22px 0; }
+      .steps-row { flex-wrap: wrap; gap: 20px; }
+      .steps-row::before { display: none; }
+      .step { flex: 1 1 45%; min-width: 120px; }
+      .locality-grid { grid-template-columns: 1fr; }
+      .locality-card.featured { grid-column: auto; }
+      .plan-free, .bulk-price-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0;">
+<div class="email-outer">
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="logo-block">
+        <div class="logo-dot">M</div>
+        <div class="logo-text">My<span>OMR</span>.in</div>
+      </div>
+      <div class="tag-pill">For Local Businesses</div>
+    </div>
+    <div class="hero-area">
+      <div class="eyebrow">📍 OMR's #1 Local Job Board</div>
+      <h1 class="hero-headline">Hire Local.<br>Hire <span class="hl">Faster.</span><br>Hire Free.</h1>
+      <p class="hero-subtext">Post your job openings on OMR's most trusted community platform. Connect directly with 1,000+ active job seekers living right here on Old Mahabalipuram Road — from Perungudi to Kelambakkam.</p>
+      <a href="https://myomr.in/omr-local-job-listings/post-job-omr.php?utm_source=email&amp;utm_medium=mail&amp;utm_campaign=job_posting_promo&amp;utm_content=hero_cta" class="cta-primary">Post a Job — It's Free →</a>
+    </div>
+  </div>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat-item">
+      <span class="stat-number">1,000+</span>
+      <span class="stat-label">Local Job Seekers</span>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-item">
+      <span class="stat-number">45 km</span>
+      <span class="stat-label">OMR Corridor</span>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-item">
+      <span class="stat-number">₹200</span>
+      <span class="stat-label">per extra post</span>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-item">
+      <span class="stat-number">30 days</span>
+      <span class="stat-label">per post validity</span>
+    </div>
+  </div>
+
+  <!-- LOCALITY BAND -->
+  <div class="locality-band">
+    <div class="locality-band-title">🗺️ Reaching job seekers across every OMR locality</div>
+    <div class="locality-scroll">
+      <span class="loc-tag active">Sholinganallur</span>
+      <span class="loc-tag active">Navalur</span>
+      <span class="loc-tag active">Perungudi</span>
+      <span class="loc-tag">Thoraipakkam</span>
+      <span class="loc-tag">Kelambakkam</span>
+      <span class="loc-tag">Kandanchavadi</span>
+      <span class="loc-tag">Karapakkam</span>
+      <span class="loc-tag">Medavakkam</span>
+      <span class="loc-tag">Thazhambur</span>
+      <span class="loc-tag">IT Corridor</span>
+      <span class="loc-tag">Tidel Park</span>
+      <span class="loc-tag">Padur</span>
+    </div>
+  </div>
+
+  <!-- WHY MYOMR -->
+  <div class="body-section">
+    <div class="section-label">Why MyOMR</div>
+    <h2 class="section-title">Stop fishing in the ocean.<br>Fish in your lake.</h2>
+    <p class="section-body">Big job portals flood you with CVs from across Chennai. MyOMR is different — every candidate is from OMR. Candidates who know Sholinganallur traffic, don't need relocation support, and are genuinely invested in staying local.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <div>
+          <div class="why-title">Hyper-Local Audience Only</div>
+          <div class="why-desc">Every applicant lives or works along OMR — Perungudi, Sholinganallur, Navalur, Thoraipakkam, Kelambakkam and more. Zero irrelevant applications from other parts of Chennai.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <div>
+          <div class="why-title">Faster Offers, Longer Retention</div>
+          <div class="why-desc">Local candidates mean same-day interviews, faster onboarding, and far less attrition. People who live near your office stay longer — and that saves you real money.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <div>
+          <div class="why-title">Direct Connect — No Middlemen</div>
+          <div class="why-desc">Candidates apply straight to you. No agency commissions. No premium portal subscriptions. You own the hiring relationship from day one.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📱</div>
+        <div>
+          <div class="why-title">Built for OMR Commuters</div>
+          <div class="why-desc">Most OMR job seekers browse and apply from their phones during their commute on the stretch. Your listing is optimised for every screen, every device.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <div class="steps-section">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Live in under 5 minutes.</h2>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Register Free</div>
+        <div class="step-desc">Create your employer profile — no credit card needed.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Post Your Job</div>
+        <div class="step-desc">Add role, salary, requirements and submit.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Get Applications</div>
+        <div class="step-desc">OMR candidates apply with resumes directly to you.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Hire!</div>
+        <div class="step-desc">Connect, interview, close — done.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- LOCALITY DEEP DIVE -->
+  <div class="locality-section">
+    <div class="section-label">Locality Intelligence</div>
+    <h2 class="section-title">Your candidates already live<br>minutes from your office.</h2>
+    <p class="section-body">OMR is Chennai's most talent-dense corridor. Here's the talent pool right at your doorstep.</p>
+    <div class="locality-grid">
+      <div class="locality-card featured">
+        <div class="locality-name">🏙️ IT Corridor — Sholinganallur to Tidel Park</div>
+        <div class="locality-desc">The heart of OMR. Dense with IT professionals, freshers from nearby colleges, and skilled support staff. If you're hiring for tech or tech-adjacent roles, this is your primary talent pool.</div>
+      </div>
+      <div class="locality-card">
+        <div class="locality-name">📍 Perungudi</div>
+        <div class="locality-desc">Gateway to OMR. Mix of IT, retail, and service industry talent — high volume of experienced mid-level candidates.</div>
+      </div>
+      <div class="locality-card">
+        <div class="locality-name">📍 Navalur</div>
+        <div class="locality-desc">Growing residential zone. Strong pool of freshers and young professionals seeking roles close to home.</div>
+      </div>
+      <div class="locality-card">
+        <div class="locality-name">📍 Thoraipakkam</div>
+        <div class="locality-desc">Dense residential area. High demand for hospitality, retail, and service roles from candidates who want to avoid long commutes.</div>
+      </div>
+      <div class="locality-card">
+        <div class="locality-name">📍 Kelambakkam & Beyond</div>
+        <div class="locality-desc">Fast-growing end of the corridor. Teaching, healthcare, and operations talent actively looking to work locally.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- INDUSTRIES -->
+  <div class="industry-section">
+    <div class="section-label">All Industries</div>
+    <h2 class="section-title">Whatever your business,<br>we've got your hire.</h2>
+    <div class="industry-list">
+      <div class="ind-item">💻 IT & Tech</div>
+      <div class="ind-item">🏥 Healthcare</div>
+      <div class="ind-item">📚 Education</div>
+      <div class="ind-item">🛍️ Retail</div>
+      <div class="ind-item">🍽️ Food & Hospitality</div>
+      <div class="ind-item">🏗️ Real Estate</div>
+      <div class="ind-item">🚗 Logistics</div>
+      <div class="ind-item">💼 Finance</div>
+      <div class="ind-item">🎨 Creative & Design</div>
+      <div class="ind-item">📦 Operations</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TESTIMONIAL -->
+  <div class="testimonial-section">
+    <div class="section-label">Community Voice</div>
+    <h2 class="section-title">OMR businesses trust MyOMR.</h2>
+    <div class="testi-card">
+      <p class="testi-text">"We posted three openings at once — front desk, kitchen assistant, and delivery exec. All three filled within 10 days, all candidates from Sholinganallur and Navalur. The bulk pricing is incredibly reasonable for what you get — nothing else on the market even comes close for local OMR hiring."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Ramesh K.</div>
+          <div class="testi-biz">Restaurant Owner, Sholinganallur</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRICING (last section before CTA) -->
+  <div class="pricing-section">
+    <div class="section-label">Simple, Transparent Pricing</div>
+    <h2 class="section-title">The most cost-effective way<br>to hire local talent on OMR.</h2>
+    <p class="pricing-intro">No subscription traps. No surprise invoices. One simple model — start free, scale affordably. Cheaper than a single hour with a placement consultant.</p>
+
+    <div class="plan-free">
+      <div class="free-badge-box">FREE</div>
+      <div>
+        <div class="plan-title">Single Job Post — Free</div>
+        <div class="plan-desc">Post your first job opening at zero cost. Reach 1,000+ local OMR job seekers and receive direct applications. Perfect for businesses hiring one role at a time, with no commitment whatsoever.</div>
+      </div>
+    </div>
+
+    <div class="plan-bulk">
+      <div class="best-badge">⭐ Most Cost-Effective · Recommended for Bulk Hiring</div>
+      <div class="bulk-price-row">
+        <div class="bulk-price-box">
+          <span class="bulk-price-main">₹200</span>
+          <span class="bulk-price-sub">per extra post</span>
+        </div>
+        <div class="bulk-details">
+          <div class="plan-title">Bulk Hiring Plan</div>
+          <div class="plan-desc">Start on the base plan, then add as many job posts as you need at just ₹200 each. Every post stays live for 30 full days — hire for multiple roles simultaneously.</div>
+        </div>
+      </div>
+      <ul class="feature-list">
+        <li><span class="chk">✓</span> Each additional job post: flat ₹200 only — no tiers, no surprises</li>
+        <li><span class="chk">✓</span> Every post stays live for 30 days from publish date</li>
+        <li><span class="chk">✓</span> All posts reach the same 1,000+ hyper-local OMR audience</li>
+        <li><span class="chk">✓</span> Post for 5 roles simultaneously — pay only ₹1,000 total</li>
+        <li><span class="chk">✓</span> Direct applications — zero agency commission or placement fees</li>
+        <li><span class="chk">✓</span> Candidates from YOUR locality — Sholinganallur, Navalur, Perungudi & more</li>
+      </ul>
+    </div>
+
+    <div class="pricing-note">
+      💡 <strong>Compare the math:</strong> A single agency placement for an entry-level role in OMR typically costs ₹5,000–₹15,000. With MyOMR's bulk plan, you can post 5 jobs for ₹1,000 and reach a genuinely local audience — that's the smartest hiring spend in the corridor.
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-box">
+      <h2 class="cta-title">Ready to find your<br>next <span>OMR hire?</span></h2>
+      <p class="cta-subtitle">Join hundreds of local businesses already using MyOMR to hire smarter, faster, and closer to home.</p>
+      <a href="https://myomr.in/omr-local-job-listings/post-job-omr.php?utm_source=email&amp;utm_medium=mail&amp;utm_campaign=job_posting_promo&amp;utm_content=final_cta" class="cta-btn">Post Your First Job Free →</a>
+      <p class="cta-note">First post free &nbsp;·&nbsp; Bulk posts from ₹200 each &nbsp;·&nbsp; 30-day validity per post</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">My<span>OMR</span>.in</div>
+    <div class="footer-tagline">OMR's Local Community Platform — News, Jobs, Events & More</div>
+    <div class="footer-links">
+      <a href="https://myomr.in?utm_source=email&amp;utm_medium=mail&amp;utm_campaign=job_posting_promo&amp;utm_content=footer_home">Home</a>
+      <a href="https://myomr.in/jobs-in-omr-chennai.php?utm_source=email&amp;utm_medium=mail&amp;utm_campaign=job_posting_promo&amp;utm_content=footer_browse">Browse Jobs</a>
+      <a href="https://myomr.in/omr-local-job-listings/post-job-omr.php?utm_source=email&amp;utm_medium=mail&amp;utm_campaign=job_posting_promo&amp;utm_content=footer_post">Post a Job</a>
+      <a href="https://myomr.in/about-myomr-omr-community-portal.php?utm_source=email&amp;utm_medium=mail&amp;utm_campaign=job_posting_promo&amp;utm_content=footer_about">About Us</a>
+    </div>
+    <p class="footer-fine">
+      You're receiving this because you're a business along the OMR corridor.<br>
+      <a href="#">Unsubscribe</a> &nbsp;·&nbsp; <a href="#">View in browser</a><br><br>
+      © 2026 MyOMR.in &nbsp;·&nbsp; Old Mahabalipuram Road, Chennai, Tamil Nadu
+    </p>
+  </div>
+
+  <!-- Email open tracking pixel (fires when images load) -->
+  <img src="https://myomr.in/omr-local-job-listings/email-tracking-pixel.php?c=job_posting_promo&amp;t=employer_email" width="1" height="1" alt="" style="display:block;width:1px;height:1px;border:0;" />
+</div>
+</div>
+</body>
+</html>

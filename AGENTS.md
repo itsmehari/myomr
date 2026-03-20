@@ -43,6 +43,12 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 - **Logic:** Plan cap and helpers in `omr-local-job-listings/includes/job-functions-omr.php`; cap enforced in `process-job-omr.php`; admin auto-features package jobs in `admin/manage-jobs-omr.php`.
 - **Docs:** Package rules, pricing, subscriber lifecycle: `docs/product/EMPLOYER-PACK-PRODUCT.md`.
 
+### OMR Classified Ads (March 2026)
+
+- **Module:** `/omr-classified-ads/` — general classifieds (services, wanted, community notices); parallel to `/omr-buy-sell/` (used goods).
+- **DB:** `dev-tools/migrations/2026_03_20_create_omr_classified_ads.sql`; **admin:** `/omr-classified-ads/admin/manage-listings-omr.php` (uses site `requireAdmin()`).
+- **Docs:** `docs/product/OMR-CLASSIFIED-ADS-SPEC.md`, `docs/plans/OMR-CLASSIFIED-ADS-LAUNCH-PLAN.md`.
+
 ### Hostels & PGs
 
 - Component-based layout: `hero-hostels.php`, `filters-bar.php`, `property-cards.php`, `cta-owner.php`

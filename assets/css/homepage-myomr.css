@@ -1437,3 +1437,136 @@ input[type="email"]:focus-visible {
   color: var(--el-accent-dark);
   border-bottom-color: var(--el-accent-dark);
 }
+
+/* ========================================
+   Homepage — OMR Classified Ads (teal)
+======================================== */
+.classified-ads-homepage-section {
+  background: linear-gradient(160deg, #ecfeff 0%, #cffafe 45%, #e0f2fe 100%);
+  border-top: 3px solid #67e8f9;
+  border-bottom: 3px solid #67e8f9;
+  padding: var(--omr-section-padding-lg, 2.5rem) 1.5rem;
+}
+.classified-ads-homepage-section__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.classified-ads-homepage-section__header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+.classified-ads-homepage-section__title {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-weight: 700;
+  color: #0e7490;
+  margin-bottom: 0.5rem;
+}
+.classified-ads-homepage-section__tagline {
+  color: #155e75;
+  max-width: 42rem;
+  margin: 0 auto 1rem;
+  font-size: 1rem;
+}
+.classified-ads-homepage-section__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.classified-ads-homepage-section__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.classified-ads-homepage-section__btn--primary {
+  background: #0e7490;
+  color: #fff !important;
+}
+.classified-ads-homepage-section__btn--primary:hover {
+  background: #155e75;
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+.classified-ads-homepage-section__btn--secondary {
+  background: #fff;
+  color: #0e7490 !important;
+  border: 2px solid #0e7490;
+}
+.classified-ads-homepage-section__btn--secondary:hover {
+  background: #f0fdfa;
+  color: #155e75 !important;
+}
+.classified-ads-homepage-section__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.classified-ads-homepage-section__card {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 1rem 1.1rem;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #a5f3fc;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.classified-ads-homepage-section__card:hover {
+  box-shadow: 0 8px 24px rgba(14, 116, 144, 0.12);
+  border-color: #22d3ee;
+}
+.classified-ads-homepage-section__card-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ecfeff;
+  color: #0e7490;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+.classified-ads-homepage-section__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.classified-ads-homepage-section__card-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #0f172a;
+  line-height: 1.35;
+}
+.classified-ads-homepage-section__card-meta {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+.classified-ads-homepage-section__card-price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0e7490;
+}
+.classified-ads-homepage-section__card-price--muted {
+  font-weight: 500;
+  color: #94a3b8;
+}
+.classified-ads-homepage-section__empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #155e75;
+}
+.classified-ads-homepage-section__empty i {
+  font-size: 2.5rem;
+  opacity: 0.5;
+  margin-bottom: 0.75rem;
+}

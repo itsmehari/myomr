@@ -16,21 +16,85 @@ global $conn;
 
 // Check if employer is logged in
 $isLoggedIn = isEmployerLoggedIn();
+
+// SEO Meta
+$page_title = "Hire Local Talent in OMR — Post Jobs Free | MyOMR Employer Portal";
+$page_description = "Post job vacancies on OMR's #1 local job board. Reach 1000+ job seekers in Perungudi, Sholinganallur, Navalur, Thoraipakkam &amp; across the OMR corridor. Free for employers.";
+$page_keywords = "post job OMR, hire talent OMR Chennai, job vacancy Old Mahabalipuram Road, employer OMR, local hiring Chennai, jobs Perungudi Sholinganallur Navalur";
+$canonical_url = "https://myomr.in/omr-local-job-listings/employer-landing-omr.php";
+$og_image = "https://myomr.in/My-OMR-Logo.png";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hire Local Talent in OMR — Post Jobs Free | MyOMR Employer Portal</title>
+    <title><?php echo htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8'); ?></title>
+    <meta name="description" content="<?php echo htmlspecialchars($page_description, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="keywords" content="<?php echo htmlspecialchars($page_keywords, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
+    <!-- GEO (local SEO) -->
+    <meta name="geo.region" content="IN-TN">
+    <meta name="geo.placename" content="Chennai, Old Mahabalipuram Road, OMR">
+    <meta name="geo.position" content="12.9064;80.2322">
+    <meta name="ICBM" content="12.9064, 80.2322">
+    <!-- Open Graph -->
+    <meta property="og:title" content="<?php echo htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($page_description, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="<?php echo htmlspecialchars($og_image, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:site_name" content="MyOMR">
+    <meta property="og:locale" content="en_IN">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($page_description, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="twitter:image" content="<?php echo htmlspecialchars($og_image, ENT_QUOTES, 'UTF-8'); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/job-listings-omr.css">
     <link rel="stylesheet" href="assets/omr-jobs-unified-design.css">
     <link rel="stylesheet" href="/assets/css/footer.css">
-    
-    <!-- Google Analytics -->
-    <?php $ga_user_id = (int)($_SESSION['employer_id'] ?? 0); $ga_user_properties = ['user_type' => 'employer']; include '../components/analytics.php'; ?>
+    <!-- AEO: Structured data for AI/search engines -->
+    <script type="application/ld+json">
+    <?php
+    $webPageSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebPage',
+        'name' => $page_title,
+        'description' => $page_description,
+        'url' => $canonical_url,
+        'inLanguage' => 'en-IN',
+        'about' => [
+            '@type' => 'Place',
+            'name' => 'Old Mahabalipuram Road, Chennai',
+            'geo' => ['@type' => 'GeoCoordinates', 'latitude' => 12.9064, 'longitude' => 80.2322]
+        ]
+    ];
+    echo json_encode($webPageSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    ?>
+    </script>
+    <script type="application/ld+json">
+    <?php
+    $orgSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => 'MyOMR',
+        'url' => 'https://myomr.in/',
+        'logo' => 'https://myomr.in/My-OMR-Logo.png'
+    ];
+    echo json_encode($orgSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    ?>
+    </script>
+    <!-- Google Analytics 4 + Microsoft Clarity -->
+    <?php
+    $ga_user_id = (int)($_SESSION['employer_id'] ?? 0);
+    $ga_user_properties = ['user_type' => 'employer'];
+    $ga_content_group = 'Job Listings';
+    include ROOT_PATH . '/components/analytics.php';
+    ?>
     
     <style>
         .option-card {

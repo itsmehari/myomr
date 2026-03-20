@@ -273,3 +273,101 @@ When replicating a MyOMR feature to another project (e.g. banner ads to mycovai.
 ### Manual job posting (SQL)
 
 For support or one-off job posts (bypassing the normal employer form flow): insert/update `employers`, then insert into `job_postings` with `status='approved'`; ensure title/description are SEO-friendly. After insert, regenerate the job sitemap and consider submitting in Search Console. In application code, always use prepared statements; this note is for occasional manual SQL only. See [docs/workflows-pipelines/job-portal-workflow.md](docs/workflows-pipelines/job-portal-workflow.md) for the normal flow.
+
+---
+
+## Hostels & PGs bootstrap fatal — resilient require (March 2026)
+
+### What we did
+
+- Investigated live error on https://myomr.in/omr-hostels-pgs/ (blank page, PHP fatal).
+- Used browser tool to compare hub links: Hostels failed; Rent & Lease and Buy & Sell loaded.
+- Identified root cause: production was missing `omr-hostels-pgs/includes/error-reporting.php` while bootstrap required it unconditionally.
+- Implemented a resilient require so the page works even when that file is absent; applied the same pattern to Buy & Sell for consistency.
+
+### Key decisions
+
+1. **Root cause**  
+   `omr-hostels-pgs/includes/bootstrap.php` had `require_once __DIR__ . '/error-reporting.php';`. The file exists in the repo and is not gitignored; on production it was missing (e.g. stale or partial deploy). Unconditional require caused a fatal before any output.
+
+2. **Why only Hostels broke**  
+   Rent & Lease does not use a shared bootstrap; its `index.php` requires `error-reporting.php` directly, and that file was present on server. Buy & Sell uses a bootstrap that also requires `error-reporting.php`; that file was present. So only `omr-hostels-pgs/includes/` was missing the file.
+
+3. **Resilient require pattern**  
+   Load optional/support files only if they exist so a missing file never fatals:
+   ```php
+   $err_report = __DIR__ . '/error-reporting.php';
+   if (file_exists($err_report)) {
+       require_once $err_report;
+   }
+   ```
+   This restores the page immediately and prevents the same failure if the file is ever missing again.
+
+4. **Apply to both bootstrap modules**  
+   Hostels and Buy & Sell both use `includes/bootstrap.php` that required `error-reporting.php`. We applied the same pattern to both so neither module can fatal on a missing error-reporting file.
+
+### Files involved
+
+- `omr-hostels-pgs/includes/bootstrap.php` — resilient require for `error-reporting.php`.
+- `omr-buy-sell/includes/bootstrap.php` — same pattern.
+- `.cpanel.yml` — deploys via `cp -R omr-hostels-pgs ...`; in theory the file should be copied; ops should redeploy and confirm `omr-hostels-pgs/includes/error-reporting.php` exists on server.
+
+### Investigation method
+
+- Grep for `error-reporting.php` and bootstrap usage across the repo.
+- Check that `omr-hostels-pgs/includes/error-reporting.php` exists locally and is not in `.gitignore`.
+- Use browser MCP to open Hostels, Rent & Lease, and Buy & Sell and compare page state (title, refs) to confirm only Hostels failed.
+
+### Takeaway
+
+For **module bootstrap files** that pull in optional or environment-specific includes (e.g. error-reporting, dev helpers): use `file_exists()` before `require_once` so a missing file does not fatal. Redeploy to ensure all expected files are present on production; the resilient pattern is a safety net, not a substitute for correct deployment.
+
+---
+
+## CTA modals + homepage ad/Buy & Sell layout (March 2026)
+
+### What we did
+
+- Fixed CTA modals (Hire on OMR, Employer Pack, Job alerts) so they work in Chrome and look consistent in Firefox: no raw markup in flow, no overlapping, one modal at a time, Adobe-style design.
+- Merged the homepage top ad with the Buy & Sell section in a single row: 65% Buy & Sell (left), 35% ad (right); removed the standalone top ad block that consumed vertical space.
+- Added auto-show behaviour: one modal on first visit per session (after ~1.5s), then one modal every 5 minutes in rotation (Post job → Employer Pack → Subscribe → repeat).
+- Synced changes to GitHub (commit + push to `origin main`).
+
+### Key decisions
+
+1. **Modal visibility depends on the framework**  
+   `components/modal-cta.php` uses Bootstrap 5 markup (`.modal.fade`, `.modal-dialog`) and `bootstrap.Modal` in JS. The homepage and other pages using the main footer did **not** load Bootstrap 5, so modals had no `display: none` and no show/hide logic — they appeared as unstyled blocks and could overlap. Fix: load Bootstrap 5 CSS and JS where the component is used (we did it in `components/footer.php` before including modal-cta), and add **defensive CSS** so the three CTA modal IDs are hidden by default and only shown when they have the `.show` class. That way even before Bootstrap runs, they never appear in the document flow.
+
+2. **Defensive CSS in a global stylesheet**  
+   Added rules in `assets/css/main.css` (loaded on all pages) scoped to `#omrCtaPostJob`, `#omrCtaEmployerPack`, `#omrCtaSubscribe`: `display: none !important` by default, and `display: block !important` when `.show` is present. This acts as a fallback for any page that might render the footer before Bootstrap CSS is applied.
+
+3. **Two modal systems coexist**  
+   The codebase has (a) a legacy overlay: `#modalOverlay` + `core/modal.js` / `core/modal.css`; (b) Bootstrap CTA modals in the footer. Don’t mix them. The defensive and Adobe-style CSS are scoped to the CTA modal IDs so the legacy modal is unaffected.
+
+4. **Adobe-style overrides in a separate file**  
+   Created `assets/css/modal-cta-adobe.css` (loaded after Bootstrap in the footer) to override only the CTA modals: dimmed backdrop, max-width 480px, rounded corners, shadow, clear header/close/body/footer, MyOMR green for primary buttons. No change to modal HTML structure; all look-and-feel in CSS.
+
+5. **Homepage: one row 65/35 instead of stacked ad + section**  
+   Removed the full-width `omr_ad_slot_row('homepage-top', 2)` block. Wrapped the Buy & Sell include and a single `omr_ad_slot('homepage-top', '336x280')` in a grid row (`.homepage-buysell-ad-row`) with `65fr 35fr` at 992px and single column below. Right column holds one ad; left column gets the existing Buy & Sell section. This saves vertical space and keeps the ad visible without dominating.
+
+6. **Buy & Sell in a narrower column**  
+   When the section sits in the 65% column, three card columns felt cramped. In `homepage-myomr.css`, scoped overrides for `.homepage-buysell-ad-row__left .buy-sell-homepage-section__cards` cap the grid at 2 columns at all breakpoints (no 3-column layout in that context).
+
+7. **Auto-show: first visit + 5‑minute rotation**  
+   Used `sessionStorage`: (a) `myomr_cta_first_visit_shown` — if unset, show the first modal after 1.5s and set it so we don’t show again on refresh in the same session; (b) `myomr_cta_rotation_index` — which modal to show next (0, 1, 2). On first visit we show index 0 and set next to 1. A `setInterval(5 * 60 * 1000)` closes any open CTA modal and shows the next in rotation, then increments the stored index. So over time users see Post job → Employer Pack → Subscribe → Post job → …
+
+8. **Git / PowerShell**  
+   On Windows PowerShell, command chaining uses `;` not `&&`. For “upload/sync to GitHub”: `git add -A`, `git commit -m "..."`, `git push origin main` (with existing `origin` pointing at the GitHub repo).
+
+### Files involved
+
+- `assets/css/main.css` — defensive hide/show for CTA modal IDs.
+- `components/footer.php` — Bootstrap 5 CSS link, `modal-cta-adobe.css` link, Bootstrap 5 JS script, then `modal-cta.php`.
+- `assets/css/modal-cta-adobe.css` — new; Adobe-style overrides for CTA modals.
+- `components/modal-cta.php` — Bootstrap modal markup; JS for triggers, close, first-visit pop, 5‑min rotation.
+- `index.php` — removed top ad block; added `.homepage-buysell-ad-row` with left (Buy & Sell include) and right (single ad slot).
+- `assets/css/homepage-myomr.css` — `.homepage-buysell-ad-row` (grid 65fr/35fr, stacked on small screens), `.homepage-buysell-ad-row__right` and ad slot styles, Buy & Sell max 2 columns when inside `__left`.
+
+### Takeaway
+
+When a **UI component depends on a framework** (e.g. Bootstrap) that isn’t loaded on every page: either load that framework on every page that includes the component (e.g. in the footer before the component) or accept that the component will break there. Add **defensive CSS** (hide by default, show only when the framework adds a “shown” class) so the component never appears as raw markup in the flow. For **homepage layout**, merging an ad with a content section in one row (e.g. 65/35) can reduce vertical space and keep the ad visible; limit the content column’s internal grid when it’s narrower so cards stay readable. For **recurring modals**, first-visit (sessionStorage) + fixed-interval rotation (setInterval + stored index) is a simple, session-scoped pattern.

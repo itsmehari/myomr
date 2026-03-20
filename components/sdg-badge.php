@@ -37,6 +37,7 @@ if (!isset($sdg_position)) {
 /**
  * Auto-detect SDG badges based on current page
  */
+if (!function_exists('autoDetectSDGBadges')) {
 function autoDetectSDGBadges() {
     $path = $_SERVER['REQUEST_URI'] ?? '';
     $path = parse_url($path, PHP_URL_PATH);
@@ -121,6 +122,7 @@ function autoDetectSDGBadges() {
     
     // Default: No badges
     return [];
+}
 }
 
 // Only render if badges are configured

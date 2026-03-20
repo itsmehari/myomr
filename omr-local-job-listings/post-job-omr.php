@@ -81,16 +81,39 @@ if (empty($_SESSION['csrf_token'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $page_title; ?></title>
     <meta name="description" content="<?php echo $page_description; ?>">
-    <meta name="keywords" content="post job OMR, job vacancy Chennai, hire employees OMR, job listing OMR">
+    <meta name="keywords" content="post job OMR, job vacancy Chennai, hire employees OMR, job listing OMR, Old Mahabalipuram Road jobs">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
-    
+    <!-- GEO (local SEO) -->
+    <meta name="geo.region" content="IN-TN">
+    <meta name="geo.placename" content="Chennai, Old Mahabalipuram Road, OMR">
+    <meta name="geo.position" content="12.9064;80.2322">
+    <meta name="ICBM" content="12.9064, 80.2322">
     <!-- Open Graph -->
     <meta property="og:title" content="<?php echo $page_title; ?>">
     <meta property="og:description" content="<?php echo $page_description; ?>">
     <meta property="og:url" content="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://myomr.in/My-OMR-Logo.png">
-    
+    <!-- AEO: Structured data for AI/search engines -->
+    <script type="application/ld+json">
+    <?php
+    $postJobSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebPage',
+        'name' => $page_title,
+        'description' => $page_description,
+        'url' => $canonical_url,
+        'inLanguage' => 'en-IN',
+        'about' => [
+            '@type' => 'Place',
+            'name' => 'Old Mahabalipuram Road, Chennai',
+            'geo' => ['@type' => 'GeoCoordinates', 'latitude' => 12.9064, 'longitude' => 80.2322]
+        ]
+    ];
+    echo json_encode($postJobSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    ?>
+    </script>
     <!-- Google Analytics -->
     <?php $ga_user_id = (int)($_SESSION['employer_id'] ?? 0); $ga_user_properties = ['user_type' => 'employer']; include ROOT_PATH . '/components/analytics.php'; ?>
     

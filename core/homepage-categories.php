@@ -22,6 +22,8 @@ $cats = [
   ['label' => 'Jobs', 'url' => '/omr-local-job-listings/', 'icon' => 'fas fa-briefcase', 'highlight' => true, 'table' => null],
   ['label' => 'Events', 'url' => '/omr-local-events/', 'icon' => 'fas fa-calendar-day', 'highlight' => true, 'table' => 'event_listings'],
   ['label' => 'Rent & Lease', 'url' => '/omr-rent-lease/', 'icon' => 'fas fa-house', 'highlight' => true, 'table' => 'rent_lease_properties'],
+  ['label' => 'Buy & Sell', 'url' => '/omr-buy-sell/', 'icon' => 'fas fa-shopping-bag', 'highlight' => false, 'table' => 'omr_buy_sell_listings'],
+  ['label' => 'Classified Ads', 'url' => '/omr-classified-ads/', 'icon' => 'fas fa-newspaper', 'highlight' => true, 'table' => null],
   ['label' => 'Hostels & PGs', 'url' => '/omr-hostels-pgs/', 'icon' => 'fas fa-bed', 'highlight' => false, 'table' => null],
   ['label' => 'Coworking', 'url' => '/omr-coworking-spaces/', 'icon' => 'fas fa-building', 'highlight' => false, 'table' => null],
   ['label' => 'Hospitals', 'url' => '/omr-listings/hospitals.php', 'icon' => 'fas fa-hospital', 'highlight' => false, 'table' => 'omrhospitalslist'],
@@ -49,6 +51,15 @@ foreach ($cats as $c) {
   }
   if ($c['label'] === 'Jobs' && $job_count !== null) {
     $count = $job_count;
+  }
+  if ($c['label'] === 'Classified Ads' && isset($conn) && $conn && !$conn->connect_error) {
+    $chk = @$conn->query("SHOW TABLES LIKE 'omr_classified_ads_listings'");
+    if ($chk && $chk->num_rows > 0) {
+      $r = @$conn->query("SELECT COUNT(*) c FROM omr_classified_ads_listings WHERE status = 'approved'");
+      if ($r && $row = $r->fetch_assoc()) {
+        $count = (int) $row['c'];
+      }
+    }
   }
   $home_categories[] = [
     'label'  => $c['label'],

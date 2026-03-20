@@ -43,6 +43,7 @@ $sitemaps = [
 
     // Buy & Sell
     ['loc' => $base . '/omr-buy-sell/sitemap.xml',                            'lastmod' => $today],
+    ['loc' => $base . '/omr-classified-ads/sitemap.xml',                      'lastmod' => $today],
 
     // Pentahive
     ['loc' => $base . '/pentahive/sitemap.xml',                               'lastmod' => $today],

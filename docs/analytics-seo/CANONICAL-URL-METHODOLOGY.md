@@ -85,6 +85,7 @@
 |--------|-------------------------|
 | Jobs | Slug: `/omr-local-job-listings/job/{id}/{slug}` |
 | Buy-Sell | Slug: `/omr-buy-sell/listing/{id}/{slug}` |
+| Classified Ads | Slug: `/omr-classified-ads/listing/{id}/{slug}` |
 | Hostels, Rent-Lease, Coworking | Query-string (e.g. `?id=X`). Prefer slug when adding new modules or refactoring. |
 
 ---

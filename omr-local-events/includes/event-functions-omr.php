@@ -56,6 +56,10 @@ function getCategoryBySlug(string $slug): ?array {
         if (!isset($conn) || !$conn || $conn->connect_error) { return null; }
         $sql = "SELECT id, name, slug FROM event_categories WHERE slug = ? AND is_active = 1 LIMIT 1";
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log('Events: getCategoryBySlug prepare failed: ' . $conn->error);
+            return null;
+        }
         $stmt->bind_param('s', $slug);
         $stmt->execute();
         $res = $stmt->get_result();
@@ -121,6 +125,10 @@ function getEvents(array $filters, int $limit, int $offset): array {
                 FROM event_listings $whereSql $order LIMIT ? OFFSET ?";
 
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log('Events: getEvents prepare failed: ' . $conn->error);
+            return [];
+        }
         if ($types) {
             $typesFull = $types . 'ii';
             $bindValues = $params;
@@ -176,6 +184,10 @@ function getLocalityCounts(int $limit = 15): array {
                 WHERE status IN ('scheduled','ongoing') AND locality IS NOT NULL AND locality != ''
                 GROUP BY locality ORDER BY cnt DESC LIMIT ?";
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log('Events: getLocalityCounts prepare failed: ' . $conn->error);
+            return [];
+        }
         $stmt->bind_param('i', $limit);
         $stmt->execute();
         $res = $stmt->get_result();
@@ -199,6 +211,10 @@ function getFeaturedEvents(int $limit = 2): array {
                 FROM event_listings WHERE featured = 1 AND status IN ('scheduled','ongoing')
                 ORDER BY start_datetime ASC LIMIT ?";
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log('Events: getFeaturedEvents prepare failed: ' . $conn->error);
+            return [];
+        }
         $stmt->bind_param('i', $limit);
         $stmt->execute();
         $res = $stmt->get_result();
@@ -254,6 +270,10 @@ function getEventCount(array $filters): int {
         $whereSql = 'WHERE ' . implode(' AND ', $where);
         $sql = "SELECT COUNT(*) AS cnt FROM event_listings $whereSql";
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log('Events: getEventCount prepare failed: ' . $conn->error);
+            return 0;
+        }
         if ($types) {
             $stmt->bind_param($types, ...$params);
         }
@@ -273,6 +293,10 @@ function getEventBySlug(string $slug): ?array {
         if (!isset($conn) || !$conn || $conn->connect_error) { return null; }
         $sql = "SELECT * FROM event_listings WHERE slug = ? LIMIT 1";
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log('Events: getEventBySlug prepare failed: ' . $conn->error);
+            return null;
+        }
         $stmt->bind_param('s', $slug);
         $stmt->execute();
         $res = $stmt->get_result();
@@ -289,6 +313,10 @@ function getCategoryById(int $id): ?array {
         if (!isset($conn) || !$conn || $conn->connect_error) { return null; }
         $sql = "SELECT id, name, slug FROM event_categories WHERE id = ? AND is_active = 1 LIMIT 1";
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log('Events: getCategoryById prepare failed: ' . $conn->error);
+            return null;
+        }
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $res = $stmt->get_result();
@@ -324,6 +352,10 @@ function getEventsByVenue(string $venueLabel, int $limit, int $offset): array {
                 FROM event_listings WHERE status IN ('scheduled','ongoing') AND location = ?
                 ORDER BY start_datetime ASC LIMIT ? OFFSET ?";
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log('Events: getEventsByVenue prepare failed: ' . $conn->error);
+            return [];
+        }
         $stmt->bind_param('sii', $venueLabel, $limit, $offset);
         $stmt->execute();
         $res = $stmt->get_result();
@@ -342,6 +374,10 @@ function getEventCountByVenue(string $venueLabel): int {
         if (!isset($conn) || !$conn || $conn->connect_error) { return 0; }
         $sql = "SELECT COUNT(*) AS cnt FROM event_listings WHERE status IN ('scheduled','ongoing') AND location = ?";
         $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            error_log('Events: getEventCountByVenue prepare failed: ' . $conn->error);
+            return 0;
+        }
         $stmt->bind_param('s', $venueLabel);
         $stmt->execute();
         $res = $stmt->get_result();

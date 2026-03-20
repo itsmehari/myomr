@@ -40,7 +40,8 @@ require_once ROOT_PATH . '/components/page-bootstrap.php';
 | `/omr-local-job-listings/` | Job portal |
 | `/omr-hostels-pgs/` | Hostels & PGs |
 | `/omr-rent-lease/` | Rent & lease |
-| `/omr-buy-sell/` | Buy & sell classifieds |
+| `/omr-buy-sell/` | Buy & sell (used goods) |
+| `/omr-classified-ads/` | OMR Classified Ads (services, wanted, notices) |
 | `/omr-local-events/` | Events |
 | `/local-news/` | Articles (article.php) |
 | `/omr-listings/` | Directories (schools, banks, etc.) |
