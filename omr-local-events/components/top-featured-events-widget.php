@@ -25,7 +25,7 @@ if (empty($items)) { return; }
     <ul class="list-unstyled mb-0">
       <?php foreach ($items as $ev): ?>
         <li class="mb-2">
-          <a href="/omr-local-events/event-detail-omr.php?slug=<?php echo urlencode($ev['slug']); ?>" class="text-decoration-none">
+          <a href="/omr-local-events/event/<?php echo urlencode($ev['slug']); ?>" class="text-decoration-none">
             <strong><?php echo htmlspecialchars($ev['title']); ?></strong>
           </a>
           <div class="small text-muted">

@@ -1,8 +1,5 @@
 <?php
-if (!defined('ROOT_PATH')) define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__));
-require_once __DIR__ . '/includes/error-reporting.php';
-require_once __DIR__ . '/../core/omr-connect.php';
-require_once __DIR__ . '/includes/event-functions-omr.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 $slug = isset($_GET['slug']) ? sanitizeInput($_GET['slug']) : '';
 $category = $slug ? getCategoryBySlug($slug) : null;
 if (!$category) {
@@ -43,11 +40,12 @@ $canonical_url = 'https://myomr.in/omr-local-events/category/' . urlencode($slug
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../omr-local-job-listings/assets/omr-jobs-unified-design.css" />
   <link rel="stylesheet" href="assets/events-dashboard.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
   <?php include __DIR__ . '/../components/analytics.php'; ?>
   <?php include __DIR__ . '/../components/organization-schema.php'; ?>
 </head>
 <body class="modern-page">
-<?php include __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav(); ?>
 
 <div class="dashboard-header">
   <div class="container d-flex flex-wrap justify-content-between align-items-center">
@@ -56,8 +54,8 @@ $canonical_url = 'https://myomr.in/omr-local-events/category/' . urlencode($slug
       <div class="small opacity-90">Find upcoming <?php echo htmlspecialchars($category['name']); ?> events across OMR</div>
     </div>
     <div class="dashboard-actions">
-      <a href="post-event-omr.php" class="btn-modern btn-modern-primary"><i class="fas fa-plus"></i><span>List an Event</span></a>
-      <a href="index.php" class="btn-modern btn-modern-secondary"><i class="fas fa-globe"></i><span>All Events</span></a>
+      <a href="/omr-local-events/post-event-omr.php" class="btn-modern btn-modern-primary"><i class="fas fa-plus"></i><span>List an Event</span></a>
+      <a href="/omr-local-events/" class="btn-modern btn-modern-secondary"><i class="fas fa-globe"></i><span>All Events</span></a>
     </div>
   </div>
 </div>
@@ -66,7 +64,7 @@ $canonical_url = 'https://myomr.in/omr-local-events/category/' . urlencode($slug
   <div class="container">
     <div class="card-modern mb-4">
       <div class="p-4">
-        <p>Explore <?php echo htmlspecialchars($category['name']); ?> events happening along the OMR IT corridor: Perungudi, Sholinganallur, Karapakkam, Navalur and beyond. New events are added daily—check back often or <a href="post-event-omr.php">list your event</a>.</p>
+        <p>Explore <?php echo htmlspecialchars($category['name']); ?> events happening along the OMR IT corridor: Perungudi, Sholinganallur, Karapakkam, Navalur and beyond. New events are added daily—check back often or <a href="/omr-local-events/post-event-omr.php">list your event</a>.</p>
         <h5 class="mt-3">Frequently Asked</h5>
         <ul class="mb-0">
           <li>Where are the most popular <?php echo htmlspecialchars($category['name']); ?> venues in OMR?</li>
@@ -91,7 +89,7 @@ $canonical_url = 'https://myomr.in/omr-local-events/category/' . urlencode($slug
               </div>
             </div>
             <div class="d-flex justify-content-between align-items-center">
-              <a href="event/<?php echo urlencode($ev['slug']); ?>" class="btn-modern btn-modern-secondary"><i class="fas fa-eye"></i><span>View</span></a>
+              <a href="/omr-local-events/event/<?php echo urlencode($ev['slug']); ?>" class="btn-modern btn-modern-secondary"><i class="fas fa-eye"></i><span>View</span></a>
               <a href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode($ev['location'] . ' ' . ($ev['locality'] ?? 'OMR Chennai')); ?>" target="_blank" class="btn-modern btn-modern-secondary"><i class="fas fa-map-marker-alt"></i><span>Map</span></a>
             </div>
           </div>
@@ -115,7 +113,7 @@ $canonical_url = 'https://myomr.in/omr-local-events/category/' . urlencode($slug
 
 <?php include __DIR__ . '/../components/omr-topic-hubs.php'; ?>
 
-<?php include __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

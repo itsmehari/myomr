@@ -117,8 +117,8 @@ function getEvents(array $filters, int $limit, int $offset): array {
             $params[] = $filters['date_to'] . (strlen($filters['date_to']) === 10 ? ' 23:59:59' : '');
             $types .= 's';
         }
-        // Upcoming by start time
-        $order = "ORDER BY start_datetime ASC";
+        // Latest event date first (28 Mar, then 21 Mar, then older)
+        $order = "ORDER BY start_datetime DESC";
         $whereSql = 'WHERE ' . implode(' AND ', $where);
 
         $sql = "SELECT id, title, slug, category_id, location, locality, start_datetime, end_datetime, is_free, price, tickets_url, image_url, featured
@@ -209,7 +209,7 @@ function getFeaturedEvents(int $limit = 2): array {
         if (!isset($conn) || !$conn || $conn->connect_error) { return []; }
         $sql = "SELECT id, title, slug, location, locality, start_datetime, is_free, price, tickets_url, image_url
                 FROM event_listings WHERE featured = 1 AND status IN ('scheduled','ongoing')
-                ORDER BY start_datetime ASC LIMIT ?";
+                ORDER BY start_datetime DESC LIMIT ?";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             error_log('Events: getFeaturedEvents prepare failed: ' . $conn->error);
@@ -350,7 +350,7 @@ function getEventsByVenue(string $venueLabel, int $limit, int $offset): array {
         if (!isset($conn) || !$conn || $conn->connect_error) { return []; }
         $sql = "SELECT id, title, slug, category_id, location, locality, start_datetime, end_datetime, is_free, price, image_url, featured
                 FROM event_listings WHERE status IN ('scheduled','ongoing') AND location = ?
-                ORDER BY start_datetime ASC LIMIT ? OFFSET ?";
+                ORDER BY start_datetime DESC LIMIT ? OFFSET ?";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             error_log('Events: getEventsByVenue prepare failed: ' . $conn->error);

@@ -17,23 +17,6 @@
  *   ?>
  */
 
-// SDG Badge Configuration
-// If $sdg_badges is not set, auto-detect based on current page
-
-if (!isset($sdg_badges) || empty($sdg_badges)) {
-    $sdg_badges = autoDetectSDGBadges();
-}
-
-// Layout: 'stacked' (vertical) or 'side-by-side' (horizontal)
-if (!isset($sdg_layout)) {
-    $sdg_layout = count($sdg_badges) > 1 ? 'stacked' : 'single';
-}
-
-// Position: 'bottom-left' (default), 'bottom-right', 'bottom-center'
-if (!isset($sdg_position)) {
-    $sdg_position = 'bottom-left';
-}
-
 /**
  * Auto-detect SDG badges based on current page
  */
@@ -123,6 +106,22 @@ function autoDetectSDGBadges() {
     // Default: No badges
     return [];
 }
+}
+
+// SDG Badge Configuration
+// If $sdg_badges is not set, auto-detect based on current page
+if (!isset($sdg_badges) || empty($sdg_badges)) {
+    $sdg_badges = autoDetectSDGBadges();
+}
+
+// Layout: 'stacked' (vertical) or 'side-by-side' (horizontal)
+if (!isset($sdg_layout)) {
+    $sdg_layout = count($sdg_badges) > 1 ? 'stacked' : 'single';
+}
+
+// Position: 'bottom-left' (default), 'bottom-right', 'bottom-center'
+if (!isset($sdg_position)) {
+    $sdg_position = 'bottom-left';
 }
 
 // Only render if badges are configured

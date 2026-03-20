@@ -1,6 +1,5 @@
-﻿<?php
-require_once __DIR__ . '/includes/error-reporting.php';
-require_once __DIR__ . '/../core/omr-connect.php';
+<?php
+require_once __DIR__ . '/includes/bootstrap.php';
 
 $page_title = 'Partner with MyOMR Events — Badges, Embeds &amp; Free Listings for OMR Organisations';
 $page_desc  = 'RWAs, colleges, NGOs and local organisations on OMR can embed the MyOMR Events badge, list events for free, and help their community stay connected.';
@@ -87,10 +86,11 @@ if (isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
     .section-heading { font-weight: 700; color: var(--brand); }
     .copy-btn { font-size: .8rem; }
   </style>
+  <link rel="stylesheet" href="/assets/css/footer.css" />
 </head>
 <body class="modern-page">
 
-<?php include __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav(); ?>
 
 <!-- HERO -->
 <section class="partner-hero">
@@ -255,7 +255,7 @@ if (isset($conn) && $conn instanceof mysqli && !$conn->connect_error) {
   </div>
 </section>
 
-<?php include __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
 </html>

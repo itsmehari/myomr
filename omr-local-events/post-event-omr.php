@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . '/includes/error-reporting.php';
-require_once __DIR__ . '/../core/omr-connect.php';
-require_once __DIR__ . '/includes/event-functions-omr.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 // Simple CSRF token
 session_start();
 if (empty($_SESSION['csrf_token'])) {
@@ -34,10 +32,11 @@ $og_url              = 'https://myomr.in/omr-local-events/post-event-omr.php';
   <link rel="stylesheet" href="../omr-local-job-listings/assets/post-job-form-modern.css" />
   <link rel="stylesheet" href="../omr-local-job-listings/assets/omr-jobs-unified-design.css" />
   <link rel="stylesheet" href="assets/events-dashboard.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
   <?php include __DIR__ . '/../components/analytics.php'; ?>
 </head>
 <body class="modern-page">
-<?php include __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav(); ?>
 
 <!-- Dashboard Header -->
 <div class="dashboard-header">
@@ -213,7 +212,7 @@ $og_url              = 'https://myomr.in/omr-local-events/post-event-omr.php';
   </div>
 </main>
 
-<?php include __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="assets/events-analytics.js"></script>
 <script>
 (function(){

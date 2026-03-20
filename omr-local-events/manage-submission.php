@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . '/includes/error-reporting.php';
-require_once __DIR__ . '/../core/omr-connect.php';
-require_once __DIR__ . '/includes/event-functions-omr.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/includes/organizer-manage.php';
 
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
@@ -67,9 +65,10 @@ if (!$error && $sub && $sub['status'] === 'submitted' && $_SERVER['REQUEST_METHO
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Manage Submission – MyOMR</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/footer.css" />
 </head>
 <body class="modern-page">
-<?php include __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav(); ?>
 
 <div class="container py-5">
   <h1 class="h3 mb-3">Manage Submission</h1>
@@ -133,7 +132,7 @@ if (!$error && $sub && $sub['status'] === 'submitted' && $_SERVER['REQUEST_METHO
   <?php endif; ?>
 </div>
 
-<?php include __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

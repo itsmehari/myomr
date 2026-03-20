@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/includes/error-reporting.php';
-require_once __DIR__ . '/../core/omr-connect.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 $submission_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $t = isset($_GET['t']) ? $_GET['t'] : '';
 ?>
@@ -13,10 +12,11 @@ $t = isset($_GET['t']) ? $_GET['t'] : '';
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../omr-local-job-listings/assets/omr-jobs-unified-design.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
   <?php include __DIR__ . '/../components/analytics.php'; ?>
 </head>
 <body class="modern-page">
-<?php include __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav(); ?>
 
 <div class="hero-modern">
   <div class="container">
@@ -45,7 +45,7 @@ $t = isset($_GET['t']) ? $_GET['t'] : '';
   </div>
 </main>
 
-<?php include __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="assets/events-analytics.js"></script>
 <script>
   (function(){

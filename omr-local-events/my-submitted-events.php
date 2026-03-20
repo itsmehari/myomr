@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . '/includes/error-reporting.php';
-require_once __DIR__ . '/../core/omr-connect.php';
-require_once __DIR__ . '/includes/event-functions-omr.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 if (empty($_SESSION['organizer_csrf'])) { $_SESSION['organizer_csrf'] = bin2hex(random_bytes(16)); }
 
@@ -48,11 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../omr-local-job-listings/assets/omr-jobs-unified-design.css" />
   <link rel="stylesheet" href="assets/events-dashboard.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
   <?php include __DIR__ . '/../components/analytics.php'; ?>
   <?php include __DIR__ . '/../components/organization-schema.php'; ?>
 </head>
 <body class="modern-page">
-<?php include __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav(); ?>
 
 <div class="dashboard-header">
   <div class="container d-flex flex-wrap justify-content-between align-items-center">
@@ -122,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 </main>
 
-<?php include __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,10 +1,6 @@
 <?php
 // Events Listing - MyOMR
-require_once __DIR__ . '/includes/error-reporting.php';
-require_once __DIR__ . '/../core/include-path.php';
-require_once ROOT_PATH . '/components/component-includes.php';
-require_once __DIR__ . '/../core/omr-connect.php';
-require_once __DIR__ . '/includes/event-functions-omr.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 
 $filters = [
   'search' => isset($_GET['search']) ? sanitizeInput($_GET['search']) : '',
@@ -60,6 +56,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
   <link rel="stylesheet" href="../omr-local-job-listings/assets/omr-jobs-unified-design.css" />
   <link rel="stylesheet" href="../omr-local-job-listings/assets/post-job-form-modern.css" />
   <link rel="stylesheet" href="assets/events-dashboard.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
   <?php include __DIR__ . '/../components/analytics.php'; ?>
   <?php
   if (!defined('_GA_JSON_FLAGS')) {
@@ -80,7 +77,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 </head>
 <body class="modern-page">
 <?php require_once __DIR__ . '/../components/skip-link.php'; ?>
-<?php include __DIR__ . '/../components/main-nav.php'; ?>
+<?php omr_nav(); ?>
 
 <!-- Dashboard Header -->
 <div class="dashboard-header">
@@ -134,7 +131,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
     </div>
 
     <!-- Filters -->
-    <form class="card-modern mb-4 dashboard-toolbar" method="get">
+    <form class="card-modern mb-4 dashboard-toolbar" method="get" action="/omr-local-events/">
       <div class="">
         <div class="row g-3">
           <div class="col-md-4">
@@ -186,7 +183,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
         </div>
         <div class="mt-3 d-flex gap-3">
           <button class="btn-modern btn-modern-primary" type="submit"><i class="fas fa-filter"></i><span>Apply Filters</span></button>
-          <a class="btn-modern btn-modern-secondary" href="index.php"><i class="fas fa-rotate-left"></i><span>Reset</span></a>
+          <a class="btn-modern btn-modern-secondary" href="/omr-local-events/"><i class="fas fa-rotate-left"></i><span>Reset</span></a>
         </div>
         <div class="mt-2 d-flex gap-2 flex-wrap">
           <?php
@@ -290,7 +287,7 @@ if (!empty($events)) {
           'addressCountry' => 'IN'
         ]
       ],
-      'url' => 'https://myomr.in/omr-local-events/event-detail-omr.php?slug=' . urlencode($ev['slug'])
+      'url' => 'https://myomr.in/omr-local-events/event/' . urlencode($ev['slug'])
     ];
     if (!empty($ev['end_datetime'])) {
       $event['endDate'] = date('c', strtotime($ev['end_datetime']));
@@ -303,7 +300,7 @@ if (!empty($events)) {
         '@type' => 'Offer',
         'price' => $ev['price'],
         'priceCurrency' => 'INR',
-        'url' => 'https://myomr.in/omr-local-events/event-detail-omr.php?slug=' . urlencode($ev['slug'])
+        'url' => 'https://myomr.in/omr-local-events/event/' . urlencode($ev['slug'])
       ];
     }
     $ld[] = $event;
@@ -312,7 +309,7 @@ if (!empty($events)) {
 }
 ?>
 
-<?php include __DIR__ . '/../components/footer.php'; ?>
+<?php omr_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/events-analytics.js"></script>
 

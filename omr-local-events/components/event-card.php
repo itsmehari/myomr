@@ -35,10 +35,10 @@ $compact = !empty($compact);
       <span class="event-card__date"><i class="far fa-calendar-alt"></i> <?php echo date('M d, Y g:i a', strtotime($ev['start_datetime'])); ?></span>
       <span class="event-card__location"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($ev['location']); ?><?php echo !empty($ev['locality']) ? ' · ' . htmlspecialchars($ev['locality']) : ''; ?></span>
       <?php if (!empty($locSlug) && !$compact): ?>
-        <a class="event-card__locality-tag" href="locality.php?slug=<?php echo urlencode($locSlug); ?>">#<?php echo htmlspecialchars($ev['locality']); ?></a>
+        <a class="event-card__locality-tag" href="/omr-local-events/locality/<?php echo urlencode($locSlug); ?>">#<?php echo htmlspecialchars($ev['locality']); ?></a>
       <?php endif; ?>
       <?php if (!empty($ev['location']) && !$compact): $venueSlug = locationToVenueSlug($ev['location']); ?>
-        <a class="event-card__venue-tag" href="venue.php?slug=<?php echo urlencode($venueSlug); ?>">@ <?php echo htmlspecialchars($ev['location']); ?></a>
+        <a class="event-card__venue-tag" href="/omr-local-events/venue/<?php echo urlencode($venueSlug); ?>">@ <?php echo htmlspecialchars($ev['location']); ?></a>
       <?php endif; ?>
     </div>
     <div class="event-card__actions">
