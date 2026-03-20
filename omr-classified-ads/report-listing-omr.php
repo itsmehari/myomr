@@ -26,22 +26,25 @@ $submitted = isset($_GET['submitted']);
 <title><?= htmlspecialchars($page_title) ?></title>
 <meta name="robots" content="noindex">
 <?php include ROOT_PATH . '/components/analytics.php'; ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
 <?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
 <?php omr_nav('main'); ?>
 
-<main id="main-content" class="container py-4">
+<main id="main-content" class="container ca-form-shell py-4">
   <?php if ($submitted): ?>
-  <div class="alert alert-success">Thank you. Your report will be reviewed.</div>
-  <a href="/omr-classified-ads/<?= htmlspecialchars(getClassifiedAdsDetailPath($listing_id, $listing['title'])) ?>" class="btn btn-outline-secondary">Back to listing</a>
+  <div class="ca-auth-card text-center py-4">
+    <div class="ca-success-icon mx-auto mb-3" style="width:3.5rem;height:3.5rem;font-size:1.5rem"><i class="fas fa-check" aria-hidden="true"></i></div>
+    <p class="alert alert-success border-0 mb-3">Thank you. Your report will be reviewed.</p>
+    <a href="/omr-classified-ads/<?= htmlspecialchars(getClassifiedAdsDetailPath($listing_id, $listing['title'])) ?>" class="btn btn-outline-secondary rounded-pill fw-semibold">Back to listing</a>
+  </div>
   <?php else: ?>
-  <h1 class="h2 mb-4">Report listing</h1>
-  <p class="mb-3">Reporting: <strong><?= htmlspecialchars($listing['title']) ?></strong></p>
+  <div class="ca-form-panel">
+  <p class="ca-auth-kicker">Moderation</p>
+  <h1 class="ca-display mb-3 fs-3">Report listing</h1>
+  <p class="mb-3 text-muted">Reporting: <strong class="text-dark"><?= htmlspecialchars($listing['title']) ?></strong></p>
   <form method="post" action="process-report-omr.php">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
     <input type="hidden" name="listing_id" value="<?= (int) $listing_id ?>">
@@ -59,12 +62,14 @@ $submitted = isset($_GET['submitted']);
       <label class="form-label" for="notes">Details (optional)</label>
       <textarea name="notes" id="notes" class="form-control" rows="3"></textarea>
     </div>
-    <button type="submit" class="btn btn-danger">Submit</button>
-    <a href="/omr-classified-ads/<?= htmlspecialchars(getClassifiedAdsDetailPath($listing_id, $listing['title'])) ?>" class="btn btn-outline-secondary ms-2">Cancel</a>
+    <button type="submit" class="btn btn-danger rounded-pill px-4 fw-semibold">Submit report</button>
+    <a href="/omr-classified-ads/<?= htmlspecialchars(getClassifiedAdsDetailPath($listing_id, $listing['title'])) ?>" class="btn btn-outline-secondary ms-2 rounded-pill fw-semibold">Cancel</a>
   </form>
+  </div>
   <?php endif; ?>
 </main>
 
 <?php omr_footer(); ?>
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 </body>
 </html>

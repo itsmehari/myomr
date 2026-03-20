@@ -79,11 +79,7 @@ if (isset($listing['price']) && $listing['price'] > 0) {
 echo json_encode($schema, JSON_UNESCAPED_SLASHES);
 ?>
 </script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/omr-classified-ads/assets/classified-ads-omr.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
@@ -92,15 +88,15 @@ echo json_encode($schema, JSON_UNESCAPED_SLASHES);
 
 <main id="main-content">
 <div class="container py-4">
-  <nav aria-label="Breadcrumb" class="mb-3">
-    <ol class="breadcrumb">
+  <nav aria-label="Breadcrumb" class="ca-breadcrumb mb-3">
+    <ol class="breadcrumb mb-0">
       <li class="breadcrumb-item"><a href="/">Home</a></li>
       <li class="breadcrumb-item"><a href="/omr-classified-ads/">OMR Classified Ads</a></li>
       <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars(mb_strimwidth($listing['title'], 0, 50, '…')) ?></li>
     </ol>
   </nav>
 
-  <div class="row">
+  <div class="row g-4">
     <div class="col-lg-8">
       <?php if ($is_owner_pending): ?>
       <div class="alert alert-warning mb-3"><i class="fas fa-hourglass-half me-2"></i>This ad is <strong>pending approval</strong>. Only you can see this page until a moderator approves it.</div>
@@ -110,32 +106,32 @@ echo json_encode($schema, JSON_UNESCAPED_SLASHES);
       <div class="alert alert-warning mb-3"><i class="fas fa-clock me-2"></i>This listing has expired (10-day window).</div>
       <?php endif; ?>
 
-      <div class="bg-light rounded d-flex align-items-center justify-content-center mb-4 ca-detail-placeholder" style="min-height:200px"><i class="fas fa-bullhorn fa-4x text-muted"></i></div>
+      <div class="d-flex align-items-center justify-content-center mb-4 ca-detail-placeholder" aria-hidden="true"><i class="fas fa-bullhorn fa-4x"></i></div>
 
-      <h1 class="h2 mb-2"><?= htmlspecialchars($listing['title']) ?></h1>
-      <p class="text-muted"><i class="fas fa-map-marker-alt me-1"></i><?= htmlspecialchars($listing['locality']) ?> · <span class="badge bg-secondary"><?= htmlspecialchars($listing['category_name'] ?? '') ?></span></p>
+      <h1 class="ca-article-title"><?= htmlspecialchars($listing['title']) ?></h1>
+      <p class="ca-article-meta mb-2"><i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i><?= htmlspecialchars($listing['locality']) ?><?php if (!empty($listing['category_name'])): ?> · <span class="ca-cat-pill d-inline-block"><?= htmlspecialchars($listing['category_name']) ?></span><?php endif; ?></p>
       <?php if (!empty($listing['poster_name'])): ?>
-      <p class="small text-muted">Posted by <?= htmlspecialchars($listing['poster_name']) ?></p>
+      <p class="small text-muted mb-3">Posted by <?= htmlspecialchars($listing['poster_name']) ?></p>
       <?php endif; ?>
 
       <?php if (isset($listing['price']) && $listing['price'] > 0): ?>
-      <p class="h4 text-primary mb-3">₹<?= number_format($listing['price']) ?></p>
+      <p class="ca-price-tag mb-3">₹<?= number_format($listing['price']) ?></p>
       <?php else: ?>
-      <p class="h6 text-muted mb-3">Price not listed — contact poster</p>
+      <p class="text-muted mb-3 fw-medium">Price not listed — contact poster</p>
       <?php endif; ?>
 
-      <div class="mb-4"><?= nl2br(htmlspecialchars($listing['description'] ?? '')) ?></div>
+      <div class="ca-article-body mb-4"><?= nl2br(htmlspecialchars($listing['description'] ?? '')) ?></div>
 
       <?php omr_ad_slot('classified-ads-detail-mid', '336x280'); ?>
 
       <?php if (!empty($related)): ?>
-      <h2 class="h5 mb-3">More in this category</h2>
+      <h2 class="ca-related-heading">More in this category</h2>
       <div class="row g-3">
         <?php foreach ($related as $r): ?>
         <div class="col-6 col-md-3">
-          <div class="card h-100">
+          <div class="card h-100 ca-related-card">
             <div class="card-body p-2">
-              <a href="/omr-classified-ads/<?= htmlspecialchars(getClassifiedAdsDetailPath((int) $r['id'], $r['title'])) ?>" class="text-decoration-none text-dark small"><?= htmlspecialchars(mb_strimwidth($r['title'], 0, 40, '…')) ?></a>
+              <a href="/omr-classified-ads/<?= htmlspecialchars(getClassifiedAdsDetailPath((int) $r['id'], $r['title'])) ?>" class="text-decoration-none small fw-semibold ca-related-card__link"><?= htmlspecialchars(mb_strimwidth($r['title'], 0, 40, '…')) ?></a>
             </div>
           </div>
         </div>
@@ -145,41 +141,41 @@ echo json_encode($schema, JSON_UNESCAPED_SLASHES);
     </div>
 
     <div class="col-lg-4">
-      <div class="alert alert-warning mb-3 small">
+      <div class="alert ca-safety-note mb-3 small py-2 px-3">
         <strong>Safety:</strong> Meet in person when possible. Do not pay strangers in advance.
       </div>
-      <div class="card sticky-top">
+      <div class="card ca-contact-panel sticky-top border-0">
         <div class="card-body">
-          <h3 class="h6">Contact</h3>
+          <h3>Contact</h3>
           <?php if ($show_phone_plain && !empty($listing['contact_phone'])): ?>
-          <p class="mb-2"><a href="tel:<?= htmlspecialchars($listing['contact_phone']) ?>" class="btn btn-outline-primary w-100"><i class="fas fa-phone me-2"></i>Call</a></p>
+          <p class="mb-2"><a href="tel:<?= htmlspecialchars($listing['contact_phone']) ?>" class="btn btn-outline-dark w-100 fw-semibold" style="border-radius:10px"><i class="fas fa-phone me-2" aria-hidden="true"></i>Call</a></p>
           <?php
           $phone_digits = preg_replace('/\D/', '', $listing['contact_phone'] ?? '');
             $wa_msg = rawurlencode("Hi, I'm interested in: " . ($listing['title'] ?? '') . " - " . $canonical_url);
             $wa_href = strlen($phone_digits) >= 10 ? ('https://wa.me/91' . substr($phone_digits, -10) . '?text=' . $wa_msg) : ('https://wa.me/?text=' . $wa_msg);
           ?>
-          <p class="mb-2"><a href="<?= htmlspecialchars($wa_href) ?>" class="btn btn-success w-100" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp</a></p>
+          <p class="mb-2"><a href="<?= htmlspecialchars($wa_href) ?>" class="btn w-100 fw-semibold text-white" style="border-radius:10px;background:#25d366;border:none" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2" aria-hidden="true"></i>WhatsApp</a></p>
           <?php elseif (($listing['status'] ?? '') === 'approved' && !empty($listing['contact_phone'])): ?>
             <?php if ($viewer_id === null): ?>
             <p class="small text-muted">Log in to reveal the phone number (reduces spam).</p>
-            <a href="/omr-classified-ads/login-omr.php?redirect=<?= urlencode($_SERVER['REQUEST_URI'] ?? '') ?>" class="btn btn-primary w-100 mb-2">Log in to reveal</a>
+            <a href="/omr-classified-ads/login-omr.php?redirect=<?= urlencode($_SERVER['REQUEST_URI'] ?? '') ?>" class="btn w-100 mb-2 fw-semibold text-white ca-btn-post border-0">Log in to reveal</a>
             <?php else: ?>
             <div id="ca-phone-reveal-wrap">
-              <button type="button" class="btn btn-primary w-100 mb-2" id="ca-reveal-btn" data-listing-id="<?= (int) $id ?>"><i class="fas fa-eye me-2"></i>Reveal phone</button>
+              <button type="button" class="btn w-100 mb-2 fw-semibold text-white ca-btn-post border-0" id="ca-reveal-btn" data-listing-id="<?= (int) $id ?>"><i class="fas fa-eye me-2" aria-hidden="true"></i>Reveal phone</button>
               <div id="ca-phone-result" class="d-none">
-                <p class="mb-2"><a href="#" class="btn btn-outline-primary w-100 ca-tel-link" id="ca-tel-btn"><i class="fas fa-phone me-2"></i><span id="ca-phone-text"></span></a></p>
-                <p class="mb-0"><a href="#" class="btn btn-success w-100" id="ca-wa-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2"></i>WhatsApp</a></p>
+                <p class="mb-2"><a href="#" class="btn btn-outline-dark w-100 ca-tel-link fw-semibold" style="border-radius:10px" id="ca-tel-btn"><i class="fas fa-phone me-2" aria-hidden="true"></i><span id="ca-phone-text"></span></a></p>
+                <p class="mb-0"><a href="#" class="btn w-100 fw-semibold text-white" style="border-radius:10px;background:#25d366;border:none" id="ca-wa-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-2" aria-hidden="true"></i>WhatsApp</a></p>
               </div>
             </div>
             <?php endif; ?>
           <?php endif; ?>
 
           <?php if (!empty($listing['contact_email']) && ($show_phone_plain || ($listing['status'] ?? '') === 'approved')): ?>
-          <a href="mailto:<?= htmlspecialchars($listing['contact_email']) ?>" class="btn btn-outline-secondary w-100 mb-2"><i class="fas fa-envelope me-2"></i>Email</a>
+          <a href="mailto:<?= htmlspecialchars($listing['contact_email']) ?>" class="btn btn-outline-secondary w-100 mb-2 fw-semibold" style="border-radius:10px"><i class="fas fa-envelope me-2" aria-hidden="true"></i>Email</a>
           <?php endif; ?>
 
           <?php if (($listing['status'] ?? '') === 'approved'): ?>
-          <a href="/omr-classified-ads/report-listing-omr.php?listing_id=<?= (int) $id ?>" class="btn btn-link w-100 text-muted small"><i class="fas fa-flag me-1"></i>Report</a>
+          <a href="/omr-classified-ads/report-listing-omr.php?listing_id=<?= (int) $id ?>" class="btn btn-link w-100 text-muted small"><i class="fas fa-flag me-1" aria-hidden="true"></i>Report</a>
           <?php endif; ?>
         </div>
       </div>
@@ -189,7 +185,7 @@ echo json_encode($schema, JSON_UNESCAPED_SLASHES);
 </main>
 
 <?php omr_footer(); ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 <?php if (($listing['status'] ?? '') === 'approved' && !$show_phone_plain && $viewer_id !== null && !empty($listing['contact_phone'])): ?>
 <script>
 (function(){

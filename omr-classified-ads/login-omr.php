@@ -24,18 +24,17 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/login-omr.php';
 <meta name="robots" content="noindex">
 <link rel="canonical" href="<?= htmlspecialchars($canonical_url) ?>">
 <?php include ROOT_PATH . '/components/analytics.php'; ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
 <?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
 <?php omr_nav('main'); ?>
 
-<main id="main-content" class="container py-4" style="max-width:480px">
-  <h1 class="h3 mb-3">Log in</h1>
+<main id="main-content" class="container ca-auth-wrap">
+  <div class="ca-auth-card">
+  <p class="ca-auth-kicker">OMR Classified Ads</p>
+  <h1 class="ca-display mb-2 fs-3">Log in</h1>
   <p class="text-muted small mb-4">New here? <a href="/omr-classified-ads/register-omr.php">Register</a></p>
 
   <?php
@@ -83,12 +82,12 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/login-omr.php';
   ?>
 
   <?php if ($google_ok): ?>
-  <a href="/omr-classified-ads/auth/google-start-omr.php" class="btn btn-outline-dark w-100 mb-3"><i class="fab fa-google me-2"></i>Continue with Google</a>
-  <p class="text-center text-muted small mb-3">or</p>
+  <a href="/omr-classified-ads/auth/google-start-omr.php" class="btn btn-outline-dark w-100 mb-3 py-2"><i class="fab fa-google me-2" aria-hidden="true"></i>Continue with Google</a>
+  <p class="ca-auth-divider">or</p>
   <?php endif; ?>
 
-  <p class="mb-3"><a href="/omr-classified-ads/phone-login-omr.php" class="btn btn-outline-primary w-100">Log in with phone (OTP)</a></p>
-  <p class="text-center text-muted small mb-3">or use email</p>
+  <p class="mb-3"><a href="/omr-classified-ads/phone-login-omr.php" class="btn btn-outline-primary w-100 py-2">Log in with phone (OTP)</a></p>
+  <p class="ca-auth-divider">email</p>
 
   <form method="post" action="process-login-omr.php">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
@@ -101,10 +100,12 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/login-omr.php';
       <label class="form-label" for="password">Password</label>
       <input type="password" name="password" id="password" class="form-control" required autocomplete="current-password">
     </div>
-    <button type="submit" class="btn btn-primary w-100">Log in</button>
+    <button type="submit" class="btn btn-primary w-100 py-2">Log in</button>
   </form>
+  </div>
 </main>
 
 <?php omr_footer(); ?>
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 </body>
 </html>

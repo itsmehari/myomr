@@ -24,17 +24,17 @@ $page_title = 'Log in with phone | OMR Classified Ads | MyOMR';
 <title><?= htmlspecialchars($page_title) ?></title>
 <meta name="robots" content="noindex">
 <?php include ROOT_PATH . '/components/analytics.php'; ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
 <?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
 <?php omr_nav('main'); ?>
 
-<main id="main-content" class="container py-4" style="max-width:480px">
-  <h1 class="h3 mb-3">Log in with phone</h1>
+<main id="main-content" class="container ca-auth-wrap">
+  <div class="ca-auth-card">
+  <p class="ca-auth-kicker">OMR Classified Ads</p>
+  <h1 class="ca-display mb-2 fs-3">Log in with phone</h1>
   <p class="text-muted small mb-4"><a href="/omr-classified-ads/login-omr.php">Email login</a> · <a href="/omr-classified-ads/register-omr.php">Register</a></p>
 
   <?php if (isset($_GET['phone_err'])): ?>
@@ -63,12 +63,14 @@ $page_title = 'Log in with phone | OMR Classified Ads | MyOMR';
       <label class="form-label" for="code">6-digit code</label>
       <input type="text" name="code" id="code" class="form-control" required maxlength="6" pattern="[0-9]{6}" inputmode="numeric" autocomplete="one-time-code">
     </div>
-    <button type="submit" class="btn btn-primary w-100">Verify &amp; log in</button>
+    <button type="submit" class="btn btn-primary w-100 py-2">Verify &amp; log in</button>
   </form>
   <p class="mt-3 small"><a href="/omr-classified-ads/phone-login-omr.php">Start over</a></p>
   <?php endif; ?>
+  </div>
 </main>
 
 <?php omr_footer(); ?>
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 </body>
 </html>

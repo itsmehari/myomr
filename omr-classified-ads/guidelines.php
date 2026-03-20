@@ -14,9 +14,7 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/guidelines.php';
 <meta name="description" content="<?= htmlspecialchars($page_desc) ?>">
 <link rel="canonical" href="<?= htmlspecialchars($canonical_url) ?>">
 <?php include ROOT_PATH . '/components/analytics.php'; ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
@@ -43,12 +41,14 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/guidelines.php';
       <p>Ads are <strong>reviewed before publishing</strong>. Approved listings stay live for <strong>10 days</strong>, then expire unless renewed.</p>
       <h2 class="h5 mt-4">Contact &amp; safety</h2>
       <p>Phone numbers are shown after <strong>Reveal</strong> (logged-in users) to reduce spam. Meet safely; never pay strangers in advance.</p>
-      <p class="mt-4"><a href="/omr-classified-ads/" class="btn btn-primary">Browse ads</a>
+      <p class="mt-4 ca-prose-cta"><a href="/omr-classified-ads/" class="btn btn-primary">Browse ads</a>
       <a href="/omr-classified-ads/post-listing-omr.php" class="btn btn-outline-primary ms-2">Post an ad</a></p>
     </div>
+  </div>
   </div>
 </main>
 
 <?php omr_footer(); ?>
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 </body>
 </html>

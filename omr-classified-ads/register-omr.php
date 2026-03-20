@@ -27,18 +27,17 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/register-omr.php';
 <meta name="robots" content="noindex">
 <link rel="canonical" href="<?= htmlspecialchars($canonical_url) ?>">
 <?php include ROOT_PATH . '/components/analytics.php'; ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
 <?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
 <?php omr_nav('main'); ?>
 
-<main id="main-content" class="container py-4" style="max-width:480px">
-  <h1 class="h3 mb-3">Create account</h1>
+<main id="main-content" class="container ca-auth-wrap">
+  <div class="ca-auth-card">
+  <p class="ca-auth-kicker">OMR Classified Ads</p>
+  <h1 class="ca-display mb-2 fs-3">Create account</h1>
   <p class="text-muted small mb-4">For posting on OMR Classified Ads. Already have one? <a href="/omr-classified-ads/login-omr.php">Log in</a></p>
 
   <?php if (isset($_GET['check_email'])): ?>
@@ -50,8 +49,8 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/register-omr.php';
   <?php endif; ?>
 
   <?php if (ca_google_oauth_config()): ?>
-  <a href="/omr-classified-ads/auth/google-start-omr.php" class="btn btn-outline-dark w-100 mb-3"><i class="fab fa-google me-2"></i>Continue with Google</a>
-  <p class="text-center text-muted small mb-3">or register with email</p>
+  <a href="/omr-classified-ads/auth/google-start-omr.php" class="btn btn-outline-dark w-100 mb-3 py-2"><i class="fab fa-google me-2" aria-hidden="true"></i>Continue with Google</a>
+  <p class="ca-auth-divider">register with email</p>
   <?php endif; ?>
 
   <form method="post" action="process-register-omr.php">
@@ -68,10 +67,12 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/register-omr.php';
       <label class="form-label" for="password">Password (min 8 characters)</label>
       <input type="password" name="password" id="password" class="form-control" required minlength="8" autocomplete="new-password">
     </div>
-    <button type="submit" class="btn btn-primary w-100">Register</button>
+    <button type="submit" class="btn btn-primary w-100 py-2">Register</button>
   </form>
+  </div>
 </main>
 
 <?php omr_footer(); ?>
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 </body>
 </html>

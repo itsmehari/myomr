@@ -71,14 +71,15 @@ if ($check && $check->num_rows > 0) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manage Classified Ads | Admin</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<?php include __DIR__ . '/../includes/admin-head-assets.php'; ?>
 </head>
-<body>
+<body class="classified-ads-admin">
 <?php require_once __DIR__ . '/../../components/skip-link.php'; ?>
 <main id="main-content" class="container py-4">
-  <h1 class="h3 mb-4">OMR Classified Ads — listings</h1>
-  <div class="mb-3">
+  <header class="ca-admin-header">
+    <h1>OMR Classified Ads — listings</h1>
+  </header>
+  <div class="mb-3 ca-admin-nav d-flex flex-wrap gap-2">
     <a href="?status=" class="btn btn-sm btn-outline-secondary">All</a>
     <a href="?status=pending" class="btn btn-sm btn-warning">Pending</a>
     <a href="?status=approved" class="btn btn-sm btn-success">Approved</a>
@@ -135,8 +136,9 @@ if ($check && $check->num_rows > 0) {
   <?php if (empty($listings)): ?>
   <p class="text-muted">No listings.</p>
   <?php endif; ?>
-  <a href="view-reports-omr.php" class="btn btn-outline-warning me-2">Reports</a>
+  <a href="view-reports-omr.php" class="btn btn-outline-dark me-2">Reports</a>
   <a href="index.php" class="btn btn-outline-secondary">Back</a>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

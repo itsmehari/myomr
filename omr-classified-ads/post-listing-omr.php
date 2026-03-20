@@ -28,11 +28,7 @@ if (empty($_SESSION['csrf_token'])) {
 <link rel="canonical" href="<?= htmlspecialchars($canonical_url) ?>">
 <?php include ROOT_PATH . '/components/analytics.php'; ?>
 <script>if (typeof gtag === 'function') gtag('event', 'post_listing_start', { event_category: 'classified_ads' });</script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/omr-classified-ads/assets/classified-ads-omr.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
@@ -40,8 +36,8 @@ if (empty($_SESSION['csrf_token'])) {
 <?php omr_nav('main'); ?>
 
 <main id="main-content">
-<div class="container py-4">
-  <h1 class="h2 mb-2">Post your ad <span class="fs-6 text-muted fw-normal">இடுகையிடு</span></h1>
+<div class="container ca-form-shell py-4">
+  <h1 class="ca-display mb-2">Post your ad <span class="ca-ta fs-5 fw-normal text-muted d-block d-sm-inline ms-sm-2">இடுகையிடு</span></h1>
   <p class="text-muted mb-4">Your ad will be reviewed before it goes live. No full-time jobs or property rent/sale — use <a href="/omr-local-job-listings/">Jobs</a> and <a href="/omr-rent-lease/">Rent &amp; Lease</a>.</p>
 
   <?php
@@ -57,6 +53,7 @@ if (empty($_SESSION['csrf_token'])) {
 
   <?php $pf = $_SESSION['ca_post_prefill'] ?? []; if (!empty($pf)) { unset($_SESSION['ca_post_prefill']); } ?>
 
+  <div class="ca-form-panel">
   <form method="post" action="process-listing-omr.php" class="needs-validation" novalidate>
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
 
@@ -105,13 +102,14 @@ if (empty($_SESSION['csrf_token'])) {
       <input type="email" name="contact_email" id="contact_email" class="form-control" value="<?= htmlspecialchars($pf['contact_email'] ?? '') ?>">
     </div>
 
-    <button type="submit" class="btn btn-success">Submit for review</button>
-    <a href="/omr-classified-ads/" class="btn btn-outline-secondary ms-2">Cancel</a>
+    <button type="submit" class="btn ca-btn-submit">Submit for review</button>
+    <a href="/omr-classified-ads/" class="btn btn-outline-secondary ms-2 rounded-pill fw-semibold">Cancel</a>
   </form>
+  </div>
 </div>
 </main>
 
 <?php omr_footer(); ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 </body>
 </html>

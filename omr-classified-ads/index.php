@@ -92,12 +92,7 @@ if (isset($_GET['registered'])) {
 }
 </script>
 <?php endif; ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/omr-classified-ads/assets/classified-ads-omr.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
@@ -105,39 +100,40 @@ if (isset($_GET['registered'])) {
 <?php omr_nav('main'); ?>
 
 <main id="main-content">
-<section class="ca-hero py-5" style="background:linear-gradient(135deg,#0e7490,#155e75);color:#fff;">
+<section class="ca-hero py-5" aria-labelledby="ca-hub-title">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-8">
-        <h1 class="h2 mb-2">OMR Classified Ads <span class="d-block d-md-inline fs-6 fw-normal opacity-90">உள்ளூர் விளம்பரங்கள்</span></h1>
-        <p class="mb-4 opacity-90">Have something to offer or need? Post in 2 minutes. Services, wanted ads, and community notices — not full-time jobs or property rent/sale (use our Jobs and Rent hubs).</p>
-        <form method="get" action="" class="d-flex flex-wrap gap-2" id="ca-search-form">
-          <input type="search" name="search" class="form-control" style="max-width:220px" placeholder="Search…" value="<?= htmlspecialchars($filters['search'] ?? '') ?>">
-          <select name="category_id" class="form-select" style="max-width:200px">
+    <div class="row align-items-start">
+      <div class="col-lg-10 col-xl-9">
+        <p class="ca-hero__kicker">MyOMR · Chennai OMR</p>
+        <h1 id="ca-hub-title" class="ca-hero__title">OMR Classified Ads <span class="ca-ta d-block d-md-inline fs-5 fw-normal mt-1 mt-md-0 ms-md-2">உள்ளூர் விளம்பரங்கள்</span></h1>
+        <p class="ca-hero__lede">Services, wanted posts, and neighbourhood notices — posted in minutes. For jobs and property, use our <a href="/omr-local-job-listings/" class="text-white text-decoration-underline">Jobs</a> and <a href="/omr-rent-lease/" class="text-white text-decoration-underline">Rent &amp; Lease</a> hubs.</p>
+        <form method="get" action="" class="ca-filter-bar" id="ca-search-form" role="search" aria-label="Search classified ads">
+          <input type="search" name="search" class="form-control" style="max-width:220px;flex:1 1 160px" placeholder="Search…" value="<?= htmlspecialchars($filters['search'] ?? '') ?>" aria-label="Keywords">
+          <select name="category_id" class="form-select" style="max-width:200px" aria-label="Category">
             <option value="">All categories</option>
             <?php foreach ($categories as $c): ?>
             <option value="<?= (int) $c['id'] ?>" <?= ($filters['category_id'] ?? '') == $c['id'] ? 'selected' : '' ?>><?= htmlspecialchars($c['name']) ?></option>
             <?php endforeach; ?>
           </select>
-          <input type="number" name="price_min" class="form-control" style="max-width:100px" placeholder="Min ₹" value="<?= htmlspecialchars($filters['price_min'] ?? '') ?>">
-          <input type="number" name="price_max" class="form-control" style="max-width:100px" placeholder="Max ₹" value="<?= htmlspecialchars($filters['price_max'] ?? '') ?>">
-          <select name="sort" class="form-select" style="max-width:150px">
+          <input type="number" name="price_min" class="form-control" style="max-width:100px" inputmode="numeric" placeholder="Min ₹" value="<?= htmlspecialchars($filters['price_min'] ?? '') ?>" aria-label="Minimum price">
+          <input type="number" name="price_max" class="form-control" style="max-width:100px" inputmode="numeric" placeholder="Max ₹" value="<?= htmlspecialchars($filters['price_max'] ?? '') ?>" aria-label="Maximum price">
+          <select name="sort" class="form-select" style="max-width:160px" aria-label="Sort order">
             <option value="newest" <?= ($filters['sort'] ?? 'newest') === 'newest' ? 'selected' : '' ?>>Newest first</option>
             <option value="price_asc" <?= ($filters['sort'] ?? '') === 'price_asc' ? 'selected' : '' ?>>Price: Low → High</option>
             <option value="price_desc" <?= ($filters['sort'] ?? '') === 'price_desc' ? 'selected' : '' ?>>Price: High → Low</option>
           </select>
-          <button type="submit" class="btn btn-light"><i class="fas fa-search me-1"></i> Search</button>
+          <button type="submit" class="btn ca-btn-search"><i class="fas fa-search me-1" aria-hidden="true"></i> Search</button>
         </form>
-        <div class="mt-3 d-flex gap-3 flex-wrap align-items-center">
-          <strong><?= number_format($total) ?></strong> live ads
-          <a href="/omr-classified-ads/post-listing-omr.php" class="btn btn-success btn-sm"><i class="fas fa-plus me-1"></i> Post ad — இடுகையிடு</a>
+        <div class="ca-hero-actions">
+          <span class="ca-stat"><strong><?= number_format($total) ?></strong> live <?= $total === 1 ? 'ad' : 'ads' ?></span>
+          <a href="/omr-classified-ads/post-listing-omr.php" class="btn btn-sm ca-btn-post"><i class="fas fa-plus me-1" aria-hidden="true"></i> Post ad — இடுகையிடு</a>
           <?php if (ca_user_id() === null): ?>
-          <a href="/omr-classified-ads/login-omr.php" class="btn btn-outline-light btn-sm">Log in</a>
-          <a href="/omr-classified-ads/register-omr.php" class="btn btn-outline-light btn-sm">Register</a>
+          <a href="/omr-classified-ads/login-omr.php" class="btn btn-sm ca-btn-ghost-light">Log in</a>
+          <a href="/omr-classified-ads/register-omr.php" class="btn btn-sm ca-btn-ghost-light">Register</a>
           <?php else: ?>
-          <span class="small opacity-90"><?= htmlspecialchars(ca_current_user()['display_name'] ?? 'You') ?></span>
-          <a href="/omr-classified-ads/account-omr.php" class="btn btn-outline-light btn-sm">Account</a>
-          <a href="/omr-classified-ads/logout-omr.php" class="btn btn-outline-light btn-sm">Log out</a>
+          <span class="small text-white-50"><?= htmlspecialchars(ca_current_user()['display_name'] ?? 'You') ?></span>
+          <a href="/omr-classified-ads/account-omr.php" class="btn btn-sm ca-btn-ghost-light">Account</a>
+          <a href="/omr-classified-ads/logout-omr.php" class="btn btn-sm ca-btn-ghost-light">Log out</a>
           <?php endif; ?>
         </div>
       </div>
@@ -145,43 +141,45 @@ if (isset($_GET['registered'])) {
   </div>
 </section>
 
-<div class="container py-3"><?php omr_ad_slot('classified-ads-index-top', '728x90'); ?></div>
+<div class="container ca-ad-wrap"><?php omr_ad_slot('classified-ads-index-top', '728x90'); ?></div>
 
 <section class="py-4">
   <div class="container">
-    <div class="d-flex flex-wrap gap-2 mb-3">
-      <a href="/omr-classified-ads/" class="btn btn-outline-secondary btn-sm <?= empty($filters['locality']) ? 'active' : '' ?>">All areas</a>
+    <div class="ca-chip-row mb-4">
+      <a href="/omr-classified-ads/" class="ca-chip <?= empty($filters['locality']) ? 'active' : '' ?>">All areas</a>
       <?php foreach ($localities as $loc): ?>
-      <a href="?<?= http_build_query(array_merge($filters, ['locality' => $loc, 'page' => 1])) ?>" class="btn btn-outline-secondary btn-sm <?= ($filters['locality'] ?? '') === $loc ? 'active' : '' ?>"><?= htmlspecialchars($loc) ?></a>
+      <a href="?<?= http_build_query(array_merge($filters, ['locality' => $loc, 'page' => 1])) ?>" class="ca-chip <?= ($filters['locality'] ?? '') === $loc ? 'active' : '' ?>"><?= htmlspecialchars($loc) ?></a>
       <?php endforeach; ?>
     </div>
 
     <?php if (empty($listings)): ?>
-    <div class="text-center py-5">
-      <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
-      <h2 class="h4">No listings yet</h2>
-      <p class="text-muted">Be the first to post — free for the OMR community.</p>
-      <a href="/omr-classified-ads/post-listing-omr.php" class="btn btn-success">Post your ad</a>
+    <div class="py-4">
+      <div class="ca-empty">
+        <div class="ca-empty__icon" aria-hidden="true"><i class="fas fa-newspaper"></i></div>
+        <h2>No listings yet</h2>
+        <p class="text-muted mb-4">Be the first to post — free for the OMR community.</p>
+        <a href="/omr-classified-ads/post-listing-omr.php" class="btn ca-btn-post">Post your ad</a>
+      </div>
     </div>
     <?php else: ?>
-    <div class="row g-3">
+    <div class="row g-4">
       <?php foreach ($listings as $item): ?>
       <?php $detailPath = getClassifiedAdsDetailPath((int) $item['id'], $item['title'] ?? null); ?>
       <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-img-top bg-light d-flex align-items-center justify-content-center ca-card-placeholder"><i class="fas fa-bullhorn fa-3x text-muted"></i></div>
-          <div class="card-body">
-            <span class="badge bg-secondary mb-2"><?= htmlspecialchars($item['category_name'] ?? '') ?></span>
-            <h3 class="h6 card-title"><a href="/omr-classified-ads/<?= htmlspecialchars($detailPath) ?>" class="text-decoration-none text-dark"><?= htmlspecialchars($item['title']) ?></a></h3>
-            <p class="card-text small text-muted mb-1"><i class="fas fa-map-marker-alt me-1"></i><?= htmlspecialchars($item['locality']) ?></p>
+        <article class="ca-listing-card">
+          <div class="ca-listing-card__media" aria-hidden="true"><i class="fas fa-bullhorn"></i></div>
+          <div class="ca-listing-card__body">
+            <?php if (!empty($item['category_name'])): ?><span class="ca-cat-pill"><?= htmlspecialchars($item['category_name']) ?></span><?php endif; ?>
+            <h3 class="ca-listing-card__title"><a href="/omr-classified-ads/<?= htmlspecialchars($detailPath) ?>"><?= htmlspecialchars($item['title']) ?></a></h3>
+            <p class="ca-listing-card__meta mb-0"><i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i><?= htmlspecialchars($item['locality']) ?></p>
             <?php if (isset($item['price']) && $item['price'] > 0): ?>
-            <p class="mb-0"><strong>₹<?= number_format($item['price']) ?></strong></p>
+            <p class="ca-listing-card__price mb-0">₹<?= number_format($item['price']) ?></p>
             <?php else: ?>
-            <p class="mb-0 text-muted small">Price optional / contact</p>
+            <p class="ca-listing-card__price ca-listing-card__price--muted mb-0">Contact for details</p>
             <?php endif; ?>
-            <a href="/omr-classified-ads/<?= htmlspecialchars($detailPath) ?>" class="btn btn-outline-primary btn-sm mt-2">View</a>
+            <a href="/omr-classified-ads/<?= htmlspecialchars($detailPath) ?>" class="ca-card-cta">View listing</a>
           </div>
-        </div>
+        </article>
       </div>
       <?php endforeach; ?>
     </div>
@@ -205,7 +203,7 @@ if (isset($_GET['registered'])) {
 <?php include ROOT_PATH . '/components/omr-topic-hubs.php'; ?>
 
 <?php omr_footer(); ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 <script>
 document.getElementById('ca-search-form')?.addEventListener('submit', function() {
   var inp = this.querySelector('input[name=search]');

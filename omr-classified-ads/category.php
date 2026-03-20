@@ -49,12 +49,7 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/category/' . rawurlencode(
 <link rel="canonical" href="<?= htmlspecialchars($canonical_url) ?>">
 <meta name="geo.region" content="IN-TN">
 <?php include ROOT_PATH . '/components/analytics.php'; ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/omr-classified-ads/assets/classified-ads-omr.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
@@ -62,40 +57,49 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/category/' . rawurlencode(
 <?php omr_nav('main'); ?>
 
 <main id="main-content">
-<section class="ca-hero py-4" style="background:linear-gradient(135deg,#0e7490,#155e75);color:#fff;">
+<section class="ca-hero py-4" aria-labelledby="ca-cat-title">
   <div class="container">
-    <h1 class="h2 mb-2"><?= htmlspecialchars($category['name']) ?></h1>
-    <p class="mb-0 opacity-90"><?= number_format($total) ?> listings</p>
+    <p class="ca-hero__kicker"><a href="/omr-classified-ads/" class="text-white-50 text-decoration-none">Classified Ads</a> · Category</p>
+    <h1 id="ca-cat-title" class="ca-hero__title mb-2"><?= htmlspecialchars($category['name']) ?></h1>
+    <p class="ca-hero__lede mb-0"><?= number_format($total) ?> <?= $total === 1 ? 'listing' : 'listings' ?></p>
   </div>
 </section>
 
 <section class="py-4">
   <div class="container">
-    <div class="d-flex flex-wrap gap-2 mb-3">
-      <a href="/omr-classified-ads/category/<?= htmlspecialchars($slug) ?>/" class="btn btn-outline-secondary btn-sm <?= empty($filters['locality']) ? 'active' : '' ?>">All areas</a>
+    <div class="ca-chip-row mb-4">
+      <a href="/omr-classified-ads/category/<?= htmlspecialchars($slug) ?>/" class="ca-chip <?= empty($filters['locality']) ? 'active' : '' ?>">All areas</a>
       <?php foreach ($localities as $loc): ?>
-      <a href="?locality=<?= urlencode($loc) ?>" class="btn btn-outline-secondary btn-sm <?= ($filters['locality'] ?? '') === $loc ? 'active' : '' ?>"><?= htmlspecialchars($loc) ?></a>
+      <a href="?locality=<?= urlencode($loc) ?>" class="ca-chip <?= ($filters['locality'] ?? '') === $loc ? 'active' : '' ?>"><?= htmlspecialchars($loc) ?></a>
       <?php endforeach; ?>
     </div>
     <?php if (empty($listings)): ?>
-    <div class="text-center py-5">
-      <h2 class="h4">No listings in this category yet</h2>
-      <a href="/omr-classified-ads/post-listing-omr.php" class="btn btn-success">Post your ad</a>
+    <div class="py-4">
+      <div class="ca-empty">
+        <div class="ca-empty__icon" aria-hidden="true"><i class="fas fa-folder-open"></i></div>
+        <h2>No listings in this category yet</h2>
+        <p class="text-muted mb-4">Start the board for <?= htmlspecialchars($category['name']) ?>.</p>
+        <a href="/omr-classified-ads/post-listing-omr.php" class="btn ca-btn-post">Post your ad</a>
+      </div>
     </div>
     <?php else: ?>
-    <div class="row g-3">
+    <div class="row g-4">
       <?php foreach ($listings as $item): ?>
       <?php $detailPath = getClassifiedAdsDetailPath((int) $item['id'], $item['title'] ?? null); ?>
       <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-img-top bg-light d-flex align-items-center justify-content-center ca-card-placeholder"><i class="fas fa-bullhorn fa-3x text-muted"></i></div>
-          <div class="card-body">
-            <h3 class="h6 card-title"><a href="/omr-classified-ads/<?= htmlspecialchars($detailPath) ?>" class="text-decoration-none text-dark"><?= htmlspecialchars($item['title']) ?></a></h3>
-            <p class="card-text small text-muted"><i class="fas fa-map-marker-alt me-1"></i><?= htmlspecialchars($item['locality']) ?></p>
-            <?php if (isset($item['price']) && $item['price'] > 0): ?><p class="mb-0"><strong>₹<?= number_format($item['price']) ?></strong></p><?php endif; ?>
-            <a href="/omr-classified-ads/<?= htmlspecialchars($detailPath) ?>" class="btn btn-outline-primary btn-sm mt-2">View</a>
+        <article class="ca-listing-card">
+          <div class="ca-listing-card__media" aria-hidden="true"><i class="fas fa-bullhorn"></i></div>
+          <div class="ca-listing-card__body">
+            <h3 class="ca-listing-card__title"><a href="/omr-classified-ads/<?= htmlspecialchars($detailPath) ?>"><?= htmlspecialchars($item['title']) ?></a></h3>
+            <p class="ca-listing-card__meta mb-0"><i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i><?= htmlspecialchars($item['locality']) ?></p>
+            <?php if (isset($item['price']) && $item['price'] > 0): ?>
+            <p class="ca-listing-card__price mb-0">₹<?= number_format($item['price']) ?></p>
+            <?php else: ?>
+            <p class="ca-listing-card__price ca-listing-card__price--muted mb-0">Contact for details</p>
+            <?php endif; ?>
+            <a href="/omr-classified-ads/<?= htmlspecialchars($detailPath) ?>" class="ca-card-cta">View listing</a>
           </div>
-        </div>
+        </article>
       </div>
       <?php endforeach; ?>
     </div>
@@ -117,6 +121,6 @@ $canonical_url = 'https://myomr.in/omr-classified-ads/category/' . rawurlencode(
 
 <?php include ROOT_PATH . '/components/omr-topic-hubs.php'; ?>
 <?php omr_footer(); ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 </body>
 </html>

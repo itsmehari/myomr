@@ -1271,18 +1271,21 @@ input[type="email"]:focus-visible {
    Attention-grabbing, SEO-strong block
 ======================================== */
 .elections-2026-homepage {
-  --el-bg: linear-gradient(160deg, #f0fdf4 0%, #dcfce7 40%, #ecfdf5 100%);
-  --el-border: #86efac;
+  --el-bg: linear-gradient(150deg, #f7fff9 0%, #e6faee 46%, #dcfce7 100%);
+  --el-border: #a7f3d0;
   --el-accent: var(--omr-green, #008552);
   --el-accent-dark: var(--omr-deep-green, #14532d);
   --el-text: var(--omr-text, #333);
   --el-muted: var(--omr-text-muted, #6b7280);
   background: var(--el-bg);
-  border-top: 3px solid var(--el-border);
-  border-bottom: 3px solid var(--el-border);
+  border: 1px solid #d1fae5;
+  border-radius: 22px;
+  box-shadow: 0 16px 34px rgba(20, 83, 45, 0.1);
   padding: var(--omr-section-padding-lg, 2.5rem) 1.5rem;
   position: relative;
   overflow: hidden;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .elections-2026-homepage::before {
@@ -1296,11 +1299,59 @@ input[type="email"]:focus-visible {
   pointer-events: none;
 }
 
+.elections-2026-homepage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 9% 85%, rgba(34, 197, 94, 0.12) 0, transparent 35%),
+    radial-gradient(circle at 88% 18%, rgba(16, 185, 129, 0.1) 0, transparent 30%);
+}
+
 .elections-2026-homepage .el-inner {
   max-width: var(--omr-max-width, 1280px);
   margin: 0 auto;
   position: relative;
   z-index: 1;
+}
+
+.elections-2026-homepage .el-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.15rem;
+}
+
+.elections-2026-homepage .el-main {
+  min-width: 0;
+}
+
+.elections-2026-homepage .el-sidebar {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.elections-2026-homepage .el-stat-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  text-align: left;
+}
+
+.elections-2026-homepage .el-stat-value {
+  font-family: var(--font-display, "Fraunces", serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--el-accent-dark);
+  line-height: 1.2;
+}
+
+.elections-2026-homepage .el-stat-label {
+  font-family: var(--font-body, "Poppins", sans-serif);
+  color: #4b5563;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
 }
 
 .elections-2026-homepage .el-badge {
@@ -1349,7 +1400,7 @@ input[type="email"]:focus-visible {
 .elections-2026-homepage .el-actions {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.75rem;
+  gap: 0.65rem;
   margin-bottom: 1.5rem;
 }
 
@@ -1369,9 +1420,9 @@ input[type="email"]:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem 1.25rem;
+  padding: 0.9rem 1rem;
   background: var(--omr-white, #fff);
-  border: 1px solid var(--el-border);
+  border: 1px solid #bbf7d0;
   border-radius: 12px;
   text-decoration: none;
   color: var(--el-accent-dark);
@@ -1382,7 +1433,7 @@ input[type="email"]:focus-visible {
 }
 
 .elections-2026-homepage .el-action-card:hover {
-  border-color: var(--el-accent);
+  border-color: #34d399;
   box-shadow: 0 4px 14px var(--omr-shadow-hover, rgba(20, 83, 45, 0.2));
   transform: translateY(-2px);
   color: var(--el-accent-dark);
@@ -1398,7 +1449,7 @@ input[type="email"]:focus-visible {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .elections-2026-homepage .el-cta-primary {
@@ -1438,100 +1489,173 @@ input[type="email"]:focus-visible {
   border-bottom-color: var(--el-accent-dark);
 }
 
+@media (min-width: 960px) {
+  .elections-2026-homepage .el-layout {
+    grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 1.2rem;
+  }
+}
+
 /* ========================================
-   Homepage — OMR Classified Ads (teal)
+   Homepage — OMR Classified Ads (editorial / gazette)
 ======================================== */
 .classified-ads-homepage-section {
-  background: linear-gradient(160deg, #ecfeff 0%, #cffafe 45%, #e0f2fe 100%);
-  border-top: 3px solid #67e8f9;
-  border-bottom: 3px solid #67e8f9;
+  background:
+    linear-gradient(165deg, #f7f2ea 0%, #efe8dc 48%, #f4eee4 100%);
+  border: 1px solid rgba(22, 27, 38, 0.1);
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(22, 27, 38, 0.08);
   padding: var(--omr-section-padding-lg, 2.5rem) 1.5rem;
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+.classified-ads-homepage-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 22%, rgba(194, 86, 33, 0.12) 0, transparent 32%),
+    radial-gradient(circle at 88% 72%, rgba(26, 35, 50, 0.06) 0, transparent 35%);
 }
 .classified-ads-homepage-section__inner {
   max-width: 1280px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 .classified-ads-homepage-section__header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 1.75rem;
 }
-.classified-ads-homepage-section__title {
-  font-family: var(--font-display, 'Manrope', sans-serif);
+.classified-ads-homepage-section__label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(194, 86, 33, 0.35);
+  color: #9e4218;
+  background: rgba(255, 255, 255, 0.82);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   font-weight: 700;
-  color: #0e7490;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+.classified-ads-homepage-section__title {
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-weight: 700;
+  color: #1a2332;
+  margin-bottom: 0.45rem;
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
 }
 .classified-ads-homepage-section__tagline {
-  color: #155e75;
-  max-width: 42rem;
-  margin: 0 auto 1rem;
-  font-size: 1rem;
+  color: #3d4a5c;
+  max-width: 48rem;
+  margin: 0 0 0.95rem;
+  font-size: 0.97rem;
+  line-height: 1.58;
+}
+.classified-ads-homepage-section__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 0.95rem;
+}
+.classified-ads-homepage-section__meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.33rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(22, 27, 38, 0.1);
+  color: #2a3544;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 .classified-ads-homepage-section__ctas {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .classified-ads-homepage-section__btn {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.55rem 1.15rem;
-  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.87rem;
   text-decoration: none;
   transition: transform 0.15s, box-shadow 0.15s;
+  border: 1px solid transparent;
 }
 .classified-ads-homepage-section__btn--primary {
-  background: #0e7490;
+  background: #c25621;
   color: #fff !important;
+  box-shadow: 0 9px 22px rgba(194, 86, 33, 0.32);
 }
 .classified-ads-homepage-section__btn--primary:hover {
-  background: #155e75;
+  background: #9e4218;
   color: #fff !important;
   transform: translateY(-1px);
 }
 .classified-ads-homepage-section__btn--secondary {
   background: #fff;
-  color: #0e7490 !important;
-  border: 2px solid #0e7490;
+  color: #1a2332 !important;
+  border: 1px solid rgba(22, 27, 38, 0.2);
 }
 .classified-ads-homepage-section__btn--secondary:hover {
-  background: #f0fdfa;
-  color: #155e75 !important;
+  background: #fffcf7;
+  color: #c25621 !important;
+  border-color: rgba(194, 86, 33, 0.4);
+}
+.classified-ads-homepage-section__btn--ghost {
+  background: transparent;
+  border-color: rgba(22, 27, 38, 0.22);
+  color: #2a3544 !important;
+}
+.classified-ads-homepage-section__btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(194, 86, 33, 0.35);
 }
 .classified-ads-homepage-section__cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1rem;
+  gap: 0.85rem;
 }
 .classified-ads-homepage-section__card {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   gap: 0.85rem;
-  align-items: flex-start;
-  padding: 1rem 1.1rem;
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid #a5f3fc;
+  align-items: center;
+  padding: 0.85rem 0.95rem;
+  background: #fffcf7;
+  border-radius: 14px;
+  border: 1px solid rgba(22, 27, 38, 0.1);
   text-decoration: none;
   color: inherit;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
 }
 .classified-ads-homepage-section__card:hover {
-  box-shadow: 0 8px 24px rgba(14, 116, 144, 0.12);
-  border-color: #22d3ee;
+  box-shadow: 0 14px 28px rgba(22, 27, 38, 0.1);
+  border-color: rgba(194, 86, 33, 0.35);
+  transform: translateY(-2px);
 }
 .classified-ads-homepage-section__card-icon {
   flex-shrink: 0;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.3rem;
+  height: 2.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ecfeff;
-  color: #0e7490;
+  background: rgba(194, 86, 33, 0.1);
+  color: #c25621;
   border-radius: 8px;
   font-size: 1.1rem;
 }
@@ -1554,19 +1678,42 @@ input[type="email"]:focus-visible {
 .classified-ads-homepage-section__card-price {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #0e7490;
+  color: #2a4d3f;
 }
 .classified-ads-homepage-section__card-price--muted {
   font-weight: 500;
   color: #94a3b8;
 }
+.classified-ads-homepage-section__card-arrow {
+  color: #c25621;
+  font-size: 0.82rem;
+  opacity: 0.75;
+}
 .classified-ads-homepage-section__empty {
   text-align: center;
   padding: 2rem 1rem;
-  color: #155e75;
+  color: #2a3544;
+  background: rgba(255, 255, 255, 0.75);
+  border: 2px dashed rgba(22, 27, 38, 0.12);
+  border-radius: 16px;
 }
 .classified-ads-homepage-section__empty i {
   font-size: 2.5rem;
   opacity: 0.5;
   margin-bottom: 0.75rem;
+}
+
+@media (max-width: 767px) {
+  .classified-ads-homepage-section__header {
+    text-align: center;
+  }
+
+  .classified-ads-homepage-section__tagline {
+    margin: 0 auto 0.95rem;
+  }
+
+  .classified-ads-homepage-section__meta,
+  .classified-ads-homepage-section__ctas {
+    justify-content: center;
+  }
 }

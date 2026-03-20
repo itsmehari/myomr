@@ -2,6 +2,10 @@
 
 General local classifieds (services, wanted, community notices) parallel to **Buy & Sell** (used goods).
 
+## UI (editorial theme)
+
+Public pages use **`includes/head-assets.php`** (Bootstrap 5, Font Awesome, **Poppins** + **Newsreader**, [`assets/classified-ads-omr.css`](assets/classified-ads-omr.css)) and **`includes/foot-scripts.php`** (Bootstrap JS for the main nav). Body class: `classified-ads-page`. Admin tools under `admin/` use [`includes/admin-head-assets.php`](includes/admin-head-assets.php) + [`assets/classified-ads-admin.css`](assets/classified-ads-admin.css) with body class `classified-ads-admin`. The homepage promo block is styled in [`assets/css/homepage-myomr.css`](../assets/css/homepage-myomr.css) (`.classified-ads-homepage-section`) to match the same palette.
+
 ## Setup
 
 1. **Migrations (core + auth tables):** from repo root, with DB credentials as in `core/omr-connect.php` (or override `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME` for remote runs):

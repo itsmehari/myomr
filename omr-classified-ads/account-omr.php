@@ -27,17 +27,17 @@ $pending = $_SESSION['ca_phone_otp_pending'] ?? '';
 <title><?= htmlspecialchars($page_title) ?></title>
 <meta name="robots" content="noindex">
 <?php include ROOT_PATH . '/components/analytics.php'; ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/assets/css/footer.css">
+<?php include __DIR__ . '/includes/head-assets.php'; ?>
 </head>
 <body class="classified-ads-page">
 
 <?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
 <?php omr_nav('main'); ?>
 
-<main id="main-content" class="container py-4" style="max-width:560px">
-  <h1 class="h3 mb-4">Your account</h1>
+<main id="main-content" class="container ca-auth-wrap ca-auth-wrap--wide">
+  <div class="ca-auth-card">
+  <p class="ca-auth-kicker">OMR Classified Ads</p>
+  <h1 class="ca-display mb-4 fs-3">Your account</h1>
 
   <?php if (isset($_GET['phone_ok'])): ?>
   <div class="alert alert-success">Phone number linked.</div>
@@ -46,12 +46,12 @@ $pending = $_SESSION['ca_phone_otp_pending'] ?? '';
   <div class="alert alert-danger small"><?= htmlspecialchars($_GET['phone_err'] === 'taken' ? 'That number is already on another account.' : 'Something went wrong.') ?></div>
   <?php endif; ?>
 
-  <ul class="list-group mb-4">
-    <li class="list-group-item"><strong>Email:</strong> <?= htmlspecialchars($u['email'] ?? '') ?></li>
-    <li class="list-group-item"><strong>Display name:</strong> <?= htmlspecialchars($u['display_name'] ?? '') ?></li>
-    <li class="list-group-item"><strong>Email verified:</strong> <?= !empty($u['email_verified']) ? 'Yes' : 'No' ?></li>
-    <li class="list-group-item"><strong>Google:</strong> <?= !empty($u['google_sub']) ? 'Connected' : 'Not connected' ?></li>
-    <li class="list-group-item"><strong>Phone:</strong> <?= !empty($u['phone_verified']) && !empty($u['phone_e164']) ? htmlspecialchars($u['phone_e164']) : 'Not linked' ?></li>
+  <ul class="list-group list-group-flush mb-4 rounded-3 border ca-account-list">
+    <li class="list-group-item d-flex justify-content-between align-items-start flex-wrap gap-1"><span class="text-muted small">Email</span><span class="fw-semibold text-break"><?= htmlspecialchars($u['email'] ?? '') ?></span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-start flex-wrap gap-1"><span class="text-muted small">Display name</span><span class="fw-semibold"><?= htmlspecialchars($u['display_name'] ?? '') ?></span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-start flex-wrap gap-1"><span class="text-muted small">Email verified</span><span class="fw-semibold"><?= !empty($u['email_verified']) ? 'Yes' : 'No' ?></span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-start flex-wrap gap-1"><span class="text-muted small">Google</span><span class="fw-semibold"><?= !empty($u['google_sub']) ? 'Connected' : 'Not connected' ?></span></li>
+    <li class="list-group-item d-flex justify-content-between align-items-start flex-wrap gap-1"><span class="text-muted small">Phone</span><span class="fw-semibold text-break"><?= !empty($u['phone_verified']) && !empty($u['phone_e164']) ? htmlspecialchars($u['phone_e164']) : 'Not linked' ?></span></li>
   </ul>
 
   <?php if ($google_on && empty($u['google_sub'])): ?>
@@ -84,10 +84,11 @@ $pending = $_SESSION['ca_phone_otp_pending'] ?? '';
   </form>
   <?php endif; ?>
 
-  <p class="mt-4"><a href="/omr-classified-ads/">Back to classifieds</a> · <a href="/omr-classified-ads/logout-omr.php">Log out</a></p>
+  <p class="mt-4 small"><a href="/omr-classified-ads/">Back to classifieds</a> · <a href="/omr-classified-ads/logout-omr.php">Log out</a></p>
+  </div>
 </main>
 
 <?php omr_footer(); ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<?php include __DIR__ . '/includes/foot-scripts.php'; ?>
 </body>
 </html>
