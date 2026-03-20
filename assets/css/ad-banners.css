@@ -1,6 +1,6 @@
 /**
  * Ad banner templates — standard IAB sizes (728x90, 336x280, 300x250, 320x50 mobile).
- * Rotating promotions: ResumeDoctor, MyCovai, ColourChemist, BSERI.
+ * Rotating promotions: ResumeDoctor, MyCovai, Colourchemist (design studio), BSERI.
  * Card-style layout; aligns with MyOMR section look (--omr-* vars when available).
  */
 
@@ -367,8 +367,9 @@
 }
 
 /* ========== ColourChemist — Industrial, precision --- */
+/* Colourchemist — graphic & web design studio */
 .omr-ad-banner--colourchemist {
-  background: linear-gradient(135deg, #1e3a5f 0%, #164e63 50%, #0d9488 100%);
+  background: linear-gradient(125deg, #1e1b4b 0%, #4c1d95 38%, #be185d 72%, #ea580c 100%);
   color: #fff;
   position: relative;
 }
@@ -380,13 +381,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 20px,
-    rgba(255, 255, 255, 0.03) 20px,
-    rgba(255, 255, 255, 0.03) 21px
-  );
+  background:
+    radial-gradient(circle at 15% 40%, rgba(255, 255, 255, 0.12) 0%, transparent 35%),
+    radial-gradient(circle at 85% 70%, rgba(251, 191, 36, 0.15) 0%, transparent 40%);
   pointer-events: none;
 }
 
@@ -416,10 +413,11 @@
 }
 
 .omr-ad-banner--colourchemist .omr-ad-headline {
-  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  font-family: Poppins, system-ui, sans-serif;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .omr-ad-banner--colourchemist.omr-ad-banner--728x90 .omr-ad-headline {

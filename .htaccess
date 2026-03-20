@@ -120,6 +120,9 @@ RewriteRule ^elections-2026/sitemap\.xml$ elections-2026/generate-sitemap.php [L
 # Root-level pages (files in sub-folders)
 RewriteRule ^contact-my-omr-team\.php$ weblog/contact-my-omr-team.php [L]
 RewriteRule ^citizens-charter-old-mahabali-puram-road\.php$ info/citizens-charter-old-mahabali-puram-road.php [L]
+# About My OMR — linked from nav/emails; works even if root PHP stub is missing (301 to canonical)
+RewriteRule ^about-myomr-omr-community-portal\.php$ /discover-myomr/overview.php [R=301,L]
+
 
 # Legacy redirect
 RewriteRule ^listings/search-and-post-jobs-job-vacancy-employment-platform-for-omr-chennai\.php$ omr-local-job-listings/index.php [R=301,L]

@@ -52,13 +52,13 @@ $omr_ads = [
     ],
     [
         'id'         => 'colourchemist-1',
-        'advertiser' => 'ColourChemist',
+        'advertiser' => 'Colourchemist',
         'url'        => 'https://colourchemist.co.in',
         'slot_ids'   => $omr_ad_slot_ids,
         'sizes'      => ['728x90', '336x280', '300x250', '320x50'],
         'design'     => 'colourchemist',
-        'headline'   => 'ColourChemist — Precision Chemicals',
-        'tagline'    => 'Dyes, pigments & specialty chemical solutions',
+        'headline'   => 'Colourchemist — Graphic & Web Design Studio',
+        'tagline'    => 'Branding, print & digital — logos, sites, campaigns',
         'active'     => true,
     ],
     [
