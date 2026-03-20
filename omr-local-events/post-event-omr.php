@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
-include __DIR__ . '/includes/dev-diagnostics.php';
+if (file_exists(__DIR__ . '/includes/dev-diagnostics.php')) { include __DIR__ . '/includes/dev-diagnostics.php'; }
 
 // Simple CSRF token
 session_start();

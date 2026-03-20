@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/error-reporting.php';
 require_once __DIR__ . '/../core/omr-connect.php';
-include __DIR__ . '/includes/dev-diagnostics.php';
+if (file_exists(__DIR__ . '/includes/dev-diagnostics.php')) { include __DIR__ . '/includes/dev-diagnostics.php'; }
 
 $submission_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $t = isset($_GET['t']) ? $_GET['t'] : '';

@@ -5,7 +5,9 @@ require_once __DIR__ . '/../core/include-path.php';
 require_once ROOT_PATH . '/components/component-includes.php';
 require_once __DIR__ . '/../core/omr-connect.php';
 require_once __DIR__ . '/includes/event-functions-omr.php';
-include __DIR__ . '/includes/dev-diagnostics.php';
+if (file_exists(__DIR__ . '/includes/dev-diagnostics.php')) {
+    include __DIR__ . '/includes/dev-diagnostics.php';
+}
 
 $filters = [
   'search' => isset($_GET['search']) ? sanitizeInput($_GET['search']) : '',
