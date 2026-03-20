@@ -525,7 +525,7 @@ $page_keywords = "website maintenance service Chennai, website maintenance OMR, 
                             <li><a href="/omr-listings/schools.php">Schools in OMR Chennai</a></li>
                             <li><a href="/omr-listings/it-companies.php">IT Companies in OMR</a></li>
                             <li><a href="/local-news/news-highlights-from-omr-road.php">OMR News & Updates</a></li>
-                            <li><a href="/about-myomr-omr-community-portal.php">About MyOMR.in</a></li>
+                            <li><a href="/discover-myomr/overview.php">About MyOMR.in</a></li>
                         </ul>
                     </section>
                     

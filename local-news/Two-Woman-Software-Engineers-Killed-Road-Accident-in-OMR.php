@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $page_title          = 'Two Women Techies Killed in Road Accident on OMR - Sept 2022 | MyOMR';
 $page_description    = 'Two women software engineers were killed in a road accident on Old Mahabalipuram Road by a drunk driver in September 2022.';
 $canonical_url       = 'https://myomr.in/local-news/Two-Woman-Software-Engineers-Killed-Road-Accident-in-OMR.php';
@@ -210,7 +210,7 @@ color:grey;
         </li>
         
         <li class="nav-item">
-          <a class="nav-link active" href="About-My-OMR-Old-Mahabalipuram-Road-Local-News.php">About My OMR</a>
+          <a class="nav-link active" href="/discover-myomr/overview.php">About My OMR</a>
         </li>
         
         <li class="nav-item">

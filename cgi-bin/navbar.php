@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Unified Bootstrap Navbar for MyOMR
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded mb-3" style="font-family: 'Josefin Sans', Arial, sans-serif;">
@@ -12,7 +12,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item"><a class="nav-link" href="/index.php"><i class="fas fa-home mr-1"></i>Home</a></li>
-      <li class="nav-item"><a class="nav-link" href="/local-news/About-My-OMR-Local-News-Network-of-Old-Mahabalipuram-Road.php"><i class="fas fa-info-circle mr-1"></i>About My OMR</a></li>
+      <li class="nav-item"><a class="nav-link" href="/discover-myomr/overview.php"><i class="fas fa-info-circle mr-1"></i>About My OMR</a></li>
       <li class="nav-item"><a class="nav-link" href="/local-news/news-highlights-from-omr-road.php"><i class="fas fa-newspaper mr-1"></i>News Highlights</a></li>
       <li class="nav-item"><a class="nav-link" href="/local-news/image-video-gallery-old-mahabalipuram-road-news.php"><i class="fas fa-images mr-1"></i>Gallery</a></li>
       <li class="nav-item"><a class="nav-link" href="/listings/search-and-post-jobs-job-vacancy-employment-platform-for-omr-chennai.php"><i class="fas fa-briefcase mr-1"></i>Job Search</a></li>

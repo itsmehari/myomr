@@ -4,7 +4,7 @@
   <div><img src="../My-OMR-Idhu-Namma-OMR-Logo.jpg" style="width:inherit; position:relative;max-width: 280px; padding-bottom:10px;"></div>
   <ul class="nav nav-pills flex-column">
     <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
-    <li class="nav-item"><a class="nav-link" href="About-My-OMR-Old-Mahabalipuram-Road-Local-News.php">About My OMR</a></li>
+    <li class="nav-item"><a class="nav-link" href="/discover-myomr/overview.php">About My OMR</a></li>
     <li class="nav-item"><a class="nav-link" href="news-highlights-from-omr-road.php">Highlights</a></li>
     <li class="nav-item"><a class="nav-link" href="old-mahabalipuram-road-news-image-video-gallery.php">Gallery</a></li>
     <li class="nav-item"><a class="nav-link disabled" href="contact-my-omr-team.php">Contact</a></li>

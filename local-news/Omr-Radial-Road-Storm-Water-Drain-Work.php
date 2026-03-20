@@ -1,4 +1,4 @@
-﻿<?php include '../weblog/log.php'; ?>
+<?php include '../weblog/log.php'; ?>
 <?php include '../components/main-nav.php'; ?>
 <?php
 $page_title          = 'Unfinished Pallavaram Thoraipakkam Radial Road Project - Delays on OMR Secondary IT Corridor | MyOMR';
@@ -209,7 +209,7 @@ color:grey;
         </li>
         
         <li class="nav-item">
-          <a class="nav-link active" href="About-My-OMR-Old-Mahabalipuram-Road-Local-News.php">About My OMR</a>
+          <a class="nav-link active" href="/discover-myomr/overview.php">About My OMR</a>
         </li>
         
         <li class="nav-item">

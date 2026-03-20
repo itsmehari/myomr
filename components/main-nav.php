@@ -613,7 +613,7 @@ function is_active($link, $current_uri) {
   
   <ul id="main-menu">
     <li class="nav-item"><a class="nav-link <?php echo is_active('/omr-listings/index.php', $current_uri) ? 'active' : ''; ?>" href="/omr-listings/index.php"><i class="fas fa-home mr-1"></i>Explore Places</a></li>
-    <li><a href="/about-myomr-omr-community-portal.php" class="<?php echo is_active('/about-myomr-omr-community-portal.php', $current_uri) ? 'active' : ''; ?>">About My OMR</a></li>
+    <li><a href="/discover-myomr/overview.php" class="<?php echo (is_active('/discover-myomr/overview.php', $current_uri) || is_active('/about-myomr-omr-community-portal.php', $current_uri)) ? 'active' : ''; ?>">About My OMR</a></li>
     <li><a href="/local-news/news-highlights-from-omr-road.php" class="<?php echo is_active('/local-news/news-highlights-from-omr-road.php', $current_uri) ? 'active' : ''; ?>">News Highlights</a></li>
     <li><a href="/local-news/image-video-gallery-old-mahabalipuram-road-news.php" class="<?php echo is_active('/local-news/image-video-gallery-old-mahabalipuram-road-news.php', $current_uri) ? 'active' : ''; ?>">Gallery</a></li>
     <li><a href="/elections-2026/" class="<?php echo (is_active('/elections-2026/', $current_uri) || strpos($current_uri, 'elections-2026') !== false) ? 'active' : ''; ?>">Elections 2026</a></li>

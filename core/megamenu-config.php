@@ -142,9 +142,9 @@ $megamenu = [
   ],
   [
     'label'   => 'About',
-    'url'     => '/about-myomr-omr-community-portal.php',
+    'url'     => '/discover-myomr/overview.php',
     'icon'    => 'fas fa-info-circle',
-    'active'  => nav_is_active('/about-myomr-omr-community-portal.php', $current_path),
+    'active'  => nav_is_active('/discover-myomr/overview.php', $current_path) || nav_is_active('/about-myomr-omr-community-portal.php', $current_path),
   ],
   [
     'label'   => 'Contact',

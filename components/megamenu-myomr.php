@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * MyOMR Megamenu – responsive navigation with menu, submenu, list items
  * Requires: core/megamenu-config.php (fallback if missing)
@@ -16,7 +16,7 @@ if (empty($megamenu) || !is_array($megamenu)) {
     ['label' => 'Events', 'url' => '/omr-local-events/', 'icon' => 'fas fa-calendar-alt'],
     ['label' => 'News', 'url' => '/local-news/news-highlights-from-omr-road.php', 'icon' => 'fas fa-newspaper'],
     ['label' => 'Places', 'url' => '/omr-listings/', 'icon' => 'fas fa-map-marker-alt'],
-    ['label' => 'About', 'url' => '/about-myomr-omr-community-portal.php', 'icon' => 'fas fa-info-circle'],
+    ['label' => 'About', 'url' => '/discover-myomr/overview.php', 'icon' => 'fas fa-info-circle'],
     ['label' => 'Contact', 'url' => '/contact-my-omr-team.php', 'icon' => 'fas fa-envelope'],
   ];
 }

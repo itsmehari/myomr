@@ -1,4 +1,4 @@
-﻿<?php include 'weblog/log.php' ?>
+<?php include 'weblog/log.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -215,7 +215,7 @@ color:grey;
           <a class="nav-link active" href="../index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="About-My-OMR-Local-News-Network-of-Old-Mahabalipuram-Road.php">About My OMR</a>
+          <a class="nav-link active" href="/discover-myomr/overview.php">About My OMR</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="news-highlights-from-omr-road.php">Highlights</a>

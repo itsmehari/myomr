@@ -107,7 +107,7 @@
                         <a class="nav-link active" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="About-My-OMR-Old-Mahabalipuram-Road-Local-News.php">About My OMR</a>
+                        <a class="nav-link" href="/discover-myomr/overview.php">About My OMR</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="news-highlights-from-omr-road.php">Highlights</a>
