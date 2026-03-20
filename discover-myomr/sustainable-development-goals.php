@@ -1,49 +1,30 @@
-﻿<?php
-// Start output buffering to catch any errors
+<?php
 ob_start();
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+
+$page_nav = 'main';
+$omr_css_bootstrap5 = true;
+$omr_css_megamenu = false;
+
+$page_title = 'UN Sustainable Development Goals | MyOMR Community Commitment | MyOMR.in';
+$page_description = "Take action for sustainability in OMR. Make your pledge, find local initiatives in Perungudi, Karapakkam, Thoraipakkam, and connect with OMR businesses committed to SDGs.";
+$page_keywords = 'UN SDG, Sustainable Development Goals, OMR community, sustainability, Chennai, MyOMR, community development';
+$canonical_url = 'https://myomr.in/discover-myomr/sustainable-development-goals.php';
+$og_title = 'UN Sustainable Development Goals | MyOMR Community Commitment';
+$og_description = "MyOMR's commitment to UN Sustainable Development Goals. Learn how our OMR community platform supports sustainable development.";
+$og_image = 'https://myomr.in/My-OMR-Logo.png';
+$og_url = $canonical_url;
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Take action for sustainability in OMR! Make your personal pledge, find local initiatives in Perungudi, Karapakkam, Thoraipakkam, and connect with OMR businesses committed to SDGs. Start your sustainable journey today.">
-    <meta name="keywords" content="UN SDG, Sustainable Development Goals, OMR community, sustainability, Chennai, MyOMR, community development">
-    <meta name="author" content="MyOMR Team">
-    <title>UN Sustainable Development Goals | MyOMR Community Commitment | MyOMR.in</title>
-    
-    <!-- Google Analytics -->
-    <?php 
-    if (file_exists('../components/analytics.php')) {
-        include '../components/analytics.php';
-    }
-    ?>
-    
-    <!-- Meta Tags for Social Sharing -->
-    <?php
-    $page_title = "UN Sustainable Development Goals | MyOMR Community Commitment";
-    $page_description = "MyOMR's commitment to UN Sustainable Development Goals. Learn how our OMR community platform supports sustainable development and how you can participate.";
-    $page_keywords = "UN SDG, Sustainable Development Goals, OMR community, sustainability, Chennai, MyOMR, community development";
-    $og_title = "UN Sustainable Development Goals | MyOMR Community Commitment";
-    $og_description = "MyOMR's commitment announcement to UN Sustainable Development Goals";
-    $og_image = "https://myomr.in/My-OMR-Logo.png";
-    $og_url = "https://myomr.in/discover-myomr/sustainable-development-goals.php";
-    if (file_exists('../components/meta.php')) {
-        include '../components/meta.php';
-    }
-    ?>
-    
-    <!-- Google Fonts -->
+<?php require_once ROOT_PATH . '/components/meta.php'; ?>
+<?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <!-- Favicon -->
-    <link rel="icon" href="../My-OMR-Logo.png" type="image/jpeg">
+    <link rel="icon" href="/My-OMR-Logo.png" type="image/jpeg">
 
     <!-- SDG Page Specific Styles -->
     <style>
@@ -518,13 +499,10 @@ ob_start();
 </head>
 
 <body>
-<!-- Header & Navigation -->
-<?php 
-if (file_exists('../components/main-nav.php')) {
-    include '../components/main-nav.php';
-}
-?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav(); ?>
 
+<main id="main-content">
 <!-- Hero Section -->
 <section class="sdg-hero">
     <div class="container">
@@ -1164,96 +1142,79 @@ if (file_exists('../components/main-nav.php')) {
         <h2>Frequently Asked Questions About SDGs</h2>
         <p>Common questions about the UN Sustainable Development Goals and MyOMR's role</p>
     </header>
-    
+
     <div class="row">
         <div class="col-lg-10 mx-auto">
             <div class="accordion" id="sdgFAQAccordion">
-                <div class="card mb-3">
-                    <div class="card-header" id="faq1">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link text-left w-100" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                What are the UN Sustainable Development Goals?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapse1" class="collapse show" aria-labelledby="faq1" data-parent="#sdgFAQAccordion">
-                        <div class="card-body">
-                            <p>The UN Sustainable Development Goals (SDGs) are 17 interlinked global goals designed to achieve a better and more sustainable future for all by 2030. They were adopted by world leaders in 2015 as part of the United Nations 2030 Agenda for Sustainable Development. These goals address pressing global challenges including poverty, inequality, climate change, environmental degradation, peace, and justice.</p>
+                <div class="accordion-item border rounded mb-2 overflow-hidden">
+                    <h2 class="accordion-header" id="faq1">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                            What are the UN Sustainable Development Goals?
+                        </button>
+                    </h2>
+                    <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#sdgFAQAccordion">
+                        <div class="accordion-body">
+                            <p class="mb-0">The UN Sustainable Development Goals (SDGs) are 17 interlinked global goals designed to achieve a better and more sustainable future for all by 2030. They were adopted by world leaders in 2015 as part of the United Nations 2030 Agenda for Sustainable Development. These goals address pressing global challenges including poverty, inequality, climate change, environmental degradation, peace, and justice.</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="card mb-3">
-                    <div class="card-header" id="faq2">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link text-left w-100" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                How many UN Sustainable Development Goals are there?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapse2" class="collapse" aria-labelledby="faq2" data-parent="#sdgFAQAccordion">
-                        <div class="card-body">
-                            <p>There are 17 UN Sustainable Development Goals. They range from ending poverty and hunger to promoting climate action and building peace, justice, and strong institutions.</p>
+                <div class="accordion-item border rounded mb-2 overflow-hidden">
+                    <h2 class="accordion-header" id="faq2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                            How many UN Sustainable Development Goals are there?
+                        </button>
+                    </h2>
+                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#sdgFAQAccordion">
+                        <div class="accordion-body">
+                            <p class="mb-0">There are 17 UN Sustainable Development Goals. They range from ending poverty and hunger to promoting climate action and building peace, justice, and strong institutions.</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="card mb-3">
-                    <div class="card-header" id="faq3">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link text-left w-100" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                How does MyOMR support the Sustainable Development Goals?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapse3" class="collapse" aria-labelledby="faq3" data-parent="#sdgFAQAccordion">
-                        <div class="card-body">
-                            <p>MyOMR supports the SDGs through four primary areas: (1) Sustainable Cities & Communities (SDG 11) via local news and civic engagement, (2) Quality Education (SDG 4) through comprehensive school directories, (3) Decent Work & Economic Growth (SDG 8) via job listings and business directories, and (4) Good Health & Well-being (SDG 3) through healthcare facility directories and wellness content.</p>
+                <div class="accordion-item border rounded mb-2 overflow-hidden">
+                    <h2 class="accordion-header" id="faq3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                            How does MyOMR support the Sustainable Development Goals?
+                        </button>
+                    </h2>
+                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#sdgFAQAccordion">
+                        <div class="accordion-body">
+                            <p class="mb-0">MyOMR supports the SDGs through four primary areas: (1) Sustainable Cities &amp; Communities (SDG 11) via local news and civic engagement, (2) Quality Education (SDG 4) through comprehensive school directories, (3) Decent Work &amp; Economic Growth (SDG 8) via job listings and business directories, and (4) Good Health &amp; Well-being (SDG 3) through healthcare facility directories and wellness content.</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="card mb-3">
-                    <div class="card-header" id="faq4">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link text-left w-100" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                When were the UN Sustainable Development Goals established?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapse4" class="collapse" aria-labelledby="faq4" data-parent="#sdgFAQAccordion">
-                        <div class="card-body">
-                            <p>The UN Sustainable Development Goals were established in 2015 when world leaders adopted the United Nations 2030 Agenda for Sustainable Development. The goals are designed to be achieved by 2030.</p>
+                <div class="accordion-item border rounded mb-2 overflow-hidden">
+                    <h2 class="accordion-header" id="faq4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                            When were the UN Sustainable Development Goals established?
+                        </button>
+                    </h2>
+                    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#sdgFAQAccordion">
+                        <div class="accordion-body">
+                            <p class="mb-0">The UN Sustainable Development Goals were established in 2015 when world leaders adopted the United Nations 2030 Agenda for Sustainable Development. The goals are designed to be achieved by 2030.</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="card mb-3">
-                    <div class="card-header" id="faq5">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link text-left w-100" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                How can I participate in supporting the SDGs through MyOMR?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapse5" class="collapse" aria-labelledby="faq5" data-parent="#sdgFAQAccordion">
-                        <div class="card-body">
-                            <p>You can participate in three ways: (1) Individual Actions - Make sustainable choices, support local businesses, and participate in community initiatives, (2) Business Practices - Adopt sustainable business practices and list your business on MyOMR, and (3) Community Initiatives - Join or start community initiatives focused on sustainability, education, health, and social inclusion.</p>
+                <div class="accordion-item border rounded mb-2 overflow-hidden">
+                    <h2 class="accordion-header" id="faq5">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                            How can I participate in supporting the SDGs through MyOMR?
+                        </button>
+                    </h2>
+                    <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#sdgFAQAccordion">
+                        <div class="accordion-body">
+                            <p class="mb-0">You can participate in three ways: (1) Individual Actions - Make sustainable choices, support local businesses, and participate in community initiatives, (2) Business Practices - Adopt sustainable business practices and list your business on MyOMR, and (3) Community Initiatives - Join or start community initiatives focused on sustainability, education, health, and social inclusion.</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="card mb-3">
-                    <div class="card-header" id="faq6">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link text-left w-100" type="button" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                                What is SDG 11 and how does MyOMR support it?
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapse6" class="collapse" aria-labelledby="faq6" data-parent="#sdgFAQAccordion">
-                        <div class="card-body">
-                            <p>SDG 11 is Sustainable Cities & Communities, aiming to make cities inclusive, safe, resilient and sustainable. MyOMR supports SDG 11 through community news and civic awareness, local business directories promoting sustainable practices, and community events that build social connections.</p>
+                <div class="accordion-item border rounded mb-2 overflow-hidden">
+                    <h2 class="accordion-header" id="faq6">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                            What is SDG 11 and how does MyOMR support it?
+                        </button>
+                    </h2>
+                    <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#sdgFAQAccordion">
+                        <div class="accordion-body">
+                            <p class="mb-0">SDG 11 is Sustainable Cities &amp; Communities, aiming to make cities inclusive, safe, resilient and sustainable. MyOMR supports SDG 11 through community news and civic awareness, local business directories promoting sustainable practices, and community events that build social connections.</p>
                         </div>
                     </div>
                 </div>
@@ -1272,53 +1233,26 @@ if (file_exists('../components/main-nav.php')) {
     </div>
 </section>
 
-<!-- Footer Section -->
-<?php 
-if (file_exists('../components/footer.php')) {
-    include '../components/footer.php';
-}
-?>
+</main>
 
-<!-- Bootstrap JS, Popper.js, and jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<?php omr_footer(); ?>
 
 <!-- Smooth Scrolling -->
 <script>
-if (typeof jQuery !== 'undefined') {
-    jQuery(document).ready(function($){
-        $('a[href^="#"]').on('click', function(event) {
-            var href = $(this).attr('href');
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var href = this.getAttribute('href');
             if (href && href !== '#' && href.length > 1) {
-                var target = $(href);
-                if( target.length ) {
-                    event.preventDefault();
-                    $('html, body').stop().animate({
-                        scrollTop: target.offset().top - 100
-                    }, 1000);
+                var target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             }
         });
     });
-} else {
-    // Fallback if jQuery fails to load
-    document.addEventListener('DOMContentLoaded', function() {
-        var links = document.querySelectorAll('a[href^="#"]');
-        links.forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                var href = this.getAttribute('href');
-                if (href && href !== '#' && href.length > 1) {
-                    var target = document.querySelector(href);
-                    if (target) {
-                        e.preventDefault();
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-            });
-        });
-    });
-}
+});
 </script>
 
 </body>

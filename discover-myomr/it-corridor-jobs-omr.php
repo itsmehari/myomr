@@ -5,7 +5,11 @@
  */
 $root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
 require_once $root . '/core/include-path.php';
-require_once ROOT_PATH . '/components/component-includes.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+
+$page_nav = 'main';
+$omr_css_bootstrap5 = true;
+$omr_css_megamenu = false;
 
 $page_title     = 'IT Corridor Chennai — Jobs & Companies on OMR | MyOMR';
 $page_description = 'Old Mahabalipuram Road (OMR) is Chennai\'s IT corridor. Find jobs in Perungudi, Sholinganallur, Navalur, Thoraipakkam, Kelambakkam and browse companies hiring.';
@@ -32,8 +36,7 @@ $corridor_areas = [
 <html lang="en">
 <head>
 <?php require_once ROOT_PATH . '/components/meta.php'; ?>
-<?php include ROOT_PATH . '/components/analytics.php'; ?>
-<?php include ROOT_PATH . '/components/head-resources.php'; ?>
+<?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 body { font-family: 'Poppins', sans-serif; }

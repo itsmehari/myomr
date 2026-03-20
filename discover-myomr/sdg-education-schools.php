@@ -1,48 +1,28 @@
-﻿<?php
-// Start output buffering to catch any errors
+<?php
 ob_start();
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+
+$page_nav = 'main';
+$omr_css_bootstrap5 = true;
+$omr_css_megamenu = false;
+
+$page_title = 'SDG Education in OMR Schools | Parents & Students | MyOMR.in';
+$page_description = "Join MyOMR's mission to spread UN SDG awareness in OMR schools. Empower students, teachers, and parents to become SDG ambassadors and make OMR India's first SDG-aware community.";
+$page_keywords = 'UN SDG education, SDG in schools, SDG awareness India, OMR schools SDG, sustainable development education, student SDG ambassadors, parent SDG awareness';
+$canonical_url = 'https://myomr.in/discover-myomr/sdg-education-schools.php';
+$og_title = 'SDG Education in OMR Schools | Parents & Students | MyOMR';
+$og_description = 'Spread UN SDG awareness in OMR schools. Empower students, teachers, and parents to become SDG ambassadors.';
+$og_image = 'https://myomr.in/My-OMR-Logo.png';
+$og_url = $canonical_url;
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Spread UN SDG awareness in OMR schools! Empower students, teachers, and parents to become SDG ambassadors. Join MyOMR's mission to make OMR the first SDG-aware community in India.">
-    <meta name="keywords" content="UN SDG education, SDG in schools, SDG awareness India, OMR schools SDG, sustainable development education, student SDG ambassadors, parent SDG awareness">
-    <meta name="author" content="MyOMR Team">
-    <title>SDG Education in OMR Schools | Parents & Students | MyOMR.in</title>
-    
-    <!-- Google Analytics -->
-    <?php 
-    if (file_exists('../components/analytics.php')) {
-        include '../components/analytics.php';
-    }
-    ?>
-    
-    <!-- Meta Tags for Social Sharing -->
-    <?php
-    $page_title = "SDG Education in OMR Schools | Parents & Students";
-    $page_description = "Join MyOMR's mission to spread UN SDG awareness in OMR schools. Empower students, teachers, and parents to become SDG ambassadors and make OMR India's first SDG-aware community.";
-    $page_keywords = "UN SDG education, SDG in schools, SDG awareness India, OMR schools SDG";
-    $og_title = "SDG Education in OMR Schools | Parents & Students | MyOMR";
-    $og_description = "Spread UN SDG awareness in OMR schools! Empower students, teachers, and parents to become SDG ambassadors.";
-    $og_image = "https://myomr.in/My-OMR-Logo.png";
-    $og_url = "https://myomr.in/discover-myomr/sdg-education-schools.php";
-    if (file_exists('../components/meta.php')) {
-        include '../components/meta.php';
-    }
-    ?>
-    
-    <!-- Google Fonts -->
+<?php require_once ROOT_PATH . '/components/meta.php'; ?>
+<?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Core tokens -->
-    <link rel="stylesheet" href="/assets/css/core.css">
-    
     <style>
         :root {
             --sdg-primary: #4CAF50;
@@ -409,13 +389,10 @@ ob_start();
 </head>
 
 <body>
-<!-- Header & Navigation -->
-<?php 
-if (file_exists('../components/main-nav.php')) {
-    include '../components/main-nav.php';
-}
-?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav(); ?>
 
+<main id="main-content">
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="container">
@@ -1249,15 +1226,9 @@ if (file_exists('../components/main-nav.php')) {
 }
 </script>
 
-<!-- Footer -->
-<?php 
-if (file_exists('../components/footer.php')) {
-    include '../components/footer.php';
-}
-?>
+</main>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php omr_footer(); ?>
 
 <!-- FAQ Toggle Script -->
 <script>
@@ -1297,9 +1268,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 </script>
 
 <!-- UN SDG Floating Badges -->
-<?php 
+<?php
 $sdg_badges = [4]; // SDG 4: Quality Education
-include '../components/sdg-badge.php'; 
+require_once ROOT_PATH . '/components/sdg-badge.php';
 ?>
 
 </body>

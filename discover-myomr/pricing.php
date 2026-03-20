@@ -1,4 +1,12 @@
-﻿<?php
+<?php
+$root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
+require_once $root . '/core/include-path.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+
+$page_nav = 'main';
+$omr_css_bootstrap5 = true;
+$omr_css_megamenu = false;
+
 $page_title       = 'Pricing Plans - MyOMR Community Portal | OMR Chennai';
 $page_description = 'Browse OMR Chennai\'s #1 local portal free. Upgrade your business with Verified or Featured listings for maximum local visibility.';
 $canonical_url    = 'https://myomr.in/discover-myomr/pricing.php';
@@ -11,9 +19,8 @@ $breadcrumbs      = [['https://myomr.in/','Home'],['https://myomr.in/discover-my
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include '../components/meta.php'; ?>
-<?php include '../components/analytics.php'; ?>
-<?php include '../components/head-resources.php'; ?>
+<?php require_once ROOT_PATH . '/components/meta.php'; ?>
+<?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
   <style>
     body { font-family: 'Poppins', sans-serif; }
     :root { --brand: #14532d; --brand-mid: #166534; --brand-accent: #22c55e; --brand-light: #f0fdf4; }
@@ -88,8 +95,10 @@ $breadcrumbs      = [['https://myomr.in/','Home'],['https://myomr.in/discover-my
 </head>
 <body>
 
-<?php include '../components/main-nav.php'; ?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav(); ?>
 
+<main id="main-content">
 <!-- HERO -->
 <section class="pricing-hero">
   <div class="container text-center">
@@ -306,7 +315,9 @@ $breadcrumbs      = [['https://myomr.in/','Home'],['https://myomr.in/discover-my
   </div>
 </section>
 
-<?php include '../components/footer.php'; ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</main>
+
+<?php omr_footer(); ?>
+<?php require_once ROOT_PATH . '/components/js-includes.php'; ?>
 </body>
 </html>

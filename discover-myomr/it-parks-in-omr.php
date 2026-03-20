@@ -4,13 +4,12 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
 require_once $root . '/core/include-path.php';
-require_once ROOT_PATH . '/components/component-includes.php';
-?>
-<?php include '../weblog/log.php'; ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<?php
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+
+$page_nav = 'main';
+$omr_css_bootstrap5 = true;
+$omr_css_megamenu = false;
+
 $page_title          = 'IT Parks in OMR (Old Mahabalipuram Road), Chennai | MyOMR';
 $page_description    = 'A practical guide to major IT Parks on OMR, Chennai - significance, economic impact, and detailed park profiles with locations and key tenants.';
 $canonical_url       = 'https://myomr.in/discover-myomr/it-parks-in-omr.php';
@@ -19,9 +18,12 @@ $og_description      = 'A practical guide to major IT Parks on OMR - significanc
 $og_image            = 'https://myomr.in/My-OMR-Logo.png';
 $og_url              = 'https://myomr.in/discover-myomr/it-parks-in-omr.php';
 ?>
-<?php include '../components/meta.php'; ?>
-<?php include '../components/analytics.php'; ?>
-<?php include '../components/head-resources.php'; ?>
+<?php include ROOT_PATH . '/weblog/log.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php require_once ROOT_PATH . '/components/meta.php'; ?>
+<?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
 
 <meta name="robots" content="index, follow">
 <style>
@@ -95,10 +97,10 @@ body { font-family: 'Poppins', sans-serif; }
 
 </head>
 <body>
-<?php include '../components/skip-link.php'; ?>
-<?php include '../components/main-nav.php'; ?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav(); ?>
 
-<div class="container maxw-1280 py-4">
+<main id="main-content" class="container maxw-1280 py-4">
   <h1 class="text-center section-title">IT Parks in OMR (Rajiv Gandhi Salai), Chennai — A Practical Guide</h1>
   <p class="lead-intro text-center mb-3">Old Mahabalipuram Road (OMR), Chennai’s IT corridor, hosts several major IT Parks and SEZ campuses that power the city’s technology ecosystem.</p>
   <p class="text-center mb-4">
@@ -225,7 +227,7 @@ body { font-family: 'Poppins', sans-serif; }
         <a class="btn btn-sm btn-outline-primary" href="<?php echo htmlspecialchars($p['website'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener">Website</a>
       <?php endif; ?>
       <?php $mapQuery = urlencode(($p['name'] ?? '') . ' ' . ($p['address'] ?? 'OMR Chennai')); $mapUrl = 'https://www.google.com/maps/search/?api=1&query='.$mapQuery; ?>
-      <a class="btn btn-sm btn-primary ml-2" href="<?php echo htmlspecialchars($mapUrl, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener">View on Map</a>
+      <a class="btn btn-sm btn-primary ms-2" href="<?php echo htmlspecialchars($mapUrl, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener">View on Map</a>
     </div>
   </section>
   <hr>
@@ -238,9 +240,11 @@ body { font-family: 'Poppins', sans-serif; }
   <div class="mt-4">
     <a class="btn btn-success" href="/omr-listings/it-parks-in-omr.php">Open the Directory View</a>
   </div>
-</div>
 
-<?php include '../components/footer.php'; ?>
+</main>
+
+<?php omr_footer(); ?>
+<?php require_once ROOT_PATH . '/components/js-includes.php'; ?>
 
 </body>
 </html>

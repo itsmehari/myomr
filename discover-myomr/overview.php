@@ -1,7 +1,11 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'] ?? __DIR__ . '/..';
 require_once $root . '/core/include-path.php';
-require_once ROOT_PATH . '/components/component-includes.php';
+require_once ROOT_PATH . '/components/page-bootstrap.php';
+
+$page_nav = 'main';
+$omr_css_bootstrap5 = true;
+$omr_css_megamenu = false;
 
 $page_title       = 'Everything OMR. One Trusted Portal. | MyOMR Chennai';
 $page_description = 'MyOMR is OMR Chennai\'s local community portal. Trusted for local news, jobs, events, business listings, hostels, coworking spaces and more across the entire OMR corridor.';
@@ -15,9 +19,8 @@ $breadcrumbs      = [['https://myomr.in/','Home'],['https://myomr.in/discover-my
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include '../components/meta.php'; ?>
-<?php include '../components/analytics.php'; ?>
-<?php include '../components/head-resources.php'; ?>
+<?php require_once ROOT_PATH . '/components/meta.php'; ?>
+<?php require_once ROOT_PATH . '/components/head-includes.php'; ?>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Poppins', sans-serif; }
@@ -76,10 +79,12 @@ $breadcrumbs      = [['https://myomr.in/','Home'],['https://myomr.in/discover-my
 </head>
 <body>
 
-<?php include ROOT_PATH . '/components/main-nav.php'; ?>
+<?php require_once ROOT_PATH . '/components/skip-link.php'; ?>
+<?php omr_nav(); ?>
 
 <div class="container py-3"><?php omr_ad_slot('discover-top', '728x90'); ?></div>
 
+<main id="main-content">
 <!-- HERO -->
 <section class="overview-hero">
   <div class="container">
@@ -261,7 +266,9 @@ $breadcrumbs      = [['https://myomr.in/','Home'],['https://myomr.in/discover-my
   </div>
 </section>
 
-<?php include '../components/footer.php'; ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</main>
+
+<?php omr_footer(); ?>
+<?php require_once ROOT_PATH . '/components/js-includes.php'; ?>
 </body>
 </html>
