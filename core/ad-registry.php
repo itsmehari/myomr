@@ -29,14 +29,14 @@ $omr_ad_slot_ids = [
 
 $omr_ads = [
     [
-        'id'         => 'resumedoctor-1',
-        'advertiser' => 'ResumeDoctor',
-        'url'        => 'https://resumedoctor.in',
+        'id'         => 'resumebuilder-1',
+        'advertiser' => 'ResumeBuilder.in',
+        'url'        => 'https://resumebuilder.in',
         'slot_ids'   => $omr_ad_slot_ids,
         'sizes'      => ['728x90', '336x280', '300x250', '320x50'],
-        'design'     => 'resumedoctor',
-        'headline'   => 'Build ATS-Ready Resumes in Minutes',
-        'tagline'    => "India's #1 Resume Builder · 50,000+ job seekers",
+        'design'     => 'resumebuilder',
+        'headline'   => 'Make your resume in minutes',
+        'tagline'    => 'Choose a layout, add your details, download and send to employers',
         'active'     => true,
     ],
     [

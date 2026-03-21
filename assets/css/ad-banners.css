@@ -213,14 +213,16 @@
   }
 }
 
-/* ========== ResumeDoctor — Professional, navy/teal, trust --- */
-.omr-ad-banner--resumedoctor {
+/* ========== Resume builder banner (ResumeBuilder.in / legacy resumedoctor class) — navy/teal --- */
+.omr-ad-banner--resumedoctor,
+.omr-ad-banner--resumebuilder {
   background: linear-gradient(135deg, #0f172a 0%, #0e7490 100%);
   color: #fff;
   position: relative;
 }
 
-.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 {
+.omr-ad-banner--resumedoctor.omr-ad-banner--728x90,
+.omr-ad-banner--resumebuilder.omr-ad-banner--728x90 {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -236,7 +238,9 @@
 }
 
 .omr-ad-banner--resumedoctor.omr-ad-banner--336x280,
-.omr-ad-banner--resumedoctor.omr-ad-banner--300x250 {
+.omr-ad-banner--resumedoctor.omr-ad-banner--300x250,
+.omr-ad-banner--resumebuilder.omr-ad-banner--336x280,
+.omr-ad-banner--resumebuilder.omr-ad-banner--300x250 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -244,37 +248,44 @@
   padding: 1.5rem;
 }
 
-.omr-ad-banner--resumedoctor .omr-ad-icon {
+.omr-ad-banner--resumedoctor .omr-ad-icon,
+.omr-ad-banner--resumebuilder .omr-ad-icon {
   font-size: 2.5rem;
   opacity: 0.9;
 }
 
-.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-icon {
+.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-icon,
+.omr-ad-banner--resumebuilder.omr-ad-banner--728x90 .omr-ad-icon {
   font-size: 2rem;
 }
 
-.omr-ad-banner--resumedoctor .omr-ad-headline {
+.omr-ad-banner--resumedoctor .omr-ad-headline,
+.omr-ad-banner--resumebuilder .omr-ad-headline {
   font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
   letter-spacing: -0.02em;
 }
 
-.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-headline {
+.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-headline,
+.omr-ad-banner--resumebuilder.omr-ad-banner--728x90 .omr-ad-headline {
   font-size: 1.2rem;
   line-height: 1.3;
 }
 
-.omr-ad-banner--resumedoctor .omr-ad-tagline {
+.omr-ad-banner--resumedoctor .omr-ad-tagline,
+.omr-ad-banner--resumebuilder .omr-ad-tagline {
   font-size: 0.8rem;
   opacity: 0.9;
 }
 
-.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-tagline {
+.omr-ad-banner--resumedoctor.omr-ad-banner--728x90 .omr-ad-tagline,
+.omr-ad-banner--resumebuilder.omr-ad-banner--728x90 .omr-ad-tagline {
   font-size: 0.85rem;
 }
 
-.omr-ad-banner--resumedoctor.omr-ad-banner--320x50 {
+.omr-ad-banner--resumedoctor.omr-ad-banner--320x50,
+.omr-ad-banner--resumebuilder.omr-ad-banner--320x50 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -282,11 +293,13 @@
   padding: 0 0.75rem;
 }
 
-.omr-ad-banner--resumedoctor.omr-ad-banner--320x50 .omr-ad-icon {
+.omr-ad-banner--resumedoctor.omr-ad-banner--320x50 .omr-ad-icon,
+.omr-ad-banner--resumebuilder.omr-ad-banner--320x50 .omr-ad-icon {
   font-size: 1.25rem;
 }
 
-.omr-ad-banner--resumedoctor.omr-ad-banner--320x50 .omr-ad-headline {
+.omr-ad-banner--resumedoctor.omr-ad-banner--320x50 .omr-ad-headline,
+.omr-ad-banner--resumebuilder.omr-ad-banner--320x50 .omr-ad-headline {
   font-size: clamp(0.75rem, 2.5vw, 0.9rem);
 }
 

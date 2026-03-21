@@ -2,6 +2,7 @@
 // Events Listing - MyOMR
 require_once __DIR__ . '/includes/bootstrap.php';
 
+// Default: list all events (no date filters). Date range only applied when user sets From/To.
 $filters = [
   'search' => isset($_GET['search']) ? sanitizeInput($_GET['search']) : '',
   'category' => isset($_GET['category']) ? (int)$_GET['category'] : 0,

@@ -93,6 +93,7 @@ if (!function_exists('omr_ad_slot')) {
     function _omr_ad_icon($design) {
         switch ($design) {
             case 'resumedoctor':
+            case 'resumebuilder':
                 return '<i class="fas fa-file-alt" aria-hidden="true"></i>';
             case 'mycovai':
                 return '<i class="fas fa-map-marker-alt" aria-hidden="true"></i>';
