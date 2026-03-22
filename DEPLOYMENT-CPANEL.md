@@ -105,6 +105,30 @@ git status
 
 `git status` must show **“nothing to commit, working tree clean”**. Then open **Git Version Control** again — **Deploy HEAD Commit** should enable.
 
+### If you do not have Terminal or SSH
+
+Many shared plans hide **Terminal** or disable shell login. You can still fix a dirty repo without the command line:
+
+**Option 1 — Re-clone in cPanel (usually the cleanest without SSH)**
+
+1. In **cPanel → Git Version Control**, open your repo (**myomr-main**).
+2. Use the interface option to **remove / delete** this repository from cPanel (only the clone under `repositories/…`; it does not delete your GitHub repo or your live site files under `myomr.in`).
+3. **Clone the repository again** from the same GitHub URL (`https://github.com/itsmehari/myomr.git`), same or new name, into something like `/home3/metap8ok/repositories/myomr-main` (or the path cPanel suggests).
+4. Open **Manage → Deploy** and set **Deployment Path** to your site root again: **`/home3/metap8ok/myomr.in/`** (must match `.cpanel.yml` and your domain’s document root).
+5. Use **Update from Remote**, then try **Deploy HEAD Commit**.
+
+A fresh clone starts with a **clean working tree**, which unlocks deploy when `.cpanel.yml` is valid.
+
+**Option 2 — Enable SSH (HostGator / many hosts)**
+
+- In cPanel look under **Security** for **SSH Access** / **Manage SSH Keys** and enable access if the host allows it, or open a ticket asking to **enable jailed SSH** for your account.
+
+**Option 3 — Support ticket**
+
+Ask support to run in your account (paths from your setup):
+
+`cd /home3/metap8ok/repositories/myomr-main && git config core.autocrlf false && git fetch origin && git reset --hard origin/main && git clean -fd`
+
 ### Fix B: YAML and path
 
 - **Indentation:** spaces only (no tabs). **LF** line endings for `.cpanel.yml` (see `.gitattributes` in this repo).
