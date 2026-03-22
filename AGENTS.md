@@ -96,6 +96,18 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 - **Microsoft Clarity:** Project ID `vnpelcljv4` — session recordings, heatmaps. Loaded from the same component.
 - New public pages must include `<?php include ROOT_PATH . '/components/analytics.php'; ?>` in the head; do not add duplicate or alternate analytics scripts unless explicitly required.
 
+### GA4 Data API (server-side read, planning, admin)
+
+Use this when implementing or debugging **reporting**, not gtag pageviews.
+
+- **Measurement ID (`G-…`) ≠ Property ID:** The **Data API** uses the **numeric GA4 property id** (default in `core/analytics-config.php` via `myomr_ga4_property_id()`). The `G-…` id is only for the browser tag.
+- **Google Cloud:** Project must have **Google Analytics Data API** enabled; authentication uses a **service account JSON** key (`core/ga4-data-api.php`).
+- **GA4 Admin (mandatory for API):** **Admin → Property access management** must include the **service account email** (e.g. `…@….iam.gserviceaccount.com`) with at least **Viewer**. Without this, APIs return *insufficient permissions for this property*. This is separate from GCP IAM roles.
+- **Files:** `core/ga4-data-api.php`, `core/analytics-config.php`, `admin/ga4-overview.php`, `admin/events-analytics.php` (property id display).
+- **Local dev:** Optional JSON at `.cursor/secrets/google-analytics.json` (gitignored). **Production:** set `MYOMR_GA_SERVICE_ACCOUNT_PATH` to a path outside the web root.
+- **Cursor / planning:** Run `php dev-tools/analytics/fetch-ga4-snapshot.php` → `dev-tools/analytics/GA4-SNAPSHOT.md` (gitignored). Agents can read that file when prioritizing work.
+- **Rule:** `.cursor/rules/ga4-google-cloud.mdc` — full checklist for future chats.
+
 ---
 
 ## Agent Priorities
@@ -107,6 +119,7 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 5. **Consult docs** — `/docs`, module READMEs, and `.cursor/skills/` contain current patterns
 6. **For SERP/sitelinks work** — keep header/footer/schema hub links aligned from one shared source; avoid nav-label drift
 7. **For Search Console ops** — prefer API/MCP verification (`isPending`, `errors`, `warnings`, `lastSubmitted`) over unreliable direct HTTP checks
+8. **For GA4 Data API / snapshots** — confirm GA4 **Property access management** includes the service account; see `.cursor/rules/ga4-google-cloud.mdc` before assuming “permissions” bugs are code issues
 
 ---
 

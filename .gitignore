@@ -9,6 +9,8 @@
 /dev-tools/logs/
 /dev-tools/temp/
 /dev-tools/.env
+# GA4 CLI snapshot (regenerate with php dev-tools/analytics/fetch-ga4-snapshot.php)
+/dev-tools/analytics/GA4-SNAPSHOT.md
 
 # ============================================
 # Database & Configuration (SENSITIVE)
@@ -23,6 +25,10 @@ db_backup_*.sql
 # Database dumps
 /database-dumps/
 /backups/
+
+# Google Analytics Data API — service account key (never commit)
+**/ga-service-account.json
+**/google-analytics-service-account.json
 
 # Configuration files with credentials
 .env

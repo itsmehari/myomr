@@ -12,7 +12,8 @@ Project skill for MyOMR.in: local community platform for Old Mahabalipuram Road 
 - **Frontend:** HTML5, CSS3, Bootstrap 5, Vanilla JS. Poppins font; max-width 1280px; mobile-first.
 - **Backend:** PHP (procedural), MySQL (phpMyAdmin), mysqli prepared statements only.
 - **Hosting:** cPanel shared hosting; Git deploy via `.cpanel.yml`; deploy path `public_html`.
-- **Primary rules:** [AGENTS.md](AGENTS.md), [.cursor/rules/cursor-ai-rules.md](.cursor/rules/cursor-ai-rules.md).
+- **Primary rules:** [AGENTS.md](../../../AGENTS.md), [.cursorrules](../../../.cursorrules).
+- **GA4 Data API / Google Cloud / property access:** [.cursor/rules/ga4-google-cloud.mdc](../../rules/ga4-google-cloud.mdc) — measurement id vs property id, service account, GA4 Admin access.
 
 ## Bootstrap and include pattern
 

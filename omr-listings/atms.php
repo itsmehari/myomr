@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 // $browser = get_browser(null, true); // Disabled for stability
 
 require '../core/omr-connect.php';
+require_once dirname(__DIR__) . '/core/community-links.php';
 
 //echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
 
@@ -198,7 +199,7 @@ color: #4c516D;
 <body>
 <?php include '../components/skip-link.php'; ?>
 <?php include '../components/skip-link.php'; ?>
-    <a href="https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi" class="float" target="_blank">
+    <a href="<?php echo htmlspecialchars(MYOMR_WHATSAPP_INVITE_URL, ENT_QUOTES, 'UTF-8'); ?>" class="float" target="_blank" rel="noopener noreferrer">
  <i class="fa fa-whatsapp my-float"></i>
 </a>
 

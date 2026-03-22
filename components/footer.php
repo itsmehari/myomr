@@ -1,10 +1,12 @@
 <?php
+require_once __DIR__ . '/../core/community-links.php';
 require_once __DIR__ . '/../core/site-navigation.php';
 $hubLinks = myomr_get_primary_hub_links();
 $rootUrl = '/';
 if (function_exists('omr_flash_message')) {
     omr_flash_message();
 }
+require_once __DIR__ . '/whatsapp-community-strip.php';
 ?>
 <!--footer section begins -->
 <footer class="footer-section" role="contentinfo">
@@ -48,7 +50,7 @@ if (function_exists('omr_flash_message')) {
                         <a href="<?php echo htmlspecialchars($fb_group); ?>" target="_blank" rel="noopener" aria-label="Join our Facebook group" class="footer-social__link footer-social__link--fb-group" title="Join our Facebook group"><i class="fas fa-users"></i></a>
                         <a href="https://twitter.com/MyomrNews" target="_blank" rel="noopener" aria-label="Twitter" class="footer-social__link footer-social__link--tw"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.instagram.com/myomrcommunity/" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social__link footer-social__link--ig"><i class="fab fa-instagram"></i></a>
-                        <?php $wa_group = defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi'; ?>
+                        <?php $wa_group = MYOMR_WHATSAPP_INVITE_URL; ?>
                         <a href="<?php echo htmlspecialchars($wa_group); ?>" target="_blank" rel="noopener" aria-label="Join our WhatsApp group for updates" class="footer-social__link footer-social__link--wa" title="Join WhatsApp group"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
@@ -140,7 +142,7 @@ if (file_exists(__DIR__ . '/modal-cta.php')) {
           ? (a.closest('[data-listing-name]') || document.body).dataset.listingName || ''
           : ''
       });
-    } else if (/wa\.me|api\.whatsapp\.com/i.test(h)) {
+    } else if (/wa\.me|api\.whatsapp\.com|chat\.whatsapp\.com/i.test(h)) {
       gtag('event', 'whatsapp_click', {
         'destination': h.split('?')[0]
       });

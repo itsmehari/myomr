@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__ . '/_bootstrap.php';
+require_once dirname(__DIR__) . '/core/analytics-config.php';
 
 $lookerUrl = getenv('MYOMR_LOOKER_DASHBOARD_URL') ?: '';
-$propertyId = getenv('MYOMR_GA_PROPERTY_ID') ?: '';
+$propertyId = myomr_ga4_property_id();
 ?>
 <!DOCTYPE html>
 <html lang="en">

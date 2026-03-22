@@ -81,6 +81,21 @@ Replace:
 
 ---
 
+## If deployment is disabled or “not activated”
+
+cPanel only shows **Deploy** when all of the following are true:
+
+1. **`.cpanel.yml` is in the repo root** and has been **pushed** to the remote GitHub uses for “Update from Remote”.
+2. **YAML is valid** (spaces only for indentation—no tabs). On Windows, use **LF** line endings for `.cpanel.yml` (this repo sets that via `.gitattributes`).
+3. **`DEPLOYPATH` in `.cpanel.yml`** must match the **Deployment Path** you set in cPanel (same absolute path, trailing slash).  
+   - Primary domain: often `/home/USERNAME/public_html/`  
+   - Addon domain (e.g. `myomr.in`): often `/home/USERNAME/myomr.in/` or the path under **Domains** → *domain* → **Document Root** in cPanel.
+4. **Clean state** in the cPanel clone (no uncommitted deploy errors). Pull latest, then **Deploy HEAD Commit** again.
+
+If you change only `DEPLOYPATH`, edit the first `export` line in `.cpanel.yml`, commit, push, then redeploy from cPanel.
+
+---
+
 ## Verify Before Deployment
 
 - `.env` and database config are excluded via `.gitignore` – ensure production config is set on the server.

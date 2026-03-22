@@ -1,8 +1,8 @@
 <?php
 /**
  * MyOMR Analytics — Base Include
- * - Google Analytics 4: G-JYSF141J1H
- * - Microsoft Clarity: vnpelcljv4 (session recordings, heatmaps)
+ * - Google Analytics 4 (gtag) — ID from core/analytics-config.php
+ * - Microsoft Clarity — session recordings, heatmaps
  *
  * Include in <head>. Tracks page views + basic content grouping.
  *
@@ -12,7 +12,9 @@
  *   $ga_user_properties (array)  — user properties, e.g. ['user_type' => 'employer']
  *   $ga_user_id         (int)    — logged-in user ID for cross-device
  */
-$ga_id = 'G-JYSF141J1H';
+require_once __DIR__ . '/../core/analytics-config.php';
+$ga_id = myomr_ga_measurement_id();
+$clarity_id = myomr_clarity_id();
 
 // Content group: override or auto-detect from URL
 if (!empty($ga_content_group) && is_string($ga_content_group)) {
@@ -20,6 +22,7 @@ if (!empty($ga_content_group) && is_string($ga_content_group)) {
 } else {
     $path = $_SERVER['REQUEST_URI'] ?? '';
     $map = [
+        '/join-omr-whatsapp-group-myomr.php' => 'Community & WhatsApp',
         '/omr-local-job-listings/' => 'Job Listings',
         '/omr-local-events/'       => 'Local Events',
         '/omr-coworking-spaces/'   => 'Coworking Spaces',
@@ -72,5 +75,5 @@ gtag('set', 'user_properties', <?= json_encode($ga_user_props, _GA_JSON_FLAGS) ?
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "vnpelcljv4");
+})(window, document, "clarity", "script", "<?= htmlspecialchars($clarity_id, ENT_QUOTES, 'UTF-8') ?>");
 </script>

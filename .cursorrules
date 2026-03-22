@@ -81,6 +81,12 @@
 - When understanding architecture → Check `docs/ARCHITECTURE.md`
 - When documenting or following a process → Check `docs/workflows-pipelines/`
 
+## Google Analytics 4 — Data API & access (read before changing analytics)
+
+- **Two IDs:** Measurement ID `G-…` (gtag, `core/analytics-config.php`) vs **numeric property id** (Data API, same file `myomr_ga4_property_id()`). Do not mix them.
+- **GA4 Admin:** Service accounts need **Property access management** (Viewer+) on the GA4 property; otherwise API errors with “insufficient permissions”. Separate from Google Cloud IAM.
+- **Details:** `.cursor/rules/ga4-google-cloud.mdc` and `AGENTS.md` (section GA4 Data API).
+
 ## Project Context
 
 **Technology Stack:**

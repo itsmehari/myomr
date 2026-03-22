@@ -26,6 +26,9 @@ $pages = [
     // Digital marketing
     ['loc' => $base . '/digital-marketing-landing.php', 'priority' => '0.8', 'changefreq' => 'monthly'],
 
+    // WhatsApp community (SEO landing)
+    ['loc' => $base . '/join-omr-whatsapp-group-myomr.php', 'priority' => '0.85', 'changefreq' => 'weekly'],
+
     // Rent & Lease
     ['loc' => $base . '/omr-rent-lease/', 'priority' => '0.9', 'changefreq' => 'weekly'],
 

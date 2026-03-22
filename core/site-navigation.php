@@ -15,6 +15,7 @@ if (!function_exists('myomr_get_primary_hub_links')) {
             ['label' => 'Buy & Sell', 'path' => '/omr-buy-sell/'],
             ['label' => 'Elections 2026', 'path' => '/elections-2026/'],
             ['label' => 'News Highlights', 'path' => '/local-news/news-highlights-from-omr-road.php'],
+            ['label' => 'WhatsApp', 'path' => '/join-omr-whatsapp-group-myomr.php'],
             ['label' => 'Contact', 'path' => '/contact-my-omr-team.php'],
         ];
     }

@@ -1,0 +1,2 @@
+# cPanel reads .cpanel.yml on Linux; CRLF from Windows can break YAML parsing.
+.cpanel.yml text eol=lf

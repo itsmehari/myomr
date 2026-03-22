@@ -58,6 +58,7 @@ if (!function_exists('omr_flash_message')) {
 
 /**
  * Output footer. Skip if $page_footer === false (set before call).
+ * Outputs whatsapp-community-strip.php first (minimal ~50px promo to the WhatsApp landing page).
  */
 if (!function_exists('omr_footer')) {
     function omr_footer() {

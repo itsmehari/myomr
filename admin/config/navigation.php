@@ -25,6 +25,9 @@ return [
                 'path' => '/admin/dashboard.php',
                 'icon' => 'fa-chart-pie',
                 'tags' => ['dashboard', 'overview', 'analytics'],
+                'actions' => [
+                    ['label' => 'GA4 overview (API)', 'path' => '/admin/ga4-overview.php'],
+                ],
             ],
             [
                 'key' => 'articles',
