@@ -1,0 +1,15 @@
+# Snapshot: SELECT id, name, slug, is_active FROM job_categories ORDER BY name
+# Generated via: php dev-tools/jobs/dump_job_categories.php (host myomr.in:3306)
+# Date: 2026-03-22
+#
+# id	name	slug	is_active
+# 5	Construction	construction	1
+# 9	Customer Service	customer-service	1
+# 8	Engineering	engineering	1
+# 7	Finance & Accounting	finance-accounting	1
+# 3	Healthcare	healthcare	1
+# 6	Hospitality	hospitality	1
+# 1	Information Technology	it	1
+# 10	Other	other	1
+# 4	Sales & Marketing	sales-marketing	1
+# 2	Teaching & Education	teaching-education	1

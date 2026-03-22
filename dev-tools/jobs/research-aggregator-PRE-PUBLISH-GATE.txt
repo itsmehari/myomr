@@ -1,0 +1,18 @@
+PRE-PUBLISH GATE (MyOMR job research CSV)
+========================================
+
+File: research-aggregator-vacancies-2026.csv
+
+Column: db_ready_gate
+  yes = verified_yes_no is "yes" AND blockers field is empty (no text in blockers).
+  no  = everything else (partial data, aggregator conflicts, or explicit blockers).
+
+Column: pre_publish_checklist
+  Action items to complete BEFORE inserting into employers / job_postings on live DB.
+  Even when db_ready_gate=yes, still: paraphrase descriptions, confirm listing open, fill employer contact policy fields.
+
+File: research-aggregator-vacancies-db-ready.csv
+  Subset of rows that passed db_ready_gate at research time (IDs 8 and 11).
+  Not an instruction to insert automatically—human review and consent still required.
+
+Last updated: 2026-03-22
