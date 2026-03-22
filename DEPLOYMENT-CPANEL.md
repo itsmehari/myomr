@@ -81,18 +81,38 @@ Replace:
 
 ---
 
-## If deployment is disabled or “not activated”
+## If “Deploy HEAD Commit” is greyed out (cannot deploy)
 
-cPanel only shows **Deploy** when all of the following are true:
+Per [cPanel: Git Deployment](https://go.cpanel.net/GitDeployment), deployment stays disabled until **both** are true:
 
-1. **`.cpanel.yml` is in the repo root** and has been **pushed** to the remote GitHub uses for “Update from Remote”.
-2. **YAML is valid** (spaces only for indentation—no tabs). On Windows, use **LF** line endings for `.cpanel.yml` (this repo sets that via `.gitattributes`).
-3. **`DEPLOYPATH` in `.cpanel.yml`** must match the **Deployment Path** you set in cPanel (same absolute path, trailing slash).  
-   - Primary domain: often `/home/USERNAME/public_html/`  
-   - Addon domain (e.g. `myomr.in`): often `/home/USERNAME/myomr.in/` or the path under **Domains** → *domain* → **Document Root** in cPanel.
-4. **Clean state** in the cPanel clone (no uncommitted deploy errors). Pull latest, then **Deploy HEAD Commit** again.
+1. A **valid** `.cpanel.yml` exists in the **top level of the Git repository** (the clone under `~/repositories/…`, **not** only inside the public site folder).
+2. The repository has a **clean working tree** (no uncommitted changes on the checked-out branch).
 
-If you change only `DEPLOYPATH`, edit the first `export` line in `.cpanel.yml`, commit, push, then redeploy from cPanel.
+Seeing `.cpanel.yml` in **File Manager** under `/home3/metap8ok/myomr.in/` only proves the file was copied to the live site; cPanel still validates the copy inside **`/home3/metap8ok/repositories/myomr-main/`** (your repo path).
+
+### Fix A: Clean working tree (most common)
+
+After “Update from Remote”, Git may still report a **dirty** tree (line endings, permissions, or local edits). **SSH / Terminal** (cPanel → Advanced → Terminal), then:
+
+```bash
+cd /home3/metap8ok/repositories/myomr-main
+git config core.autocrlf false
+git fetch origin
+git reset --hard origin/main
+git clean -fd
+git status
+```
+
+`git status` must show **“nothing to commit, working tree clean”**. Then open **Git Version Control** again — **Deploy HEAD Commit** should enable.
+
+### Fix B: YAML and path
+
+- **Indentation:** spaces only (no tabs). **LF** line endings for `.cpanel.yml` (see `.gitattributes` in this repo).
+- **`DEPLOYPATH`** in `.cpanel.yml` must match **Git → Manage → Deploy** for this repo (e.g. `/home3/metap8ok/myomr.in/` if that is the document root for `myomr.in`).
+
+### After changing `DEPLOYPATH` only
+
+Edit the `export DEPLOYPATH=...` line in `.cpanel.yml`, commit, push to GitHub, run **Update from Remote** in cPanel, then **Deploy HEAD Commit**.
 
 ---
 

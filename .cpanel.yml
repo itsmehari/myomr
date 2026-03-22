@@ -1,13 +1,5 @@
 ---
-# MyOMR.in — cPanel Git™ deployment
-#
-# Requirements (or cPanel hides the Deploy UI):
-#   - This file must be committed at the repository root.
-#   - DEPLOYPATH must match: cPanel » Git Version Control » Manage » Deploy » Deployment Path
-#     (trailing slash required). Addon domains often use .../domain.com/ ; primary site uses .../public_html/
-#
-# After editing DEPLOYPATH, commit and push, then in cPanel run Pull or Deploy HEAD Commit.
-#
+# MyOMR.in deploy: copy repo to DEPLOYPATH (must match cPanel Deploy path for this site).
 deployment:
   tasks:
     - export DEPLOYPATH=/home3/metap8ok/myomr.in/
