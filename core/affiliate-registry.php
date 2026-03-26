@@ -15,7 +15,7 @@ $omr_affiliate_products = [
         'title' => 'Gadget Deals Gyro Ball Wrist Exerciser',
         'benefit' => 'Improves wrist, forearm and grip strength in short daily sessions.',
         'url' => 'https://amzn.to/3Q0ydlz',
-        'image_url' => 'https://m.media-amazon.com/images/I/61TfQ5QfW6L._AC_SL500_.jpg',
+        'image_url' => 'https://m.media-amazon.com/images/I/61Q5oC1bqEL._SL1129_.jpg',
         'active' => true,
     ],
     [
