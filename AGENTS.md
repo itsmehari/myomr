@@ -96,6 +96,18 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 - **Microsoft Clarity:** Project ID `vnpelcljv4` — session recordings, heatmaps. Loaded from the same component.
 - New public pages must include `<?php include ROOT_PATH . '/components/analytics.php'; ?>` in the head; do not add duplicate or alternate analytics scripts unless explicitly required.
 
+### Amazon affiliate recommendations (news articles)
+
+- **Registry-driven architecture:** Affiliate products and targeting rules live in `core/affiliate-registry.php` (not hardcoded in templates/components).
+- **Render component:** `components/amazon-affiliate-spotlight.php` renders recommendation cards and is loaded via `components/component-includes.php`.
+- **Placement:** Integrated on `local-news/article.php` after the mid-article ad area.
+- **Targeting:** Products are selected by matching article title/category/tags against keyword segments (`career`, `education`, `business`) with `default` fallback.
+- **Rotation:** Deterministic daily rotation per article slug (`seed + date`) to keep recommendations stable for a day while still rotating.
+- **Current format:** Two cards (primary + secondary), no duplicates, title + thumbnail + short benefit line + affiliate disclosure.
+- **Tracking:** GA4 event `affiliate_link_click` includes `event_label` (product id), `affiliate_network`, `affiliate_position`, and `article_title`.
+- **Compliance:** Affiliate links must keep `rel="sponsored nofollow noopener noreferrer"` and visible disclosure text.
+- **Ops reference:** `.cursor/sop/AMAZON-AFFILIATE-SYSTEM-SOP.md`.
+
 ### GA4 Data API (server-side read, planning, admin)
 
 Use this when implementing or debugging **reporting**, not gtag pageviews.
@@ -120,6 +132,14 @@ Use this when implementing or debugging **reporting**, not gtag pageviews.
 6. **For SERP/sitelinks work** — keep header/footer/schema hub links aligned from one shared source; avoid nav-label drift
 7. **For Search Console ops** — prefer API/MCP verification (`isPending`, `errors`, `warnings`, `lastSubmitted`) over unreliable direct HTTP checks
 8. **For GA4 Data API / snapshots** — confirm GA4 **Property access management** includes the service account; see `.cursor/rules/ga4-google-cloud.mdc` before assuming “permissions” bugs are code issues
+9. **For operational runbooks** — use `.cursor/sop/README.md` (index of all SOPs: publishing, SEO, GA4, deployment, security, incidents, etc.)
+
+---
+
+## Standard operating procedures (SOP)
+
+Detailed step-by-step runbooks live in **`.cursor/sop/`**. Start at **[`.cursor/sop/README.md`](.cursor/sop/README.md)** for the full index (news publishing, article QA, canonical/sitemaps, Search Console API, GA4 events, affiliate/ad monetization, modular bootstrap, 404s, remote DB, cPanel deploy, security, homepage releases, module launch, incident triage).  
+Affiliate-specific: **[`.cursor/sop/AMAZON-AFFILIATE-SYSTEM-SOP.md`](.cursor/sop/AMAZON-AFFILIATE-SYSTEM-SOP.md)**.
 
 ---
 

@@ -150,6 +150,7 @@ require_once ROOT_PATH . '/components/page-bootstrap.php';
 
 ## Documentation map
 
+- [.cursor/sop/README.md](../../sop/README.md) — operational SOP index (publishing, SEO, GA4, deploy, security, incidents, etc.)
 - [docs/README.md](docs/README.md) — hub
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — structure
 - [docs/analytics-seo/CANONICAL-URL-METHODOLOGY.md](docs/analytics-seo/CANONICAL-URL-METHODOLOGY.md) — canonical rules

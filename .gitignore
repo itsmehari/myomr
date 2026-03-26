@@ -40,8 +40,18 @@ config.local.php
 # ============================================
 # IDE & Editor Files
 # ============================================
-# Cursor IDE
-.cursor/
+# Cursor IDE — ignore most of .cursor/; track SOPs + key project docs (see negations below)
+.cursor/*
+!.cursor/sop/
+!.cursor/sop/**
+!.cursor/LEARNINGS.md
+!.cursor/RECENT-UPDATES.md
+# Track only myomr-project skill (single file); keep other skills/rules private
+!.cursor/skills/
+.cursor/skills/*
+!.cursor/skills/myomr-project/
+.cursor/skills/myomr-project/*
+!.cursor/skills/myomr-project/SKILL.md
 
 # Visual Studio Code
 .vscode/

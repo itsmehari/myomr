@@ -44,6 +44,15 @@ if (!function_exists('omr_ad_slot')) {
 }
 
 /**
+ * Output Amazon affiliate spotlight component (rotating recommendation).
+ * Usage: omr_amazon_affiliate_spotlight(['seed' => $slug, 'article_title' => $title]);
+ */
+if (!function_exists('omr_amazon_affiliate_spotlight')) {
+    $base = defined('ROOT_PATH') ? ROOT_PATH : dirname(__DIR__);
+    require_once $base . '/components/amazon-affiliate-spotlight.php';
+}
+
+/**
  * Output site-wide flash messages (site_flash_success, site_flash_error, site_flash_info).
  * Call once per page, e.g. at top of main or include from footer.
  */

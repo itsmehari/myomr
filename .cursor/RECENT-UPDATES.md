@@ -6,6 +6,43 @@ Summary of notable changes for deployment and context. Keep this updated when sh
 
 ## March 2026
 
+### SOP library (`.cursor/sop/`)
+
+**Shipped in docs (workspace):** Full MyOMR SOP set with index and shared template—operational runbooks for agents and humans.
+
+| Resource | Location |
+|----------|----------|
+| SOP index + standard template | `.cursor/sop/README.md` |
+| All SOP files | `.cursor/sop/*.md` — **README + 16 SOP documents** (publishing, QA, SEO, Search Console, GA4, affiliate catalog, ad slots, bootstrap, 404, remote DB, cPanel deploy, security, homepage, module launch, incidents, Amazon affiliate) |
+
+**Cross-links:** `AGENTS.md` (Agent Priorities + SOP section), `.cursor/LEARNINGS.md` (SOP library blurb).
+
+### Amazon affiliate recommendation system (news detail pages)
+
+**Shipped in code (workspace):** Registry-based Amazon affiliate recommendation system on article detail pages with category/tag targeting, deterministic daily rotation, and GA4 click tracking.
+
+| Change | Location |
+|--------|----------|
+| Central affiliate product registry + targeting map | `core/affiliate-registry.php` |
+| Affiliate renderer (2-card recommendation block with disclosure) | `components/amazon-affiliate-spotlight.php` |
+| Global component loader | `components/component-includes.php` |
+| Article detail placement + tracking payload updates | `local-news/article.php` |
+
+**Behavior implemented:**
+
+- Uses article context (`title`, `category`, `tags`) to select segment pool.
+- Segment matching: `career`, `education`, `business`; fallback: `default`.
+- Renders two products (primary + secondary) with non-duplicate deterministic daily rotation.
+- Card format: thumbnail + product title + short benefit line + CTA.
+- Link policy: `rel="sponsored nofollow noopener noreferrer"` with visible affiliate disclosure.
+- GA4 event: `affiliate_link_click` with `event_label`, `affiliate_network`, `affiliate_position`, `article_title`.
+
+**Ops note:**
+
+- Some shortlinks may resolve to Amazon interstitials in automation contexts; unresolved products are intentionally labeled as `*-update` entries in registry for manual metadata completion.
+
+**Reference SOP:** `.cursor/sop/AMAZON-AFFILIATE-SYSTEM-SOP.md`
+
 ### Remote database connection + Elections 2026 migration
 
 **Shipped:** Ability to run DB migrations from the local dev machine against the **remote** cPanel MySQL database, plus documentation so the same approach works on other machines (e.g. another laptop).

@@ -628,6 +628,12 @@ if (!$article) {
         </section>
 
         <?php omr_ad_slot('article-mid', '336x280'); ?>
+        <?php omr_amazon_affiliate_spotlight([
+            'seed' => $article['slug'] ?? $slug,
+            'article_title' => $article['title'] ?? 'News Article',
+            'article_category' => $article['category'] ?? '',
+            'article_tags' => $article['tags'] ?? '',
+        ]); ?>
 
         <!-- Related Articles Section -->
         <?php
@@ -893,6 +899,19 @@ document.querySelectorAll('.article-share-copy').forEach(function(btn) {
             btn.setAttribute('title', 'Copied!');
             setTimeout(function() { btn.classList.remove('copied'); btn.setAttribute('title', 'Copy link'); }, 2000);
         }
+    });
+});
+
+document.querySelectorAll('.js-affiliate-click').forEach(function(link) {
+    link.addEventListener('click', function() {
+        if (typeof gtag !== 'function') return;
+        gtag('event', 'affiliate_link_click', {
+            event_category: 'Affiliate',
+            event_label: this.getAttribute('data-affiliate-id') || 'amazon-affiliate',
+            affiliate_network: this.getAttribute('data-affiliate-network') || 'amazon',
+            affiliate_position: this.getAttribute('data-affiliate-position') || '',
+            article_title: this.getAttribute('data-affiliate-article') || ''
+        });
     });
 });
 </script>

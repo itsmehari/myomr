@@ -4,6 +4,61 @@ Recorded learnings from MyOMR.in development — patterns, decisions, and gotcha
 
 ---
 
+## Standard operating procedures (SOP) library (March 2026)
+
+Operational runbooks for repeatable workflows are maintained in **[`.cursor/sop/README.md`](sop/README.md)** (index + template). Use these for publishing, SEO/sitemaps, Search Console API, GA4 tracking, affiliate/ad systems, bootstrap patterns, 404s, remote DB migrations, cPanel deployment, security checks, homepage changes, module launches, and production incident triage—see individual files under `.cursor/sop/`.
+
+---
+
+## Amazon affiliate system on article detail (March 2026)
+
+### What we did
+
+- Built a reusable affiliate recommendation component for news detail pages.
+- Moved product data and targeting rules to a central registry file.
+- Upgraded from generic placeholders to product cards (title, image, benefit line).
+- Switched from single-item to two-item rotation (primary + secondary).
+
+### Key decisions
+
+1. **Registry-first design**  
+   Product catalog and targeting map live in `core/affiliate-registry.php`.  
+   This avoids hardcoded product metadata in rendering logic and lets content/business updates happen in one file.
+
+2. **Context targeting beats pure random**  
+   We derive context from article title + category + tags and match keywords against segments (`career`, `education`, `business`) before falling back to `default`.
+
+3. **Stable daily rotation per article**  
+   Rotation uses article seed + date (`crc32`) so cards are deterministic for a day (good UX, easier tracking), but still rotate over time.
+
+4. **Show two cards, not one**  
+   Rendering two recommendations increases exposure while keeping layout clean.  
+   Secondary card uses next pool index to avoid duplicates.
+
+5. **Compliance + tracking are mandatory**  
+   All outbound affiliate links use `rel="sponsored nofollow noopener noreferrer"` and visible affiliate disclosure.
+   GA4 event `affiliate_link_click` includes:
+   - product id (`event_label`)
+   - network
+   - position (1/2)
+   - article title context
+
+6. **Unresolved shortlinks should be explicit**  
+   If Amazon shortlinks cannot be resolved during automation, keep placeholder entries in registry with clear `*-update` ids so they are easy to replace later.
+
+### Files involved
+
+- `core/affiliate-registry.php` — product catalog + targeting segments.
+- `components/amazon-affiliate-spotlight.php` — targeted selection + 2-card renderer.
+- `components/component-includes.php` — loads affiliate component globally.
+- `local-news/article.php` — component placement + GA4 click tracking.
+
+### Takeaway
+
+For affiliate systems on MyOMR, use a **registry + targeting + deterministic rotation** pattern. This improves CTR potential, keeps maintenance simple, and preserves editorial control without touching page templates repeatedly.
+
+---
+
 ## WhatsApp community group CTA (March 2026)
 
 ### What we did
