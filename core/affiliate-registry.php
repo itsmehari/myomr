@@ -2,6 +2,10 @@
 /**
  * Affiliate registry for content recommendations.
  * Keeps products and targeting rules out of component code.
+ *
+ * Image URLs: use m.media-amazon.com with _AC_SL500_ (or similar). Filenames containing "+" must be
+ * normalized in the component (encoded as %2B). Prefer stable media-amazon paths over legacy
+ * images-eu.ssl-images-amazon.com hotlinks (hotlink/referrer issues on some browsers).
  */
 
 $omr_affiliate_products = [
@@ -11,7 +15,7 @@ $omr_affiliate_products = [
         'title' => 'Gadget Deals Gyro Ball Wrist Exerciser',
         'benefit' => 'Improves wrist, forearm and grip strength in short daily sessions.',
         'url' => 'https://amzn.to/3Q0ydlz',
-        'image_url' => 'https://images-eu.ssl-images-amazon.com/images/I/61TfQ5QfW6L._AC_UL600_SR600,600_.jpg',
+        'image_url' => 'https://m.media-amazon.com/images/I/61TfQ5QfW6L._AC_SL500_.jpg',
         'active' => true,
     ],
     [
@@ -20,7 +24,7 @@ $omr_affiliate_products = [
         'title' => 'GLUN Honeycomb Paper Bubble Wrap Roll',
         'benefit' => 'Eco-friendly packing roll for moving, shipping and small business dispatch.',
         'url' => 'https://amzn.to/3Pz9MeW',
-        'image_url' => 'https://images-eu.ssl-images-amazon.com/images/I/71D7Fgxy+0L._AC_UL600_SR600,600_.jpg',
+        'image_url' => 'https://m.media-amazon.com/images/I/71D7Fgxy+0L._AC_SL500_.jpg',
         'active' => true,
     ],
     [
@@ -29,7 +33,7 @@ $omr_affiliate_products = [
         'title' => 'UCRAVO Dual Tip Art Markers (120 Colors)',
         'benefit' => 'Useful for visual notes, sketching, design drafts and creative work.',
         'url' => 'https://amzn.to/47pz8lB',
-        'image_url' => 'https://images-eu.ssl-images-amazon.com/images/I/71M4m7i6gvL._AC_UL600_SR600,600_.jpg',
+        'image_url' => 'https://m.media-amazon.com/images/I/71M4m7i6gvL._AC_SL500_.jpg',
         'active' => true,
     ],
     [

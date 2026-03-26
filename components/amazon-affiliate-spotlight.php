@@ -9,6 +9,19 @@
  *     'article_title' => $article['title'] ?? '',
  *   ]);
  */
+if (!function_exists('omr_affiliate_normalize_image_url')) {
+    /**
+     * Amazon image paths often include "+" in the filename; must be %2B in the request URL.
+     */
+    function omr_affiliate_normalize_image_url($url) {
+        $url = trim((string)$url);
+        if ($url === '') {
+            return '';
+        }
+        return str_replace('+', '%2B', $url);
+    }
+}
+
 if (!function_exists('omr_amazon_affiliate_spotlight')) {
     function omr_amazon_affiliate_spotlight(array $context = []) {
         $seed = isset($context['seed']) ? (string)$context['seed'] : '';
@@ -74,7 +87,6 @@ if (!function_exists('omr_amazon_affiliate_spotlight')) {
             $pool = array_values($activeById);
         }
 
-        // Rotate daily, while remaining stable for each article.
         $rotationSeed = $seed . '|' . date('Y-m-d');
         $index = abs((int)crc32($rotationSeed)) % count($pool);
         $selectedProducts = [$pool[$index]];
@@ -87,43 +99,48 @@ if (!function_exists('omr_amazon_affiliate_spotlight')) {
 
         if (!defined('OMR_AFFILIATE_SPOTLIGHT_CSS_LOADED')) {
             define('OMR_AFFILIATE_SPOTLIGHT_CSS_LOADED', true);
-            echo '<style>
-            .omr-affiliate-spotlight{margin:1.5rem 0;padding:1rem;border:1px solid #e5e7eb;border-radius:10px;background:#f8fafc}
-            .omr-affiliate-badge{display:inline-block;font-size:.75rem;font-weight:700;color:#92400e;background:#fef3c7;border:1px solid #fde68a;border-radius:999px;padding:.15rem .6rem;margin-bottom:.6rem}
-            .omr-affiliate-grid{display:grid;grid-template-columns:1fr;gap:.9rem}
-            .omr-affiliate-card{display:grid;grid-template-columns:100px 1fr;gap:.85rem;align-items:start;padding:.75rem;background:#fff;border:1px solid #e5e7eb;border-radius:10px}
-            .omr-affiliate-thumb{width:100px;height:100px;border-radius:8px;overflow:hidden;background:#fff;border:1px solid #e5e7eb;display:flex;align-items:center;justify-content:center}
-            .omr-affiliate-thumb img{max-width:100%;max-height:100%;display:block}
-            .omr-affiliate-thumb i{font-size:1.25rem;color:#6b7280}
-            .omr-affiliate-title{margin:0 0 .35rem 0;font-size:1.05rem;line-height:1.35;color:#14532d}
-            .omr-affiliate-description{margin:0 0 .8rem 0;color:#4b5563;font-size:.93rem;line-height:1.5}
-            .omr-affiliate-cta{display:inline-flex;align-items:center;gap:.45rem;background:#14532d;color:#fff;text-decoration:none;border-radius:8px;padding:.55rem .95rem;font-weight:600}
-            .omr-affiliate-cta:hover{color:#fff;background:#166534}
-            .omr-affiliate-disclosure{display:block;margin-top:.7rem;font-size:.8rem;color:#6b7280}
-            @media (min-width:900px){.omr-affiliate-grid{grid-template-columns:1fr 1fr}}
-            @media (max-width:576px){.omr-affiliate-card{grid-template-columns:72px 1fr}.omr-affiliate-thumb{width:72px;height:72px}}
-            </style>';
+            echo '<link rel="stylesheet" href="/assets/css/amazon-affiliate-spotlight.css">';
         }
         ?>
-        <aside class="omr-affiliate-spotlight" role="complementary" aria-label="Recommended product">
-            <span class="omr-affiliate-badge">Affiliate</span>
+        <aside class="omr-affiliate-spotlight" role="complementary" aria-label="Recommended on Amazon">
+            <div class="omr-affiliate-spotlight__head">
+                <div class="omr-affiliate-spotlight__head-icon" aria-hidden="true">
+                    <i class="fab fa-amazon"></i>
+                </div>
+                <div class="omr-affiliate-spotlight__head-text">
+                    <p class="omr-affiliate-spotlight__kicker">Readers also shop</p>
+                    <p class="omr-affiliate-spotlight__title">Hand-picked picks</p>
+                </div>
+                <span class="omr-affiliate-badge">Affiliate</span>
+            </div>
             <div class="omr-affiliate-grid">
                 <?php foreach ($selectedProducts as $position => $product): ?>
                     <?php
                     $network = isset($product['network']) ? (string)$product['network'] : 'amazon';
                     $benefit = isset($product['benefit']) ? (string)$product['benefit'] : '';
-                    $imageUrl = isset($product['image_url']) ? (string)$product['image_url'] : '';
+                    $rawImageUrl = isset($product['image_url']) ? (string)$product['image_url'] : '';
+                    $imageUrl = omr_affiliate_normalize_image_url($rawImageUrl);
+                    $imgAlt = htmlspecialchars($product['title'] ?? 'Product', ENT_QUOTES, 'UTF-8');
                     ?>
-                    <div class="omr-affiliate-card">
-                        <div class="omr-affiliate-thumb" aria-hidden="true">
+                    <article class="omr-affiliate-card">
+                        <div class="omr-affiliate-thumb<?php echo $imageUrl === '' ? ' omr-affiliate-thumb--fallback' : ''; ?>">
                             <?php if ($imageUrl !== ''): ?>
-                                <img src="<?php echo htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8'); ?>" alt="">
-                            <?php else: ?>
-                                <i class="fas fa-box-open"></i>
+                                <img src="<?php echo htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8'); ?>"
+                                     alt="<?php echo $imgAlt; ?>"
+                                     width="500"
+                                     height="375"
+                                     loading="lazy"
+                                     decoding="async"
+                                     referrerpolicy="no-referrer-when-downgrade"
+                                     onerror="this.closest('.omr-affiliate-thumb').classList.add('omr-affiliate-thumb--fallback');">
                             <?php endif; ?>
+                            <div class="omr-affiliate-thumb__placeholder">
+                                <i class="fab fa-amazon" aria-hidden="true"></i>
+                                <span>Amazon</span>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="omr-affiliate-title"><?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <div class="omr-affiliate-card__body">
+                            <h3 class="omr-affiliate-product-title"><?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
                             <p class="omr-affiliate-description"><?php echo htmlspecialchars($benefit, ENT_QUOTES, 'UTF-8'); ?></p>
                             <a href="<?php echo htmlspecialchars($product['url'], ENT_QUOTES, 'UTF-8'); ?>"
                                class="omr-affiliate-cta js-affiliate-click"
@@ -137,12 +154,12 @@ if (!function_exists('omr_amazon_affiliate_spotlight')) {
                                 View on Amazon
                             </a>
                         </div>
-                    </div>
+                    </article>
                 <?php endforeach; ?>
             </div>
-            <small class="omr-affiliate-disclosure">
+            <p class="omr-affiliate-disclosure">
                 We may earn a commission if you buy through these links, at no extra cost to you.
-            </small>
+            </p>
         </aside>
         <?php
     }

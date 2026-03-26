@@ -476,6 +476,16 @@ if (file_exists($core_file)) {
   <?php include 'components/featured-news-links.php'; ?>
 </section>
 <?php omr_ad_slot('homepage-mid', '336x280'); ?>
+<section class="homepage-section homepage-section--affiliate" aria-label="Recommended on Amazon">
+  <div class="container px-3">
+    <?php omr_amazon_affiliate_spotlight([
+      'seed' => 'homepage',
+      'article_title' => 'Homepage',
+      'article_category' => '',
+      'article_tags' => 'homepage',
+    ]); ?>
+  </div>
+</section>
 </main>
 
 <section id="subscribe" class="homepage-section" aria-labelledby="subscribe-heading">

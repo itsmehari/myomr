@@ -1,0 +1,217 @@
+/**
+ * Amazon affiliate spotlight — article detail recommendations
+ * Loaded once per page from omr_amazon_affiliate_spotlight()
+ */
+
+.omr-affiliate-spotlight {
+  --omr-aff-accent: #14532d;
+  --omr-aff-accent-soft: #dcfce7;
+  margin: 2rem 0;
+  padding: 0;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 50%, #ecfdf5 100%);
+  box-shadow: 0 4px 24px rgba(20, 83, 45, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.omr-affiliate-spotlight__head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid rgba(20, 83, 45, 0.12);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.omr-affiliate-spotlight__head-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #14532d, #22c55e);
+  color: #fff;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.omr-affiliate-spotlight__head-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.omr-affiliate-spotlight__kicker {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.omr-affiliate-spotlight__title {
+  margin: 0.15rem 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--omr-aff-accent);
+  line-height: 1.25;
+}
+
+.omr-affiliate-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #92400e;
+  background: linear-gradient(180deg, #fef3c7, #fde68a);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+}
+
+.omr-affiliate-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .omr-affiliate-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+}
+
+.omr-affiliate-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.omr-affiliate-card:hover {
+  box-shadow: 0 8px 28px rgba(20, 83, 45, 0.1);
+  transform: translateY(-2px);
+}
+
+.omr-affiliate-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 200px;
+  background: linear-gradient(160deg, #f8fafc 0%, #e2e8f0 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.omr-affiliate-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.omr-affiliate-thumb--fallback img {
+  display: none !important;
+}
+
+.omr-affiliate-thumb__placeholder {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.omr-affiliate-thumb--fallback .omr-affiliate-thumb__placeholder {
+  display: flex;
+}
+
+.omr-affiliate-thumb__placeholder i {
+  font-size: 1.75rem;
+  color: #94a3b8;
+}
+
+.omr-affiliate-card__body {
+  padding: 1rem 1rem 1.1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.omr-affiliate-product-title {
+  margin: 0 0 0.4rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #0f172a;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.omr-affiliate-description {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #64748b;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.omr-affiliate-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 0.55rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff !important;
+  text-decoration: none !important;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #166534 0%, #14532d 100%);
+  border: 1px solid rgba(20, 83, 45, 0.35);
+  box-shadow: 0 2px 6px rgba(20, 83, 45, 0.2);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.omr-affiliate-cta:hover {
+  color: #fff !important;
+  background: linear-gradient(180deg, #15803d 0%, #166534 100%);
+  box-shadow: 0 4px 12px rgba(20, 83, 45, 0.28);
+  transform: translateY(-1px);
+}
+
+.omr-affiliate-disclosure {
+  display: block;
+  margin: 0;
+  padding: 0.75rem 1.25rem 1rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #64748b;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+}

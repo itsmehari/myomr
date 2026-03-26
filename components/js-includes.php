@@ -9,3 +9,4 @@
  */
 ?>
 <!-- Common JS (extend as needed) -->
+<script src="/assets/js/amazon-affiliate-tracking.js" defer></script>
