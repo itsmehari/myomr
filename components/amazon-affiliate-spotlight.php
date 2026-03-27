@@ -133,7 +133,7 @@ if (!function_exists('omr_amazon_affiliate_spotlight')) {
                                     <p class="omr-affiliate-card__subline"><?php echo htmlspecialchars($benefit, ENT_QUOTES, 'UTF-8'); ?></p>
                                 <?php endif; ?>
                             </div>
-                            <div class="omr-affiliate-card__badge" aria-hidden="true" title="Amazon">
+                            <div class="omr-affiliate-card__badge" aria-hidden="true" title="Opens on Amazon">
                                 <i class="fab fa-amazon"></i>
                             </div>
                         </div>
