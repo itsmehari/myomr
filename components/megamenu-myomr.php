@@ -13,7 +13,7 @@ if (empty($megamenu) || !is_array($megamenu)) {
   $megamenu = [
     ['label' => 'Home', 'url' => '/', 'icon' => 'fas fa-home', 'active' => true],
     ['label' => 'Jobs', 'url' => '/omr-local-job-listings/', 'icon' => 'fas fa-briefcase'],
-    ['label' => 'Events', 'url' => '/omr-local-events/', 'icon' => 'fas fa-calendar-alt'],
+    ['label' => 'Events', 'url' => '/local-events/', 'icon' => 'fas fa-calendar-alt'],
     ['label' => 'News', 'url' => '/local-news/news-highlights-from-omr-road.php', 'icon' => 'fas fa-newspaper'],
     ['label' => 'Places', 'url' => '/omr-listings/', 'icon' => 'fas fa-map-marker-alt'],
     ['label' => 'About', 'url' => '/discover-myomr/overview.php', 'icon' => 'fas fa-info-circle'],

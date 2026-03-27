@@ -20,7 +20,7 @@ $cats = [
   ['label' => 'Schools', 'url' => '/omr-listings/schools.php', 'icon' => 'fas fa-graduation-cap', 'highlight' => false, 'table' => 'omrschoolslist'],
   ['label' => 'Restaurants', 'url' => '/omr-listings/restaurants.php', 'icon' => 'fas fa-utensils', 'highlight' => false, 'table' => 'omr_restaurants'],
   ['label' => 'Jobs', 'url' => '/omr-local-job-listings/', 'icon' => 'fas fa-briefcase', 'highlight' => true, 'table' => null],
-  ['label' => 'Events', 'url' => '/omr-local-events/', 'icon' => 'fas fa-calendar-day', 'highlight' => true, 'table' => 'event_listings'],
+  ['label' => 'Events', 'url' => '/local-events/', 'icon' => 'fas fa-calendar-day', 'highlight' => true, 'table' => 'event_listings'],
   ['label' => 'Rent & Lease', 'url' => '/omr-rent-lease/', 'icon' => 'fas fa-house', 'highlight' => true, 'table' => 'rent_lease_properties'],
   ['label' => 'Buy & Sell', 'url' => '/omr-buy-sell/', 'icon' => 'fas fa-shopping-bag', 'highlight' => false, 'table' => 'omr_buy_sell_listings'],
   ['label' => 'Classified Ads', 'url' => '/omr-classified-ads/', 'icon' => 'fas fa-newspaper', 'highlight' => true, 'table' => null],

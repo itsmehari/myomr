@@ -31,7 +31,7 @@ foreach ($categoryCounts as $cc) { $catCountMap[(int)$cc['id']] = (int)$cc['cnt'
 // SEO
 $page_title = 'Events in OMR Chennai – Local Community & Happenings | MyOMR';
 $page_description = 'Discover upcoming events across OMR: community, education, sports, arts, networking and more. Submit your event and reach local residents.';
-$canonical_url = 'https://myomr.in/omr-local-events/';
+$canonical_url = 'https://myomr.in' . EVENTS_BASE_URL . '/';
 $og_title            = $page_title;
 $og_description      = $page_description;
 $og_image            = 'https://myomr.in/My-OMR-Logo.png';
@@ -45,7 +45,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
 <head>
   <?php $breadcrumbs = [
     ['https://myomr.in/','Home'],
-    ['https://myomr.in/omr-local-events/','Events']
+    ['https://myomr.in' . EVENTS_BASE_URL . '/','Events']
   ]; ?>
   <?php include __DIR__ . '/../components/meta.php'; ?>
   <?php if (!empty($_GET) && (isset($_GET['search']) || isset($_GET['category']) || isset($_GET['locality']) || isset($_GET['is_free']) || isset($_GET['date_from']) || isset($_GET['date_to']))): ?>
@@ -125,14 +125,14 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
     <!-- Prominent quick links -->
     <div class="events-quick-links mb-4 d-flex flex-wrap gap-2 align-items-center">
       <span class="me-2 fw-semibold">Browse:</span>
-      <a class="btn btn-sm btn-outline-primary" href="today.php"><i class="fas fa-calendar-day me-1"></i>Today</a>
-      <a class="btn btn-sm btn-outline-primary" href="weekend.php"><i class="fas fa-calendar-week me-1"></i>This Weekend</a>
-      <a class="btn btn-sm btn-outline-primary" href="month.php"><i class="fas fa-calendar-alt me-1"></i>This Month</a>
-      <a class="btn btn-sm btn-outline-success" href="index.php?is_free=1"><i class="fas fa-gift me-1"></i>Free Events</a>
+      <a class="btn btn-sm btn-outline-primary" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/today"><i class="fas fa-calendar-day me-1"></i>Today</a>
+      <a class="btn btn-sm btn-outline-primary" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/weekend"><i class="fas fa-calendar-week me-1"></i>This Weekend</a>
+      <a class="btn btn-sm btn-outline-primary" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/month"><i class="fas fa-calendar-alt me-1"></i>This Month</a>
+      <a class="btn btn-sm btn-outline-success" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/?is_free=1"><i class="fas fa-gift me-1"></i>Free Events</a>
     </div>
 
     <!-- Filters -->
-    <form class="card-modern mb-4 dashboard-toolbar" method="get" action="/omr-local-events/">
+    <form class="card-modern mb-4 dashboard-toolbar" method="get" action="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/">
       <div class="">
         <div class="row g-3">
           <div class="col-md-4">
@@ -184,7 +184,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
         </div>
         <div class="mt-3 d-flex gap-3">
           <button class="btn-modern btn-modern-primary" type="submit"><i class="fas fa-filter"></i><span>Apply Filters</span></button>
-          <a class="btn-modern btn-modern-secondary" href="/omr-local-events/"><i class="fas fa-rotate-left"></i><span>Reset</span></a>
+          <a class="btn-modern btn-modern-secondary" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/"><i class="fas fa-rotate-left"></i><span>Reset</span></a>
         </div>
         <div class="mt-2 d-flex gap-2 flex-wrap">
           <?php
@@ -248,7 +248,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
   <div class="container">
     <h2 class="h5 mb-3">How to list your event on MyOMR</h2>
     <ol class="mb-0 ps-3">
-      <li class="mb-2">Click <a href="post-event-omr.php">List an Event</a> and fill in the form (title, date, venue, description).</li>
+      <li class="mb-2">Click <a href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/post-event-omr.php">List an Event</a> and fill in the form (title, date, venue, description).</li>
       <li class="mb-2">Add an image and ticket link if you have one. Free events get a &ldquo;Free&rdquo; badge.</li>
       <li>After a quick review, your event goes live and appears in search and on our events directory.</li>
     </ol>
@@ -260,7 +260,7 @@ $twitter_image       = 'https://myomr.in/My-OMR-Logo.png';
     <?php include __DIR__ . '/components/newsletter-signup.php'; ?>
   </div>
   <div class="container mt-3 text-center">
-    <small>Quick links: <a href="today.php">Today</a> · <a href="weekend.php">This Weekend</a> · <a href="month.php">This Month</a></small>
+    <small>Quick links: <a href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/today">Today</a> · <a href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/weekend">This Weekend</a> · <a href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/month">This Month</a></small>
   </div>
 </section>
 
@@ -288,7 +288,7 @@ if (!empty($events)) {
           'addressCountry' => 'IN'
         ]
       ],
-      'url' => 'https://myomr.in/omr-local-events/event/' . urlencode($ev['slug'])
+      'url' => 'https://myomr.in' . EVENTS_BASE_URL . '/event/' . urlencode($ev['slug'])
     ];
     if (!empty($ev['end_datetime'])) {
       $event['endDate'] = date('c', strtotime($ev['end_datetime']));
@@ -301,7 +301,7 @@ if (!empty($events)) {
         '@type' => 'Offer',
         'price' => $ev['price'],
         'priceCurrency' => 'INR',
-        'url' => 'https://myomr.in/omr-local-events/event/' . urlencode($ev['slug'])
+        'url' => 'https://myomr.in' . EVENTS_BASE_URL . '/event/' . urlencode($ev['slug'])
       ];
     }
     $ld[] = $event;

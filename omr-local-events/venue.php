@@ -11,7 +11,7 @@ $total = getEventCountByVenue($venueLabel); $pages = max(1, (int)ceil($total / $
 
 $page_title = $venueLabel . ' – Upcoming Events | MyOMR';
 $page_description = 'Upcoming events at ' . $venueLabel . ' along Old Mahabalipuram Road (OMR). Timings, venue map, and details.';
-$canonical_url = 'https://myomr.in/omr-local-events/venue/' . urlencode($slug);
+$canonical_url = 'https://myomr.in' . EVENTS_BASE_URL . '/venue/' . urlencode($slug);
 ?>
 <!DOCTYPE html>
 <html lang="en">

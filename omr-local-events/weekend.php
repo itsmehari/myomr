@@ -14,7 +14,7 @@ $total = getEventCount($filters); $pages = max(1, (int)ceil($total / $per_page))
 
 $page_title = 'This Weekend in OMR – Events | MyOMR';
 $page_description = 'Top events this weekend across OMR: workshops, sports, community meetups and more.';
-$canonical_url = 'https://myomr.in/omr-local-events/weekend';
+$canonical_url = 'https://myomr.in' . EVENTS_BASE_URL . '/weekend';
 ?>
 <!DOCTYPE html>
 <html lang="en">

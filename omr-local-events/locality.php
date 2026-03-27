@@ -23,7 +23,7 @@ $pages = max(1, (int)ceil($total / $per_page));
 
 $page_title = 'Events in ' . $localityLabel . ' – OMR Chennai | MyOMR';
 $page_description = 'Discover events happening in ' . $localityLabel . ' along Old Mahabalipuram Road (OMR): timings, venues, and details.';
-$canonical_url = 'https://myomr.in/omr-local-events/locality/' . urlencode($slug);
+$canonical_url = 'https://myomr.in' . EVENTS_BASE_URL . '/locality/' . urlencode($slug);
 ?>
 <!DOCTYPE html>
 <html lang="en">

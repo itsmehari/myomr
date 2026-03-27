@@ -59,7 +59,7 @@ $pages = [
     // Module indexes (detail pages in respective sitemaps)
     ['loc' => $base . '/omr-hostels-pgs/', 'priority' => '0.9', 'changefreq' => 'weekly'],
     ['loc' => $base . '/omr-coworking-spaces/', 'priority' => '0.8', 'changefreq' => 'weekly'],
-    ['loc' => $base . '/omr-local-events/', 'priority' => '0.9', 'changefreq' => 'daily'],
+    ['loc' => $base . '/local-events/', 'priority' => '0.9', 'changefreq' => 'daily'],
     ['loc' => $base . '/local-news/', 'priority' => '0.9', 'changefreq' => 'daily'],
 ];
 

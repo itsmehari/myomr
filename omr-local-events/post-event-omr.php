@@ -13,17 +13,17 @@ $categories = getEventCategories();
 <?php
 $page_title          = 'List Your Event on OMR | MyOMR';
 $page_description    = 'Submit your local event to reach OMR residents. Community, workshops, sports, arts, business and more.';
-$canonical_url       = 'https://myomr.in/omr-local-events/post-event-omr.php';
+$canonical_url       = 'https://myomr.in' . EVENTS_BASE_URL . '/post-event-omr.php';
 $og_title            = 'List Your Event on OMR | MyOMR';
 $og_description      = 'Submit your local event to reach OMR residents. Community, workshops, sports, arts, business and more.';
 $og_image            = 'https://myomr.in/My-OMR-Logo.png';
-$og_url              = 'https://myomr.in/omr-local-events/post-event-omr.php';
+$og_url              = 'https://myomr.in' . EVENTS_BASE_URL . '/post-event-omr.php';
 ?>
 <head>
   <?php $breadcrumbs = [
     ['https://myomr.in/','Home'],
-    ['https://myomr.in/omr-local-events/','Events'],
-    ['https://myomr.in/omr-local-events/post-event-omr.php','List an Event']
+    ['https://myomr.in' . EVENTS_BASE_URL . '/','Events'],
+    ['https://myomr.in' . EVENTS_BASE_URL . '/post-event-omr.php','List an Event']
   ]; ?>
   <?php include __DIR__ . '/../components/meta.php'; ?>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />

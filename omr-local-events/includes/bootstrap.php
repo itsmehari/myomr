@@ -26,5 +26,5 @@ if (!defined('EVENTS_PATH')) {
 }
 
 if (!defined('EVENTS_BASE_URL')) {
-    define('EVENTS_BASE_URL', '/omr-local-events');
+    define('EVENTS_BASE_URL', MYOMR_EVENTS_HUB_PATH);
 }

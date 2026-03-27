@@ -87,6 +87,23 @@ RewriteRule ^sitemap-pages\.xml$ /generate-sitemap-pages.php [L]
 # Legacy static sitemap path -> canonical sitemap index
 RewriteRule ^info/sitemap\.xml$ /sitemap.xml [R=301,L]
 
+# Legacy /events (old static listing; Google still surfaces it) -> short events hub
+RewriteRule ^events/index\.php$ /local-events/ [R=301,L,QSA]
+RewriteRule ^events/?$ /local-events/ [R=301,L,QSA]
+
+# Short events hub URL (alias for omr-local-events — same handlers)
+RewriteRule ^local-events/sitemap\.xml$ omr-local-events/generate-events-sitemap.php [L]
+RewriteRule ^local-events/event/([^/]+)/?$ omr-local-events/event-detail-omr.php?slug=$1 [L,QSA]
+RewriteRule ^local-events/category/([^/]+)/?$ omr-local-events/category.php?slug=$1 [L,QSA]
+RewriteRule ^local-events/locality/([^/]+)/?$ omr-local-events/locality.php?slug=$1 [L,QSA]
+RewriteRule ^local-events/venue/([^/]+)/?$ omr-local-events/venue.php?slug=$1 [L,QSA]
+RewriteRule ^local-events/today/?$ omr-local-events/today.php [L]
+RewriteRule ^local-events/weekend/?$ omr-local-events/weekend.php [L]
+RewriteRule ^local-events/month/?$ omr-local-events/month.php [L]
+RewriteRule ^local-events/post/?$ omr-local-events/post-event-omr.php [L]
+RewriteRule ^local-events/([A-Za-z0-9_.-]+\.php)$ omr-local-events/$1 [L,QSA]
+RewriteRule ^local-events/?$ omr-local-events/index.php [L,QSA]
+
 # Module: Events – clean routes
 RewriteRule ^omr-local-events/sitemap\.xml$ omr-local-events/generate-events-sitemap.php [L]
 RewriteRule ^omr-local-events/event/([^/]+)/?$ omr-local-events/event-detail-omr.php?slug=$1 [L,QSA]

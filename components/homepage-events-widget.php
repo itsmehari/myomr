@@ -3,6 +3,9 @@
  * Homepage Events Widget - upcoming events strip
  * Expects $recent_events array with: id, title, slug, start_datetime, location, locality (optional)
  */
+if (!defined('MYOMR_EVENTS_HUB_PATH')) {
+  require_once __DIR__ . '/../core/include-path.php';
+}
 if (empty($recent_events) || !is_array($recent_events)) {
   return;
 }
@@ -15,7 +18,7 @@ if (empty($recent_events) || !is_array($recent_events)) {
   <div class="events-homepage-strip__track-wrap">
     <div class="events-homepage-strip__track">
       <?php foreach ($recent_events as $ev): ?>
-      <a href="/omr-local-events/event/<?php echo urlencode($ev['slug'] ?? ''); ?>" class="events-homepage-strip__item">
+      <a href="<?php echo htmlspecialchars(MYOMR_EVENTS_HUB_PATH, ENT_QUOTES, 'UTF-8'); ?>/event/<?php echo urlencode($ev['slug'] ?? ''); ?>" class="events-homepage-strip__item">
         <span class="events-homepage-strip__title"><?php echo htmlspecialchars($ev['title'] ?? 'Event'); ?></span>
         <span class="events-homepage-strip__meta">
           <?php echo !empty($ev['start_datetime']) ? date('M d', strtotime($ev['start_datetime'])) : ''; ?>
@@ -25,7 +28,7 @@ if (empty($recent_events) || !is_array($recent_events)) {
       <span class="events-homepage-strip__sep" aria-hidden="true">•</span>
       <?php endforeach; ?>
       <?php foreach ($recent_events as $ev): ?>
-      <a href="/omr-local-events/event/<?php echo urlencode($ev['slug'] ?? ''); ?>" class="events-homepage-strip__item">
+      <a href="<?php echo htmlspecialchars(MYOMR_EVENTS_HUB_PATH, ENT_QUOTES, 'UTF-8'); ?>/event/<?php echo urlencode($ev['slug'] ?? ''); ?>" class="events-homepage-strip__item">
         <span class="events-homepage-strip__title"><?php echo htmlspecialchars($ev['title'] ?? 'Event'); ?></span>
         <span class="events-homepage-strip__meta">
           <?php echo !empty($ev['start_datetime']) ? date('M d', strtotime($ev['start_datetime'])) : ''; ?>
@@ -36,5 +39,5 @@ if (empty($recent_events) || !is_array($recent_events)) {
       <?php endforeach; ?>
     </div>
   </div>
-  <a href="/omr-local-events/" class="events-homepage-strip__cta">Browse all events</a>
+  <a href="<?php echo htmlspecialchars(MYOMR_EVENTS_HUB_PATH, ENT_QUOTES, 'UTF-8'); ?>/" class="events-homepage-strip__cta">Browse all events</a>
 </section>

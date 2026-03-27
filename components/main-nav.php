@@ -512,6 +512,7 @@
 
 <?php
 require_once __DIR__ . '/../core/site-navigation.php';
+require_once __DIR__ . '/../core/include-path.php';
 
 // Get the current request URI for active class comparison
 $current_uri = $_SERVER['REQUEST_URI'];
@@ -526,6 +527,14 @@ function is_active($link, $current_uri) {
     // Special case for Explore Places (schools-list.php, restaurants.php)
     if ($link_path === '/omr-listings/index.php') {
         return in_array($current_path, ['/omr-listings/schools-list.php', '/omr-listings/restaurants.php', '/omr-listings/index.php']);
+    }
+
+    // Events hub: short URL + legacy module path
+    if ($link_path === MYOMR_EVENTS_HUB_PATH . '/') {
+        return $current_path === MYOMR_EVENTS_HUB_PATH || $current_path === MYOMR_EVENTS_HUB_PATH . '/'
+            || strpos($current_path, MYOMR_EVENTS_HUB_PATH . '/') === 0
+            || $current_path === '/omr-local-events' || $current_path === '/omr-local-events/'
+            || strpos($current_path, '/omr-local-events/') === 0;
     }
     
     // General case: match the path exactly
@@ -628,7 +637,7 @@ function is_active($link, $current_uri) {
         <a href="/fresher-jobs-omr-chennai.php" class="dropdown-sub-item">Fresher Jobs</a>
         <a href="/part-time-jobs-omr-chennai.php" class="dropdown-sub-item">Part-Time Jobs</a>
         <div class="dropdown-divider"></div>
-        <a href="/omr-local-events/" class="<?php echo is_active('/omr-local-events/', $current_uri) ? 'active' : ''; ?>">Events</a>
+        <a href="<?php echo htmlspecialchars(MYOMR_EVENTS_HUB_PATH, ENT_QUOTES, 'UTF-8'); ?>/" class="<?php echo is_active(MYOMR_EVENTS_HUB_PATH . '/', $current_uri) ? 'active' : ''; ?>">Events</a>
         <a href="/omr-hostels-pgs/" class="<?php echo is_active('/omr-hostels-pgs/', $current_uri) ? 'active' : ''; ?>">Hostels & PGs</a>
         <a href="/omr-coworking-spaces/" class="<?php echo is_active('/omr-coworking-spaces/', $current_uri) ? 'active' : ''; ?>">Coworking Spaces</a>
         <a href="/omr-rent-lease/" class="<?php echo is_active('/omr-rent-lease/', $current_uri) ? 'active' : ''; ?>">Rent & Lease</a>
@@ -662,7 +671,7 @@ function is_active($link, $current_uri) {
         <span>List a Job</span>
       </div>
     </a>
-    <a href="/omr-local-events/post-event-omr.php" class="action-pill pill-event">
+    <a href="<?php echo htmlspecialchars(MYOMR_EVENTS_HUB_PATH, ENT_QUOTES, 'UTF-8'); ?>/post-event-omr.php" class="action-pill pill-event">
       <div class="pill-accent"></div>
       <div class="pill-content">
         <i class="fas fa-calendar-plus"></i>

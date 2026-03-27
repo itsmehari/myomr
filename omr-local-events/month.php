@@ -14,7 +14,7 @@ $total = getEventCount($filters); $pages = max(1, (int)ceil($total / $per_page))
 
 $page_title = 'This Month in OMR – Events | MyOMR';
 $page_description = 'Plan ahead with events this month across OMR: community, arts, sports, workshops and more.';
-$canonical_url = 'https://myomr.in/omr-local-events/month';
+$canonical_url = 'https://myomr.in' . EVENTS_BASE_URL . '/month';
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -24,6 +24,7 @@ if (!empty($ga_content_group) && is_string($ga_content_group)) {
     $map = [
         '/join-omr-whatsapp-group-myomr.php' => 'Community & WhatsApp',
         '/omr-local-job-listings/' => 'Job Listings',
+        '/local-events/'            => 'Local Events',
         '/omr-local-events/'       => 'Local Events',
         '/omr-coworking-spaces/'   => 'Coworking Spaces',
         '/omr-hostels-pgs/'        => 'Hostels & PGs',

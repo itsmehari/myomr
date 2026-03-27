@@ -48,6 +48,8 @@ function autoDetectSDGBadges() {
         '/local-news/index.php' => [11, 16],
         
         // Events
+        '/local-events' => [11, 17],
+        '/local-events/index.php' => [11, 17],
         '/omr-local-events' => [11, 17],
         '/omr-local-events/index.php' => [11, 17],
         '/events' => [11, 17],

@@ -7,7 +7,7 @@
 if (empty($ev) || empty($ev['slug'])) return;
 
 $imgUrl = !empty($ev['image_url']) ? $ev['image_url'] : 'https://myomr.in/My-OMR-Logo.png';
-$evUrl = '/omr-local-events/event/' . htmlspecialchars($ev['slug']);
+$evUrl = EVENTS_BASE_URL . '/event/' . htmlspecialchars($ev['slug']);
 $locSlug = !empty($ev['locality']) ? localityToSlug($ev['locality']) : '';
 $compact = !empty($compact);
 ?>
@@ -35,10 +35,10 @@ $compact = !empty($compact);
       <span class="event-card__date"><i class="far fa-calendar-alt"></i> <?php echo date('M d, Y g:i a', strtotime($ev['start_datetime'])); ?></span>
       <span class="event-card__location"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($ev['location']); ?><?php echo !empty($ev['locality']) ? ' · ' . htmlspecialchars($ev['locality']) : ''; ?></span>
       <?php if (!empty($locSlug) && !$compact): ?>
-        <a class="event-card__locality-tag" href="/omr-local-events/locality/<?php echo urlencode($locSlug); ?>">#<?php echo htmlspecialchars($ev['locality']); ?></a>
+        <a class="event-card__locality-tag" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/locality/<?php echo urlencode($locSlug); ?>">#<?php echo htmlspecialchars($ev['locality']); ?></a>
       <?php endif; ?>
       <?php if (!empty($ev['location']) && !$compact): $venueSlug = locationToVenueSlug($ev['location']); ?>
-        <a class="event-card__venue-tag" href="/omr-local-events/venue/<?php echo urlencode($venueSlug); ?>">@ <?php echo htmlspecialchars($ev['location']); ?></a>
+        <a class="event-card__venue-tag" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/venue/<?php echo urlencode($venueSlug); ?>">@ <?php echo htmlspecialchars($ev['location']); ?></a>
       <?php endif; ?>
     </div>
     <div class="event-card__actions">

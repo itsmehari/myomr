@@ -17,7 +17,7 @@ $total = getEventCount($filters); $pages = max(1, (int)ceil($total / $per_page))
 
 $page_title = 'Events Today in OMR Chennai | MyOMR';
 $page_description = 'See what is happening today across Old Mahabalipuram Road (OMR): workshops, sports, community events and more.';
-$canonical_url = 'https://myomr.in/omr-local-events/today';
+$canonical_url = 'https://myomr.in' . EVENTS_BASE_URL . '/today';
 ?>
 <!DOCTYPE html>
 <html lang="en">

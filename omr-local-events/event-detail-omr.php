@@ -6,6 +6,8 @@ if (!$event) {
   require_once ROOT_PATH . '/core/serve-404.php';
   exit;
 }
+$events_public_base = 'https://myomr.in' . EVENTS_BASE_URL;
+$events_event_canonical = $events_public_base . '/event/' . $slug;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,11 +17,11 @@ if (!$event) {
   <title><?php echo $event ? htmlspecialchars($event['title']) . ' – MyOMR' : 'Event – MyOMR'; ?></title>
   <meta name="description" content="<?php echo $event ? htmlspecialchars(substr(strip_tags($event['description']),0,160)) : 'Event details'; ?>" />
   <?php if ($event): ?>
-  <link rel="canonical" href="<?php echo htmlspecialchars('https://myomr.in/omr-local-events/event/' . $slug, ENT_QUOTES, 'UTF-8'); ?>" />
+  <link rel="canonical" href="<?php echo htmlspecialchars($events_event_canonical, ENT_QUOTES, 'UTF-8'); ?>" />
   <!-- Open Graph / Twitter for Event -->
   <meta property="og:title" content="<?php echo htmlspecialchars($event['title'] . ' – MyOMR'); ?>" />
   <meta property="og:description" content="<?php echo htmlspecialchars(substr(strip_tags($event['description']),0,160)); ?>" />
-  <meta property="og:url" content="<?php echo htmlspecialchars('https://myomr.in/omr-local-events/event/' . $slug, ENT_QUOTES, 'UTF-8'); ?>" />
+  <meta property="og:url" content="<?php echo htmlspecialchars($events_event_canonical, ENT_QUOTES, 'UTF-8'); ?>" />
   <meta property="og:type" content="event" />
   <meta property="og:image" content="<?php echo htmlspecialchars($event['image_url'] ?: 'https://myomr.in/My-OMR-Logo.png'); ?>" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -58,7 +60,7 @@ if (!$event) {
           'addressCountry' => 'IN'
         ]
       ],
-    'url' => 'https://myomr.in/omr-local-events/event/' . urlencode($slug)
+    'url' => $events_public_base . '/event/' . urlencode($slug)
     ];
     if (!empty($event['end_datetime'])) { $detailLd['endDate'] = date('c', strtotime($event['end_datetime'])); }
     if (!empty($event['image_url'])) { $detailLd['image'] = $event['image_url']; }
@@ -67,7 +69,7 @@ if (!$event) {
         '@type' => 'Offer',
         'price' => $event['price'],
         'priceCurrency' => 'INR',
-        'url' => 'https://myomr.in/omr-local-events/event/' . urlencode($slug)
+        'url' => $events_public_base . '/event/' . urlencode($slug)
       ];
     }
   ?>
@@ -78,9 +80,9 @@ if (!$event) {
     "@type": "BreadcrumbList",
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://myomr.in/"},
-      {"@type": "ListItem", "position": 2, "name": "Events", "item": "https://myomr.in/omr-local-events/"},
+      {"@type": "ListItem", "position": 2, "name": "Events", "item": <?php echo json_encode($events_public_base . '/'); ?>},
       {"@type": "ListItem", "position": 3, "name": <?php echo json_encode($event['title']); ?>,
-       "item": <?php echo json_encode('https://myomr.in/omr-local-events/event/' . $slug); ?> }
+       "item": <?php echo json_encode($events_event_canonical); ?> }
     ]
   }
   </script>
@@ -114,25 +116,25 @@ if (!$event) {
       <div class="d-flex flex-wrap gap-2">
         <?php if (!empty($event['locality'])): ?>
           <?php $locSlug = localityToSlug($event['locality']); ?>
-          <a class="badge-modern badge-modern-secondary" href="/omr-local-events/locality/<?php echo urlencode($locSlug); ?>">More in <?php echo htmlspecialchars($event['locality']); ?></a>
+          <a class="badge-modern badge-modern-secondary" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/locality/<?php echo urlencode($locSlug); ?>">More in <?php echo htmlspecialchars($event['locality']); ?></a>
         <?php endif; ?>
         <?php if (!empty($event['category_id'])): ?>
           <?php $cat = getCategoryById((int)$event['category_id']); if ($cat): ?>
-            <a class="badge-modern badge-modern-secondary" href="/omr-local-events/category/<?php echo urlencode($cat['slug']); ?>">More <?php echo htmlspecialchars($cat['name']); ?> events</a>
+            <a class="badge-modern badge-modern-secondary" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/category/<?php echo urlencode($cat['slug']); ?>">More <?php echo htmlspecialchars($cat['name']); ?> events</a>
           <?php endif; ?>
         <?php endif; ?>
         <?php if (!empty($event['location'])): ?>
           <?php $venueSlug = locationToVenueSlug($event['location']); ?>
-          <a class="badge-modern badge-modern-secondary" href="/omr-local-events/venue/<?php echo urlencode($venueSlug); ?>">More at this venue</a>
+          <a class="badge-modern badge-modern-secondary" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/venue/<?php echo urlencode($venueSlug); ?>">More at this venue</a>
         <?php endif; ?>
       </div>
               <hr class="my-4" />
               <h5>Share</h5>
               <?php 
-                $baseUrl = 'https://myomr.in/omr-local-events/event/' . urlencode($slug);
-                $eventUrlWhatsApp = $baseUrl . '&utm_source=whatsapp&utm_medium=social&utm_campaign=events_share';
-                $eventUrlTwitter = $baseUrl . '&utm_source=twitter&utm_medium=social&utm_campaign=events_share';
-                $eventUrlFacebook = $baseUrl . '&utm_source=facebook&utm_medium=social&utm_campaign=events_share';
+                $baseUrl = $events_public_base . '/event/' . urlencode($slug);
+                $eventUrlWhatsApp = $baseUrl . '?utm_source=whatsapp&utm_medium=social&utm_campaign=events_share';
+                $eventUrlTwitter = $baseUrl . '?utm_source=twitter&utm_medium=social&utm_campaign=events_share';
+                $eventUrlFacebook = $baseUrl . '?utm_source=facebook&utm_medium=social&utm_campaign=events_share';
                 $shareText = urlencode(($event['title'] ?? 'Event') . ' – via MyOMR');
               ?>
               <div class="d-flex gap-2 flex-wrap">
@@ -149,7 +151,7 @@ if (!$event) {
                   ]);
                 ?>
                 <a class="btn btn-sm btn-outline-primary" target="_blank" data-analytics="addToCalendar" data-analytics-label="<?php echo htmlspecialchars($slug); ?>" href="https://www.google.com/calendar/render?<?php echo $gcParams; ?>"><i class="far fa-calendar-plus"></i> Add to Google Calendar</a>
-                <a class="btn btn-sm btn-outline-primary" data-analytics="icsDownloaded" data-analytics-label="<?php echo htmlspecialchars($slug); ?>" href="/omr-local-events/event-ics.php?slug=<?php echo urlencode($slug); ?>"><i class="far fa-file"></i> Download ICS</a>
+                <a class="btn btn-sm btn-outline-primary" data-analytics="icsDownloaded" data-analytics-label="<?php echo htmlspecialchars($slug); ?>" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/event-ics.php?slug=<?php echo urlencode($slug); ?>"><i class="far fa-file"></i> Download ICS</a>
               </div>
             </div>
             <div class="col-md-4">
@@ -162,7 +164,7 @@ if (!$event) {
                   <div class="mb-3"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($event['location']); ?></div>
                   <div class="d-grid gap-2">
                     <a class="btn-modern btn-modern-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode(($event['location'] ?: '') . ' ' . ($event['locality'] ?: 'OMR Chennai')); ?>"><i class="fas fa-map"></i><span>View on Map</span></a>
-                    <a class="btn-modern btn-modern-secondary" href="/omr-local-events/post-event-omr.php"><i class="fas fa-plus"></i><span>List your event</span></a>
+                    <a class="btn-modern btn-modern-secondary" href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/post-event-omr.php"><i class="fas fa-plus"></i><span>List your event</span></a>
                     <?php if (!empty($event['tickets_url'])): ?>
                       <a class="btn-modern btn-modern-primary" href="<?php echo htmlspecialchars($event['tickets_url']); ?>" target="_blank" data-analytics="getTickets" data-analytics-label="<?php echo htmlspecialchars($slug); ?>"><i class="fas fa-ticket"></i><span>Get Tickets</span></a>
                     <?php endif; ?>
@@ -182,7 +184,7 @@ if (!$event) {
         <?php include __DIR__ . '/components/newsletter-signup.php'; ?>
       </div>
       <div class="text-center">
-        <a href="/omr-local-events/" class="btn-modern btn-modern-secondary"><i class="fas fa-arrow-left"></i><span>Back to Events</span></a>
+        <a href="<?php echo htmlspecialchars(EVENTS_BASE_URL, ENT_QUOTES, 'UTF-8'); ?>/" class="btn-modern btn-modern-secondary"><i class="fas fa-arrow-left"></i><span>Back to Events</span></a>
       </div>
     <?php endif; ?>
   </div>

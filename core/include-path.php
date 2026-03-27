@@ -28,3 +28,8 @@ if (!defined('MYOMR_WHATSAPP_GROUP_URL')) {
 if (!defined('MYOMR_FACEBOOK_GROUP_URL')) {
     define('MYOMR_FACEBOOK_GROUP_URL', 'https://www.facebook.com/groups/416854920508620');
 }
+
+/** Public events hub path (short URL; rewrites to omr-local-events). Must match .htaccess local-events rules. */
+if (!defined('MYOMR_EVENTS_HUB_PATH')) {
+    define('MYOMR_EVENTS_HUB_PATH', '/local-events');
+}

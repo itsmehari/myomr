@@ -61,7 +61,7 @@ if (!defined('_GA_JSON_FLAGS')) {
     <div class="err-links mt-4">
       <a href="/" class="btn btn-success"><i class="fas fa-home me-1"></i> Go Home</a>
       <a href="/omr-local-job-listings/" class="btn btn-outline-secondary"><i class="fas fa-briefcase me-1"></i> Jobs</a>
-      <a href="/omr-local-events/" class="btn btn-outline-secondary"><i class="fas fa-calendar me-1"></i> Events</a>
+      <a href="/local-events/" class="btn btn-outline-secondary"><i class="fas fa-calendar me-1"></i> Events</a>
       <a href="/omr-listings/" class="btn btn-outline-secondary"><i class="fas fa-list me-1"></i> Directory</a>
       <a href="/local-news/" class="btn btn-outline-secondary"><i class="fas fa-newspaper me-1"></i> News</a>
     </div>
