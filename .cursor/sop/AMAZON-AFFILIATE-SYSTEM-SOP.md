@@ -78,9 +78,8 @@ Recommendation:
 
 - Rotation seed uses article slug + current date.
 - Output is deterministic for that day (same article -> same product order).
-- Two cards are rendered:
-  - position 1: primary
-  - position 2: secondary (next index, no duplicate)
+- Up to **three** cards are rendered when the product pool has at least three active items (otherwise two or one).
+  - Positions 1–3 map to consecutive pool indices (wrap-around), no duplicate products when the pool size allows.
 
 This balances UX consistency and freshness.
 
@@ -96,15 +95,15 @@ Expected event params:
 
 - `event_label` (product id)
 - `affiliate_network` (amazon)
-- `affiliate_position` (1 or 2)
+- `affiliate_position` (1, 2, or 3)
 - `article_title`
 
 Quick validation:
 
 1. Open any article detail page.
-2. Click both affiliate cards.
+2. Click each visible affiliate card.
 3. Verify GA4 DebugView receives `affiliate_link_click`.
-4. Confirm position values are distinct (1 and 2).
+4. Confirm position values are distinct (1, 2, 3 when three cards show).
 
 ---
 

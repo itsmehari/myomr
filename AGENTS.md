@@ -103,8 +103,8 @@ MyOMR.in is a local community platform for Old Mahabalipuram Road (OMR), Chennai
 - **Placement:** Integrated on `local-news/article.php` after the mid-article ad area.
 - **Targeting:** Products are selected by matching article title/category/tags against keyword segments (`career`, `education`, `business`) with `default` fallback.
 - **Rotation:** Deterministic daily rotation per article slug (`seed + date`) to keep recommendations stable for a day while still rotating.
-- **Current format:** Two cards (primary + secondary), no duplicates, title + thumbnail + short benefit line + affiliate disclosure.
-- **Tracking:** GA4 event `affiliate_link_click` includes `event_label` (product id), `affiliate_network`, `affiliate_position`, and `article_title`.
+- **Current format:** Up to three cards per section (rotated from the pool, no duplicate products when the pool has enough items), title + thumbnail + short benefit line + affiliate disclosure.
+- **Tracking:** GA4 event `affiliate_link_click` includes `event_label` (product id), `affiliate_network`, `affiliate_position` (1–3), and `article_title`.
 - **Compliance:** Affiliate links must keep `rel="sponsored nofollow noopener noreferrer"` and visible disclosure text.
 - **Ops reference:** `.cursor/sop/AMAZON-AFFILIATE-SYSTEM-SOP.md`.
 
