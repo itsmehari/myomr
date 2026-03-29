@@ -1,6 +1,6 @@
 /**
  * Ad banner templates — standard IAB sizes (728x90, 336x280, 300x250, 320x50 mobile).
- * Rotating promotions: ResumeDoctor, MyCovai, Colourchemist (design studio), BSERI.
+ * Rotating promotions: ResumeDoctor (resumedoctor.in), MyCovai, Colourchemist, BSERI.
  * Card-style layout; aligns with MyOMR section look (--omr-* vars when available).
  */
 
@@ -213,7 +213,7 @@
   }
 }
 
-/* ========== Resume builder banner (ResumeBuilder.in / legacy resumedoctor class) — navy/teal --- */
+/* ========== ResumeDoctor (resumedoctor.in) — navy/teal; .resumebuilder kept for backward-compat --- */
 .omr-ad-banner--resumedoctor,
 .omr-ad-banner--resumebuilder {
   background: linear-gradient(135deg, #0f172a 0%, #0e7490 100%);

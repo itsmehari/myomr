@@ -459,7 +459,7 @@ $application_deadline_label = (!empty($job['application_deadline']) && $job['app
           <?php endif; ?>
         </div>
 
-        <?php omr_ad_slot('jobs-detail-mid', '336x280'); ?>
+        <?php omr_ad_slot('jobs-detail-mid', '728x90'); ?>
 
         <div class="jp-content-block jp-quick-facts">
           <h2><i class="fas fa-bolt"></i> Quick Job Facts</h2>
