@@ -278,6 +278,13 @@ omr_nav('main');
         </div>
     </section>
 
+    <?php
+    if (!isset($job_seeker_cta_utm)) {
+        $job_seeker_cta_utm = 'utm_source=job_landing&utm_medium=strip&utm_campaign=job_seeker_profile';
+    }
+    require __DIR__ . '/job-seeker-profile-cta-strip.php';
+    ?>
+
     <div class="container py-2"><?php if (function_exists('omr_ad_slot')) { omr_ad_slot('listing-top', '728x90'); } ?></div>
 
     <?php if (!empty($salary_insights) && isset($salary_insights['min']) && isset($salary_insights['max'])): ?>

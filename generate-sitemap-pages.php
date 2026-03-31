@@ -43,6 +43,9 @@ $pages = [
     ['loc' => $base . '/discover-myomr/it-parks-in-omr.php', 'priority' => '0.7', 'changefreq' => 'monthly'],
     ['loc' => $base . '/discover-myomr/it-careers-omr.php', 'priority' => '0.8', 'changefreq' => 'weekly'],
     ['loc' => $base . '/discover-myomr/it-corridor-jobs-omr.php', 'priority' => '0.8', 'changefreq' => 'monthly'],
+    ['loc' => $base . '/discover-myomr/omr-job-search-guide-myomr.php', 'priority' => '0.75', 'changefreq' => 'monthly'],
+    ['loc' => $base . '/discover-myomr/fresher-resume-checklist-omr-chennai-myomr.php', 'priority' => '0.75', 'changefreq' => 'monthly'],
+    ['loc' => $base . '/discover-myomr/job-seeker-profile-walkthrough-myomr.php', 'priority' => '0.8', 'changefreq' => 'monthly'],
 
     // Info
     ['loc' => $base . '/info/citizens-charter-old-mahabali-puram-road.php', 'priority' => '0.6', 'changefreq' => 'monthly'],

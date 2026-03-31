@@ -90,6 +90,7 @@ require_once __DIR__ . '/whatsapp-community-strip.php';
                         <li><a href="/hospitality-jobs-omr-chennai.php">Hospitality Jobs</a></li>
                         <li><a href="/fresher-jobs-omr-chennai.php">Fresher Jobs</a></li>
                         <li><a href="/part-time-jobs-omr-chennai.php">Part-Time Jobs</a></li>
+                        <li><a href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=footer&utm_medium=link&utm_campaign=job_seeker_profile">Job seeker profile (CV upload)</a></li>
                     </ul>
                 </div>
             </nav>

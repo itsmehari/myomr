@@ -486,6 +486,15 @@ Current Status:
 
 ---
 
+## Job seeker profiles (job portal)
+
+- **Table:** `job_seeker_profiles` — résumé path + contact + optional consent columns (`consent_contact`, `consent_at`).
+- **Migration file:** `dev-tools/migrations/2026-03-31-job-seeker-profiles.sql`
+- **CLI runner (applies migration + idempotent consent ALTERs):** `php dev-tools/sql/run-job-seeker-profiles-migration.php`
+- **Admin list / CSV:** `/admin/manage-job-seeker-profiles-omr.php` (requires admin login).
+
+---
+
 ## 🎉 You're Ready!
 
 You now have complete documentation for the MyOMR database. Choose your path above and start exploring!

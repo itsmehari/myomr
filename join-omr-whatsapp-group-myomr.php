@@ -197,6 +197,7 @@ $ga_content_group = 'Community & WhatsApp';
                             <i class="fab fa-whatsapp me-2" aria-hidden="true"></i> Request to join on WhatsApp
                         </a>
                         <a class="btn btn-outline-light btn-lg" href="/omr-local-job-listings/">Browse jobs on MyOMR</a>
+                        <a class="btn btn-outline-light btn-lg" href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=whatsapp_landing&utm_medium=hero&utm_campaign=job_seeker_profile">Résumé &amp; profile</a>
                     </div>
                     <p class="small mt-3 mb-0 opacity-75">Free to request · Admin approval may apply · Be kind and local-first</p>
                 </div>
@@ -220,7 +221,7 @@ $ga_content_group = 'Community & WhatsApp';
                 <div class="col-md-6 col-lg-4">
                     <div class="use-card">
                         <h3><i class="fas fa-briefcase text-primary me-2" aria-hidden="true"></i>Jobs &amp; careers</h3>
-                        <p class="small text-muted mb-0">New openings, referrals, and hiring chatter along the IT corridor. For full search and applications, use our <a href="/jobs-in-omr-chennai.php">OMR jobs hub</a>.</p>
+                        <p class="small text-muted mb-0">New openings, referrals, and hiring chatter along the IT corridor. For full search and applications, use our <a href="/jobs-in-omr-chennai.php">OMR jobs hub</a>. Upload your CV and save a <a href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=whatsapp_landing&utm_medium=use_case&utm_campaign=job_seeker_profile">free job seeker profile</a> on the website.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">

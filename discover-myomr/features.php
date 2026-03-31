@@ -70,7 +70,7 @@ $og_url           = $canonical_url;
       <div class="col-md-6 col-lg-4">
         <div class="feature-tile">
           <h3>Job search and local jobs</h3>
-          <p class="text-muted small mb-0">Find and post jobs, connect with local employers, and grow your career in OMR.</p>
+          <p class="text-muted small mb-0">Find and post jobs, connect with local employers, and grow your career in OMR. Job seekers can <a href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=features&utm_medium=link&utm_campaign=job_seeker_profile">upload a résumé and create a profile</a>.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-4">

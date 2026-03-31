@@ -1,6 +1,7 @@
 <?php
 $omrTopicHubs = [
     ['label' => 'Jobs in OMR Road', 'url' => '/omr-local-job-listings/'],
+    ['label' => 'Job seeker profile (CV)', 'url' => '/omr-local-job-listings/candidate-profile-omr.php'],
     ['label' => 'IT Career News', 'url' => '/discover-myomr/it-careers-omr.php'],
     ['label' => 'Events in OMR Road', 'url' => '/local-events/'],
     ['label' => 'Explore Places in OMR Road', 'url' => '/omr-listings/index.php'],

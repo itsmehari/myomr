@@ -87,7 +87,7 @@ try {
 
 /* ── SEO ─────────────────────────────────────────────────────── */
 $page_title = "Jobs in OMR Chennai – Find Local Opportunities | MyOMR";
-$page_desc  = "Chennai's IT corridor – jobs first. Find " . number_format($total_jobs) . "+ jobs in OMR – IT, Teaching, Healthcare, BPO, Hospitality & more. Apply directly. Updated daily.";
+$page_desc  = "Chennai's IT corridor – jobs first. Find " . number_format($total_jobs) . "+ jobs in OMR – IT, Teaching, Healthcare, BPO, Hospitality & more. Apply directly, or upload your résumé and create a free job seeker profile. Updated daily.";
 $canonical  = "https://myomr.in/omr-local-job-listings/";
 
 $filter_qs  = http_build_query(array_filter($filters));
@@ -174,7 +174,8 @@ include ROOT_PATH . '/components/analytics.php'; ?>
   "mainEntity":[
     {"@type":"Question","name":"How do I apply for jobs?","acceptedAnswer":{"@type":"Answer","text":"Click Apply Now on any job to open the application form. Submit your name, email, phone, resume and optional cover letter. Applications go directly to the employer. Applying is free."}},
     {"@type":"Question","name":"Is it free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. Job seekers can browse and apply for free. Employers can post one free job; the Employer Pack offers 10 featured jobs per month for companies that need more visibility."}},
-    {"@type":"Question","name":"Where are the offices located?","acceptedAnswer":{"@type":"Answer","text":"All jobs listed here are in or around Old Mahabalipuram Road (OMR), Chennai — the IT corridor. Locations include Perungudi, Sholinganallur, Navalur, Thoraipakkam, Kelambakkam and nearby areas."}}
+    {"@type":"Question","name":"Where are the offices located?","acceptedAnswer":{"@type":"Answer","text":"All jobs listed here are in or around Old Mahabalipuram Road (OMR), Chennai — the IT corridor. Locations include Perungudi, Sholinganallur, Navalur, Thoraipakkam, Kelambakkam and nearby areas."}},
+    {"@type":"Question","name":"Can I upload my résumé and create a job seeker profile?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Create job seeker profile page on MyOMR to upload your CV (PDF, DOC, or DOCX) and add your skills and preferred OMR locality. It is free. You can still browse all listings and apply to each job as usual."}}
   ]
 }
 </script>
@@ -260,6 +261,12 @@ include ROOT_PATH . '/components/analytics.php'; ?>
       </div>
 
       <div class="col-lg-4 d-none d-lg-block">
+        <div class="jp-candidate-cta-card">
+          <div style="font-size:1.75rem;margin-bottom:.35rem" aria-hidden="true">📄</div>
+          <h3>Want to get hired faster?</h3>
+          <p>Upload your résumé and create your job seeker profile — show OMR employers you are ready.</p>
+          <a href="candidate-profile-omr.php" class="btn-candidate-hero"><i class="fas fa-file-upload me-1"></i> Upload résumé &amp; profile</a>
+        </div>
         <!-- Employer CTA card in hero -->
         <div style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:1.5rem;color:#fff;text-align:center">
           <div style="font-size:2rem;margin-bottom:.5rem">🏢</div>
@@ -274,6 +281,15 @@ include ROOT_PATH . '/components/analytics.php'; ?>
     </div>
   </div>
 </section>
+
+<div class="jp-candidate-mobile-strip d-lg-none">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+      <span class="small fw-semibold" style="color:var(--omr-dark);"><i class="fas fa-user-check me-1" style="color:var(--omr-blue);"></i> Job seeker? Build your profile with your CV.</span>
+      <a href="candidate-profile-omr.php" class="btn btn-sm text-white" style="background:var(--omr-blue);border-radius:8px;"><i class="fas fa-file-upload me-1"></i> Get started</a>
+    </div>
+  </div>
+</div>
 
 <!-- ── QUICK FILTER PILLS ──────────────────────────────────────── -->
 <nav class="jp-quick-filters" aria-label="Quick job filters">
@@ -321,6 +337,20 @@ include ROOT_PATH . '/components/analytics.php'; ?>
     </a>
   </div>
 </nav>
+
+<section class="jp-candidate-inline-cta my-4" aria-labelledby="candidate-cta-heading">
+  <div class="container">
+  <div class="row align-items-center g-3">
+    <div class="col-lg-8">
+      <h2 id="candidate-cta-heading" class="h5 fw-bold mb-2" style="color:var(--omr-green-dark);"><i class="fas fa-file-signature me-2" style="color:var(--omr-blue);"></i>Create your profile from your résumé</h2>
+      <p class="mb-0 text-muted">One short form: upload your CV, add skills and your preferred locality on OMR. It helps you stand out alongside your applications and keeps your details ready for local hiring teams using MyOMR.</p>
+    </div>
+    <div class="col-lg-4 text-lg-end">
+      <a href="candidate-profile-omr.php" class="btn btn-lg fw-semibold text-white w-100 w-lg-auto" style="background:var(--omr-blue);border-radius:10px;"><i class="fas fa-cloud-upload-alt me-2"></i>Upload résumé &amp; create profile</a>
+    </div>
+  </div>
+  </div>
+</section>
 
 <section class="jp-segment-switch">
   <div class="container">
@@ -692,6 +722,7 @@ include ROOT_PATH . '/components/analytics.php'; ?>
         <div class="jp-employer-banner">
           <h2>Hiring in OMR? Post a Job — It's Free</h2>
           <p>Connect with thousands of skilled local candidates instantly. Reach job seekers across Perungudi, Sholinganallur, Thoraipakkam &amp; more.</p>
+          <p class="small mb-3" style="opacity:.92;">Job seeker? <a href="candidate-profile-omr.php" class="text-white text-decoration-underline fw-semibold">Create your profile with your résumé</a> to get started on OMR.</p>
           <a href="post-job-omr.php" class="jp-btn-white me-2">
             <i class="fas fa-plus"></i> Post a Job Free
           </a>
@@ -729,6 +760,14 @@ include ROOT_PATH . '/components/analytics.php'; ?>
               </h3>
               <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#jobFaqAccordion">
                 <div class="accordion-body">All jobs listed here are in or around Old Mahabalipuram Road (OMR), Chennai — the IT corridor. Locations include Perungudi, Sholinganallur, Navalur, Thoraipakkam, Kelambakkam and nearby areas. Use the location filter to narrow results.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">Can I upload my résumé and create a profile?</button>
+              </h3>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#jobFaqAccordion">
+                <div class="accordion-body">Yes. Open <a href="candidate-profile-omr.php">Create your job seeker profile</a> to upload your CV and add skills plus your preferred locality on OMR. It is free and optional — you can still apply to any job from its listing. Updating your profile later uses the same email address.</div>
               </div>
             </div>
           </div>

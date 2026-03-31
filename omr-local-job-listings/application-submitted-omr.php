@@ -100,6 +100,14 @@ if ($job_id > 0) {
                     </div>
                 </div>
                 <?php endif; ?>
+
+                <div class="card-modern mb-4" style="border-left:4px solid #1a73e8;">
+                    <div class="p-4">
+                        <h3 class="h5 mb-2"><i class="fas fa-file-upload me-2 text-primary"></i> Next step: your MyOMR profile</h3>
+                        <p class="text-muted small mb-3">Upload your résumé and save your job seeker profile once — it speeds up future applications on OMR.</p>
+                        <a href="candidate-profile-omr.php?utm_source=application_submitted&utm_medium=cta&utm_campaign=job_seeker_profile" class="btn btn-primary btn-sm"><i class="fas fa-user-plus me-1"></i> Create profile &amp; upload CV</a>
+                    </div>
+                </div>
                 
                 <!-- Next Steps -->
                 <div class="card-modern mb-4">

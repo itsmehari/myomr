@@ -115,6 +115,10 @@ if ($job_id > 0) {
                     </div>
                 </div>
                 <?php endif; ?>
+
+                <div class="alert alert-info border-0 mb-4 small">
+                    <strong>Tip for hiring:</strong> Tell candidates they can upload a CV and create a free <a href="candidate-profile-omr.php?utm_source=job_posted_success&utm_medium=employer_tip&utm_campaign=job_seeker_profile">MyOMR job seeker profile</a> so you receive stronger applications.
+                </div>
                 
                 <!-- Next Steps -->
                 <div class="card-modern mb-4">

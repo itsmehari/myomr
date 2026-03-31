@@ -74,6 +74,7 @@ return [
                     ['label' => 'Manage Jobs', 'path' => '/omr-local-job-listings/admin/manage-jobs-omr.php'],
                     ['label' => 'Verify Employers', 'path' => '/omr-local-job-listings/admin/verify-employers-omr.php'],
                     ['label' => 'All Applications', 'path' => '/omr-local-job-listings/admin/view-all-applications-omr.php'],
+                    ['label' => 'Job seeker profiles', 'path' => '/admin/manage-job-seeker-profiles-omr.php'],
                 ],
             ],
             [

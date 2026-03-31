@@ -94,6 +94,19 @@ unset($_SESSION['application_errors']);
 $form_data = $_SESSION['application_form_data'] ?? [];
 if (empty($app_errors)) unset($_SESSION['application_form_data']);
 
+$seeker_pf = $_SESSION['seeker_profile_prefill'] ?? [];
+if (is_array($seeker_pf)) {
+    if (empty($form_data['applicant_name']) && !empty($seeker_pf['applicant_name'])) {
+        $form_data['applicant_name'] = $seeker_pf['applicant_name'];
+    }
+    if (empty($form_data['applicant_email']) && !empty($seeker_pf['applicant_email'])) {
+        $form_data['applicant_email'] = $seeker_pf['applicant_email'];
+    }
+    if (empty($form_data['applicant_phone']) && !empty($seeker_pf['applicant_phone'])) {
+        $form_data['applicant_phone'] = $seeker_pf['applicant_phone'];
+    }
+}
+
 /* ── SEO: canonical (user-friendly /job/15/slug) and geo-friendly title ─ */
 $canonical    = getJobDetailUrl($job_id, $job['title'] ?? null);
 $request_path = rtrim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/');
@@ -408,6 +421,11 @@ $application_deadline_label = (!empty($job['application_deadline']) && $job['app
   </div>
 </section>
 
+<?php
+$job_seeker_cta_utm = 'utm_source=job_detail&utm_medium=banner&utm_campaign=job_seeker_profile';
+require __DIR__ . '/includes/job-seeker-profile-cta-strip.php';
+?>
+
 <!-- ── MAIN CONTENT ────────────────────────────────────────────── -->
 <main id="main-content">
   <div class="container jp-detail-main-wrap">
@@ -688,6 +706,12 @@ $application_deadline_label = (!empty($job['application_deadline']) && $job['app
                 <i class="fas fa-envelope"></i> Share via Email
               </button>
             </div>
+          </div>
+
+          <div class="jp-sidebar-detail jp-candidate-sidebar-card mb-3">
+            <h3><i class="fas fa-file-signature me-2 text-primary"></i> Save time next time</h3>
+            <p class="small text-muted mb-2">Build your <strong>MyOMR job seeker profile</strong> once — upload your CV and keep your details ready for roles on OMR.</p>
+            <a href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=job_detail&utm_medium=sidebar&utm_campaign=job_seeker_profile" class="btn btn-sm btn-primary w-100">Résumé &amp; profile</a>
           </div>
 
           <!-- Join our WhatsApp group (community) -->

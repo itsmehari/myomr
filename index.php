@@ -446,6 +446,7 @@ if (file_exists($core_file)) {
   <span class="me-3"><strong><?php echo number_format($total_jobs_home); ?></strong> live jobs</span>
   <span><strong><?php echo number_format($total_employers_home); ?></strong> employers on OMR</span>
   <a href="/omr-local-job-listings/jobs-hub-omr.php" class="ms-3 btn btn-success btn-sm">Browse jobs</a>
+  <a href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=homepage&utm_medium=cta&utm_campaign=job_seeker_profile" class="ms-2 btn btn-outline-primary btn-sm">Résumé &amp; profile</a>
 </div>
 <?php endif; ?>
 <?php if (!empty($recent_jobs)): ?>

@@ -130,6 +130,13 @@ $og_image = "https://myomr.in/My-OMR-Logo.png";
     </div>
 </section>
 
+<div class="container py-2">
+    <div class="alert alert-light border mb-0 small" style="border-color:#bbf7d0!important;background:#f0fdf4;">
+        <strong>For candidates:</strong> Share this link so applicants can upload a CV and build a free profile —
+        <a href="candidate-profile-omr.php?utm_source=employer_landing&utm_medium=banner&utm_campaign=job_seeker_profile">myomr.in/omr-local-job-listings/candidate-profile-omr.php</a>
+    </div>
+</div>
+
 <main class="py-5">
     <div class="container">
         

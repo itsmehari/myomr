@@ -23,6 +23,7 @@ if (!empty($ga_content_group) && is_string($ga_content_group)) {
     $path = $_SERVER['REQUEST_URI'] ?? '';
     $map = [
         '/join-omr-whatsapp-group-myomr.php' => 'Community & WhatsApp',
+        '/omr-local-job-listings/candidate-profile-omr.php' => 'Job seeker profile',
         '/omr-local-job-listings/' => 'Job Listings',
         '/local-events/'            => 'Local Events',
         '/omr-local-events/'       => 'Local Events',

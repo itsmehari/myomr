@@ -142,6 +142,7 @@ body { font-family: 'Poppins', sans-serif; }
       <a href="/jobs-in-perungudi-omr.php">Jobs in Perungudi</a>
       <a href="/jobs-in-sholinganallur-omr.php">Jobs in Sholinganallur</a>
       <a href="/jobs-in-navalur-omr.php">Jobs in Navalur</a>
+      <a href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=it_careers_hub&utm_medium=strip&utm_campaign=job_seeker_profile">Job seeker profile (CV)</a>
     </div>
   </div>
 </section>
@@ -183,6 +184,11 @@ body { font-family: 'Poppins', sans-serif; }
         <?php endif; ?>
       </div>
       <aside class="col-lg-4">
+        <div class="p-3 rounded mb-3" style="background:#e8f4fc;border:1px solid #bae6fd;">
+          <h3 class="h6 mb-2">Build your profile</h3>
+          <p class="small text-muted mb-2">Upload your résumé once for OMR roles.</p>
+          <a class="btn btn-sm btn-primary w-100" href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=it_careers_aside&utm_medium=cta&utm_campaign=job_seeker_profile">Résumé &amp; profile</a>
+        </div>
         <div class="p-3 rounded" style="background:#f1f5f9;border:1px solid #e2e8f0;">
           <h3 class="h6 mb-2">Browse jobs</h3>
           <?php

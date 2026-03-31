@@ -214,6 +214,9 @@ $canonical_url = "https://myomr.in/jobs-in-omr-chennai.php";
                             <a href="/manpower-jobs-omr-chennai.php" class="btn btn-outline-light btn-sm">Manpower Jobs</a>
                             <a href="/omr-local-job-listings/" class="btn btn-outline-light btn-sm">View All Jobs</a>
                         </div>
+                        <p class="mt-3 mb-0 small" style="opacity:.95">
+                            <a href="/omr-local-job-listings/candidate-profile-omr.php" class="text-white fw-semibold text-decoration-underline">Upload your résumé &amp; create a job seeker profile</a> — stand out for OMR roles.
+                        </p>
                     </div>
                     <div class="col-lg-5">
                         <!-- Statistics -->

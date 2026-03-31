@@ -210,6 +210,24 @@
   background: #c2410c; /* Even darker on hover */
 }
 
+/* Candidate / résumé — blue (job seekers) */
+.pill-candidate {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #fff;
+}
+.pill-candidate .pill-accent {
+  background: #1e40af;
+}
+.pill-candidate:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.45);
+  color: #fff;
+}
+.pill-candidate:hover .pill-accent {
+  background: #1e3a8a;
+}
+
 /* Event Button - Purple/Violet */
 .pill-event {
   background: linear-gradient(135deg, #8b5cf6, #7c3aed);
@@ -630,7 +648,8 @@ function is_active($link, $current_uri) {
       <a href="#" tabindex="0" aria-label="Services menu" aria-haspopup="true" aria-expanded="false">Services ▾</a>
       <div class="dropdown-content">
         <a href="/omr-local-job-listings/jobs-hub-omr.php" class="<?php echo (is_active('/omr-local-job-listings/jobs-hub-omr.php', $current_uri) || strpos($current_uri, 'jobs-in-') !== false || strpos($current_uri, 'it-jobs') !== false || strpos($current_uri, 'fresher-jobs') !== false || strpos($current_uri, 'part-time-jobs') !== false) ? 'active' : ''; ?>">Find Jobs in OMR</a>
-        <a href="/omr-local-job-listings/" class="<?php echo (is_active('/omr-local-job-listings/', $current_uri) && strpos($current_uri, 'jobs-hub') === false) ? 'active' : ''; ?>">Browse All Jobs</a>
+        <a href="/omr-local-job-listings/" class="<?php echo (is_active('/omr-local-job-listings/', $current_uri) && strpos($current_uri, 'jobs-hub') === false && strpos($current_uri, 'candidate-profile') === false) ? 'active' : ''; ?>">Browse All Jobs</a>
+        <a href="/omr-local-job-listings/candidate-profile-omr.php" class="<?php echo strpos($current_uri, 'candidate-profile-omr') !== false ? 'active' : ''; ?>">Résumé &amp; job seeker profile</a>
         <div class="dropdown-divider"></div>
         <a href="/it-jobs-omr-chennai.php" class="dropdown-sub-item">IT Jobs</a>
         <a href="/teaching-jobs-omr-chennai.php" class="dropdown-sub-item">Teaching Jobs</a>
@@ -664,6 +683,13 @@ function is_active($link, $current_uri) {
 <!-- Quick Action Pills Bar -->
 <div class="quick-action-pills">
   <div class="pills-container">
+    <a href="/omr-local-job-listings/candidate-profile-omr.php" class="action-pill pill-candidate">
+      <div class="pill-accent"></div>
+      <div class="pill-content">
+        <i class="fas fa-file-upload"></i>
+        <span>Résumé &amp; profile</span>
+      </div>
+    </a>
     <a href="/omr-local-job-listings/employer-landing-omr.php" class="action-pill pill-job">
       <div class="pill-accent"></div>
       <div class="pill-content">

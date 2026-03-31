@@ -43,6 +43,10 @@ $canonical_url = 'https://myomr.in/omr-local-job-listings/employer-pack-landing-
     </div>
 </section>
 
+<div class="container py-2">
+    <p class="small text-muted mb-0"><strong>For candidates:</strong> Encourage applicants to create a free <a href="candidate-profile-omr.php?utm_source=employer_pack&utm_medium=co_marketing&utm_campaign=job_seeker_profile">MyOMR job seeker profile</a> with their CV.</p>
+</div>
+
 <main class="py-5">
     <div class="container">
         <div class="row g-4 mb-5">

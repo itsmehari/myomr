@@ -137,6 +137,10 @@ php_errors.log
 /uploads/*
 !/uploads/.gitkeep
 
+# Job portal résumés (keep folder; ignore uploaded binaries)
+/omr-local-job-listings/uploads/resumes/*
+!/omr-local-job-listings/uploads/resumes/.gitkeep
+
 # User-generated content
 /user-content/
 /user-uploads/

@@ -101,6 +101,7 @@ body { font-family: 'Poppins', sans-serif; }
         <a href="/it-jobs-omr-chennai.php" class="d-block mb-2">IT jobs in OMR</a>
         <a href="/omr-local-job-listings/companies-hiring-omr.php" class="d-block mb-2">Companies hiring on OMR</a>
         <a href="/discover-myomr/it-careers-omr.php" class="d-block mb-2">IT career articles</a>
+        <a href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=it_corridor_hub&utm_medium=sidebar&utm_campaign=job_seeker_profile" class="d-block mb-2">Job seeker profile (CV)</a>
       </div>
     </aside>
   </div>

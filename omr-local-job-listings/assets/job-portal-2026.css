@@ -1435,6 +1435,120 @@ body.job-portal-page {
   color: var(--omr-muted);
 }
 
+/* ── CANDIDATE PROFILE / RÉSUMÉ CTA ───────────────────────────── */
+.jp-hero--compact {
+  padding: 2.25rem 0 2rem;
+}
+.jp-candidate-hero-kicker {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+}
+.jp-candidate-cta-btn {
+  background: var(--omr-blue);
+  color: #fff !important;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(26, 115, 232, 0.35);
+}
+.jp-candidate-cta-btn:hover {
+  background: #1557b0;
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+.jp-candidate-benefits .jp-candidate-step-card {
+  background: var(--omr-card-bg);
+  border-radius: var(--omr-radius);
+  border: 1px solid var(--omr-border);
+  padding: 1.5rem 1.35rem;
+  box-shadow: var(--omr-shadow-sm);
+  position: relative;
+  transition: var(--omr-transition);
+}
+.jp-candidate-benefits .jp-candidate-step-card:hover {
+  box-shadow: var(--omr-shadow-md);
+  border-color: rgba(0, 133, 82, 0.2);
+}
+.jp-candidate-step-num {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--omr-green-light);
+  color: var(--omr-green-dark);
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+.jp-candidate-form-card {
+  border-radius: var(--omr-radius) !important;
+}
+.jp-candidate-submit-btn {
+  background: var(--omr-green);
+  color: #fff;
+  border: none;
+  border-radius: var(--omr-radius-sm);
+  padding: 0.85rem 1.5rem;
+}
+.jp-candidate-submit-btn:hover:not(:disabled) {
+  background: var(--omr-green-dark);
+  color: #fff;
+}
+.jp-hero .jp-candidate-cta-card {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 14px;
+  padding: 1.25rem 1.35rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0.85rem;
+}
+.jp-hero .jp-candidate-cta-card h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: #fff;
+}
+.jp-hero .jp-candidate-cta-card p {
+  font-size: 0.82rem;
+  opacity: 0.9;
+  margin-bottom: 0.85rem;
+}
+.jp-hero .jp-candidate-cta-card .btn-candidate-hero {
+  display: inline-block;
+  background: var(--omr-blue);
+  color: #fff !important;
+  border-radius: 8px;
+  padding: 0.55rem 1.1rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.jp-hero .jp-candidate-cta-card .btn-candidate-hero:hover {
+  background: #1557b0;
+  color: #fff !important;
+}
+.jp-candidate-mobile-strip {
+  background: linear-gradient(90deg, rgba(26, 115, 232, 0.12) 0%, rgba(0, 133, 82, 0.1) 100%);
+  border-bottom: 1px solid var(--omr-border);
+  padding: 0.85rem 0;
+}
+.jp-candidate-mobile-strip .btn {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.jp-candidate-inline-cta {
+  background: var(--omr-green-light);
+  border: 1px solid rgba(0, 133, 82, 0.2);
+  border-radius: var(--omr-radius);
+  padding: 1.35rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
 /* ── UTILITIES ───────────────────────────────────────────────── */
 .jp-divider { border: none; border-top: 1px solid var(--omr-border); margin: 1rem 0; }
 .text-omr-green { color: var(--omr-green) !important; }

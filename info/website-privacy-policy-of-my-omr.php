@@ -22,6 +22,8 @@
             <li><strong>Personal Information:</strong> Name, email address, phone number, and location, when you fill out forms, subscribe to newsletters, or apply for jobs.</li>
             <li><strong>Usage Data:</strong> Information about your browser, device, IP address, and how you interact with our website (via cookies or analytics tools).</li>
         </ul>
+        <h3>2.1 Job seeker profiles (résumé upload)</h3>
+        <p>If you use our <a href="/omr-local-job-listings/candidate-profile-omr.php">job seeker profile</a> feature, we store your contact details, optional career fields (such as skills and preferred locality on OMR), and your uploaded résumé file (PDF or Word). We use this information to operate the profile service, improve local job matching on MyOMR, and — only if you opt in — to contact you about relevant opportunities or share your profile with verified employers on our platform. You may request correction or deletion of this data by emailing <a href="mailto:myomrnews@gmail.com">myomrnews@gmail.com</a>. Résumés and profile rows are retained while needed for the service and removed on valid deletion requests where applicable law allows.</p>
         <h2>3. How We Use Your Information</h2>
         <p>We use the information to:</p>
         <ul>

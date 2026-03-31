@@ -64,7 +64,7 @@ $og_url           = $canonical_url;
         <div class="step-card">
           <div class="step-num">2</div>
           <h3 class="h5 text-success mb-2">Discover features</h3>
-          <p class="text-muted small mb-0">Use the directory, job portal, events calendar, and locality filters for OMR.</p>
+          <p class="text-muted small mb-0">Use the directory, <a href="/omr-local-job-listings/">job portal</a>, <a href="/omr-local-job-listings/candidate-profile-omr.php?utm_source=getting_started&utm_medium=link&utm_campaign=job_seeker_profile">job seeker profile (CV)</a>, events calendar, and locality filters for OMR.</p>
         </div>
       </div>
       <div class="col-md-4">
@@ -80,6 +80,7 @@ $og_url           = $canonical_url;
       <h2 class="section-heading h4 mb-3">Ready to go deeper?</h2>
       <p class="text-muted mb-4">See pricing for verified and featured business listings.</p>
       <a href="/discover-myomr/pricing.php" class="btn btn-success btn-lg">View plans and pricing</a>
+      <p class="text-muted small mt-4 mb-0">Job hunting? Read our <a href="/discover-myomr/omr-job-search-guide-myomr.php">OMR job search guide</a> or <a href="/discover-myomr/job-seeker-profile-walkthrough-myomr.php">job seeker profile walkthrough</a>.</p>
     </section>
 
     <section class="cta-strip p-4">

@@ -11,7 +11,7 @@ require_once ROOT_PATH . '/core/include-path.php';
 require_once ROOT_PATH . '/components/page-bootstrap.php';
 
 $page_title = 'Jobs in OMR Chennai — Find local jobs or hire locally | MyOMR';
-$page_description = 'OMR\'s local job board: find IT, teaching, hospitality & office jobs in Perungudi, Sholinganallur, Navalur. Or post jobs free and reach local candidates. Apply direct to employers.';
+$page_description = 'OMR\'s local job board: find IT, teaching, hospitality & office jobs in Perungudi, Sholinganallur, Navalur. Upload your résumé, create a job seeker profile, or post jobs free. Apply direct to employers.';
 $canonical_url = 'https://myomr.in/omr-local-job-listings/jobs-hub-omr.php';
 ?>
 <!DOCTYPE html>
@@ -53,11 +53,15 @@ $canonical_url = 'https://myomr.in/omr-local-job-listings/jobs-hub-omr.php';
                     <h2 class="h4 mb-3" style="color:#14532d;">I'm looking for a job</h2>
                     <ul class="list-unstyled mb-4 flex-grow-1">
                         <li class="mb-2"><i class="fas fa-map-marker-alt text-success me-2"></i>Jobs only in OMR — Perungudi, Sholinganallur, Navalur, Thoraipakkam, Palavakkam, Kelambakkam and more.</li>
-                        <li class="mb-2"><i class="fas fa-paper-plane text-success me-2"></i>Apply for free, directly to employers. No sign-up required to browse.</li>
+                        <li class="mb-2"><i class="fas fa-file-upload text-primary me-2"></i><strong>Get hired faster:</strong> upload your résumé and create your candidate profile — skills, headline, and preferred locality in one place.</li>
+                        <li class="mb-2"><i class="fas fa-paper-plane text-success me-2"></i>Apply for free, directly to employers. Browse listings without an account; add a profile when you are ready.</li>
                         <li class="mb-0"><i class="fas fa-briefcase text-success me-2"></i>IT, teaching, hospitality, office, fresher and part-time jobs — all in one place.</li>
                     </ul>
-                    <p class="text-muted small mb-3">How it works: Browse jobs → Click a job → Apply with your resume.</p>
-                    <a href="index.php" class="btn btn-lg w-100 fw-semibold" style="background:#14532d;color:#fff;border-radius:8px;padding:12px 24px;">
+                    <p class="text-muted small mb-3">How it works: (Optional) Create profile with CV → Browse jobs → Open a role → Apply with your résumé.</p>
+                    <a href="candidate-profile-omr.php" class="btn btn-lg w-100 fw-semibold mb-2" style="background:#1a73e8;color:#fff;border-radius:8px;padding:12px 24px;">
+                        <i class="fas fa-cloud-upload-alt me-2"></i>Upload résumé &amp; create profile
+                    </a>
+                    <a href="index.php" class="btn btn-lg w-100 fw-semibold btn-outline-success" style="border-radius:8px;padding:12px 24px;border-width:2px;">
                         <i class="fas fa-list me-2"></i>Browse jobs in OMR
                     </a>
                 </div>
