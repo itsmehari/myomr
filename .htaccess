@@ -60,6 +60,10 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
   <FilesMatch "\.(html|php)$">
     Header set Cache-Control "public, max-age=300"
   </FilesMatch>
+  # Superadmin: never cache (login form + session pages)
+  SetEnvIf Request_URI "^/superadmin/" myomr_no_cache=1
+  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0" env=myomr_no_cache
+  Header set Pragma "no-cache" env=myomr_no_cache
 </IfModule>
 
 <IfModule mod_deflate.c>
@@ -77,6 +81,21 @@ SetEnv MYOMR_ENV production
 # <IfModule mod_php8.c>
 #   php_value auto_prepend_file core/error-handler.php
 # </IfModule>
+
+# Legacy /admin/ → /superadmin/ (301)
+RewriteRule ^admin/(.*)$ /superadmin/$1 [R=301,L]
+
+# Module admin → superadmin command center (301)
+RewriteRule ^omr-local-job-listings/admin/(.*)$ /superadmin/jobs/$1 [R=301,L]
+RewriteRule ^omr-classified-ads/admin/(.*)$ /superadmin/classified-ads/$1 [R=301,L]
+RewriteRule ^omr-buy-sell/admin/(.*)$ /superadmin/buy-sell/$1 [R=301,L]
+RewriteRule ^omr-local-events/admin/(.*)$ /superadmin/community-events/$1 [R=301,L]
+RewriteRule ^omr-hostels-pgs/admin/(.*)$ /superadmin/hostels/$1 [R=301,L]
+RewriteRule ^omr-coworking-spaces/admin/(.*)$ /superadmin/coworking/$1 [R=301,L]
+RewriteRule ^omr-rent-lease/admin/(.*)$ /superadmin/rent-lease/$1 [R=301,L]
+
+# Superadmin root → dashboard (avoids blank /superadmin/ directory)
+RewriteRule ^superadmin/?$ /superadmin/index.php [L]
 
 # Favicon: redirect to logo (avoids 403 when favicon.ico missing)
 RewriteRule ^favicon\.ico$ /My-OMR-Logo.png [L,R=302]

@@ -1,9 +1,9 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('COMMUNITY_EVENTS_ADMIN_ROUTED', '/superadmin/community-events/index.php');
+require_once __DIR__ . '/_urls.php';
 require_once __DIR__ . '/../includes/error-reporting.php';
 require_once __DIR__ . '/../../core/omr-connect.php';
-require_once __DIR__ . '/../../core/admin-auth.php';
-requireAdmin();
-
 $stats = [
   'pending' => 0,
   'approved_submissions' => 0,

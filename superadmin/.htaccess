@@ -1,0 +1,18 @@
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /superadmin/
+
+# /superadmin/ -> dashboard
+RewriteRule ^$ index.php [L]
+</IfModule>
+
+<Files "_auth.php">
+  Require all denied
+</Files>
+
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  Header set Pragma "no-cache"
+</IfModule>

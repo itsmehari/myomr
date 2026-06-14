@@ -1,11 +1,11 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('JOBS_ADMIN_ROUTED', '/superadmin/jobs/package-subscribers-omr.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin - Package Subscribers (Employer Pack)
  * List employers with an active paid plan for renewals and cap checks.
  */
-require_once __DIR__ . '/../../core/admin-auth.php';
-requireAdmin();
-
 require_once __DIR__ . '/../../core/omr-connect.php';
 require_once __DIR__ . '/../includes/job-functions-omr.php';
 
@@ -25,6 +25,12 @@ if (jobEmployersTableHasPlanColumns($conn)) {
         }
     }
 }
+
+$__modulePageTitle = 'Package Subscribers';
+$__moduleActiveNav = '/superadmin/jobs/';
+if (myomr_module_using_shell()) {
+    myomr_module_shell_open($__modulePageTitle, $__moduleActiveNav);
+} else {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,11 +44,12 @@ if (jobEmployersTableHasPlanColumns($conn)) {
     <link rel="stylesheet" href="../assets/job-listings-omr.css">
 </head>
 <body>
+<?php } ?>
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3"><i class="fas fa-crown me-2"></i>Package Subscribers</h1>
-        <a href="index.php" class="btn btn-outline-secondary">Back to Dashboard</a>
+        <a href="<?= htmlspecialchars(JOBS_ADMIN_INDEX_URL, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-outline-secondary">Back to Dashboard</a>
     </div>
 
     <?php if (!jobEmployersTableHasPlanColumns($conn)): ?>
@@ -85,5 +92,9 @@ if (jobEmployersTableHasPlanColumns($conn)) {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php if (myomr_module_using_shell()) { ?>
+<?php myomr_module_shell_close(); ?>
+<?php } else { ?>
 </body>
 </html>
+<?php } ?>

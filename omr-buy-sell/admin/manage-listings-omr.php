@@ -1,9 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('BUY_SELL_ADMIN_ROUTED', '/superadmin/buy-sell/manage-listings-omr.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * OMR Buy-Sell Admin — Manage Listings
  */
-require_once __DIR__ . '/../../admin/_bootstrap.php';
-requireAdmin();
 require_once __DIR__ . '/../../core/omr-connect.php';
 require_once __DIR__ . '/../includes/listing-functions.php';
 

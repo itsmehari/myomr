@@ -1,13 +1,16 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('JOBS_ADMIN_ROUTED', '/superadmin/jobs/manage-jobs-omr.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin - Manage Jobs (Approve/Reject)
  */
-require_once __DIR__ . '/../../core/admin-auth.php';
-requireAdmin();
 
 require_once __DIR__ . '/../../core/omr-connect.php';
 require_once __DIR__ . '/../../core/email.php';
 require_once __DIR__ . '/../includes/job-functions-omr.php';
+
+$featuredOnly = isset($_GET['featured']) && $_GET['featured'] === '1';
 
 // CSRF token
 if (empty($_SESSION['admin_csrf'])) {
@@ -66,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     @sendEmail($info['email'], 'Job ' . ucfirst($status) . ' - ' . $info['title'], $body);
                 }
             }
-            header('Location: manage-jobs-omr.php?success=1');
+            header('Location: ' . JOBS_ADMIN_MANAGE_URL . '?success=1');
             exit;
         }
     }
@@ -115,7 +118,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             @sendEmail($info['email'], 'Job ' . ucfirst($status) . ' - ' . $info['title'], $body);
         }
 
-        header('Location: manage-jobs-omr.php?success=1');
+        header('Location: ' . JOBS_ADMIN_MANAGE_URL . '?success=1');
+        exit;
+    }
+
+    if ($job_id > 0 && $action === 'toggle_featured') {
+        $u = $conn->prepare("UPDATE job_postings SET featured = 1 - COALESCE(featured, 0) WHERE id = ? AND status = 'approved'");
+        $u->bind_param('i', $job_id);
+        $u->execute();
+        header('Location: ' . JOBS_ADMIN_MANAGE_URL . ($featuredOnly ? '?featured=1&success=1' : '?success=1'));
         exit;
     }
 }
@@ -125,10 +136,21 @@ $jobsQuery = "SELECT j.*, e.company_name, e.email AS employer_email";
 if (jobEmployersTableHasPlanColumns($conn)) {
     $jobsQuery .= ", e.plan_type, e.plan_end_date";
 }
-$jobsQuery .= " FROM job_postings j JOIN employers e ON j.employer_id = e.id ORDER BY j.created_at DESC";
+$jobsQuery .= " FROM job_postings j JOIN employers e ON j.employer_id = e.id";
+if ($featuredOnly) {
+    $jobsQuery .= " WHERE j.status = 'approved' AND j.featured = 1";
+}
+$jobsQuery .= " ORDER BY j.created_at DESC";
 $result = $conn->query($jobsQuery);
 $jobs = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 
+?>
+<?php
+$__modulePageTitle = 'Manage Jobs';
+$__moduleActiveNav = '/superadmin/jobs/';
+if (myomr_module_using_shell()) {
+    myomr_module_shell_open($__modulePageTitle, $__moduleActiveNav);
+} else {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,11 +164,12 @@ $jobs = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     <link rel="stylesheet" href="../assets/job-listings-omr.css">
 </head>
 <body>
+<?php } ?>
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3"><i class="fas fa-tasks me-2"></i>Manage Job Postings</h1>
-        <a href="index.php" class="btn btn-outline-secondary">Back to Dashboard</a>
+        <a href="<?= htmlspecialchars(JOBS_ADMIN_INDEX_URL, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-outline-secondary">Back to Dashboard</a>
     </div>
 
     <?php if (isset($_GET['success'])): ?>
@@ -173,6 +196,7 @@ $jobs = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
                     <th>Company</th>
                     <?php if (jobEmployersTableHasPlanColumns($conn)): ?><th>Plan</th><?php endif; ?>
                     <th>Status</th>
+                    <th>Featured</th>
                     <th>Segment</th>
                     <th>Views</th>
                     <th>Applications</th>
@@ -203,6 +227,17 @@ $jobs = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
                             <span class="badge bg-<?php echo $badge; ?>"><?php echo ucfirst($status); ?></span>
                         </td>
                         <td>
+                            <?php if ($status === 'approved'): ?>
+                                <?php if (!empty($job['featured'])): ?>
+                                    <span class="badge bg-info"><i class="fas fa-star"></i> Featured</span>
+                                <?php else: ?>
+                                    <span class="text-muted">—</span>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <span class="text-muted">—</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
                             <?php
                                 $segment = normalizeJobSegment((string)($job['work_segment'] ?? inferJobSegmentFromData($job)));
                                 echo htmlspecialchars(getJobSegmentLabel($segment));
@@ -228,7 +263,15 @@ $jobs = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
                                     </form>
                                 <?php endif; ?>
                                 <a href="../<?php echo getJobDetailPath((int)$job['id'], $job['title'] ?? null); ?>" target="_blank" class="btn btn-outline-secondary"><i class="fas fa-eye"></i></a>
-                                <a href="view-applications-omr.php?id=<?php echo (int)$job['id']; ?>" class="btn btn-outline-primary"><i class="fas fa-inbox"></i></a>
+                                <?php if ($job['status'] === 'approved'): ?>
+                                    <form method="POST" class="d-inline">
+                                        <input type="hidden" name="job_id" value="<?php echo (int)$job['id']; ?>">
+                                        <input type="hidden" name="action" value="toggle_featured">
+                                        <input type="hidden" name="csrf" value="<?php echo htmlspecialchars($_SESSION['admin_csrf']); ?>">
+                                        <button type="submit" class="btn btn-outline-warning" title="<?php echo !empty($job['featured']) ? 'Unfeature' : 'Feature'; ?>"><i class="fas fa-star"></i></button>
+                                    </form>
+                                <?php endif; ?>
+                                <a href="<?php echo htmlspecialchars(jobs_admin_applications_for_job_url((int)$job['id']), ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline-primary"><i class="fas fa-inbox"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -273,6 +316,10 @@ document.getElementById('checkAll')?.addEventListener('change', function(){
   document.querySelectorAll('.row-check').forEach(cb => { cb.checked = this.checked; });
 });
 </script>
+<?php if (myomr_module_using_shell()) { ?>
+<?php myomr_module_shell_close(); ?>
+<?php } else { ?>
 </body>
 </html>
+<?php } ?>
 

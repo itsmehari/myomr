@@ -1,10 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('JOBS_ADMIN_ROUTED', '/superadmin/jobs/view-all-applications-omr.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin - View All Applications
  */
-require_once __DIR__ . '/../../core/admin-auth.php';
-requireAdmin();
-
 require_once __DIR__ . '/../../core/omr-connect.php';
 
 // Get all applications
@@ -15,6 +15,11 @@ $result = $conn->query("SELECT a.*, j.title as job_title, e.company_name
                         ORDER BY a.applied_at DESC");
 $applications = $result->fetch_all(MYSQLI_ASSOC);
 
+$__modulePageTitle = 'All Applications';
+$__moduleActiveNav = '/superadmin/jobs/';
+if (myomr_module_using_shell()) {
+    myomr_module_shell_open($__modulePageTitle, $__moduleActiveNav);
+} else {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,11 +32,12 @@ $applications = $result->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="../assets/job-listings-omr.css">
 </head>
 <body>
+<?php } ?>
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3"><i class="fas fa-inbox me-2"></i>All Job Applications</h1>
-        <a href="index.php" class="btn btn-outline-secondary">Back to Dashboard</a>
+        <a href="<?= htmlspecialchars(JOBS_ADMIN_INDEX_URL, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-outline-secondary">Back to Dashboard</a>
     </div>
 
     <div class="table-responsive">
@@ -95,6 +101,10 @@ $applications = $result->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php if (myomr_module_using_shell()) { ?>
+<?php myomr_module_shell_close(); ?>
+<?php } else { ?>
 </body>
 </html>
+<?php } ?>
 

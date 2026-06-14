@@ -1,9 +1,9 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('COMMUNITY_EVENTS_ADMIN_ROUTED', '/superadmin/community-events/export-events-csv.php');
+require_once __DIR__ . '/_urls.php';
 require_once __DIR__ . '/../includes/error-reporting.php';
 require_once __DIR__ . '/../../core/omr-connect.php';
-require_once __DIR__ . '/../../core/admin-auth.php';
-requireAdmin();
-
 header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename="events-upcoming.csv"');
 

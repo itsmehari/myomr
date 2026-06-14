@@ -1,11 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('HOSTELS_ADMIN_ROUTED', '/superadmin/hostels/index.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin Dashboard - Hostels & PGs Module
  */
-
-require_once __DIR__ . '/../../admin/_bootstrap.php';
-require_once __DIR__ . '/../../core/admin-auth.php';
-requireAdmin();
 
 $title = 'Hostels & PGs Dashboard';
 
@@ -43,11 +42,8 @@ $recent_owners = $conn->query("SELECT id, full_name, email, created_at FROM prop
 <body>
 <div class="container-fluid">
   <div class="row">
-    <?php include '../../admin/admin-sidebar.php'; ?>
-    <main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4" aria-label="Main content">
-      <?php include '../../admin/admin-header.php'; ?>
-      <?php include '../../admin/admin-breadcrumbs.php'; ?>
-      <?php include '../../admin/admin-flash.php'; ?>
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4" aria-label="Main content">
+<?php include '../../admin/admin-flash.php'; ?>
       
       <div class="alert alert-success mt-3">
         <strong>Hostels & PGs Module</strong> - Manage properties, owners, and inquiries
@@ -194,9 +190,7 @@ $recent_owners = $conn->query("SELECT id, full_name, email, created_at FROM prop
         </div>
       </div>
       
-    </main>
-  </div>
-</div>
+    </main></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

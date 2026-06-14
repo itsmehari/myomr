@@ -1,9 +1,9 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('COMMUNITY_EVENTS_ADMIN_ROUTED', '/superadmin/community-events/manage-events-omr.php');
+require_once __DIR__ . '/_urls.php';
 require_once __DIR__ . '/../includes/error-reporting.php';
 require_once __DIR__ . '/../../core/omr-connect.php';
-require_once __DIR__ . '/../../core/admin-auth.php';
-requireAdmin();
-
 // Simple admin guard placeholder (replace with session-based admin check)
 // if (empty($_SESSION['admin_logged_in'])) { die('Unauthorized'); }
 
@@ -61,12 +61,12 @@ try {
               <td><span class="badge bg-warning text-dark"><?php echo htmlspecialchars($p['status']); ?></span></td>
               <td>
                 <div class="btn-group btn-group-sm">
-                  <form method="post" action="process-approve-event.php" class="d-inline">
+                  <form method="post" action="<?= htmlspecialchars(community_events_admin_process_url('process-approve-event.php'), ENT_QUOTES, 'UTF-8') ?>" class="d-inline">
                     <input type="hidden" name="csrf" value="<?php echo htmlspecialchars($_SESSION['admin_csrf']); ?>">
                     <input type="hidden" name="id" value="<?php echo (int)$p['id']; ?>">
                     <button class="btn btn-success" title="Approve" type="submit">Approve</button>
                   </form>
-                  <form method="post" action="process-reject-event.php" class="d-inline ms-1">
+                  <form method="post" action="<?= htmlspecialchars(community_events_admin_process_url('process-reject-event.php'), ENT_QUOTES, 'UTF-8') ?>" class="d-inline ms-1">
                     <input type="hidden" name="csrf" value="<?php echo htmlspecialchars($_SESSION['admin_csrf']); ?>">
                     <input type="hidden" name="id" value="<?php echo (int)$p['id']; ?>">
                     <button class="btn btn-danger" title="Reject" type="submit">Reject</button>

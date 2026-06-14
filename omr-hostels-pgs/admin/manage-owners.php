@@ -1,10 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('HOSTELS_ADMIN_ROUTED', '/superadmin/hostels/manage-owners.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin - Manage Owners
  */
-
-require_once __DIR__ . '/../../admin/_bootstrap.php';
-requireAdmin();
 
 $title = 'Manage Owners';
 
@@ -32,12 +32,8 @@ $owners = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 <body>
 <div class="container-fluid">
   <div class="row">
-    <?php include '../../admin/admin-sidebar.php'; ?>
-    <main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
-      <?php include '../../admin/admin-header.php'; ?>
-      <?php include '../../admin/admin-breadcrumbs.php'; ?>
-      
-      <?php if (isset($_GET['success'])): ?>
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
+<?php if (isset($_GET['success'])): ?>
         <div class="alert alert-success">Operation completed successfully!</div>
       <?php endif; ?>
       
@@ -95,9 +91,7 @@ $owners = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
         </div>
       <?php endif; ?>
       
-    </main>
-  </div>
-</div>
+    </main></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 function verifyOwner(id) {

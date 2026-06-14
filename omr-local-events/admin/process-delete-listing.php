@@ -1,10 +1,11 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('COMMUNITY_EVENTS_ADMIN_ROUTED', '/superadmin/community-events/process-delete-listing.php');
+require_once __DIR__ . '/_urls.php';
 @ini_set('display_errors', 1); @ini_set('display_startup_errors', 1); @error_reporting(E_ALL);
 require_once __DIR__ . '/../includes/error-reporting.php';
 require_once __DIR__ . '/../../core/omr-connect.php';
-require_once __DIR__ . '/../../core/admin-auth.php';
 require_once __DIR__ . '/../includes/admin-audit.php';
-requireAdmin();
 requireRole(['super_admin']);
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
@@ -20,7 +21,7 @@ try {
   $stmt->bind_param('i', $id);
   $stmt->execute();
   eventAdminAudit('listing_delete', ['listing_id' => (int)$id]);
-  header('Location: view-listings.php?deleted=1');
+  header('Location: ' . community_events_admin_listings_url() . '?deleted=1');
   exit;
 } catch (Throwable $e) {
   http_response_code(500);

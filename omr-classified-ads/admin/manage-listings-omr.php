@@ -1,9 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('CLASSIFIED_ADS_ADMIN_ROUTED', '/superadmin/classified-ads/manage-listings-omr.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * OMR Classified Ads — admin manage listings
  */
-require_once __DIR__ . '/../../admin/_bootstrap.php';
-requireAdmin();
 require_once __DIR__ . '/../../core/omr-connect.php';
 require_once __DIR__ . '/../includes/listing-functions.php';
 

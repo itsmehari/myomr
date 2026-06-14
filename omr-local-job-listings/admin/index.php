@@ -1,11 +1,11 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('JOBS_ADMIN_ROUTED', '/superadmin/jobs/index.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin Dashboard
  * Overview of all job postings and applications
  */
-require_once __DIR__ . '/../../core/admin-auth.php';
-requireAdmin();
-
 require_once __DIR__ . '/../../core/omr-connect.php';
 
 // Get statistics
@@ -28,6 +28,11 @@ $stats['total_applications'] = $result['count'] ?? 0;
 $result = $conn->query("SELECT COUNT(*) as count FROM employers")->fetch_assoc();
 $stats['total_employers'] = $result['count'] ?? 0;
 
+$__modulePageTitle = 'Jobs Dashboard';
+$__moduleActiveNav = '/superadmin/jobs/';
+if (myomr_module_using_shell()) {
+    myomr_module_shell_open($__modulePageTitle, $__moduleActiveNav);
+} else {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,11 +45,12 @@ $stats['total_employers'] = $result['count'] ?? 0;
     <link rel="stylesheet" href="../assets/job-listings-omr.css">
 </head>
 <body>
+<?php } ?>
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3"><i class="fas fa-chart-line me-2"></i>Admin Dashboard</h1>
-        <a href="/admin/logout.php" class="btn btn-outline-secondary">Logout</a>
+        <a href="/superadmin/logout.php" class="btn btn-outline-secondary">Logout</a>
     </div>
 
     <!-- Statistics Cards -->
@@ -90,7 +96,7 @@ $stats['total_employers'] = $result['count'] ?? 0;
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-tasks me-2"></i>Manage Jobs</h5>
                     <p class="card-text">Approve, reject, or edit job postings</p>
-                    <a href="manage-jobs-omr.php" class="btn btn-primary">Manage Jobs</a>
+                    <a href="<?= htmlspecialchars(JOBS_ADMIN_MANAGE_URL, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-primary">Manage Jobs</a>
                 </div>
             </div>
         </div>
@@ -99,7 +105,7 @@ $stats['total_employers'] = $result['count'] ?? 0;
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-users me-2"></i>View All Applications</h5>
                     <p class="card-text">Browse all job applications</p>
-                    <a href="view-all-applications-omr.php" class="btn btn-primary">View Applications</a>
+                    <a href="<?= htmlspecialchars(JOBS_ADMIN_APPLICATIONS_URL, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-primary">View Applications</a>
                 </div>
             </div>
         </div>
@@ -108,7 +114,7 @@ $stats['total_employers'] = $result['count'] ?? 0;
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-user-check me-2"></i>Verify Employers</h5>
                     <p class="card-text">Approve, set pending, or suspend employer accounts</p>
-                    <a href="verify-employers-omr.php" class="btn btn-primary">Verify Employers</a>
+                    <a href="<?= htmlspecialchars(JOBS_ADMIN_VERIFY_EMPLOYERS_URL, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-primary">Verify Employers</a>
                 </div>
             </div>
         </div>
@@ -117,7 +123,7 @@ $stats['total_employers'] = $result['count'] ?? 0;
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-crown me-2"></i>Package Subscribers</h5>
                     <p class="card-text">Employer Pack — view active plans, usage, and renewal dates</p>
-                    <a href="package-subscribers-omr.php" class="btn btn-primary">Package Subscribers</a>
+                    <a href="<?= htmlspecialchars(JOBS_ADMIN_PACKAGE_SUBSCRIBERS_URL, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-primary">Package Subscribers</a>
                 </div>
             </div>
         </div>
@@ -125,6 +131,10 @@ $stats['total_employers'] = $result['count'] ?? 0;
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php if (myomr_module_using_shell()) { ?>
+<?php myomr_module_shell_close(); ?>
+<?php } else { ?>
 </body>
 </html>
+<?php } ?>
 

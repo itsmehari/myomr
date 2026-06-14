@@ -1,10 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('HOSTELS_ADMIN_ROUTED', '/superadmin/hostels/manage-properties.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin - Manage Properties
  */
-
-require_once __DIR__ . '/../../admin/_bootstrap.php';
-requireAdmin();
 
 $title = 'Manage Properties';
 
@@ -182,14 +182,9 @@ sort($localities, SORT_NATURAL | SORT_FLAG_CASE);
     </style>
 </head>
 <body>
-<div class="container-fluid admin-shell">
-  <div class="row">
-    <?php include '../../admin/admin-sidebar.php'; ?>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-4 py-4">
-      <?php include '../../admin/admin-header.php'; ?>
-      <?php include '../../admin/admin-breadcrumbs.php'; ?>
-      
-      <?php if (isset($_GET['success'])): ?>
+<div class="container py-4">
+<main id="main-content">
+<?php if (isset($_GET['success'])): ?>
         <div class="alert alert-success shadow-sm">Operation completed successfully!</div>
       <?php endif; ?>
       
@@ -229,7 +224,7 @@ sort($localities, SORT_NATURAL | SORT_FLAG_CASE);
             <button class="btn btn-outline-secondary btn-sm active" data-density="comfortable" type="button"><i class="fas fa-grip-lines"></i></button>
             <button class="btn btn-outline-secondary btn-sm" data-density="condensed" type="button"><i class="fas fa-grip-lines-vertical"></i></button>
           </div>
-          <form id="bulkActionForm" class="d-flex gap-2" method="post" action="bulk-update-properties.php">
+          <form id="bulkActionForm" class="d-flex gap-2" method="post" action="<?php echo htmlspecialchars(hostels_admin_action_url('bulk-update-properties.php'), ENT_QUOTES, 'UTF-8'); ?>">
             <input type="hidden" name="ids" id="bulkIds">
             <input type="hidden" name="action" id="bulkActionField">
             <button type="button" class="btn btn-outline-success btn-sm bulk-action" data-action="activate"><i class="fas fa-toggle-on me-1"></i>Activate</button>
@@ -297,6 +292,9 @@ sort($localities, SORT_NATURAL | SORT_FLAG_CASE);
                         <button class="btn btn-outline-success" onclick="approveProperty(<?php echo (int)$prop['id']; ?>)" title="Mark Active" data-bs-toggle="tooltip">
                           <i class="fas fa-check"></i>
                         </button>
+                        <button class="btn btn-outline-danger" onclick="rejectProperty(<?php echo (int)$prop['id']; ?>)" title="Reject" data-bs-toggle="tooltip">
+                          <i class="fas fa-times"></i>
+                        </button>
                       <?php endif; ?>
                       <?php if ($prop['verification_status'] !== 'verified'): ?>
                         <button class="btn btn-outline-info" onclick="verifyProperty(<?php echo (int)$prop['id']; ?>)" title="Verify" data-bs-toggle="tooltip">
@@ -312,6 +310,9 @@ sort($localities, SORT_NATURAL | SORT_FLAG_CASE);
                           <i class="fas fa-toggle-on"></i>
                         </button>
                       <?php endif; ?>
+                      <button class="btn btn-outline-danger" onclick="deleteProperty(<?php echo (int)$prop['id']; ?>)" title="Delete" data-bs-toggle="tooltip">
+                        <i class="fas fa-trash"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -322,29 +323,43 @@ sort($localities, SORT_NATURAL | SORT_FLAG_CASE);
         </div>
       <?php endif; ?>
       
-    </main>
-  </div>
-</div>
+    </main></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+const hostelsApproveUrl = <?php echo json_encode(hostels_admin_action_url('approve-property.php')); ?>;
+const hostelsRejectUrl = <?php echo json_encode(hostels_admin_action_url('reject-property.php')); ?>;
+const hostelsVerifyUrl = <?php echo json_encode(hostels_admin_action_url('verify-property.php')); ?>;
+const hostelsUnlistUrl = <?php echo json_encode(hostels_admin_action_url('unlist-property.php')); ?>;
+const hostelsDeleteUrl = <?php echo json_encode(hostels_admin_action_url('delete-property.php')); ?>;
+
 function approveProperty(id) {
   if (confirm('Approve this property?')) {
-    window.location.href = 'approve-property.php?id=' + id;
+    window.location.href = hostelsApproveUrl + '?id=' + id;
+  }
+}
+function rejectProperty(id) {
+  if (confirm('Reject this pending property? It will be marked inactive.')) {
+    window.location.href = hostelsRejectUrl + '?id=' + id;
   }
 }
 function verifyProperty(id) {
   if (confirm('Verify this property?')) {
-    window.location.href = 'verify-property.php?id=' + id;
+    window.location.href = hostelsVerifyUrl + '?id=' + id;
   }
 }
 function unlistProperty(id) {
   if (confirm('Unlist this property? It will no longer appear in public listings.')) {
-    window.location.href = 'unlist-property.php?id=' + id;
+    window.location.href = hostelsUnlistUrl + '?id=' + id;
   }
 }
 function activateProperty(id) {
   if (confirm('Set this property status to active?')) {
-    window.location.href = 'approve-property.php?id=' + id;
+    window.location.href = hostelsApproveUrl + '?id=' + id;
+  }
+}
+function deleteProperty(id) {
+  if (confirm('Permanently delete this property listing? This cannot be undone.')) {
+    window.location.href = hostelsDeleteUrl + '?id=' + id;
   }
 }
 

@@ -1,5 +1,7 @@
 # MyOMR.in – cPanel Git Deployment Guide
 
+> **Operational checklist:** [`.cursor/sop/CPANEL-DEPLOYMENT-SOP.md`](.cursor/sop/CPANEL-DEPLOYMENT-SOP.md) — use this doc for overview and local workflow; use the SOP for step-by-step deploy verification.
+
 This document describes the **pull-based** deployment workflow from GitHub to cPanel shared hosting via Git Version Control.
 
 ---

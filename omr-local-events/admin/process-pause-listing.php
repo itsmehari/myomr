@@ -1,10 +1,11 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('COMMUNITY_EVENTS_ADMIN_ROUTED', '/superadmin/community-events/process-pause-listing.php');
+require_once __DIR__ . '/_urls.php';
 @ini_set('display_errors', 1); @ini_set('display_startup_errors', 1); @error_reporting(E_ALL);
 require_once __DIR__ . '/../includes/error-reporting.php';
 require_once __DIR__ . '/../../core/omr-connect.php';
-require_once __DIR__ . '/../../core/admin-auth.php';
 require_once __DIR__ . '/../includes/admin-audit.php';
-requireAdmin();
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
 $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
@@ -21,7 +22,7 @@ try {
   $stmt->bind_param('si', $newStatus, $id);
   $stmt->execute();
   eventAdminAudit('listing_status_change', ['listing_id' => (int)$id, 'status' => $newStatus]);
-  header('Location: view-listings.php?updated=1');
+  header('Location: ' . community_events_admin_listings_url() . '?updated=1');
   exit;
 } catch (Throwable $e) {
   http_response_code(500);

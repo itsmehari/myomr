@@ -1,10 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('HOSTELS_ADMIN_ROUTED', '/superadmin/hostels/approve-property.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin - Approve Property Handler
  */
-
-require_once __DIR__ . '/../../admin/_bootstrap.php';
-requireAdmin();
 
 require_once __DIR__ . '/../../core/omr-connect.php';
 require_once __DIR__ . '/../../core/mailer.php';

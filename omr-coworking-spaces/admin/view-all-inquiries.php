@@ -1,10 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('COWORKING_ADMIN_ROUTED', '/superadmin/coworking/view-all-inquiries.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin - View All Coworking Space Inquiries
  */
-
-require_once __DIR__ . '/../../admin/_bootstrap.php';
-requireAdmin();
 
 $title = 'All Coworking Space Inquiries';
 
@@ -31,11 +31,8 @@ $inquiries = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 <body>
 <div class="container-fluid">
   <div class="row">
-    <?php include '../../admin/admin-sidebar.php'; ?>
-    <main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
-      <?php include '../../admin/admin-header.php'; ?>
-      
-      <h2 class="mb-4">All Coworking Space Inquiries</h2>
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
+<h2 class="mb-4">All Coworking Space Inquiries</h2>
       
       <?php if (empty($inquiries)): ?>
         <div class="alert alert-info">No inquiries found.</div>
@@ -82,9 +79,7 @@ $inquiries = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
         </div>
       <?php endif; ?>
       
-    </main>
-  </div>
-</div>
+    </main></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('HOSTELS_ADMIN_ROUTED', '/superadmin/hostels/featured-management.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin - Featured Properties Management
  */
-
-require_once __DIR__ . '/../../admin/_bootstrap.php';
-requireAdmin();
 
 $title = 'Featured Properties';
 
@@ -41,11 +41,8 @@ $all_active = $allActiveResult ? $allActiveResult->fetch_all(MYSQLI_ASSOC) : [];
 <body>
 <div class="container-fluid">
   <div class="row">
-    <?php include '../../admin/admin-sidebar.php'; ?>
-    <main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
-      <?php include '../../admin/admin-header.php'; ?>
-      
-      <h2 class="mb-4">Featured Properties Management</h2>
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
+<h2 class="mb-4">Featured Properties Management</h2>
       
       <div class="alert alert-info mb-4">
         <i class="fas fa-info-circle me-2"></i>Featured properties appear first in search results and on the homepage. Featured listings can be rotated monthly.
@@ -142,9 +139,7 @@ $all_active = $allActiveResult ? $allActiveResult->fetch_all(MYSQLI_ASSOC) : [];
         </div>
       </div>
       
-    </main>
-  </div>
-</div>
+    </main></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 function addFeatured() {

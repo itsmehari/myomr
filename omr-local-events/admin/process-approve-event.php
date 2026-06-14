@@ -1,4 +1,7 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('COMMUNITY_EVENTS_ADMIN_ROUTED', '/superadmin/community-events/process-approve-event.php');
+require_once __DIR__ . '/_urls.php';
 // Force top-of-file error surfacing for this action
 @ini_set('display_errors', 1);
 @ini_set('display_startup_errors', 1);
@@ -9,8 +12,6 @@ require_once __DIR__ . '/../includes/error-reporting.php';
 require_once __DIR__ . '/../../core/omr-connect.php';
 require_once __DIR__ . '/../includes/error-reporting.php';
 require_once __DIR__ . '/../includes/admin-audit.php';
-require_once __DIR__ . '/../../core/admin-auth.php';
-requireAdmin();
 require_once __DIR__ . '/../includes/event-functions-omr.php';
 
 try {
@@ -24,7 +25,7 @@ try {
   global $conn;
   if (approveSubmissionToListing($id)) {
     eventAdminAudit('approve_submission', ['submission_id' => (int)$id]);
-    header('Location: manage-events-omr.php?approved=1');
+    header('Location: ' . community_events_admin_manage_url() . '?approved=1');
     exit;
   }
 
@@ -39,7 +40,7 @@ try {
   } else {
     echo "<p>Something went wrong. Please try again later.</p>";
   }
-  echo "<p><a href='manage-events-omr.php' style='color:#b91c1c'>Back to Manage Events</a></p>";
+  echo "<p><a href='" . htmlspecialchars(community_events_admin_manage_url(), ENT_QUOTES, 'UTF-8') . "' style='color:#b91c1c'>Back to Manage Events</a></p>";
   echo "</div>";
   exit;
 } catch (Throwable $e) {
@@ -50,7 +51,7 @@ try {
   echo "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . "</p>";
   echo "<p><strong>Line:</strong> " . (int)$e->getLine() . "</p>";
   echo "<pre style='white-space:pre-wrap'>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
-  echo "<p><a href='manage-events-omr.php' style='color:#b91c1c'>Back to Manage Events</a></p>";
+  echo "<p><a href='" . htmlspecialchars(community_events_admin_manage_url(), ENT_QUOTES, 'UTF-8') . "' style='color:#b91c1c'>Back to Manage Events</a></p>";
   echo "</div>";
   exit;
 }

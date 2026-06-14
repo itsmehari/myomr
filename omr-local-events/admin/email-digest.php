@@ -1,10 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('COMMUNITY_EVENTS_ADMIN_ROUTED', '/superadmin/community-events/email-digest.php');
+require_once __DIR__ . '/_urls.php';
 require_once __DIR__ . '/../includes/error-reporting.php';
 require_once __DIR__ . '/../../core/omr-connect.php';
-require_once __DIR__ . '/../../core/admin-auth.php';
 require_once __DIR__ . '/../includes/event-functions-omr.php';
-requireAdmin();
-
 $today = new DateTime('today');
 $startParam = $_GET['start'] ?? '';
 $daysParam = isset($_GET['days']) ? (int)$_GET['days'] : 7;

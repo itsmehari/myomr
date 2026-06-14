@@ -1,10 +1,10 @@
 <?php
+require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
+myomr_module_require_routed('COWORKING_ADMIN_ROUTED', '/superadmin/coworking/manage-spaces.php');
+require_once __DIR__ . '/_urls.php';
 /**
  * Admin - Manage Coworking Spaces
  */
-
-require_once __DIR__ . '/../../admin/_bootstrap.php';
-requireAdmin();
 
 $title = 'Manage Coworking Spaces';
 
@@ -36,12 +36,8 @@ $pending = count(array_filter($spaces, fn($s) => $s['status'] === 'pending'));
 <body>
 <div class="container-fluid">
   <div class="row">
-    <?php include '../../admin/admin-sidebar.php'; ?>
-    <main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
-      <?php include '../../admin/admin-header.php'; ?>
-      <?php include '../../admin/admin-breadcrumbs.php'; ?>
-      
-      <?php if (isset($_GET['success'])): ?>
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4">
+<?php if (isset($_GET['success'])): ?>
         <div class="alert alert-success">Operation completed successfully!</div>
       <?php endif; ?>
       
@@ -100,6 +96,9 @@ $pending = count(array_filter($spaces, fn($s) => $s['status'] === 'pending'));
                         <button class="btn btn-success" onclick="approveSpace(<?php echo $space['id']; ?>)" title="Approve">
                           <i class="fas fa-check"></i>
                         </button>
+                        <button class="btn btn-danger" onclick="rejectSpace(<?php echo $space['id']; ?>)" title="Reject">
+                          <i class="fas fa-times"></i>
+                        </button>
                       <?php endif; ?>
                       <?php if ($space['verification_status'] !== 'verified'): ?>
                         <button class="btn btn-info" onclick="verifySpace(<?php echo $space['id']; ?>)" title="Verify">
@@ -110,7 +109,14 @@ $pending = count(array_filter($spaces, fn($s) => $s['status'] === 'pending'));
                         <button class="btn btn-warning" onclick="unlistSpace(<?php echo $space['id']; ?>)" title="Unlist">
                           <i class="fas fa-ban"></i>
                         </button>
+                      <?php else: ?>
+                        <button class="btn btn-secondary" onclick="approveSpace(<?php echo $space['id']; ?>)" title="Activate">
+                          <i class="fas fa-toggle-on"></i>
+                        </button>
                       <?php endif; ?>
+                      <button class="btn btn-danger" onclick="deleteSpace(<?php echo $space['id']; ?>)" title="Delete">
+                        <i class="fas fa-trash"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -120,24 +126,38 @@ $pending = count(array_filter($spaces, fn($s) => $s['status'] === 'pending'));
         </div>
       <?php endif; ?>
       
-    </main>
-  </div>
-</div>
+    </main></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+const coworkingApproveUrl = <?php echo json_encode(coworking_admin_action_url('approve-space.php')); ?>;
+const coworkingRejectUrl = <?php echo json_encode(coworking_admin_action_url('reject-space.php')); ?>;
+const coworkingVerifyUrl = <?php echo json_encode(coworking_admin_action_url('verify-space.php')); ?>;
+const coworkingUnlistUrl = <?php echo json_encode(coworking_admin_action_url('unlist-space.php')); ?>;
+const coworkingDeleteUrl = <?php echo json_encode(coworking_admin_action_url('delete-space.php')); ?>;
+
 function approveSpace(id) {
   if (confirm('Approve this space?')) {
-    window.location.href = 'approve-space.php?id=' + id;
+    window.location.href = coworkingApproveUrl + '?id=' + id;
+  }
+}
+function rejectSpace(id) {
+  if (confirm('Reject this pending space? It will be marked inactive.')) {
+    window.location.href = coworkingRejectUrl + '?id=' + id;
   }
 }
 function verifySpace(id) {
   if (confirm('Verify this space?')) {
-    window.location.href = 'verify-space.php?id=' + id;
+    window.location.href = coworkingVerifyUrl + '?id=' + id;
   }
 }
 function unlistSpace(id) {
   if (confirm('Unlist this space? It will no longer appear in public listings.')) {
-    window.location.href = 'unlist-space.php?id=' + id;
+    window.location.href = coworkingUnlistUrl + '?id=' + id;
+  }
+}
+function deleteSpace(id) {
+  if (confirm('Permanently delete this space listing? This cannot be undone.')) {
+    window.location.href = coworkingDeleteUrl + '?id=' + id;
   }
 }
 </script>
