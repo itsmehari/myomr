@@ -43,10 +43,17 @@ $subject = 'This Week in OMR: ' . max(1, count($events)) . ' events to check out
 
 // Build basic email HTML (inline styles for compatibility)
 ob_start();
-?>
-<!DOCTYPE html>
-<html>
-  <body style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;">
+
+$__modulePageTitle = 'Email Digest – MyOMR Events';
+$__moduleActiveNav = '/superadmin/community-events/';
+if (myomr_module_using_shell()) {
+    myomr_module_shell_open($__modulePageTitle, $__moduleActiveNav);
+} else {
+?><!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Email Digest – MyOMR Events</title></head>
+<body>
+<?php } ?>
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f5f7fb;padding:20px 0;">
       <tr>
         <td align="center">
@@ -193,7 +200,11 @@ $textEmail = implode("\n", $textLines);
       try { document.execCommand('copy'); } catch(e) {}
     }
   </script>
-</body>
-</html>
 
-
+<?php
+if (myomr_module_using_shell()) {
+    myomr_module_shell_close();
+} else {
+?>
+</body></html>
+<?php }

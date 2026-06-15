@@ -18,17 +18,17 @@ if ($check && $check->num_rows > 0) {
         }
     }
 }
-?>
-<!DOCTYPE html>
+
+$__modulePageTitle = 'Buy & Sell Admin';
+$__moduleActiveNav = '/superadmin/buy-sell/';
+if (myomr_module_using_shell()) {
+    myomr_module_shell_open($__modulePageTitle, $__moduleActiveNav);
+} else {
+?><!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buy & Sell Admin | MyOMR</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
+<head><meta charset="UTF-8"><title>Buy & Sell Admin</title></head>
 <body>
+<?php } ?>
 <?php require_once __DIR__ . '/../../components/skip-link.php'; ?>
 <main id="main-content" class="container py-4">
   <h1 class="h3 mb-4"><i class="fas fa-shopping-bag me-2"></i>Buy & Sell Admin</h1>
@@ -40,7 +40,13 @@ if ($check && $check->num_rows > 0) {
   <a href="manage-listings-omr.php" class="btn btn-success me-2">Manage Listings</a>
   <a href="view-reports-omr.php" class="btn btn-outline-warning me-2">View Reports</a>
   <a href="manage-categories-omr.php" class="btn btn-outline-secondary me-2">Manage Categories</a>
-  <a href="/admin/" class="btn btn-outline-secondary">Back to Admin</a>
+  <a href="/superadmin/index.php" class="btn btn-outline-secondary">Back to Command Center</a>
 </main>
-</body>
-</html>
+
+<?php
+if (myomr_module_using_shell()) {
+    myomr_module_shell_close();
+} else {
+?>
+</body></html>
+<?php }

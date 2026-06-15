@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once dirname(__DIR__, 2) . '/superadmin/includes/module-router.php';
 
@@ -175,7 +175,7 @@ if (defined('MYOMR_ADMIN_SHELL') && MYOMR_ADMIN_SHELL) {
 
         <td><span class="badge bg-<?= $p['status'] === 'approved' ? 'success' : ($p['status'] === 'pending' ? 'warning' : 'secondary') ?>"><?= htmlspecialchars($p['status']) ?></span></td>
 
-        <td><?= !empty($p['featured']) ? '<span class="badge bg-info"><i class="fas fa-star"></i></span>' : '—' ?></td>
+        <td><?= !empty($p['featured']) ? '<span class="badge bg-info"><i class="fas fa-star"></i></span>' : 'ΓÇö' ?></td>
 
         <td><?= htmlspecialchars($p['owner_name'] ?? '') ?></td>
 

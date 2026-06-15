@@ -34,154 +34,17 @@ sort($statuses, SORT_NATURAL | SORT_FLAG_CASE);
 $localities = array_map(fn($p) => $p['locality'] ? $p['locality'] : 'OMR Corridor', $properties);
 $localities = array_values(array_unique($localities));
 sort($localities, SORT_NATURAL | SORT_FLAG_CASE);
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title; ?> - MyOMR Admin</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --admin-bg: #f4f7fb;
-            --admin-card: #ffffff;
-            --admin-border: #e3e8ee;
-            --admin-accent: #118a44;
-            --admin-accent-soft: rgba(17, 138, 68, 0.08);
-        }
-        body {
-            background: var(--admin-bg);
-        }
-        .admin-shell {
-            min-height: 100vh;
-        }
-        .admin-header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: 1.75rem 1.5rem 1rem;
-            background: var(--admin-card);
-            border-bottom: 1px solid var(--admin-border);
-            position: sticky;
-            top: 0;
-            z-index: 1020;
-        }
-        .admin-header h2 {
-            margin: 0;
-            font-weight: 700;
-            color: #133b2c;
-        }
-        .admin-header .stats-pill {
-            display: flex;
-            gap: 0.75rem;
-        }
-        .stats-chip {
-            padding: 0.5rem 0.9rem;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid transparent;
-            color: #133b2c;
-            background: var(--admin-accent-soft);
-        }
-        .stats-chip.success {border-color: #badbcc;color: #0f5132;background: #d1e7dd;}
-        .stats-chip.warning {border-color: #fde68a;color: #8a5200;background: #fff3cd;}
-        .stats-chip.secondary {border-color: #d0d5dd;color: #364152;background: #f5f6f8;}
 
-        .admin-toolbar {
-            background: var(--admin-card);
-            border-radius: 12px;
-            border: 1px solid var(--admin-border);
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-            margin-bottom: 1.25rem;
-        }
-        .admin-toolbar .form-select,
-        .admin-toolbar .form-control {
-            min-width: 160px;
-        }
-        .admin-toolbar .density-toggle .btn {
-            border-radius: 999px;
-            padding-inline: 0.8rem;
-        }
-        .bulk-actions .btn {
-            border-radius: 999px;
-        }
-        .admin-card {
-            background: var(--admin-card);
-            border-radius: 12px;
-            border: 1px solid var(--admin-border);
-            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
-            overflow: hidden;
-        }
-        .admin-table {
-            margin: 0;
-        }
-        .admin-table thead th {
-            position: sticky;
-            top: 0;
-            background: #f8fafc;
-            border-bottom: 1px solid var(--admin-border);
-            font-weight: 600;
-            color: #475467;
-            z-index: 5;
-        }
-        .admin-table tbody tr {
-            transition: transform 0.12s ease, background 0.12s ease;
-        }
-        .admin-table tbody tr:hover {
-            background: #f6fff9;
-        }
-        .badge-soft {
-            padding: 0.35rem 0.75rem;
-            border-radius: 999px;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: capitalize;
-        }
-        .badge-soft.success {background: #d1e7dd;color: #0f5132;}
-        .badge-soft.warning {background: #fff3cd;color: #8a5200;}
-        .badge-soft.secondary {background: #e2e8f0;color: #475467;}
-        .badge-soft.danger {background: #fee2e2;color: #b91c1c;}
-        .featured-icon {
-            color: #f59e0b;
-        }
-        .featured-icon.inactive {
-            color: #d1d5db;
-        }
-        .table-density-condensed .admin-table tbody tr td {
-            padding: 0.45rem 0.75rem;
-        }
-        .table-density-comfortable .admin-table tbody tr td {
-            padding: 0.9rem 0.95rem;
-        }
-        .row-select {
-            width: 1.1rem;
-            height: 1.1rem;
-        }
-        @media (max-width: 992px) {
-            .admin-header {
-                position: static;
-            }
-            .admin-toolbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .admin-toolbar .form-select,
-            .admin-toolbar .form-control {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
+$__modulePageTitle = 'Hostels & PGs';
+$__moduleActiveNav = '/superadmin/hostels/';
+if (myomr_module_using_shell()) {
+    myomr_module_shell_open($__modulePageTitle, $__moduleActiveNav);
+} else {
+?><!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Hostels & PGs</title></head>
 <body>
+<?php } ?>
 <div class="container py-4">
 <main id="main-content">
 <?php if (isset($_GET['success'])): ?>
@@ -443,6 +306,11 @@ tooltipTriggerList.forEach(function (tooltipTriggerEl) {
 
 applyFilters();
 </script>
-</body>
-</html>
 
+<?php
+if (myomr_module_using_shell()) {
+    myomr_module_shell_close();
+} else {
+?>
+</body></html>
+<?php }

@@ -72,17 +72,17 @@ if ($check && $check->num_rows > 0) {
         $reports = $r->fetch_all(MYSQLI_ASSOC);
     }
 }
-?>
-<!DOCTYPE html>
+
+$__modulePageTitle = 'View Reports | Buy & Sell Admin';
+$__moduleActiveNav = '/superadmin/buy-sell/';
+if (myomr_module_using_shell()) {
+    myomr_module_shell_open($__modulePageTitle, $__moduleActiveNav);
+} else {
+?><!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>View Reports | Buy & Sell Admin</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
+<head><meta charset="UTF-8"><title>View Reports | Buy & Sell Admin</title></head>
 <body>
+<?php } ?>
 <?php require_once __DIR__ . '/../../components/skip-link.php'; ?>
 <main id="main-content" class="container py-4">
   <h1 class="h3 mb-4"><i class="fas fa-flag me-2"></i>Listing Reports</h1>
@@ -147,5 +147,11 @@ if ($check && $check->num_rows > 0) {
   <a href="<?= htmlspecialchars(BUY_SELL_ADMIN_MANAGE_URL) ?>" class="btn btn-outline-secondary me-2">Manage Listings</a>
   <a href="<?= htmlspecialchars(BUY_SELL_ADMIN_INDEX_URL) ?>" class="btn btn-outline-secondary">Back</a>
 </main>
-</body>
-</html>
+
+<?php
+if (myomr_module_using_shell()) {
+    myomr_module_shell_close();
+} else {
+?>
+</body></html>
+<?php }

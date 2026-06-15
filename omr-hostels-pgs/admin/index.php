@@ -22,30 +22,21 @@ $total_owners = $conn->query("SELECT COUNT(*) FROM property_owners")->fetch_row(
 $recent_properties = $conn->query("SELECT id, property_name, created_at FROM hostels_pgs ORDER BY created_at DESC LIMIT 5");
 $recent_inquiries = $conn->query("SELECT id, user_name, property_id, created_at FROM property_inquiries ORDER BY created_at DESC LIMIT 5");
 $recent_owners = $conn->query("SELECT id, full_name, email, created_at FROM property_owners ORDER BY created_at DESC LIMIT 5");
-?>
-<!DOCTYPE html>
+
+$__modulePageTitle = 'Hostels & PGs';
+$__moduleActiveNav = '/superadmin/hostels/';
+if (myomr_module_using_shell()) {
+    myomr_module_shell_open($__modulePageTitle, $__moduleActiveNav);
+} else {
+?><!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title; ?> - MyOMR CMS</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body { background: #f4f6f8; }
-        .stat-card { background: #fff; border-radius: 8px; padding: 1.5rem; text-align: center; transition: transform 0.2s; }
-        .stat-card:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .stat-card i { font-size: 2.5rem; }
-        .stat-card h3 { font-size: 2rem; font-weight: 700; }
-    </style>
-</head>
+<head><meta charset="UTF-8"><title>Hostels & PGs</title></head>
 <body>
+<?php } ?>
 <div class="container-fluid">
   <div class="row">
 <main class="col-md-9 ml-sm-auto col-lg-10 px-4 py-4" aria-label="Main content">
-<?php include '../../admin/admin-flash.php'; ?>
-      
-      <div class="alert alert-success mt-3">
+<div class="alert alert-success mt-3">
         <strong>Hostels & PGs Module</strong> - Manage properties, owners, and inquiries
       </div>
 
@@ -192,6 +183,11 @@ $recent_owners = $conn->query("SELECT id, full_name, email, created_at FROM prop
       
     </main></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
 
+<?php
+if (myomr_module_using_shell()) {
+    myomr_module_shell_close();
+} else {
+?>
+</body></html>
+<?php }

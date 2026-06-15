@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require_once dirname(__DIR__, 2) . '/includes/module-router.php';
+require_once dirname(__DIR__) . '/includes/module-router.php';
 myomr_module_router([
     'constant' => 'CLASSIFIED_ADS_ADMIN_ROUTED',
     'urls' => array (

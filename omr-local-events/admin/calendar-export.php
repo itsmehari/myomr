@@ -17,7 +17,7 @@ require_once __DIR__ . '/../../core/omr-connect.php';
   <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h1 class="h4 mb-0">Calendar & Export</h1>
-      <a href="/admin/" class="btn btn-outline-secondary">Admin Home</a>
+      <a href="/superadmin/index.php" class="btn btn-outline-secondary">Command Center</a>
     </div>
     <div class="card shadow-sm">
       <div class="card-body">

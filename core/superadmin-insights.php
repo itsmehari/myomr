@@ -140,8 +140,8 @@ function sa_insight_module_registry(): array
             'status_sql'  => 'SELECT status, COUNT(*) AS c FROM event_listings GROUP BY status ORDER BY c DESC',
             'list_sql'    => 'SELECT id, title, status, created_at, start_datetime AS extra FROM event_listings ORDER BY created_at DESC LIMIT 100',
             'list_cols'   => ['title' => 'Event', 'extra' => 'Starts', 'status' => 'Status', 'created_at' => 'Added'],
-            'open_href'   => '/omr-local-events/admin/view-listings.php',
-            'manage_href' => '/omr-local-events/admin/manage-events-omr.php',
+            'open_href'   => '/superadmin/community-events/view-listings.php',
+            'manage_href' => '/superadmin/community-events/manage-events-omr.php',
         ],
         'classified' => [
             'name'        => 'Classified Ads',
@@ -153,8 +153,8 @@ function sa_insight_module_registry(): array
             'status_sql'  => 'SELECT status, COUNT(*) AS c FROM omr_classified_ads_listings GROUP BY status ORDER BY c DESC',
             'list_sql'    => 'SELECT id, title, status, created_at, locality AS extra FROM omr_classified_ads_listings ORDER BY created_at DESC LIMIT 100',
             'list_cols'   => ['title' => 'Title', 'extra' => 'Locality', 'status' => 'Status', 'created_at' => 'Posted'],
-            'open_href'   => '/omr-classified-ads/admin/manage-listings-omr.php',
-            'manage_href' => '/omr-classified-ads/admin/index.php',
+            'open_href'   => '/superadmin/classified-ads/manage-listings-omr.php',
+            'manage_href' => '/superadmin/classified-ads/index.php',
         ],
         'buy_sell' => [
             'name'        => 'Buy & Sell',
@@ -166,8 +166,8 @@ function sa_insight_module_registry(): array
             'status_sql'  => 'SELECT status, COUNT(*) AS c FROM omr_buy_sell_listings GROUP BY status ORDER BY c DESC',
             'list_sql'    => 'SELECT id, title, status, created_at, price AS extra FROM omr_buy_sell_listings ORDER BY created_at DESC LIMIT 100',
             'list_cols'   => ['title' => 'Item', 'extra' => 'Price', 'status' => 'Status', 'created_at' => 'Listed'],
-            'open_href'   => '/omr-buy-sell/admin/manage-listings-omr.php',
-            'manage_href' => '/omr-buy-sell/admin/index.php',
+            'open_href'   => '/superadmin/buy-sell/manage-listings-omr.php',
+            'manage_href' => '/superadmin/buy-sell/index.php',
         ],
         'rent' => [
             'name'        => 'Rent & Lease',
@@ -179,8 +179,8 @@ function sa_insight_module_registry(): array
             'status_sql'  => 'SELECT status, COUNT(*) AS c FROM rent_lease_properties GROUP BY status ORDER BY c DESC',
             'list_sql'    => 'SELECT id, title, status, created_at, locality AS extra FROM rent_lease_properties ORDER BY created_at DESC LIMIT 100',
             'list_cols'   => ['title' => 'Property', 'extra' => 'Locality', 'status' => 'Status', 'created_at' => 'Added'],
-            'open_href'   => '/superadmin/rent-lease-manage.php',
-            'manage_href' => '/superadmin/rent-lease.php',
+            'open_href'   => '/superadmin/rent-lease/manage-properties-omr.php',
+            'manage_href' => '/superadmin/rent-lease/index.php',
         ],
         'hostels' => [
             'name'        => 'Hostels & PGs',
@@ -192,8 +192,8 @@ function sa_insight_module_registry(): array
             'status_sql'  => 'SELECT status, COUNT(*) AS c FROM hostels_pgs GROUP BY status ORDER BY c DESC',
             'list_sql'    => 'SELECT id, property_name AS title, status, created_at, locality AS extra FROM hostels_pgs ORDER BY created_at DESC LIMIT 100',
             'list_cols'   => ['title' => 'Property', 'extra' => 'Locality', 'status' => 'Status', 'created_at' => 'Added'],
-            'open_href'   => '/omr-hostels-pgs/admin/manage-properties.php',
-            'manage_href' => '/omr-hostels-pgs/admin/index.php',
+            'open_href'   => '/superadmin/hostels/manage-properties.php',
+            'manage_href' => '/superadmin/hostels/index.php',
         ],
         'coworking' => [
             'name'        => 'Coworking Spaces',
@@ -205,8 +205,8 @@ function sa_insight_module_registry(): array
             'status_sql'  => 'SELECT status, COUNT(*) AS c FROM coworking_spaces GROUP BY status ORDER BY c DESC',
             'list_sql'    => 'SELECT id, space_name AS title, status, created_at, locality AS extra FROM coworking_spaces ORDER BY created_at DESC LIMIT 100',
             'list_cols'   => ['title' => 'Space', 'extra' => 'Locality', 'status' => 'Status', 'created_at' => 'Added'],
-            'open_href'   => '/omr-coworking-spaces/admin/manage-spaces.php',
-            'manage_href' => '/omr-coworking-spaces/admin/index.php',
+            'open_href'   => '/superadmin/coworking/manage-spaces.php',
+            'manage_href' => '/superadmin/coworking/index.php',
         ],
     ];
 }

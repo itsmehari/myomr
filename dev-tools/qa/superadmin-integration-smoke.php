@@ -98,6 +98,31 @@ if ($cpanel && preg_match('/\badmin\b/', $cpanel) && str_contains($cpanel, 'cp -
     $errors[] = '.cpanel.yml still deploys admin/ folder';
 }
 
+foreach (glob($root . '/superadmin/*/*.php') ?: [] as $routerFile) {
+    $routerRel = ltrim(str_replace('\\', '/', substr($routerFile, strlen($rootNorm))), '/');
+    $routerContent = file_get_contents($routerFile);
+    if ($routerContent && str_contains($routerContent, "dirname(__DIR__, 2) . '/includes/module-router.php'")) {
+        $errors[] = "Broken module-router include path in {$routerRel}";
+    }
+}
+
+$publicUrlFiles = [
+    'core/superadmin-dashboard-metrics.php',
+    'core/superadmin-insights.php',
+    'superadmin/index.php',
+    'superadmin/config/navigation.php',
+];
+foreach ($publicUrlFiles as $rel) {
+    $path = $root . '/' . $rel;
+    if (!is_file($path)) {
+        continue;
+    }
+    $content = file_get_contents($path);
+    if ($content && preg_match('#[\'"]/omr-[^\'"]+/admin/#', $content)) {
+        $errors[] = "Legacy omr-*/admin/ URL in {$rel} (use /superadmin/…)";
+    }
+}
+
 if ($errors === []) {
     echo "OK: Superadmin integration smoke check passed.\n";
     echo "Entry: /superadmin/login.php → /superadmin/index.php\n";
