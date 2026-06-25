@@ -86,6 +86,17 @@ if (!$article) {
     $is_fuel_panic_article = (strpos($article['slug'], 'fuel-panic') !== false && substr($article['slug'], -6) !== '-tamil');
     // Tamil Nadu Assembly Election 2026 article: FAQPage schema for rich results (English slug only)
     $is_tn_election_2026_article = (strpos($article['slug'], 'tamil-nadu-assembly-election-2026') !== false && substr($article['slug'], -6) !== '-tamil');
+    // SWM Rules 2026 apartments / BWG compliance (English only)
+    $is_swm_2026_bwg_article = ($article['slug'] === 'swm-rules-2026-apartments-bwg-compliance-omr');
+    // Brigade Morgan Heights EC revocation near Pallikaranai Ramsar (English only)
+    $is_brigade_ec_revoked_article = ($article['slug'] === 'brigade-morgan-heights-environment-clearance-revoked-pallikaranai-ramsar-wetland');
+    $is_brigade_ec_revoked_tamil_article = ($article['slug'] === 'brigade-morgan-heights-environment-clearance-revoked-pallikaranai-ramsar-wetland-tamil');
+    $is_ozone_greens_electricity_article = ($article['slug'] === 'ozone-greens-electricity-issue-residents-generator-power');
+    $is_ozone_greens_electricity_tamil_article = ($article['slug'] === 'ozone-greens-electricity-issue-residents-generator-power-tamil');
+    $is_pallikaranai_flood_feature = ($article['slug'] === 'pallikaranai-marsh-flood-infrastructure-chennai-wetland-watch');
+    $is_perungudi_birthday_song_article = ($article['slug'] === 'perungudi-govt-school-tamil-birthday-song-morning-assembly');
+    require_once ROOT_PATH . '/core/eb-hub-config.php';
+    $is_eb_tneb_article = myomr_is_eb_hub_article($slug);
     ?>
     
     <?php 
@@ -219,6 +230,361 @@ if (!$article) {
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "As of March 2026, Naam Tamilar Katchi (NTK) is the only party to have announced a full list of 234 candidates. NTK chief Seeman will contest from Karaikudi. DMK and AIADMK are yet to announce their full candidate lists for Chennai and other seats."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
+    
+    if ($is_swm_2026_bwg_article): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the Solid Waste Management (SWM) Rules, 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The SWM Rules, 2026 are India’s updated solid waste framework effective from 1 April 2026, replacing the 2016 rules. They emphasise enforceable compliance: four-stream segregation at source, bulk waste generator accountability, on-site or certified wet waste processing, digital registration and reporting, landfill limited to true residual waste, and Polluter Pays penalties including fines and environmental compensation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are apartment societies treated as bulk waste generators (BWG)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Residential societies and apartment associations can fall under the bulk waste generator category when they meet notified criteria—such as large built area, high water use, or generating around 100 kg or more of waste per day. BWGs are primary accountable entities for segregation, processing or certified alternatives, authorised recyclers, and record-keeping."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What must OMR apartment residents do under the new rules?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Residents should segregate daily into four streams: wet (organic), dry (recyclables), sanitary waste, and special-care or hazardous items as per local schedules. Avoid mixing streams, follow association collection rules, and support on-site composting or recycling programmes. Non-compliance at household level often increases liability for the apartment association."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is four-stream waste segregation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Four-stream segregation means separating waste at source into wet organic waste, dry recyclables, sanitary waste, and special-care waste that needs separate handling. It replaces weaker two-bin habits and is intended to be legally enforceable, improving compost quality, recycler economics, and worker safety."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
+
+    if ($is_brigade_ec_revoked_article): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What happened to Brigade Morgan Heights in Perumbakkam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SEIAA Tamil Nadu revoked the Environmental Clearance granted to Brigade Enterprises Ltd for Brigade Morgan Heights after the project allegedly began construction without prior permission from the Tamil Nadu State Wetland Authority."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Brigade Morgan Heights cancelled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not fully established from the available record. The Environmental Clearance has been revoked. CMDA planning permission, RERA status, possible appeals and future regulatory action are separate matters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is Pallikaranai Marsh important?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pallikaranai Marsh is a Ramsar-recognised wetland and one of South Chennai's key natural flood-buffering systems. It supports drainage, groundwater recharge and biodiversity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should homebuyers check now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Buyers should check the latest Environmental Clearance status, CMDA planning permission status, RERA updates, developer communication, construction status and refund/legal clauses before making further decisions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which areas are affected by Pallikaranai wetland decisions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pallikaranai, Perumbakkam, Sholinganallur, Medavakkam, Velachery, Perungudi and the OMR corridor are directly linked to the wetland's drainage and flood-buffering function."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
+
+    if ($is_brigade_ec_revoked_tamil_article): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "inLanguage": "ta",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "பெரும்பாக்கத்தில் Brigade Morgan Heights-க்கு என்ன நடந்தது?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TNSWA முன் அனுமதி இல்லாமல் கட்டுமானம் தொடங்கப்பட்டதாகக் கூறி SEIAA-TN Brigade Morgan Heights சுற்றுச்சூழல் அனுமதியை ரத்து செய்தது."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Brigade Morgan Heights ரத்து செய்யப்பட்டதா?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "இதுவரை முழுமையாக உறுதிப்படுத்தப்படவில்லை. சுற்றுச்சூழல் அனுமதி ரத்து செய்யப்பட்டுள்ளது. CMDA திட்ட அனுமதி, RERA நிலை, மேல்முறையீடு மற்றும் எதிர்கால ஒழுங்குமுறை நடவடிக்கைகள் தனித்தனி விவகாரங்கள்."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "பல்லிகரணை சதுப்பு ஏன் முக்கியம்?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "பல்லிகரணை சதுப்பு ராம்சார்-அங்கீகரிக்கப்பட்ட wetland; தென் சென்னையின் முக்கிய இயற்கை வெள்ளத் தடுப்பு அமைப்பு — வடிகால், நிலத்தடி நீர் recharge, biodiversity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "வீடு வாங்குபவர்கள் இப்போது என்ன சரிபார்க்க வேண்டும்?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "சமீபத்திய EC நிலை, CMDA திட்ட அனுமதி, RERA புதுப்பிப்புகள், developer தகவல் தொடர்பு, கட்டுமான நிலை, refund/legal clauses — மேலும் முடிவெடுப்பதற்கு முன்."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "பல்லிகரணை சwetland முடிவுகள் எந்த பகுதிகளை பாதிக்கும்?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "பல்லிகரணை, பெரும்பாக்கம், சோழிங்கநல்லூர், மேடவாக்கம், வேளச்சேரி, பெருங்குடி, OMR பாதை — drainage மற்றும் flood-buffering function-உடன் இணைந்துள்ளன."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
+
+    if ($is_ozone_greens_electricity_article): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the Ozone Greens electricity issue?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Residents have raised concerns over generator-based electricity supply and the need for a permanent electricity-board connection at Ozone Greens in Perumbakkam."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is this important for OMR residents?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Perumbakkam is part of the fast-growing OMR-side residential belt. Utility issues in large apartment communities affect residents, homebuyers and the wider neighbourhood."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Has the issue appeared before legal or regulatory forums?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Public records show a related Madras High Court writ petition in 2024 and TNRERA listings involving Ozone Greens-related matters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Bengaluru Ozone Urbana case the same as Ozone Greens Perumbakkam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The Bengaluru matter is separate and should not be treated as proof in the Perumbakkam electricity issue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should OMR homebuyers check before buying an apartment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They should verify permanent electricity, water, sewerage, fire safety approval, completion or occupancy certificate, RERA status, pending cases, utility dues and association handover."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
+    
+    if ($is_ozone_greens_electricity_tamil_article): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "inLanguage": "ta",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "ஓசோன் கிரீன்ஸ் மின்சாரப் பிரச்சினை என்றால் என்ன?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "பெரும்பாக்கம் ஓசோன் கிரீன்ஸில் ஜெனரேட்டர் மூலம் மின்சாரம் மற்றும் நிரந்தர electricity-board இணைப்பு தேவை குறித்து குடியிருப்பாளர்கள் கவலை தெரிவித்துள்ளனர்."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "OMR வாழ்விடங்களுக்கு ஏன் முக்கியம்?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "பெரும்பாக்கம் OMR-side வேகமாக வளரும் residential belt-ன் ஒரு பகுதி. பெரிய apartment community-யில் utility issue residents, buyers, neighbourhood-ஐ பாதிக்கும்."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "legal அல்லது regulatory forums-ல் issue வந்ததா?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ஆம். 2024 Madras High Court writ petition, TNRERA listings — public records-ல் Ozone Greens-related matters உள்ளன."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bengaluru Ozone Urbana = Ozone Greens Perumbakkam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "இல்லை. Bengaluru matter தனி; Perumbakkam electricity issue-க்கு proof-ஆகக் கொள்ளக் கூடாது."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "OMR-ல் அடுக்குமாடி வாங்குவதற்கு முன் என்ன verify?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "நிரந்தர மின்சாரம், தண்ணீர், கழிவுநீர், fire safety, completion/occupancy certificate, RERA, pending cases, utility dues, association handover."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
+
+    if ($is_perungudi_birthday_song_article): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which school is shown in the Perungudi birthday song video?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The video shows students at a government primary school in Perungudi, Chennai. The school sign visible in the footage reads Government Primary School No. 1, School Street, Perungudi, Chennai – 96."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What Tamil birthday song are the students singing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The students sing the popular Tamil birthday wishes song with lyrics by poet Arivumathi, music by Arol Corelli and vocals by Uthara Unnikrishnan. It is widely used in Tamil homes and schools as a culturally rooted alternative to the English Happy Birthday song."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who wrote the Tamil birthday wishes song?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The lyrics were written by Tamil poet Arivumathi. The music was composed by Arol Corelli and the well-known recording features singer Uthara Unnikrishnan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is a morning assembly birthday song significant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Morning assemblies build routine, discipline and group participation. When classmates sing birthday wishes in Tamil during assembly, the child being celebrated feels seen by the whole school. It also reinforces language pride and community bonding in government schools along corridors like OMR."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is Perungudi located along OMR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Perungudi is a neighbourhood on Old Mahabalipuram Road (OMR) in south Chennai, between Thoraipakkam and Velachery. It is home to government schools, IT parks, residential apartments and the Perungudi MRTS station."
+          }
+        }
+      ]
+    }
+    </script>
+    <?php endif;
+
+    if ($is_pallikaranai_flood_feature): ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/pallikaranai-flood-infrastructure-feature.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Pallikaranai Marsh?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pallikaranai Marsh Reserve Forest is a Ramsar site (No. 2481) covering about 1,247.54 hectares. It drains roughly 250 sq km of South Chennai through connected wetlands and outlets such as Okkiyam Madavu and Kovalam Creek."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is Pallikaranai important for Chennai floods?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The marsh holds, slows and stores stormwater from a large part of South Chennai. When feeder channels are blocked, edges are filled or storage capacity is reduced, flooding shows up on roads, in apartments and across the OMR corridor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Perungudi dumpyard affect Pallikaranai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reported landfill fires, toxic smoke spread, and leachate discharge have repeatedly raised public-health and ecological concerns. Untreated leachate entering marsh-connected channels can stress wetland water quality, biodiversity and groundwater."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does metro construction affect wetlands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Metro and other infrastructure near sensitive hydrology can affect wetlands if debris, piling, temporary diversions or slope changes alter natural water movement. Responsible development requires hydrology mapping, channel protection and post-work flow verification."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which agencies are responsible for Pallikaranai protection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tamil Nadu State Wetland Authority, CMDA, CMRL, TNPCB, Forest Department, Water Resources Department, Greater Chennai Corporation and district administration all have roles in boundary mapping, construction scrutiny, pollution control and stormwater management."
           }
         }
       ]
@@ -511,8 +877,9 @@ if (!$article) {
 
 <?php omr_nav('main'); ?>
 
-<div class="container article-container">
+<div class="container article-container<?php echo $is_pallikaranai_flood_feature ? ' article-container--pallikaranai-feature' : ''; ?>">
     <article>
+        <?php if (!$is_pallikaranai_flood_feature): ?>
         <header class="article-header">
             <h1><?php echo htmlspecialchars($article['title']); ?></h1>
             <p class="article-meta">
@@ -525,6 +892,7 @@ if (!$article) {
                 <img src="<?php echo htmlspecialchars($article['image_path']); ?>" alt="<?php echo htmlspecialchars($article['title']); ?>" class="img-fluid">
             <?php endif; ?>
         </header>
+        <?php endif; ?>
         
         <!-- Language Switch Link (if Tamil version exists) -->
         <?php
@@ -601,6 +969,7 @@ if (!$article) {
         $article_share_url = 'https://myomr.in/local-news/' . $slug;
         $article_share_title = rawurlencode($article['title']);
         $article_share_text = rawurlencode($article['summary'] ?? $article['title']);
+        if (!$is_pallikaranai_flood_feature):
         ?>
         <div class="article-share-bar" aria-label="Share this article">
             <span class="article-share-label"><i class="fas fa-share-alt"></i> Share</span>
@@ -610,10 +979,17 @@ if (!$article) {
             <button type="button" class="article-share-btn article-share-copy" title="Copy link" aria-label="Copy link" data-url="<?php echo htmlspecialchars($article_share_url); ?>"><i class="fas fa-link"></i></button>
         </div>
         <p class="article-whatsapp-cta" style="margin:0.75rem 0 0;font-size:0.9rem;">
-            <a href="<?php echo htmlspecialchars(defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi'); ?>" target="_blank" rel="noopener noreferrer" style="color:#25d366;font-weight:600;text-decoration:none;" aria-label="Join our WhatsApp group for more connectivity and updates"><i class="fab fa-whatsapp" style="margin-right:0.35rem;"></i>Join our WhatsApp group for more connectivity and updates</a>
+            <a href="<?php echo htmlspecialchars(WHATSAPP_COMMUNITY_PAGE_PATH, ENT_QUOTES, 'UTF-8'); ?>" style="color:#25d366;font-weight:600;text-decoration:none;" aria-label="Join our WhatsApp community for more connectivity and updates"><i class="fab fa-whatsapp" style="margin-right:0.35rem;"></i>Join our WhatsApp community for more connectivity and updates</a>
             <span style="color:#9ca3af;margin:0 0.4rem;" aria-hidden="true">|</span>
             <a href="<?php echo htmlspecialchars(defined('MYOMR_FACEBOOK_GROUP_URL') ? MYOMR_FACEBOOK_GROUP_URL : 'https://www.facebook.com/groups/416854920508620'); ?>" target="_blank" rel="noopener noreferrer" style="color:#1877f2;font-weight:600;text-decoration:none;" aria-label="Join our Facebook group for OMR updates" title="Join our Facebook group"><i class="fab fa-facebook-f" style="margin-right:0.35rem;"></i>Join our Facebook group</a>
         </p>
+
+        <?php
+        if ($is_eb_tneb_article):
+            require_once ROOT_PATH . '/components/eb-hub.php';
+            omr_eb_render_article_extras($slug, $article['title'], $article_share_url);
+        endif;
+        ?>
 
         <?php omr_ad_slot('article-top', '728x90'); ?>
 
@@ -622,18 +998,46 @@ if (!$article) {
             <h2 class="article-toc-title">In this article</h2>
             <ol class="article-toc-list"></ol>
         </nav>
+        <?php endif; ?>
         
         <section class="article-content">
             <?php echo $article['content']; ?>
         </section>
 
+        <?php if ($is_pallikaranai_flood_feature): ?>
+        <div class="article-share-bar" aria-label="Share this article" style="max-width:720px;margin:2rem auto;padding:0 18px;">
+            <span class="article-share-label"><i class="fas fa-share-alt"></i> Share</span>
+            <a href="https://wa.me/?text=<?php echo rawurlencode($article['title'] . ' ' . $article_share_url); ?>" target="_blank" rel="noopener noreferrer" class="article-share-btn article-share-wa" title="Share on WhatsApp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode($article_share_url); ?>" target="_blank" rel="noopener noreferrer" class="article-share-btn article-share-fb" title="Share on Facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/intent/tweet?url=<?php echo rawurlencode($article_share_url); ?>&text=<?php echo $article_share_title; ?>" target="_blank" rel="noopener noreferrer" class="article-share-btn article-share-tw" title="Share on X (Twitter)" aria-label="Share on X"><i class="fab fa-x-twitter"></i></a>
+            <button type="button" class="article-share-btn article-share-copy" title="Copy link" aria-label="Copy link" data-url="<?php echo htmlspecialchars($article_share_url); ?>"><i class="fas fa-link"></i></button>
+        </div>
+        <p class="article-meta" style="max-width:720px;margin:0 auto 1.5rem;padding:0 18px;font-size:.9rem;color:#6c757d;">
+            Published on <?php echo date('F j, Y', strtotime($article['published_date'])); ?>
+            <?php if (!empty($article['author'])): ?>
+                | By <?php echo htmlspecialchars($article['author']); ?>
+            <?php endif; ?>
+        </p>
+        <?php endif; ?>
+
+        <?php omr_adsense_in_article(); ?>
+
         <?php omr_ad_slot('article-mid', '336x280'); ?>
-        <?php omr_amazon_affiliate_spotlight([
+        <?php
+        $affiliate_tags = $article['tags'] ?? '';
+        if ($is_eb_tneb_article) {
+            $affiliate_tags .= ' TNEB electricity bill AC inverter smart meter power saving solar OMR utilities';
+        }
+        omr_amazon_affiliate_spotlight([
             'seed' => $article['slug'] ?? $slug,
             'article_title' => $article['title'] ?? 'News Article',
             'article_category' => $article['category'] ?? '',
-            'article_tags' => $article['tags'] ?? '',
-        ]); ?>
+            'article_tags' => $affiliate_tags,
+        ]);
+        if ($is_eb_tneb_article):
+            omr_eb_render_article_footer_panels($slug);
+        endif;
+        ?>
 
         <!-- Related Articles Section -->
         <?php
@@ -720,7 +1124,7 @@ if (!$article) {
             <div class="container">
                 <!-- WhatsApp Group CTA -->
                 <div style="text-align: center; margin-bottom: 2rem;">
-                    <a href="<?php echo htmlspecialchars(defined('MYOMR_WHATSAPP_GROUP_URL') ? MYOMR_WHATSAPP_GROUP_URL : 'https://chat.whatsapp.com/Eixz1mmURuFLvnNZzCfGDi'); ?>" target="_blank" rel="noopener noreferrer" 
+                    <a href="<?php echo htmlspecialchars(WHATSAPP_COMMUNITY_PAGE_PATH, ENT_QUOTES, 'UTF-8'); ?>" 
                        style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: #25d366; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(37,211,102,0.4); transition: transform 0.2s, box-shadow 0.2s;"
                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(37,211,102,0.5)';"
                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(37,211,102,0.4)';"
@@ -903,6 +1307,9 @@ document.querySelectorAll('.article-share-copy').forEach(function(btn) {
 });
 </script>
 <script src="/assets/js/amazon-affiliate-tracking.js" defer></script>
+<?php if ($is_pallikaranai_flood_feature): ?>
+<script src="/assets/js/pallikaranai-flood-infrastructure-feature.js" defer></script>
+<?php endif; ?>
 </body>
 </html>
 
