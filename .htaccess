@@ -207,6 +207,27 @@ RewriteRule ^restaurants/?$ omr-listings/restaurants.php [L]
 RewriteRule ^restaurants/([A-Za-z0-9\-]+)/?$ omr-listings/restaurant.php?slug=$1 [L,QSA]
 
 # Local News: clean article URLs (/local-news/slug -> article.php?slug=slug)
+
+# VV Placement Madipakkam AC technician / helper (EN + Tamil twin)
+RewriteRule ^jobs/ac-technician-helper-madipakkam/?$ jobs/ac-technician-helper-madipakkam.php [L]
+RewriteCond %{THE_REQUEST} \s/+jobs/ac-technician-helper-madipakkam\.php[\s?] [NC]
+RewriteRule ^jobs/ac-technician-helper-madipakkam\.php$ /jobs/ac-technician-helper-madipakkam [R=301,L]
+
+RewriteRule ^jobs/ac-technician-helper-madipakkam-tamil/?$ jobs/ac-technician-helper-madipakkam-tamil.php [L]
+RewriteCond %{THE_REQUEST} \s/+jobs/ac-technician-helper-madipakkam-tamil\.php[\s?] [NC]
+RewriteRule ^jobs/ac-technician-helper-madipakkam-tamil\.php$ /jobs/ac-technician-helper-madipakkam-tamil [R=301,L]
+
+# HR recruiter, Sembakkam (English slug + Tamil-script URL)
+RewriteRule ^jobs/hr-recruiter-10-vacancies-sembakkam-chennai/?$ jobs/hr-recruiter-10-vacancies-sembakkam-chennai.php [L]
+RewriteCond %{THE_REQUEST} \s/+jobs/hr-recruiter-10-vacancies-sembakkam-chennai\.php[\s?] [NC]
+RewriteRule ^jobs/hr-recruiter-10-vacancies-sembakkam-chennai\.php$ /jobs/hr-recruiter-10-vacancies-sembakkam-chennai [R=301,L]
+
+# Decoded Tamil path (address bar shows Tamil script)
+RewriteRule ^jobs/எச்ஆர்-ரெக்ரூட்டர்-10-காலியிடம்-செம்பாக்கம்-சென்னை/?$ jobs/hr-recruiter-10-vacancies-sembakkam-chennai-tamil.php [L]
+# Percent-encoded Tamil path, when the server matches the raw request only
+RewriteCond %{THE_REQUEST} \s/+jobs/%E0%AE%8E%E0%AE%9A%E0%AF%8D%E0%AE%86%E0%AE%B0%E0%AF%8D-%E0%AE%B0%E0%AF%86%E0%AE%95%E0%AF%8D%E0%AE%B0%E0%AF%82%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AE%B0%E0%AF%8D-10-%E0%AE%95%E0%AE%BE%E0%AE%B2%E0%AE%BF%E0%AE%AF%E0%AE%BF%E0%AE%9F%E0%AE%AE%E0%AF%8D-%E0%AE%9A%E0%AF%86%E0%AE%AE%E0%AF%8D%E0%AE%AA%E0%AE%BE%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AE%AE%E0%AF%8D-%E0%AE%9A%E0%AF%86%E0%AE%A9%E0%AF%8D%E0%AE%A9%E0%AF%88/?[\s?] [NC]
+RewriteRule ^ jobs/hr-recruiter-10-vacancies-sembakkam-chennai-tamil.php [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^local-news/([^/]+)/?$ local-news/article.php?slug=$1 [L,QSA]
