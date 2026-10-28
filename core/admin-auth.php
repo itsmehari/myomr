@@ -97,25 +97,33 @@ if (!function_exists('admin_login_csrf_verify')) {
 
 admin_auth_start_session();
 
-function isAdminLoggedIn(): bool {
-    return !empty($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
-}
-
-function requireAdmin(): void {
-    if (!isAdminLoggedIn()) {
-        $redirect = urlencode($_SERVER['REQUEST_URI'] ?? '/');
-        header('Location: /superadmin/login.php?redirect=' . $redirect);
-        exit;
+// Superadmin pages load superadmin/_auth.php first. These names must not be
+// declared again or PHP fatals with HTTP 500 (Cannot redeclare isAdminLoggedIn()).
+if (!function_exists('isAdminLoggedIn')) {
+    function isAdminLoggedIn(): bool {
+        return !empty($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
     }
 }
 
-function requireRole(array $allowedRoles): void {
-    requireAdmin();
-    $role = $_SESSION['admin_role'] ?? '';
-    if (!in_array($role, $allowedRoles, true)) {
-        http_response_code(403);
-        echo 'Forbidden';
-        exit;
+if (!function_exists('requireAdmin')) {
+    function requireAdmin(): void {
+        if (!isAdminLoggedIn()) {
+            $redirect = urlencode($_SERVER['REQUEST_URI'] ?? '/');
+            header('Location: /superadmin/login.php?redirect=' . $redirect);
+            exit;
+        }
+    }
+}
+
+if (!function_exists('requireRole')) {
+    function requireRole(array $allowedRoles): void {
+        requireAdmin();
+        $role = $_SESSION['admin_role'] ?? '';
+        if (!in_array($role, $allowedRoles, true)) {
+            http_response_code(403);
+            echo 'Forbidden';
+            exit;
+        }
     }
 }
 
@@ -155,6 +163,7 @@ function admin_auth_stmt_fetch_assoc(mysqli_stmt $stmt): ?array {
     return $copy;
 }
 
+if (!function_exists('attemptAdminLogin')) {
 function attemptAdminLogin(string $username, string $password): bool {
     require_once __DIR__ . '/omr-connect.php';
     global $conn;
@@ -236,14 +245,17 @@ function attemptAdminLogin(string $username, string $password): bool {
 
     return true;
 }
+}
 
-function adminLogout(): void {
-    $_SESSION = [];
-    if (ini_get('session.use_cookies')) {
-        $params = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+if (!function_exists('adminLogout')) {
+    function adminLogout(): void {
+        $_SESSION = [];
+        if (ini_get('session.use_cookies')) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+        }
+        session_destroy();
     }
-    session_destroy();
 }
 
 

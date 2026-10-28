@@ -79,11 +79,11 @@ return [
                 'key' => 'hostels_pgs',
                 'name' => 'Hostels & PGs',
                 'description' => 'Oversee hostel, PG, and co-living listings along OMR.',
-                'path' => '/superadmin/hostels/index.php',
+                'path' => '/superadmin/hostels.php',
                 'icon' => 'fa-building-user',
                 'tags' => ['hostel', 'pg', 'property'],
                 'actions' => [
-                    ['label' => 'Manage Properties', 'path' => '/superadmin/hostels/manage-properties.php'],
+                    ['label' => 'Manage Properties', 'path' => '/superadmin/hostels-manage.php'],
                     ['label' => 'Manage Owners', 'path' => '/superadmin/hostels/manage-owners.php'],
                     ['label' => 'View Inquiries', 'path' => '/superadmin/hostels/view-all-inquiries.php'],
                     ['label' => 'Featured management', 'path' => '/superadmin/hostels/featured-management.php'],
@@ -93,13 +93,13 @@ return [
                 'key' => 'rent_lease',
                 'name' => 'Rent & Lease',
                 'description' => 'Manage house, apartment, and land listings for rent/lease in OMR.',
-                'path' => '/superadmin/rent-lease/index.php',
+                'path' => '/superadmin/rent-lease.php',
                 'icon' => 'fa-house',
                 'tags' => ['rent', 'lease', 'property'],
                 'actions' => [
-                    ['label' => 'Manage Properties', 'path' => '/superadmin/rent-lease/manage-properties-omr.php'],
-                    ['label' => 'Pending queue', 'path' => '/superadmin/rent-lease/manage-properties-omr.php?status=pending'],
-                    ['label' => 'Upload Photos', 'path' => '/superadmin/rent-lease/upload-property-images-omr.php'],
+                    ['label' => 'Manage Properties', 'path' => '/superadmin/rent-lease-manage.php'],
+                    ['label' => 'Pending queue', 'path' => '/superadmin/rent-lease-manage.php?status=pending'],
+                    ['label' => 'Upload Photos', 'path' => '/superadmin/rent-lease-photos.php'],
                 ],
             ],
             [
@@ -125,6 +125,29 @@ return [
                 'actions' => [
                     ['label' => 'Manage Listings', 'path' => '/superadmin/classified-ads/manage-listings-omr.php'],
                     ['label' => 'Reports', 'path' => '/superadmin/classified-ads/view-reports-omr.php'],
+                ],
+            ],
+            [
+                'key' => 'marketplace',
+                'name' => 'Marketplace',
+                'description' => 'Moderate OMR marketplace listings and featured flags.',
+                'path' => '/superadmin/marketplace/index.php',
+                'icon' => 'fa-store',
+                'tags' => ['marketplace', 'moderation'],
+                'actions' => [
+                    ['label' => 'Manage listings', 'path' => '/superadmin/marketplace/manage-listings-omr.php'],
+                    ['label' => 'Pending', 'path' => '/superadmin/marketplace/manage-listings-omr.php'],
+                ],
+            ],
+            [
+                'key' => 'forum',
+                'name' => 'Community Forum',
+                'description' => 'Approve forum topics and replies.',
+                'path' => '/superadmin/forum/index.php',
+                'icon' => 'fa-comments',
+                'tags' => ['forum', 'community', 'moderation'],
+                'actions' => [
+                    ['label' => 'Moderate', 'path' => '/superadmin/forum/manage-topics-omr.php'],
                 ],
             ],
             [
