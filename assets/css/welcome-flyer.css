@@ -1,0 +1,613 @@
+/* Flyer QR landing — /welcome. Dark corridor fold + lime badge from the print piece. */
+
+.wel-page {
+  --wel-ink: #062e29;
+  --wel-field: #08352f;
+  --wel-deep: #041c19;
+  --wel-lime: #d4ff3f;
+  --wel-lime-ink: #14360a;
+  --wel-paper: #eef6ee;
+  --wel-card: #f7fbf4;
+  --wel-muted: #4d645c;
+  --wel-line: rgba(6, 46, 41, 0.12);
+  --wel-serif: Fraunces, "Palatino Linotype", Palatino, Georgia, serif;
+  --wel-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  background: var(--wel-paper);
+  color: var(--wel-ink);
+  font-family: var(--wel-sans);
+}
+
+.wel-page .wel-wrap {
+  width: min(1120px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.wel-hero {
+  position: relative;
+  overflow: hidden;
+  color: #f4faf3;
+  background:
+    radial-gradient(720px 340px at 88% -10%, rgba(212, 255, 63, 0.18), transparent 58%),
+    radial-gradient(640px 420px at 0% 110%, rgba(12, 90, 72, 0.55), transparent 50%),
+    linear-gradient(165deg, var(--wel-deep) 0%, var(--wel-field) 52%, #0a463c 100%);
+  padding: 36px 0 88px;
+}
+
+.wel-hero::before {
+  content: "";
+  position: absolute;
+  top: -18%;
+  left: 54%;
+  z-index: 0;
+  width: 14px;
+  height: 140%;
+  background: var(--wel-lime);
+  transform: rotate(8deg);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.wel-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.wel-hero__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.wel-hero__grid > div:first-child {
+  position: relative;
+  z-index: 1;
+  padding-right: 12px;
+}
+
+.wel-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 6px 12px;
+  border: 1px solid rgba(212, 255, 63, 0.35);
+  border-radius: 999px;
+  color: var(--wel-lime);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.wel-kicker i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wel-lime);
+  box-shadow: 0 0 0 4px rgba(212, 255, 63, 0.2);
+}
+
+.wel-hero h1 {
+  margin: 0 0 14px;
+  font-family: var(--wel-serif);
+  font-weight: 560;
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: #f7fbf2;
+}
+
+.wel-hero h1 em {
+  font-style: italic;
+  color: var(--wel-lime);
+}
+
+.wel-lead {
+  max-width: 36rem;
+  margin: 0 0 22px;
+  font-size: 1.12rem;
+  line-height: 1.55;
+  color: rgba(244, 250, 243, 0.86);
+}
+
+.wel-places {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 26px;
+  padding: 0;
+  list-style: none;
+}
+
+.wel-places li {
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(244, 250, 243, 0.8);
+}
+
+.wel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.wel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.wel-btn:hover {
+  transform: translateY(-2px);
+  color: inherit;
+}
+
+.wel-btn--lime {
+  background: var(--wel-lime);
+  color: var(--wel-lime-ink);
+}
+
+.wel-btn--lime:hover {
+  background: #c6f234;
+  color: var(--wel-lime-ink);
+}
+
+.wel-btn--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #f7fbf2;
+}
+
+.wel-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.wel-btn--ink {
+  background: var(--wel-ink);
+  color: #f7fbf2;
+}
+
+.wel-btn--ink:hover {
+  background: #0a433b;
+  color: #fff;
+}
+
+.wel-btn--wa {
+  background: #25d366;
+  color: #042a22;
+}
+
+.wel-btn--wa:hover {
+  background: #1ebe5a;
+  color: #042a22;
+}
+
+.wel-media {
+  position: relative;
+  min-height: 320px;
+  justify-self: end;
+  width: min(100%, 380px);
+}
+
+.wel-media__ring {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 320px);
+  aspect-ratio: 1;
+  margin-left: auto;
+  border-radius: 50%;
+  padding: 10px;
+  background:
+    conic-gradient(from 200deg, var(--wel-lime), #8fdc3a 40%, rgba(255, 255, 255, 0.2) 70%, var(--wel-lime));
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+}
+
+.wel-media__ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  border: 6px solid var(--wel-field);
+}
+
+.wel-badge {
+  position: absolute;
+  left: -18px;
+  top: 18px;
+  z-index: 4;
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--wel-lime);
+  color: var(--wel-lime-ink);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+  text-align: center;
+  transform: rotate(-8deg);
+}
+
+.wel-badge strong {
+  display: block;
+  font-family: var(--wel-serif);
+  font-size: 1.7rem;
+  font-weight: 560;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.wel-badge span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wel-note {
+  position: relative;
+  z-index: 1;
+  max-width: 34rem;
+  margin: 18px 0 0;
+  font-size: 0.88rem;
+  color: rgba(244, 250, 243, 0.62);
+}
+
+.wel-section {
+  padding: 56px 0;
+}
+
+.wel-section--shift {
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+}
+
+.wel-section h2 {
+  margin: 0 0 8px;
+  font-family: var(--wel-serif);
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+}
+
+.wel-intro {
+  margin: 0 0 28px;
+  max-width: 40rem;
+  color: var(--wel-muted);
+  line-height: 1.55;
+}
+
+.wel-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.wel-tile {
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  padding: 22px;
+  border-radius: 18px;
+  background: var(--wel-card);
+  border: 1px solid var(--wel-line);
+  box-shadow: 0 14px 36px rgba(6, 46, 41, 0.06);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.wel-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(6, 46, 41, 0.12);
+  color: inherit;
+}
+
+.wel-tile h3 {
+  margin: 0 0 8px;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.wel-tile p {
+  margin: 0 0 16px;
+  color: var(--wel-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  flex: 1;
+}
+
+.wel-tile__count {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #e4f3c8;
+  color: #215014;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.wel-tile__cta {
+  font-weight: 800;
+  color: #0d5c3a;
+  font-size: 0.9rem;
+}
+
+.wel-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wel-more a {
+  display: inline-flex;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--wel-line);
+  color: var(--wel-ink);
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+.wel-more a:hover {
+  border-color: #9ecf6a;
+  color: #0d5c3a;
+}
+
+.wel-split {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 16px;
+}
+
+.wel-panel {
+  padding: 28px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid var(--wel-line);
+}
+
+.wel-panel--dark {
+  background: var(--wel-field);
+  color: #f4faf3;
+  border: 0;
+}
+
+.wel-panel--dark h2,
+.wel-panel--dark p {
+  color: inherit;
+}
+
+.wel-panel--dark .wel-intro,
+.wel-panel--dark p {
+  color: rgba(244, 250, 243, 0.78);
+}
+
+.wel-audiences {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.wel-aud {
+  padding: 22px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--wel-line);
+}
+
+.wel-aud h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.wel-aud p {
+  margin: 0 0 16px;
+  color: var(--wel-muted);
+  font-size: 0.92rem;
+}
+
+.wel-aud a {
+  font-weight: 800;
+  color: #0d5c3a;
+  text-decoration: none;
+}
+
+.wel-form {
+  display: grid;
+  gap: 10px;
+}
+
+.wel-form label {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.wel-form input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--wel-line);
+  background: var(--wel-paper);
+}
+
+.wel-form .wel-btn {
+  width: 100%;
+}
+
+.wel-alert {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.wel-alert--ok {
+  background: #e4f3c8;
+  color: #215014;
+}
+
+.wel-alert--err {
+  background: #fde7e7;
+  color: #8a1f1f;
+}
+
+.wel-faq details {
+  border-top: 1px solid var(--wel-line);
+}
+
+.wel-faq details:last-of-type {
+  border-bottom: 1px solid var(--wel-line);
+}
+
+.wel-faq summary {
+  padding: 16px 4px;
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+}
+
+.wel-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.wel-faq summary::after {
+  content: "+";
+  float: right;
+  color: #0d5c3a;
+}
+
+.wel-faq details[open] summary::after {
+  content: "–";
+}
+
+.wel-faq details p {
+  margin: 0;
+  padding: 0 8px 16px 0;
+  max-width: 46rem;
+  color: var(--wel-muted);
+  line-height: 1.55;
+}
+
+.wel-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wel-contact a {
+  color: inherit;
+  font-weight: 700;
+}
+
+.wel-dock {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  display: none;
+  gap: 8px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(4, 28, 25, 0.94);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(212, 255, 63, 0.2);
+}
+
+.wel-dock .wel-btn {
+  flex: 1;
+  min-height: 46px;
+}
+
+@media (max-width: 980px) {
+  .wel-hero__grid,
+  .wel-split,
+  .wel-tiles,
+  .wel-audiences {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wel-hero::before {
+    left: 48%;
+  }
+
+  .wel-media {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 720px) {
+  .wel-hero {
+    padding: 24px 0 72px;
+  }
+
+  .wel-hero__grid,
+  .wel-split,
+  .wel-tiles,
+  .wel-audiences {
+    grid-template-columns: 1fr;
+  }
+
+  .wel-hero::before {
+    display: none;
+  }
+
+  .wel-media {
+    width: 100%;
+  }
+
+  .wel-media__ring {
+    margin: 8px auto 0;
+    width: min(78%, 280px);
+  }
+
+  .wel-badge {
+    left: 4px;
+    top: 8px;
+    width: 118px;
+    height: 118px;
+  }
+
+  .wel-badge strong {
+    font-size: 1.35rem;
+  }
+
+  .wel-dock {
+    display: flex;
+  }
+
+  .wel-page {
+    padding-bottom: 4px;
+  }
+}
