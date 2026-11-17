@@ -118,7 +118,9 @@ $omr_ads = [
     [
         'id'           => 'colourchemist-print-offer-16x9',
         'advertiser'   => 'Colourchemist',
-        'url'          => 'https://colourchemist.co.in/?utm_source=myomr&utm_medium=banner&utm_campaign=print_offer_16x9',
+        'url'          => '/go/print-offer.php',
+        'rel'          => 'sponsored nofollow noopener noreferrer',
+        'referrerpolicy' => 'no-referrer',
         'slot_ids'     => [
             'content-wide',
             'homepage-wide',

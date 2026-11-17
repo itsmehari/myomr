@@ -47,6 +47,11 @@ if (!function_exists('omr_ad_slot')) {
 
         $ad = $eligible[array_rand($eligible)];
         $url = $ad['url'] ?? '#';
+        $rel = trim((string) ($ad['rel'] ?? 'sponsored noopener noreferrer'));
+        if ($rel === '') {
+            $rel = 'sponsored noopener noreferrer';
+        }
+        $referrerpolicy = trim((string) ($ad['referrerpolicy'] ?? ''));
         $advertiser = htmlspecialchars($ad['advertiser'] ?? 'Sponsor');
         $headline = htmlspecialchars($ad['headline'] ?? $advertiser);
         $offer = htmlspecialchars($ad['offer'] ?? '');
@@ -105,10 +110,11 @@ if (!function_exists('omr_ad_slot')) {
         ?>
         <div class="omr-ad-slot<?php echo htmlspecialchars($slot_mods, ENT_QUOTES, 'UTF-8'); ?>" role="complementary" aria-label="Sponsored content">
             <span class="omr-ad-slot__label">Ad</span>
-            <a href="<?php echo htmlspecialchars($url); ?>"
+            <a href="<?php echo htmlspecialchars($url, ENT_QUOTES, 'UTF-8'); ?>"
                class="omr-ad-banner omr-ad-banner <?php echo htmlspecialchars($size_class . ' ' . $design_class, ENT_QUOTES, 'UTF-8'); ?>"
                target="_blank"
-               rel="sponsored noopener noreferrer"
+               rel="<?php echo htmlspecialchars($rel, ENT_QUOTES, 'UTF-8'); ?>"
+               <?php if ($referrerpolicy !== ''): ?>referrerpolicy="<?php echo htmlspecialchars($referrerpolicy, ENT_QUOTES, 'UTF-8'); ?>"<?php endif; ?>
                aria-label="<?php echo htmlspecialchars($advertiser . ' - ' . $headline, ENT_QUOTES, 'UTF-8'); ?>">
                 <?php if ($is_full_image): ?>
                     <?php echo $media_html; ?>
